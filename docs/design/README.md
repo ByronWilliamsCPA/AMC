@@ -87,40 +87,43 @@ here so they aren't lost in 3,400 lines of docs:
 - Tooling: `eslint-plugin-jsx-a11y` is already wired; add axe smoke tests +
   keyboard-interaction tests.
 
-## Recommended build order (from component-library §6)
+## Build order (from component-library §6) — status
 
-1. **Tokens & shell** — extract `tokens.css`; add skip-link + route-change focus.
-2. **Primitives** — `Button`, `TextField`, `Select`, `Checkbox`, `Alert`,
-   `Badge`, `Card` (+ a `cx` helper), each module-first; migrate the auth/list
-   pages onto them.
-3. **Runner refinements** — extract `RadioGroup` from `Question`, refactor
-   `Palette` to roving tabindex, add the `Timer` chip + milestone live region.
-4. **Responsive** — runner palette drawer on mobile; dashboard tables → stacked
-   cards.
-5. **Math** — equation overflow-scroll containers; MathML presence test.
-6. **A11y harness** — axe smokes + manual keyboard/SR/reduced-motion pass.
+All six steps are implemented on the design branch:
 
-Each is a `feat/…` or `refactor/…` branch per the project's branch-workflow rule.
+1. ✅ **Tokens & shell** — `styles/tokens.css` (light + dark contract); `Layout`
+   skip link, route-change focus to `<main>`, polite route announcer.
+2. ✅ **Primitives** — `Button`, `TextField`, `Select`, `Checkbox`, `Alert`,
+   `Badge`, `Card` (+ `cx` helper + `ui/` barrel); auth/invite/list pages
+   migrated onto them (Invite gained a Copy-link affordance).
+3. ✅ **Runner refinements** — `RadioGroup` extracted from `Question`; `Palette`
+   refactored to roving tabindex (single tab stop, arrow/Home/End); `Timer` chip
+   with urgency tiers + a polite milestone announcer (10/5/1 min, 30 s, time's up).
+4. ✅ **Responsive** — accessible `Dialog` primitive; runner palette collapses to
+   a bottom-sheet drawer on mobile and a sticky sidebar on ≥720px; `Table`
+   primitive stacks into labelled cards on mobile; `ProgressView` + `ExamReview`
+   migrated onto it (verdict/outcome as `Badge`s, algebra gate as `Alert`).
+5. ✅ **Math** — display/inline equations scroll in their own box (no page
+   side-scroll); MathML-presence test guards the `htmlAndMathml` output.
+6. ✅ **A11y harness** — `vitest-axe` wired; per-primitive axe smokes (WCAG A/AA
+   scope). Verified the matcher catches a real violation.
 
-## Prototype status
+**Final state:** 36 vitest tests pass; `tsc -b`, eslint, `vite build`, prettier,
+and the API-client drift check all green. `index.css` is now just tokens-adjacent
+globals (reset, base headings, focus ring, KaTeX, reduced-motion, the remaining
+diagnostic-runner styles) — component styling lives in co-located `*.module.css`.
 
-Per the chosen "docs + coded prototype" scope, the first prototype slice landed:
+### Still open (not part of the six steps)
 
-- **Tokens (build step 1):** `frontend/src/styles/tokens.css` extracted verbatim
-  from the design-system spec (light + dark contract), imported in `main.tsx`
-  before `index.css`. `index.css` trimmed to reset + element defaults + the
-  KaTeX/reduced-motion globals; its `:root` token block now lives in
-  `tokens.css`. Existing components keep working via the back-compat aliases.
-- **A primitive (step 2):** `components/ui/Button.tsx` + `Button.module.css` and
-  a 3-line `lib/cx.ts` helper — the props→className + token-consuming pattern.
-- **Two converted screens (steps 2–3):** the **Login** page (`LoginPage.module.css`
-  + the `Button` primitive) and the runner **Palette** (`Palette.module.css`,
-  token-driven answered/flagged/current/voided states) — proving the CSS-Modules
-  pattern on both a simple screen and a runner component.
-
-The whole frontend stays green: `tsc -b`, eslint, 15 vitest tests, `vite build`,
-prettier, and the API-client drift check all pass.
-
-The remaining build-order steps (more primitives, the RadioGroup extraction,
-roving-tabindex palette, responsive drawer, a11y harness) are tracked above and
-left as `feat/…` / `refactor/…` follow-ups.
+- **Manual a11y pass** — keyboard-only run of the exam, a screen-reader smoke
+  (VoiceOver/NVDA), and a 400%-zoom/reduced-motion check. The automated smokes
+  and the roving/focus/aria work set this up; the human pass remains.
+- **`@axe-core/playwright` contrast pass in CI** — jsdom can't compute real
+  contrast; the token palette is hand-verified, but an end-to-end contrast check
+  on the built app is a good follow-up.
+- **Diagnostic runner** — not yet migrated to the primitives (`DiagnosticRunnerPage`
+  still uses a few global `.diagnostic__*` styles + raw inputs).
+- **Confirm-before-submit dialog + low-time visual warning** — the `Dialog`
+  primitive and the timer milestone announcements are in place; wiring a
+  manual-submit confirmation (when blanks remain) is the remaining piece of the
+  exam-runner-ux recommendations.
