@@ -6,7 +6,9 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/auth/useAuth'
+import { Button } from '@/components/ui/Button'
 import { ApiError } from '@/lib/endpoints'
+import styles from './LoginPage.module.css'
 
 interface LocationState {
   from?: string
@@ -45,12 +47,15 @@ export function LoginPage() {
   }
 
   return (
-    <main className="auth-page">
-      <h1>Sign in</h1>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <label htmlFor="email">Email</label>
+    <main className={styles.page}>
+      <h1 className={styles.title}>Sign in</h1>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <label className={styles.label} htmlFor="email">
+          Email
+        </label>
         <input
           id="email"
+          className={styles.input}
           type="email"
           autoComplete="username"
           value={email}
@@ -58,9 +63,12 @@ export function LoginPage() {
           required
         />
 
-        <label htmlFor="password">Password</label>
+        <label className={styles.label} htmlFor="password">
+          Password
+        </label>
         <input
           id="password"
+          className={styles.input}
           type="password"
           autoComplete="current-password"
           value={password}
@@ -69,16 +77,22 @@ export function LoginPage() {
         />
 
         {error !== null && (
-          <p role="alert" className="form-error">
+          <p role="alert" className={styles.error}>
             {error}
           </p>
         )}
 
-        <button type="submit" disabled={submitting}>
+        <Button
+          type="submit"
+          variant="primary"
+          block
+          className={styles.submit}
+          disabled={submitting}
+        >
           {submitting ? 'Signing in…' : 'Sign in'}
-        </button>
+        </Button>
       </form>
-      <p>
+      <p className={styles.footer}>
         Have an invite? <Link to="/register">Set up your account</Link>.
       </p>
     </main>

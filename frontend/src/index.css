@@ -1,24 +1,5 @@
-/* Design tokens — one place for colour, spacing, and breakpoints (review I5). */
-:root {
-  --color-bg: #ffffff;
-  --color-fg: #1a1a2e;
-  --color-muted: #5b5b73;
-  --color-primary: #2d4ea2;
-  --color-primary-fg: #ffffff;
-  --color-border: #d4d7e0;
-  --color-ok: #1b7f4b;
-  --color-warn: #9a5b00;
-  --color-error: #b00020;
-  --color-surface: #f5f6fa;
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 1rem;
-  --space-4: 1.5rem;
-  --space-5: 2rem;
-  --radius: 6px;
-  --maxw: 960px;
-  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-}
+/* Global resets, element defaults, and a few shared helpers.
+   Design tokens live in styles/tokens.css (imported before this file). */
 
 *,
 *::before,
@@ -26,22 +7,58 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 100%; /* respect the user's browser font-size */
+}
+
 body {
   margin: 0;
-  font-family: var(--font);
-  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: var(--font-mono);
 }
 
-/* Visible focus everywhere for keyboard users (review I4). */
+/* Visible focus everywhere for keyboard users. */
 :focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
+}
+
+/* KaTeX legibility (see design-system.md §3.5): a small optical bump, display
+   spacing, horizontal overflow so wide equations don't break layout, and a
+   visible error style instead of silent mis-rendering. */
+.katex {
+  font-size: var(--math-scale);
+}
+
+.katex-display {
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex-error {
+  color: var(--color-error-text);
+}
+
+/* Honor the OS reduced-motion preference: remove movement, keep feedback. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 button {

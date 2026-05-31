@@ -3,7 +3,9 @@
  * current / voided state. Status is conveyed by text (aria-label) and shape, not
  * colour alone, and the grid is keyboard-navigable.
  */
+import { cx } from '@/lib/cx'
 import type { RunnerState } from '@/features/exam/runnerState'
+import styles from './Palette.module.css'
 
 export interface PaletteProps {
   state: RunnerState
@@ -21,28 +23,25 @@ function statusLabel(answered: boolean, flagged: boolean, voided: boolean): stri
 export function Palette({ state, voided, onSelect }: PaletteProps) {
   const voidedSet = new Set(voided)
   return (
-    <nav className="palette" aria-label="Question navigator">
-      <ul>
+    <nav className={styles.palette} aria-label="Question navigator">
+      <ul className={styles.list}>
         {state.answers.map((answer, index) => {
           const number = index + 1
           const isVoided = voidedSet.has(number)
           const flagged = state.flags[index]
           const answered = answer !== null
           const isCurrent = state.current === index
-          const classes = [
-            'palette__cell',
-            answered && 'palette__cell--answered',
-            flagged && 'palette__cell--flagged',
-            isCurrent && 'palette__cell--current',
-            isVoided && 'palette__cell--voided',
-          ]
-            .filter(Boolean)
-            .join(' ')
           return (
             <li key={number}>
               <button
                 type="button"
-                className={classes}
+                className={cx(
+                  styles.cell,
+                  answered && styles.answered,
+                  flagged && styles.flagged,
+                  isCurrent && styles.current,
+                  isVoided && styles.voided
+                )}
                 aria-current={isCurrent ? 'true' : undefined}
                 aria-label={`Question ${number}: ${statusLabel(answered, flagged, isVoided)}`}
                 onClick={() => onSelect(index)}
