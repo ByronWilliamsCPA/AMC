@@ -21,13 +21,28 @@
   gap: var(--space-4);
 }
 
+/* Mobile: the palette lives in a drawer opened by this bar; the sidebar is
+   hidden. Desktop (≥720px): the sidebar shows and the toggle bar is hidden. */
+.paletteBar {
+  display: block;
+}
+
+.sidebar {
+  display: none;
+}
+
 @media (min-width: 720px) /* --bp-md */ {
   .body {
     grid-template-columns: 12rem 1fr;
     align-items: start;
   }
 
+  .paletteBar {
+    display: none;
+  }
+
   .sidebar {
+    display: block;
     position: sticky;
     top: var(--space-3);
   }

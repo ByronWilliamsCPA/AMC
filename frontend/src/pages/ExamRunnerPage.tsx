@@ -11,7 +11,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useReducer, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ErrorState, Spinner } from '@/components/States'
-import { Button } from '@/components/ui'
+import { Button, Dialog } from '@/components/ui'
 import { ExamReview } from '@/features/exam/ExamReview'
 import { Palette } from '@/features/exam/Palette'
 import { Question } from '@/features/exam/Question'
@@ -41,6 +41,7 @@ function RunnerInner({ exam }: { exam: ExamDetail }) {
   const [state, dispatch] = useReducer(runnerReducer, exam.num_problems, initRunner)
   const startedAtRef = useRef(Date.now())
   const [result, setResult] = useState<ExamResultResponse | null>(null)
+  const [paletteOpen, setPaletteOpen] = useState(false)
 
   const submitMutation = useMutation({
     mutationFn: () => {
@@ -93,6 +94,28 @@ function RunnerInner({ exam }: { exam: ExamDetail }) {
           {answeredCount(state)} of {state.numProblems} answered
         </p>
       </header>
+
+      <div className={styles.paletteBar}>
+        <Button type="button" aria-expanded={paletteOpen} onClick={() => setPaletteOpen(true)}>
+          Questions ({answeredCount(state)}/{state.numProblems})
+        </Button>
+      </div>
+
+      <Dialog
+        open={paletteOpen}
+        onClose={() => setPaletteOpen(false)}
+        title="Question navigator"
+        placement="bottom"
+      >
+        <Palette
+          state={state}
+          voided={exam.voided}
+          onSelect={(index) => {
+            dispatch({ type: 'goto', index })
+            setPaletteOpen(false)
+          }}
+        />
+      </Dialog>
 
       <div className={styles.body}>
         <div className={styles.sidebar}>

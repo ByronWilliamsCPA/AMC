@@ -1,0 +1,38 @@
+/* Modal dialog / bottom sheet. Overlays content; traps focus while open. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  padding: var(--space-3);
+  background: var(--color-overlay);
+}
+
+.dialog {
+  margin: auto;
+  width: 100%;
+  max-width: 28rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Bottom-sheet placement (mobile drawer): pinned to the bottom edge. */
+.sheet {
+  margin: auto auto 0;
+  max-width: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.title {
+  margin: 0 0 var(--space-3);
+}
+
+.dialog:focus {
+  outline: none;
+}

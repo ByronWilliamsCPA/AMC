@@ -1,14 +1,40 @@
 /**
  * Post-submission review: the only place the answer key is shown. Renders the
  * server-graded `ExamResultResponse` (score breakdown + per-problem outcome).
+ * The per-problem table collapses to cards on mobile via the Table primitive.
  */
+import type { ReactNode } from 'react'
 import type { ExamResultResponse } from '@/client'
+import { Badge, Table, type TableColumn, type TableRow } from '@/components/ui'
+import styles from './ExamReview.module.css'
+
+const COLUMNS: TableColumn[] = [
+  { key: 'n', header: '#' },
+  { key: 'your', header: 'Your answer' },
+  { key: 'correct', header: 'Correct' },
+  { key: 'outcome', header: 'Outcome' },
+]
+
+function outcome(voided: boolean, ok: boolean): ReactNode {
+  if (voided) return <Badge tone="neutral">Void</Badge>
+  return ok ? <Badge tone="success">Correct</Badge> : <Badge tone="danger">Incorrect</Badge>
+}
 
 export function ExamReview({ result }: { result: ExamResultResponse }) {
+  const rows: TableRow[] = result.review.map((item) => ({
+    key: String(item.n),
+    cells: {
+      n: item.n,
+      your: item.your ?? '—',
+      correct: item.correct,
+      outcome: outcome(item.voided, item.ok),
+    },
+  }))
+
   return (
-    <section className="review" aria-live="polite">
+    <section className={styles.review} aria-live="polite">
       <h2>Your result</h2>
-      <dl className="review__score">
+      <dl className={styles.score}>
         <div>
           <dt>Score</dt>
           <dd>
@@ -29,32 +55,7 @@ export function ExamReview({ result }: { result: ExamResultResponse }) {
         </div>
       </dl>
 
-      <table className="review__table">
-        <caption>Per-problem review</caption>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Your answer</th>
-            <th scope="col">Correct</th>
-            <th scope="col">Outcome</th>
-          </tr>
-        </thead>
-        <tbody>
-          {result.review.map((item) => (
-            <tr key={item.n}>
-              <td>{item.n}</td>
-              <td>{item.your ?? '—'}</td>
-              <td>{item.correct}</td>
-              <td>{outcome(item.voided, item.ok)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Table caption="Per-problem review" columns={COLUMNS} rows={rows} />
     </section>
   )
-}
-
-function outcome(voided: boolean, ok: boolean): string {
-  if (voided) return 'Void'
-  return ok ? 'Correct' : 'Incorrect'
 }

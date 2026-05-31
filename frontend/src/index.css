@@ -136,40 +136,6 @@ a {
   color: var(--color-muted);
 }
 
-/* Tables (review + progress) */
-.review__table,
-.progress__table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: var(--space-3);
-}
-
-.review__table th,
-.review__table td,
-.progress__table th,
-.progress__table td {
-  border: 1px solid var(--color-border);
-  padding: var(--space-2);
-  text-align: left;
-}
-
-.review__score {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-}
-
-.review__score dt {
-  color: var(--color-muted);
-  font-size: 0.875rem;
-}
-
-.review__score dd {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
 /* Diagnostics */
 .diagnostic__items {
   display: grid;
@@ -181,19 +147,4 @@ a {
   display: flex;
   gap: var(--space-2);
   align-items: center;
-}
-
-/* Progress */
-.progress {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.progress__course {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.progress__warning {
-  color: var(--color-warn);
 }

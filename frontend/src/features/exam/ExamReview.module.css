@@ -1,0 +1,24 @@
+/* Post-submission review: score summary above the per-problem table. */
+.review {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.score {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.score dt {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.score dd {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: var(--font-numeric-tabular);
+}
