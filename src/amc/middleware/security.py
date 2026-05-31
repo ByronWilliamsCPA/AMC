@@ -35,6 +35,7 @@ logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from fastapi import FastAPI, Request
+    from starlette.middleware.base import RequestResponseEndpoint
     from starlette.types import ASGIApp
 
 
@@ -57,7 +58,9 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
     - Permissions-Policy: Restrict browser features
     """
 
-    async def dispatch(self, request: Request, call_next) -> Response:
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
         """Add security headers to response."""
         response = await call_next(request)
 
@@ -95,8 +98,10 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
             "geolocation=(), microphone=(), camera=(), payment=()"
         )
 
-        # Remove server identification (OWASP A09)
-        response.headers.pop("Server", None)
+        # Remove server identification (OWASP A09). Starlette's MutableHeaders
+        # has no ``pop``; delete the header only if present.
+        if "Server" in response.headers:
+            del response.headers["Server"]
 
         return response
 
@@ -183,7 +188,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                 },
             )
 
-    async def dispatch(self, request: Request, call_next) -> Response:
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
         """Apply rate limiting per IP address."""
         if request.client is None:
             logger.warning(
@@ -396,7 +403,9 @@ class SSRFPreventionMiddleware(BaseHTTPMiddleware):
 
         return False
 
-    async def dispatch(self, request: Request, call_next) -> Response:
+    async def dispatch(
+        self, request: Request, call_next: RequestResponseEndpoint
+    ) -> Response:
         """Check for SSRF patterns in request.
 
         Validates query parameters, form data, and JSON body for potential
