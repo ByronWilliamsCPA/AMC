@@ -32,8 +32,9 @@ coverage/
 .env.local
 .env.*.local
 
-# Generated API client (regenerate with npm run generate-client)
-src/client/
+# Generated API client: COMMITTED on purpose so clones build offline and CI can
+# drift-check it against docs/api/openapi.json (regenerate with
+# `npm run generate-client:ci`). Intentionally NOT ignored.
 
 # TypeScript build info
 *.tsbuildinfo

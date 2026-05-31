@@ -177,6 +177,57 @@ robust fix.
 
 ---
 
+### Frontend scaffold ships unrendered `{{ cookiecutter.* }}` placeholders (build is broken)
+
+- **Priority**: Critical
+- **Category**: Tooling
+
+**Issue**: The generated `frontend/` ships raw Jinja placeholders in source that the
+post-gen hook never rendered: `frontend/src/App.tsx` (`{{ cookiecutter.project_name }}`,
+`{{ cookiecutter.project_short_description }}`), `frontend/index.html` (title + description),
+and `frontend/src/test/App.test.tsx` (which asserts on those literal placeholder strings). In
+JSX, `<h1>{{ ... }}</h1>` parses as an object-literal child referencing an undefined
+`cookiecutter` identifier, so `tsc -b` fails (TS1005/TS2304) and `vite build` is red on a fresh
+clone. The committed test "passes" against the broken markup, masking it.
+
+**Context**: Discovered building out the real frontend; `npm run build` failed immediately on
+the placeholders, and `@vitejs/plugin-react-swc` also crashed vitest on the same file.
+
+**Suggested Fix**: Ensure the cookiecutter post-gen step renders `frontend/**` (it appears to
+render Python sources but skip the frontend), and replace the placeholder-asserting example
+test with one that exercises real rendered UI.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/frontend/src/App.tsx`, `index.html`,
+`src/test/App.test.tsx`; the cookiecutter post-gen hook.
+
+---
+
+### Frontend `useApi` hook is built for bearer/localStorage auth, incompatible with the cookie model
+
+- **Priority**: High
+- **Category**: Security
+
+**Issue**: The scaffold's `frontend/src/hooks/useApi.ts` (axios) sends **no credentials**
+(`withCredentials`/`credentials:'include'` absent) and instead reads `localStorage` for an
+`auth_token` and sets an `Authorization: Bearer` header. For a template whose backend uses an
+HTTP-only session cookie (the tech-spec/ADR-002 default here), this is doubly wrong: every
+authenticated request goes out cookie-less (→ 401), and storing session material in
+`localStorage` reintroduces the XSS token-theft exposure the HTTP-only cookie exists to avoid.
+The default `apiClient` also reads `VITE_API_URL` and can be pointed cross-origin, which
+silently breaks `SameSite=Lax` cookie auth.
+
+**Context**: Discovered wiring the SPA to the cookie-authenticated API; the scaffold hook had
+to be removed entirely and replaced with a generated typed client configured
+`credentials:'include'` against a same-origin base.
+
+**Suggested Fix**: Default the scaffold's API layer to `credentials:'include'` with a relative
+same-origin base and no `Authorization`/`localStorage` handling; offer bearer-token wiring only
+behind a cookiecutter option for projects that actually use token auth.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/frontend/src/hooks/useApi.ts`.
+
+---
+
 ## Submitting Feedback
 
 Once you've collected feedback, you can:
