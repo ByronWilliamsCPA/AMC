@@ -10,7 +10,7 @@ import pytest
 from sqlalchemy import text
 
 import amc.core.database as db_module
-from amc.core.database import _normalise_async_url
+from amc.core.database import normalise_async_url
 
 
 class TestNormaliseUrl:
@@ -28,7 +28,7 @@ class TestNormaliseUrl:
         ],
     )
     def test_normalisation(self, given: str, expected: str) -> None:
-        assert _normalise_async_url(given) == expected
+        assert normalise_async_url(given) == expected
 
 
 class TestSessionLifecycle:

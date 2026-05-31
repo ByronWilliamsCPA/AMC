@@ -160,6 +160,8 @@ exclude = [
     "__pycache__",
     "dist",
     "build",
+    # Alembic-generated migration scripts follow Alembic's own style.
+    "migrations/versions",
 ]
 
 [tool.ruff.format]
@@ -311,6 +313,10 @@ known-first-party = ["amc"]
 # TYPE_CHECKING block (TC001/TC003). Routers also idiomatically raise HTTP
 # errors with inline messages (EM101).
 "**/api/*.py" = ["TC001", "TC003", "EM101"]
+
+# Alembic's env.py is executed directly by Alembic, not imported as a package,
+# so it is not part of a package (INP001).
+"migrations/env.py" = ["INP001"]
 
 # Test files (relaxed rules for test code)
 "tests/**/*.py" = [

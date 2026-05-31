@@ -37,7 +37,7 @@ class Base(DeclarativeBase):
     """Declarative base for all ORM models."""
 
 
-def _normalise_async_url(url: str) -> str:
+def normalise_async_url(url: str) -> str:
     """Return a database URL that uses an async driver.
 
     Operators commonly set ``DATABASE_URL=postgresql://...`` (the synchronous
@@ -73,7 +73,7 @@ def get_engine() -> AsyncEngine:
     """
     global _engine  # noqa: PLW0603
     if _engine is None:
-        url = _normalise_async_url(settings.database_url)
+        url = normalise_async_url(settings.database_url)
         # SQLite needs check_same_thread relaxed for the async driver; Postgres
         # ignores connect_args here. pool_pre_ping avoids handing out dead
         # connections after a database restart.
