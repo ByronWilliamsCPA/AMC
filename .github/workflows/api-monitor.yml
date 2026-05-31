@@ -1,0 +1,138 @@
+# API Monitoring (Newman)
+# Boots the app against PostgreSQL, seeds content, and runs the Postman
+# collection with Newman to assert the core flow stays healthy. Runs on a
+# schedule for synthetic monitoring and on demand.
+name: API Monitor
+
+on:
+  schedule:
+    # Every 6 hours.
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Target base URL (leave blank to boot the app in-job)"
+        required: false
+        default: ""
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    name: Newman monitor
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: amc
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: amc
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U amc"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      AMC_DATABASE_URL: postgresql+asyncpg://amc:password@localhost:5432/amc
+      AMC_SESSION_SECRET: ci-monitor-session-secret-not-for-production
+      AMC_SESSION_COOKIE_SECURE: "false"
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Set up Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "22"
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Apply migrations and seed content
+        if: ${{ github.event.inputs.base_url == '' }}
+        run: |
+          uv run alembic upgrade head
+          uv run python -m amc.seed --diag content/diag_data.json
+
+      - name: Create monitor user
+        if: ${{ github.event.inputs.base_url == '' }}
+        run: |
+          uv run python - <<'PY'
+          import asyncio
+          from amc.core.database import get_session, dispose_engine
+          from amc.core.security import hash_password
+          from amc.repositories.users import UserRepository
+
+          async def main() -> None:
+              async with get_session() as session:
+                  repo = UserRepository(session)
+                  if await repo.get_by_email("monitor@example.com") is None:
+                      await repo.create(
+                          email="monitor@example.com",
+                          display_name="Monitor",
+                          role="admin",
+                          password_hash=hash_password("monitor-password-123"),
+                      )
+              await dispose_engine()
+
+          asyncio.run(main())
+          PY
+
+      - name: Boot the app
+        if: ${{ github.event.inputs.base_url == '' }}
+        run: |
+          uv run uvicorn amc.main:app --host 127.0.0.1 --port 8000 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8000/health/live && break
+            sleep 1
+          done
+
+      - name: Run Newman (in-job app)
+        if: ${{ github.event.inputs.base_url == '' }}
+        run: |
+          newman run docs/api/amc.postman_collection.json \
+            --env-var base_url=http://127.0.0.1:8000 \
+            --env-var email=monitor@example.com \
+            --env-var password=monitor-password-123 \
+            -r cli,json --reporter-json-export newman-report.json
+
+      - name: Run Newman (external target)
+        if: ${{ github.event.inputs.base_url != '' }}
+        run: |
+          newman run docs/api/amc.postman_collection.json \
+            --env-var base_url=${{ github.event.inputs.base_url }} \
+            --env-var email=${{ secrets.MONITOR_EMAIL }} \
+            --env-var password=${{ secrets.MONITOR_PASSWORD }} \
+            -r cli,json --reporter-json-export newman-report.json
+
+      - name: Upload Newman report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: newman-report
+          path: newman-report.json
+          if-no-files-found: ignore

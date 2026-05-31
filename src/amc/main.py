@@ -35,6 +35,26 @@ if TYPE_CHECKING:
 
 logger = get_logger(__name__)
 
+# OpenAPI description and tag metadata, surfaced in the exported schema so the
+# Postman/Newman import is self-documenting.
+_API_DESCRIPTION = (
+    "Server-backed AMC Trainer API.\n\n"
+    "Authentication is invite-only and session-cookie based: call "
+    "`POST /api/v1/auth/login` (or `/register`) to receive an HTTP-only "
+    "`amc_session` cookie, which authorises the protected endpoints. Answer "
+    "keys are never present in any pre-submission response; they appear only in "
+    "the graded review returned by the attempt endpoints."
+)
+
+_OPENAPI_TAGS = [
+    {"name": "health", "description": "Liveness/readiness probes (unauthenticated)."},
+    {"name": "auth", "description": "Login, logout, registration, and current user."},
+    {"name": "invites", "description": "Mint one-time invites (coach/admin only)."},
+    {"name": "catalog", "description": "Exams and diagnostics served without answer keys."},
+    {"name": "attempts", "description": "Submit exams/diagnostics for server-side grading."},
+    {"name": "progress", "description": "History plus the synthesized recommendation."},
+]
+
 # Statuses at or above this are server faults (logged with stack context).
 _SERVER_ERROR_THRESHOLD = 500
 
@@ -141,10 +161,17 @@ def create_app() -> FastAPI:
     )
 
     app = FastAPI(
-        title="AMC Trainer",
+        title="AMC Trainer API",
         version="0.1.0",
-        description="Practice AMC contests and AoPS placement diagnostics.",
+        summary="Practice AMC contests and AoPS placement diagnostics.",
+        description=_API_DESCRIPTION,
         lifespan=_lifespan,
+        openapi_tags=_OPENAPI_TAGS,
+        contact={
+            "name": "AMC Trainer",
+            "url": "https://github.com/ByronWilliamsCPA/AMC",
+        },
+        license_info={"name": "MIT"},
     )
 
     # Correlation IDs first so every downstream log line and response carries one.
