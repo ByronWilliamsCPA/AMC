@@ -123,6 +123,60 @@ way, the shipped template must pass the shipped validator.
 
 ---
 
+### `tests/test_example.py` ships a `TestCLI` suite for a non-existent `amc.cli` module
+
+- **Priority**: High
+- **Category**: Tooling
+- **Discovered**: 2026-05-31
+
+**Issue**: The generated `tests/test_example.py` includes a `TestCLI` class (12 tests) that
+imports `from amc.cli import cli` and exercises a Click-based CLI (`hello`/`config` commands,
+`--debug`, version option). The template never generates an `amc/cli.py` module, does not list
+`click` as a dependency, and adds no `[project.scripts]` entry. As shipped, the project fails
+12 tests immediately with `ModuleNotFoundError: No module named 'amc.cli'`, so a fresh clone
+cannot pass its own test suite or the CI `pytest` gate.
+
+**Context**: Discovered running the full suite while building out the FastAPI backend. The 12
+failures reproduce on the initial commit (before any project code), confirming they are a
+template defect rather than project regression. Because this project is a web app with no CLI
+in scope, the stub was removed rather than satisfied.
+
+**Suggested Fix**: Make the example test self-consistent with what the template generates.
+Either (a) generate a minimal `src/{{package}}/cli.py` (Click group with `hello`/`config`),
+add `click` to dependencies, and wire a `[project.scripts]` entry; or (b) gate the CLI test
+block behind the same cookiecutter option that decides whether a CLI is scaffolded, so
+non-CLI projects don't inherit tests for a module that was never created. Option (b) is
+preferable for library/web-app project types.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/tests/test_example.py`,
+`{{cookiecutter.project_slug}}/src/{{cookiecutter.package_name}}/` (missing `cli.py`),
+`{{cookiecutter.project_slug}}/pyproject.toml` (dependencies, `[project.scripts]`).
+
+---
+
+### `.gitignore` `models/` rule silently swallows a `src/<pkg>/models/` package
+
+- **Priority**: High
+- **Category**: Configuration
+
+**Issue**: The generated `.gitignore` contains an unanchored `models/` entry (under
+"Data and models") intended for ML weight artifacts. Because it is unanchored, it also
+matches `src/<package>/models/` — a very common name for an ORM/domain models package.
+A newly added models package is silently untracked; `git add` appears to succeed but the
+files never enter version control, which is easy to miss until CI fails to find the module.
+
+**Context**: Discovered after adding a SQLAlchemy `src/amc/models/` package; `git status`
+did not list it, and `git check-ignore -v` traced it to the `models/` line.
+
+**Suggested Fix**: Anchor the ML artifact ignores to the project root (`/models/`,
+`/weights/`, `/data/raw/`) so they cannot match nested source directories, and/or add an
+explicit un-ignore (`!src/{{cookiecutter.package_name}}/models/`). Anchoring is the more
+robust fix.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/.gitignore`.
+
+---
+
 ## Submitting Feedback
 
 Once you've collected feedback, you can:
