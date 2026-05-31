@@ -12,7 +12,7 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
-from sqlalchemy import JSON, Boolean, ForeignKey, String
+from sqlalchemy import JSON, Boolean, Float, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from amc.models.base import Base, uuid_pk
@@ -58,13 +58,19 @@ class DiagnosticInstrument(Base):
 class DiagnosticItem(Base):
     """A single question within a diagnostic instrument.
 
+    The answer-key fields (``answer``, ``numeric_value``, ``accept``) are never
+    serialized in a pre-submission response; the read schema omits them.
+
     Attributes:
         id: Primary key.
         instrument_id: Owning instrument slug.
         section_title: Heading grouping related items.
         label: Short label/number shown to the user.
         prompt: Question text (may contain LaTeX).
-        answer: Canonical answer; never serialized pre-submission.
+        answer: Canonical displayed answer (the contract's ``ans``).
+        numeric_value: Numeric value for auto-grading (the contract's ``v``), or
+            ``None`` for non-numeric/symbolic items.
+        accept: Accepted string forms for auto-grading (the contract's ``accept``).
         group: ``fund`` or ``ps`` for ``fundps`` grading, else ``None``.
         manual: True when the item is symbolic and must be self-marked.
     """
@@ -81,6 +87,8 @@ class DiagnosticItem(Base):
     label: Mapped[str] = mapped_column(String(40), default="")
     prompt: Mapped[str] = mapped_column(String, default="")
     answer: Mapped[str] = mapped_column(String, default="")
+    numeric_value: Mapped[float | None] = mapped_column(Float, nullable=True)
+    accept: Mapped[list[str]] = mapped_column(JSON, default=list)
     group: Mapped[str | None] = mapped_column(String(8), nullable=True)
     manual: Mapped[bool] = mapped_column(Boolean, default=False)
 

@@ -10,11 +10,20 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
+from amc.api.attempts import router as attempts_router
+from amc.api.auth import router as auth_router
+from amc.api.catalog import router as catalog_router
 from amc.api.health import router as health_router
+from amc.api.invites import router as invites_router
+from amc.api.progress import router as progress_router
 
-# Versioned API surface. Domain routers declare their own sub-prefix and tags
-# and are included here as they come online.
+# Versioned API surface. Each domain router declares its own sub-prefix and tags.
 v1_router = APIRouter(prefix="/api/v1")
+v1_router.include_router(auth_router)
+v1_router.include_router(invites_router)
+v1_router.include_router(catalog_router)
+v1_router.include_router(attempts_router)
+v1_router.include_router(progress_router)
 
 # Top-level aggregate mounted by the app factory.
 api_router = APIRouter()

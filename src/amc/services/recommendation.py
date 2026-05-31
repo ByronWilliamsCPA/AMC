@@ -241,8 +241,7 @@ def synthesize(
 
     if chosen is None and not has_any:
         no_data_reason = (
-            "No diagnostics taken yet; take a placement check to get a "
-            "recommendation."
+            "No diagnostics taken yet; take a placement check to get a recommendation."
         )
         return Recommendation(
             course=None,

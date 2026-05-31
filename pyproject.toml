@@ -298,6 +298,20 @@ known-first-party = ["amc"]
 # cannot be moved into a TYPE_CHECKING block (TC003) as ruff suggests.
 "**/models/*.py" = ["TC003"]
 
+# Pydantic schemas: annotation types (uuid) are read at runtime to build the
+# validation model, so they must stay importable (not TYPE_CHECKING-only).
+"**/schemas/*.py" = ["TC003"]
+
+# Repositories: record/create methods take many keyword-only domain fields by
+# design; the alternative (parameter objects) adds indirection without value.
+"**/repositories/*.py" = ["PLR0913"]
+
+# API routers: FastAPI reads dependency aliases (Annotated[..., Depends(...)])
+# and route signatures at runtime, so those imports cannot move into a
+# TYPE_CHECKING block (TC001/TC003). Routers also idiomatically raise HTTP
+# errors with inline messages (EM101).
+"**/api/*.py" = ["TC001", "TC003", "EM101"]
+
 # Test files (relaxed rules for test code)
 "tests/**/*.py" = [
     "ANN",    # Type annotations not required in tests
@@ -390,7 +404,6 @@ known-first-party = ["amc"]
     "BLE001",  # Blind except for URL parsing resilience
     "PLC0415", # Local imports to avoid circular dependencies
     "TRY300",  # Return in try block is clearer for simple cases
-    "ANN001",  # call_next typing is complex (Starlette middleware)
     "RUF012",  # ClassVar not needed for constants
     "C416",    # Dict comprehension is clearer than dict()
     "SIM102",  # Nested if is more readable for security checks
