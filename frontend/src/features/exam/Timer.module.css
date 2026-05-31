@@ -1,0 +1,34 @@
+/* Countdown chip. Calm by default; escalates at thresholds via colour AND a
+   text caption (never colour alone). Never animates. */
+.timer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.time {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  font-variant-numeric: var(--font-numeric-tabular);
+  color: var(--color-text);
+}
+
+.caption {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.caution .time {
+  color: var(--color-warning-text);
+}
+.caution .caption {
+  color: var(--color-warning-text);
+}
+
+.warning .time {
+  color: var(--color-error-text);
+}
+.warning .caption {
+  color: var(--color-error-text);
+}

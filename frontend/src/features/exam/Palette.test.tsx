@@ -32,4 +32,36 @@ describe('Palette', () => {
     const current = screen.getByRole('button', { name: /Question 3/ })
     expect(current).toHaveAttribute('aria-current', 'true')
   })
+
+  it('is a single tab stop: only the current question is tabbable', () => {
+    const state = { ...initRunner(6), current: 2 }
+    render(<Palette state={state} voided={[]} onSelect={() => {}} />)
+    expect(screen.getByRole('button', { name: /Question 3/ })).toHaveAttribute('tabindex', '0')
+    expect(screen.getByRole('button', { name: /Question 1/ })).toHaveAttribute('tabindex', '-1')
+    expect(screen.getByRole('button', { name: /Question 6/ })).toHaveAttribute('tabindex', '-1')
+  })
+
+  it('moves focus with arrow and Home/End keys (roving tabindex)', async () => {
+    const user = userEvent.setup()
+    render(<Palette state={initRunner(6)} voided={[]} onSelect={() => {}} />)
+
+    const q1 = screen.getByRole('button', { name: /Question 1/ })
+    q1.focus()
+    expect(q1).toHaveFocus()
+
+    // Right moves by one.
+    await user.keyboard('{ArrowRight}')
+    expect(screen.getByRole('button', { name: /Question 2/ })).toHaveFocus()
+
+    // Down moves by a row of five: from Question 2 (index 1) to index 6, which
+    // is out of range for 6 items, so it clamps to the last (Question 6).
+    await user.keyboard('{ArrowDown}')
+    expect(screen.getByRole('button', { name: /Question 6/ })).toHaveFocus()
+
+    // End / Home jump to last / first.
+    await user.keyboard('{Home}')
+    expect(screen.getByRole('button', { name: /Question 1/ })).toHaveFocus()
+    await user.keyboard('{End}')
+    expect(screen.getByRole('button', { name: /Question 6/ })).toHaveFocus()
+  })
 })

@@ -11,14 +11,17 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useReducer, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ErrorState, Spinner } from '@/components/States'
+import { Button } from '@/components/ui'
 import { ExamReview } from '@/features/exam/ExamReview'
 import { Palette } from '@/features/exam/Palette'
 import { Question } from '@/features/exam/Question'
 import { answeredCount, initRunner, runnerReducer } from '@/features/exam/runnerState'
-import { formatDuration, useCountdown } from '@/features/exam/useCountdown'
+import { Timer } from '@/features/exam/Timer'
+import { useCountdown } from '@/features/exam/useCountdown'
 import type { ExamDetail, ExamResultResponse } from '@/client'
 import { ApiError, getExam, submitExam } from '@/lib/endpoints'
 import { queryKeys } from '@/lib/queryClient'
+import styles from './ExamRunnerPage.module.css'
 
 export function ExamRunnerPage() {
   const { examId = '' } = useParams()
@@ -79,33 +82,28 @@ function RunnerInner({ exam }: { exam: ExamDetail }) {
   const frozen = state.phase !== 'active'
 
   return (
-    <section className="runner">
-      <header className="runner__header">
+    <section className={styles.runner}>
+      <header className={styles.header}>
         <h1>
           {exam.contest} {exam.year}
           {exam.variant}
         </h1>
-        <div
-          className="runner__timer"
-          role="timer"
-          aria-live="off"
-          aria-label={`Time remaining: ${formatDuration(remaining)}`}
-        >
-          {formatDuration(remaining)}
-        </div>
-        <p className="runner__progress" aria-live="polite">
+        <Timer remaining={remaining} />
+        <p className={styles.progress} aria-live="polite">
           {answeredCount(state)} of {state.numProblems} answered
         </p>
       </header>
 
-      <div className="runner__body">
-        <Palette
-          state={state}
-          voided={exam.voided}
-          onSelect={(index) => dispatch({ type: 'goto', index })}
-        />
+      <div className={styles.body}>
+        <div className={styles.sidebar}>
+          <Palette
+            state={state}
+            voided={exam.voided}
+            onSelect={(index) => dispatch({ type: 'goto', index })}
+          />
+        </div>
 
-        <div className="runner__question">
+        <div>
           {problem !== undefined && (
             <Question
               problem={problem}
@@ -116,37 +114,38 @@ function RunnerInner({ exam }: { exam: ExamDetail }) {
             />
           )}
 
-          <div className="runner__controls">
-            <button
+          <div className={styles.controls}>
+            <Button
               type="button"
               onClick={() => dispatch({ type: 'prev' })}
               disabled={state.current === 0}
             >
               Previous
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               aria-pressed={state.flags[state.current]}
               onClick={() => dispatch({ type: 'toggleFlag', index: state.current })}
               disabled={frozen}
             >
               {state.flags[state.current] ? 'Unflag' : 'Flag'}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={() => dispatch({ type: 'next' })}
               disabled={state.current === state.numProblems - 1}
             >
               Next
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
-              className="runner__submit"
+              variant="primary"
+              className={styles.submit}
               onClick={triggerSubmit}
               disabled={frozen}
             >
               {state.phase === 'submitting' ? 'Submitting…' : 'Submit'}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

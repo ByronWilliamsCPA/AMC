@@ -1,0 +1,49 @@
+/* RadioGroup — native radios in a labelled fieldset. Native gives roving focus
+   and arrow-key selection for free; we add row styling and a selected state. */
+.group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; /* touch target */
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-base); /* 16px floor keeps inline KaTeX legible */
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.option:hover {
+  background: var(--color-surface);
+}
+
+/* Selected: accent border + soft tint, paired with the native checked dot. */
+.selected {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+.input {
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Frozen group (after submit): dim and block pointer interaction. */
+.group:disabled .option {
+  cursor: default;
+  opacity: 0.85;
+}

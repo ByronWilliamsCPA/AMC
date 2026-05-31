@@ -1,13 +1,16 @@
 /**
- * Renders one problem and its answer choices as an accessible radiogroup.
+ * Renders one problem and its answer choices.
  *
  * Image-mode problems show the scanned image; latex-mode problems render the
- * body and each choice's HTML with KaTeX. Choice HTML comes from our own
- * backend (not user input) and is rendered via the KaTeX-aware {@link Math}
- * where it is LaTeX; plain choice labels (A–E) are always shown.
+ * body and each choice's HTML with KaTeX. The A–E choices are delegated to the
+ * reusable {@link RadioGroup} primitive; this component owns only the problem
+ * presentation and the KaTeX-typeset choice labels. Choice HTML comes from our
+ * own backend (not user input).
  */
 import { Tex } from '@/components/Tex'
+import { Button, RadioGroup, type RadioOption } from '@/components/ui'
 import type { ProblemRead } from '@/client'
+import styles from './Question.module.css'
 
 const CHOICE_LETTERS = ['A', 'B', 'C', 'D', 'E'] as const
 
@@ -43,55 +46,49 @@ export function Question({
   const choices = readChoices(problem)
   const isImage = problem.render_mode === 'image'
 
-  return (
-    <div className="question">
-      <h2 className="question__number">Problem {problem.number}</h2>
+  const options: RadioOption[] = choices.map((choice) => ({
+    value: choice.letter,
+    label: (
+      <>
+        <span className={styles.letter}>{choice.letter}</span>
+        {!isImage && choice.html && (
+          <span className={styles.choiceBody}>
+            <Tex tex={stripDelimiters(choice.html)} />
+          </span>
+        )}
+      </>
+    ),
+  }))
 
-      <div className="question__body">
+  return (
+    <div className={styles.question}>
+      <h2 className={styles.number}>Problem {problem.number}</h2>
+
+      <div className={styles.body}>
         {isImage && problem.image_path ? (
           <img
             src={problem.image_path}
             alt={`Problem ${problem.number}`}
-            className="question__image"
+            className={styles.image}
           />
         ) : (
           <Tex tex={problem.body_latex ?? ''} display />
         )}
       </div>
 
-      <fieldset
-        className="choices"
-        role="radiogroup"
-        aria-label={`Answer choices for problem ${problem.number}`}
+      <RadioGroup
+        legend={`Answer choices for problem ${problem.number}`}
+        name={`problem-${problem.number}`}
+        value={selected}
+        options={options}
         disabled={disabled}
-      >
-        {choices.map((choice) => {
-          const isSelected = selected === choice.letter
-          return (
-            <label key={choice.letter} className="choice">
-              <input
-                type="radio"
-                name={`problem-${problem.number}`}
-                value={choice.letter}
-                checked={isSelected}
-                onChange={() => onSelect(choice.letter)}
-                disabled={disabled}
-              />
-              <span className="choice__letter">{choice.letter}</span>
-              {!isImage && choice.html && (
-                <span className="choice__body">
-                  <Tex tex={stripDelimiters(choice.html)} />
-                </span>
-              )}
-            </label>
-          )
-        })}
-      </fieldset>
+        onChange={onSelect}
+      />
 
       {selected !== null && !disabled && (
-        <button type="button" className="link-button" onClick={onClear}>
+        <Button type="button" variant="subtle" className={styles.clear} onClick={onClear}>
           Clear answer
-        </button>
+        </Button>
       )}
     </div>
   )
