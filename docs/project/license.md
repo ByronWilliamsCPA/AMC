@@ -25,7 +25,7 @@ With the following conditions:
 - **License and copyright notice**: Include the license in distributions
 ## Full License Text
 
-See the [LICENSE](https://github.com/williaby/AMC/blob/main/LICENSE) file in the repository root.
+See the [LICENSE](https://github.com/ByronWilliamsCPA/AMC/blob/main/LICENSE) file in the repository root.
 
 ## Third-Party Licenses
 

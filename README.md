@@ -26,7 +26,7 @@
 |---|---|
 | **Author** | Byron Williams |
 | **Created** | 2026-05-31 |
-| **Repository** | [williaby/AMC](https://github.com/williaby/AMC) |
+| **Repository** | [ByronWilliamsCPA/AMC](https://github.com/ByronWilliamsCPA/AMC) |
 
 ---
 
@@ -74,7 +74,7 @@ pipx install uv
 
 ```bash
 # Clone repository
-git clone https://github.com/williaby/AMC.git
+git clone https://github.com/ByronWilliamsCPA/AMC.git
 cd amc
 
 # Install dependencies (includes dev tools - REQUIRED for development)
@@ -545,8 +545,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/williaby/AMC/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/williaby/AMC/discussions)
+- **Issues**: [GitHub Issues](https://github.com/ByronWilliamsCPA/AMC/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ByronWilliamsCPA/AMC/discussions)
 - **Email**: byronawilliams@gmail.com
 
 ## Acknowledgments
