@@ -1,7 +1,12 @@
 import '@testing-library/jest-dom'
-import { afterAll, afterEach, beforeAll } from 'vitest'
+import 'vitest-axe/extend-expect'
+import { afterAll, afterEach, beforeAll, expect } from 'vitest'
+import * as axeMatchers from 'vitest-axe/matchers'
 import { client } from '@/client'
 import { server } from '@/test/server'
+
+// Accessibility assertions: `expect(await axe(container)).toHaveNoViolations()`.
+expect.extend(axeMatchers)
 
 // In jsdom, node's fetch cannot build a Request from a relative URL, so point
 // the client at the jsdom origin (absolute). The app uses an empty base in the
