@@ -87,6 +87,24 @@ class Settings(BaseSettings):
     login_max_attempts: int = 5
     login_attempt_window_seconds: int = 300
 
+    # OIDC / Authentik (optional SSO; disabled by default) -------------------
+    # When ``oidc_enabled`` is true the app can run a backend-for-frontend OIDC
+    # Authorization Code flow against Authentik, minting the same server-side
+    # session on success. Left off here: built-in invite + password auth is the
+    # active scheme. See docs/auth/authentik.md to enable.
+    oidc_enabled: bool = False
+    oidc_issuer: str = ""
+    oidc_client_id: str = ""
+    # #CRITICAL: Security: the OIDC client secret must come from the environment
+    # in production, never a committed default.
+    oidc_client_secret: str = ""
+    oidc_redirect_url: str = ""
+    oidc_scopes: str = "openid profile email groups"
+    # Authentik group whose members are granted staff (coach/admin) access when
+    # roles are derived from the IdP (groups -> roles).
+    oidc_staff_group: str = "amc-staff"
+    oidc_admin_group: str = "amc-admin"
+
     # Content ----------------------------------------------------------------
     assets_dir: str = "assets"
 

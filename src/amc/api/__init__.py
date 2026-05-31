@@ -16,6 +16,7 @@ from amc.api.catalog import router as catalog_router
 from amc.api.health import router as health_router
 from amc.api.invites import router as invites_router
 from amc.api.progress import router as progress_router
+from amc.core.config import settings
 
 # Versioned API surface. Each domain router declares its own sub-prefix and tags.
 v1_router = APIRouter(prefix="/api/v1")
@@ -24,6 +25,13 @@ v1_router.include_router(invites_router)
 v1_router.include_router(catalog_router)
 v1_router.include_router(attempts_router)
 v1_router.include_router(progress_router)
+
+# Optional Authentik/OIDC SSO routes, mounted only when explicitly enabled. The
+# built-in invite + password auth is the active scheme by default.
+if settings.oidc_enabled:
+    from amc.api.oidc import router as oidc_router
+
+    v1_router.include_router(oidc_router)
 
 # Top-level aggregate mounted by the app factory.
 api_router = APIRouter()
