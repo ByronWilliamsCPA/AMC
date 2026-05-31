@@ -2,8 +2,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { EmptyState, ErrorState, Spinner } from '@/components/States'
+import { Card } from '@/components/ui'
 import { listDiagnostics } from '@/lib/endpoints'
 import { queryKeys } from '@/lib/queryClient'
+import styles from './DiagnosticListPage.module.css'
 
 export function DiagnosticListPage() {
   const { data, isLoading, isError } = useQuery({
@@ -20,13 +22,13 @@ export function DiagnosticListPage() {
         <EmptyState>No diagnostics available yet.</EmptyState>
       )}
       {data !== undefined && data.length > 0 && (
-        <ul className="diagnostic-list">
+        <ul className={styles.list}>
           {data.map((d) => (
-            <li key={d.id}>
-              <Link to={`/diagnostics/${d.id}`}>
-                {d.course} — {d.kind}
+            <Card as="li" interactive key={d.id}>
+              <Link to={`/diagnostics/${d.id}`} className={styles.link}>
+                {d.course} <span className={styles.meta}>— {d.kind}</span>
               </Link>
-            </li>
+            </Card>
           ))}
         </ul>
       )}

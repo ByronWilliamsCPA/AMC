@@ -26,6 +26,20 @@ code {
   font-family: var(--font-mono);
 }
 
+/* Base heading scale (tokenized) so pages use plain <h1>/<h2> consistently. */
+h1 {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--space-4);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+}
+
 /* Visible focus everywhere for keyboard users. */
 :focus-visible {
   outline: 3px solid var(--color-focus);
@@ -105,56 +119,6 @@ a {
   border: 0;
 }
 
-/* Layout shell */
-.layout__header {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  align-items: center;
-  padding: var(--space-3);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.layout__brand {
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.layout__nav {
-  display: flex;
-  gap: var(--space-3);
-}
-
-.layout__user {
-  margin-left: auto;
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-}
-
-.layout__main {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: var(--space-4) var(--space-3);
-}
-
-/* Auth pages */
-.auth-page {
-  max-width: 28rem;
-  margin: var(--space-5) auto;
-  padding: 0 var(--space-3);
-}
-
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.form-error {
-  color: var(--color-error);
-}
-
 /* States */
 .spinner {
   display: inline-block;
@@ -170,21 +134,6 @@ a {
 
 .empty-state {
   color: var(--color-muted);
-}
-
-/* Lists */
-.exam-list,
-.diagnostic-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: var(--space-2);
-}
-
-.filter-bar {
-  display: flex;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
 }
 
 /* Exam runner */
@@ -350,11 +299,4 @@ a {
 
 .progress__warning {
   color: var(--color-warn);
-}
-
-.invite-link {
-  display: block;
-  padding: var(--space-2);
-  background: var(--color-surface);
-  word-break: break-all;
 }

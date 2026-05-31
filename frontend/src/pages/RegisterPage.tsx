@@ -6,7 +6,9 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@/auth/useAuth'
+import { Alert, Button, TextField } from '@/components/ui'
 import { ApiError, validateInvite } from '@/lib/endpoints'
+import styles from './RegisterPage.module.css'
 
 export function RegisterPage() {
   const { user, loading, register } = useAuth()
@@ -65,32 +67,30 @@ export function RegisterPage() {
   }
 
   return (
-    <main className="auth-page">
+    <main className={styles.page}>
       <h1>Set up your account</h1>
       {inviteValid === false && (
-        <p role="alert" className="form-error">
+        <Alert severity="error">
           This invite link is invalid or has expired. Ask your coach for a new one.
-        </p>
+        </Alert>
       )}
       {inviteValid === true && (
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form onSubmit={handleSubmit} className={styles.form}>
           {inviteEmail !== null && (
             <p>
               Creating an account for <strong>{inviteEmail}</strong>.
             </p>
           )}
-          <label htmlFor="display_name">Display name</label>
-          <input
-            id="display_name"
+          <TextField
+            label="Display name"
             type="text"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             required
           />
-
-          <label htmlFor="new_password">Password (8+ characters)</label>
-          <input
-            id="new_password"
+          <TextField
+            label="Password"
+            hint="8+ characters"
             type="password"
             autoComplete="new-password"
             minLength={8}
@@ -99,18 +99,14 @@ export function RegisterPage() {
             required
           />
 
-          {error !== null && (
-            <p role="alert" className="form-error">
-              {error}
-            </p>
-          )}
+          {error !== null && <Alert severity="error">{error}</Alert>}
 
-          <button type="submit" disabled={submitting}>
+          <Button type="submit" variant="primary" block disabled={submitting}>
             {submitting ? 'Creating…' : 'Create account'}
-          </button>
+          </Button>
         </form>
       )}
-      <p>
+      <p className={styles.footer}>
         Already set up? <Link to="/login">Sign in</Link>.
       </p>
     </main>

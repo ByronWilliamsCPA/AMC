@@ -6,7 +6,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/auth/useAuth'
-import { Button } from '@/components/ui/Button'
+import { Alert, Button, TextField } from '@/components/ui'
 import { ApiError } from '@/lib/endpoints'
 import styles from './LoginPage.module.css'
 
@@ -48,27 +48,18 @@ export function LoginPage() {
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.title}>Sign in</h1>
+      <h1>Sign in</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label className={styles.label} htmlFor="email">
-          Email
-        </label>
-        <input
-          id="email"
-          className={styles.input}
+        <TextField
+          label="Email"
           type="email"
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
-        <label className={styles.label} htmlFor="password">
-          Password
-        </label>
-        <input
-          id="password"
-          className={styles.input}
+        <TextField
+          label="Password"
           type="password"
           autoComplete="current-password"
           value={password}
@@ -76,11 +67,7 @@ export function LoginPage() {
           required
         />
 
-        {error !== null && (
-          <p role="alert" className={styles.error}>
-            {error}
-          </p>
-        )}
+        {error !== null && <Alert severity="error">{error}</Alert>}
 
         <Button
           type="submit"

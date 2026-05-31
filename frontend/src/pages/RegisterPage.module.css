@@ -1,4 +1,4 @@
-/* Login page — co-located CSS Module consuming design tokens (prototype). */
+/* Register (invite redemption) page. */
 .page {
   max-width: 28rem;
   margin: var(--space-7) auto;
@@ -9,10 +9,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-}
-
-.submit {
-  margin-top: var(--space-2);
 }
 
 .footer {
