@@ -109,66 +109,6 @@ async def check_database() -> ReadinessCheck:
         )
 
 
-async def check_cache() -> ReadinessCheck:
-    """Check Redis/cache connectivity.
-
-    Returns:
-        ReadinessCheck with cache status and latency
-    """
-    start = time.time()
-    try:
-        # Example Redis check - adjust based on your cache implementation
-        # from amc.core.cache import redis_client
-        # await redis_client.ping()
-
-        # Placeholder - replace with actual cache check
-        latency_ms = (time.time() - start) * 1000
-        return ReadinessCheck(
-            name="cache",
-            status=True,
-            latency_ms=round(latency_ms, 2),
-        )
-    except Exception as e:
-        latency_ms = (time.time() - start) * 1000
-        return ReadinessCheck(
-            name="cache",
-            status=False,
-            latency_ms=round(latency_ms, 2),
-            error=str(e),
-        )
-
-
-async def check_external_service() -> ReadinessCheck:
-    """Check external API/service connectivity.
-
-    Returns:
-        ReadinessCheck with external service status
-    """
-    start = time.time()
-    try:
-        # Example external service check
-        # import httpx
-        # async with httpx.AsyncClient() as client:
-        #     response = await client.get("https://api.example.com/health", timeout=2.0)
-        #     response.raise_for_status()
-
-        # Placeholder - replace with actual external service check
-        latency_ms = (time.time() - start) * 1000
-        return ReadinessCheck(
-            name="external_api",
-            status=True,
-            latency_ms=round(latency_ms, 2),
-        )
-    except Exception as e:
-        latency_ms = (time.time() - start) * 1000
-        return ReadinessCheck(
-            name="external_api",
-            status=False,
-            latency_ms=round(latency_ms, 2),
-            error=str(e),
-        )
-
-
 @router.get(
     "/ready",
     response_model=ReadinessStatus,
@@ -190,18 +130,10 @@ async def readiness() -> ReadinessStatus:
     Returns HTTP 503 if any critical dependency is unavailable.
     If this fails, Kubernetes will stop sending traffic to this pod.
     """
-    checks: dict[str, ReadinessCheck] = {}
+    # The database is the only critical dependency for this app (no cache or
+    # external service). Add further checks here as the architecture grows.
+    checks: dict[str, ReadinessCheck] = {"database": await check_database()}
 
-    # Run all checks in parallel for better performance
-    # For now, run sequentially - can be optimized with asyncio.gather()
-    checks["database"] = await check_database()
-    # Uncomment if using cache:
-    # checks["cache"] = await check_cache()
-
-    # Uncomment if checking external services:
-    # checks["external_api"] = await check_external_service()
-
-    # Determine overall status
     all_healthy = all(check.status for check in checks.values())
 
     if not all_healthy:

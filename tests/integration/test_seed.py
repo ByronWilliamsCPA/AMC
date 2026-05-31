@@ -127,3 +127,75 @@ class TestSeedDiag:
         assert item.numeric_value == 3660.0
         assert "3,660" in item.accept
         assert item.manual is False
+
+
+class TestSeedCli:
+    """The ``python -m amc.seed`` entry point against a temp SQLite file."""
+
+    def test_main_seeds_from_files(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        from sqlalchemy import create_engine, text
+
+        import amc.core.database as db_module
+        from amc import seed as seed_module
+
+        # Point the app at a throwaway file-based SQLite database.
+        db_path = tmp_path / "seed.db"
+        url = f"sqlite+aiosqlite:///{db_path}"
+        monkeypatch.setattr(db_module.settings, "database_url", url)
+        # Reset the cached engine so the new URL takes effect.
+        db_module._engine = None
+        db_module._sessionmaker = None
+
+        # Create the schema synchronously for the CLI run.
+        sync_engine = create_engine(f"sqlite:///{db_path}")
+        from amc.models import Base
+
+        Base.metadata.create_all(sync_engine)
+        sync_engine.dispose()
+
+        # Write a tiny AMC file and reuse the real diagnostics file.
+        amc_path = tmp_path / "amc.json"
+        with amc_path.open("w", encoding="utf-8") as handle:
+            json.dump(_MINIMAL_AMC, handle)
+
+        seed_module.main(["--amc", str(amc_path), "--diag", str(_DIAG_PATH)])
+
+        # Verify rows landed.
+        check = create_engine(f"sqlite:///{db_path}")
+        with check.connect() as conn:
+            exams = conn.execute(text("SELECT count(*) FROM exams")).scalar_one()
+            items = conn.execute(
+                text("SELECT count(*) FROM diagnostic_items")
+            ).scalar_one()
+        check.dispose()
+        assert exams == 1
+        assert items == 218
+
+
+_MINIMAL_AMC = {
+    "tests": {
+        "AMC8-2016": {
+            "id": "AMC8-2016",
+            "contest": "AMC 8",
+            "year": 2016,
+            "exam": "",
+            "durationSec": 2400,
+            "scoreMode": "count",
+            "mode": "latex",
+            "voided": [],
+            "answers": ["A"],
+            "problems": [
+                {
+                    "n": 1,
+                    "q": "1?",
+                    "choices": [{"L": x, "html": x} for x in "ABCDE"],
+                    "sol": "s",
+                }
+            ],
+        }
+    },
+    "byContest": {"AMC 8": ["AMC8-2016"], "AMC 10": [], "AMC 12": []},
+    "keyedTests": [],
+}

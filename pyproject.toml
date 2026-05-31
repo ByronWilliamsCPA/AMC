@@ -542,6 +542,11 @@ markers = [
 # Note: Coverage source is specified via pytest's --cov argument in addopts above
 [tool.coverage.run]
 branch = true
+# Follow greenlet (SQLAlchemy async) and thread context switches so code executed
+# through the ASGI transport in integration tests is measured, not reported as
+# unhit. Without this, async route/repository bodies show as 0% despite passing
+# end-to-end tests.
+concurrency = ["greenlet", "thread"]
 omit = [
     # Test files
     "*/tests/*",

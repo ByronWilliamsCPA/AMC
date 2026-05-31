@@ -127,6 +127,32 @@ class TestProgressWithAmc:
         scores = [a["score"] for a in progress["test_attempts"]]
         assert set(scores) == {12.0, 6.0}
 
+    async def test_recommendation_from_diagnostic_history(
+        self,
+        admin_client: AsyncClient,
+        db_session: AsyncSession,
+        seeded_diagnostic: object,
+    ) -> None:
+        # Submit the seeded diagnostic so progress has a diagnostic attempt to
+        # walk the ladder over (exercises _latest_results / ladder mapping).
+        detail = (await admin_client.get("/api/v1/diagnostics/pa1-pre")).json()
+        items = {i["label"]: i["id"] for i in detail["items"]}
+        submit = await admin_client.post(
+            "/api/v1/diagnostics/pa1-pre/attempts",
+            json={
+                "responses": {items["1"]: "4"},
+                "marks": {items["2"]: True},
+                "elapsed_sec": 10,
+            },
+        )
+        assert submit.status_code == 200, submit.text
+
+        progress = (await admin_client.get("/api/v1/progress")).json()
+        assert len(progress["diagnostic_attempts"]) == 1
+        # A recommendation course is derived from the ladder walk.
+        assert progress["recommendation_course"] is not None
+        assert progress["recommendation_reason"]
+
 
 class TestSessionLifecycle:
     """Session expiry and logout revocation over the API."""

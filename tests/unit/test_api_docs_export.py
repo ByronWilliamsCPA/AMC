@@ -41,7 +41,9 @@ class TestExporter:
         names = {item["name"] for item in collection["item"]}
         assert "Auth: login" in names
         # The exam listing must assert the answer key is not exposed.
-        exams = next(i for i in collection["item"] if i["name"] == "Catalog: list exams")
+        exams = next(
+            i for i in collection["item"] if i["name"] == "Catalog: list exams"
+        )
         script = "\n".join(exams["event"][0]["script"]["exec"])
         assert "correct_answer" in script
 

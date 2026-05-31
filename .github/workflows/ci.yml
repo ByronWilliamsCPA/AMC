@@ -62,6 +62,9 @@ jobs:
             --junitxml=junit.xml \
             -o junit_family=xunit2
 
+      - name: Enforce per-file coverage floor
+        run: uv run python scripts/check_per_file_coverage.py --min 80
+
       - name: Run type checker
         run: uv run basedpyright src/
 
