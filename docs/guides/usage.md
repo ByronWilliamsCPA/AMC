@@ -22,7 +22,7 @@ pip install amc
 ### From Source
 
 ```bash
-git clone https://github.com/williaby/AMC
+git clone https://github.com/ByronWilliamsCPA/AMC
 cd amc
 uv sync --all-extras
 ```

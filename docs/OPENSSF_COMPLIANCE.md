@@ -397,7 +397,7 @@ The template meets 44/46 passing-level criteria:
 
 **Security Questions**: byronawilliams@gmail.com
 **Vulnerability Reports**: See [Security Policy](https://github.com/williaby/.github/blob/main/SECURITY.md)
-**General Issues**: [GitHub Issues](https://github.com/williaby/AMC/issues)
+**General Issues**: [GitHub Issues](https://github.com/ByronWilliamsCPA/AMC/issues)
 
 ---
 

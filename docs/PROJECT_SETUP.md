@@ -41,7 +41,7 @@ Your project was generated with the following configuration:
 
 ```bash
 # Create a new repository on GitHub, then:
-git remote add origin https://github.com/williaby/AMC.git
+git remote add origin https://github.com/ByronWilliamsCPA/AMC.git
 git push -u origin main
 ```
 

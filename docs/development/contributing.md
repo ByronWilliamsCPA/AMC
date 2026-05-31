@@ -23,7 +23,7 @@ Thank you for your interest in contributing to AMC!
 
 ```bash
 # Clone the repository
-git clone https://github.com/williaby/AMC
+git clone https://github.com/ByronWilliamsCPA/AMC
 cd amc
 
 # Install dependencies

@@ -28,7 +28,7 @@ This feedback will be shared with the template team to improve the cookiecutter 
 **Name**: AMC
 **Description**: Web app for practice math tests
 **Author**: Byron Williams <byronawilliams@gmail.com>
-**Repository**: https://github.com/williaby/AMC
+**Repository**: https://github.com/ByronWilliamsCPA/AMC
 **Created**: 2026-05-31
 
 ### Technology Stack
