@@ -177,6 +177,34 @@ robust fix.
 
 ---
 
+### `.gitignore` Python `lib/` rule silently swallows `frontend/src/lib/`
+
+- **Priority**: Critical
+- **Category**: Configuration
+
+**Issue**: The standard Python-build section of `.gitignore` lists unanchored directory
+entries — `build/`, `lib/`, `lib64/`, `parts/`, `dist/`, etc. — meant for setuptools
+artifacts that only ever appear at the repo root. Because they are unanchored, `lib/` also
+matches `frontend/src/lib/` (a completely ordinary JS module directory: API client wrapper,
+endpoints, query config, helpers). The whole directory was silently untracked — `git add`
+reported success but the files never entered version control — so a fresh clone of the
+frontend would not build (missing its entire API layer). Same failure mode as the `models/`
+entry above, but higher impact because it hit load-bearing source. (`build/` and `dist/`
+have the same latent collision with `frontend/build` / `frontend/dist`.)
+
+**Context**: Discovered when `git add frontend/src/lib/cx.ts` printed "paths are ignored";
+`git check-ignore -v` traced it to the unanchored `lib/` line. Several earlier frontend
+commits had unknowingly omitted `frontend/src/lib/*`.
+
+**Suggested Fix**: Anchor every directory entry in the Python-build block to the repo root
+(`/build/`, `/lib/`, `/lib64/`, `/parts/`, `/dist/`, `/sdist/`, `/var/`, `/wheels/`, …) so
+they cannot match nested source directories in `frontend/` or elsewhere. The `*.egg-info/`,
+`*.egg`, `MANIFEST` glob entries are fine as-is.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/.gitignore`.
+
+---
+
 ### Frontend scaffold ships unrendered `{{ cookiecutter.* }}` placeholders (build is broken)
 
 - **Priority**: Critical
