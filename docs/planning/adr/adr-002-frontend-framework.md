@@ -22,7 +22,7 @@ source: "/project-planning assumption reconciliation"
 We will build the frontend as the React 19 + TypeScript + Vite SPA the template already
 committed under `frontend/`, consuming a generated typed OpenAPI client, rather than the
 vanilla-JS + KaTeX static page the early drafts assumed. SPA and API are served same-origin
-behind a reverse proxy so the session cookie stays `SameSite=Lax`.
+behind a reverse proxy, so the `SameSite=Lax` session cookie avoids CORS-with-credentials.
 
 ## Context
 

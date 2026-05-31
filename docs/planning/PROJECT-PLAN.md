@@ -1,7 +1,7 @@
 ---
 title: "AMC Trainer - Project Plan"
 schema_type: planning
-status: active
+status: published
 owner: core-maintainer
 purpose: "Synthesized project plan with git branch strategy, phase deliverables, and quality gates."
 tags:
@@ -10,7 +10,7 @@ tags:
 component: Strategy
 ---
 
-> **Status**: Active | **Version**: 1.0 | **Synthesized**: 2026-05-31
+> **Status**: Published | **Version**: 1.0 | **Synthesized**: 2026-05-31
 >
 > Source documents: [project-vision.md](./project-vision.md),
 > [tech-spec.md](./tech-spec.md), [roadmap.md](./roadmap.md),

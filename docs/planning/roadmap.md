@@ -1,7 +1,7 @@
 ---
 title: "AMC - Development Roadmap"
 schema_type: planning
-status: active
+status: published
 owner: core-maintainer
 purpose: "Document the phased implementation plan and milestones."
 tags:
@@ -11,7 +11,7 @@ component: Strategy
 source: "/plan command generation"
 ---
 
-> **Status**: Active | **Updated**: 2026-05-31
+> **Status**: Published | **Updated**: 2026-05-31
 
 ## TL;DR
 

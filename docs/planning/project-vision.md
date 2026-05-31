@@ -1,7 +1,7 @@
 ---
 title: "AMC - Project Vision & Scope"
 schema_type: planning
-status: active
+status: published
 owner: core-maintainer
 purpose: "Document the project vision, scope, and success criteria."
 tags:
@@ -11,7 +11,7 @@ component: Strategy
 source: "/plan command generation"
 ---
 
-> **Status**: Active | **Version**: 1.0 | **Updated**: 2026-05-31
+> **Status**: Published | **Version**: 1.0 | **Updated**: 2026-05-31
 
 ## TL;DR
 

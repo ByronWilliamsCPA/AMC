@@ -1,7 +1,7 @@
 ---
 title: "AMC - Technical Specification"
 schema_type: planning
-status: active
+status: published
 owner: core-maintainer
 purpose: "Document the technical architecture and implementation details."
 tags:
@@ -11,7 +11,7 @@ component: Development-Tools
 source: "/plan command generation"
 ---
 
-> **Status**: Draft | **Version**: 1.0 | **Updated**: 2026-05-31
+> **Status**: Published | **Version**: 1.0 | **Updated**: 2026-05-31
 
 ## TL;DR
 
@@ -72,7 +72,8 @@ client ──►  │  /api/*  ─► FastAPI (uvicorn)      /*  ─► built Re
             └────────────────────────────────────────────────────────────┘
 ```
 
-Routing both under one origin keeps the session cookie same-origin and `SameSite=Lax` valid.
+Routing both under one origin keeps API calls same-origin, so the `SameSite=Lax` session
+cookie is sent on those calls without any CORS-with-credentials relaxation.
 The existing `frontend/nginx.conf` is the proxy configuration. Problem images under `assets/`
 are served through the authenticated API, never as unauthenticated static files, so content
 stays behind auth.
@@ -272,7 +273,7 @@ class DiagnosticAttempt:
 
 // response (graded; correct answers revealed only now)
 {
-  "score": 102.0, "max_score": 138, "correct": 17, "wrong": 6, "blank": 2,
+  "score": 105.0, "max_score": 150, "correct": 17, "wrong": 6, "blank": 2,
   "review": [{ "n": 1, "your": "C", "correct": "C", "ok": true,
                "solution_url": "https://..." }]
 }
