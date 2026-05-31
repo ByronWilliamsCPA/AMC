@@ -318,6 +318,10 @@ known-first-party = ["amc"]
 # so it is not part of a package (INP001).
 "migrations/env.py" = ["INP001"]
 
+# The seed CLI is a one-shot batch entry point, not a request path; synchronous
+# file reads before the DB transaction are correct and intended (ASYNC230/240).
+"**/seed.py" = ["ASYNC230", "ASYNC240"]
+
 # Test files (relaxed rules for test code)
 "tests/**/*.py" = [
     "ANN",    # Type annotations not required in tests
