@@ -266,8 +266,13 @@ logs/
 # Data and models (customize as needed)
 data/raw/
 data/processed/
-models/
+# ML model artifacts (top-level only; do not swallow the src/amc/models package)
+/models/
 weights/
+# The application's ORM models package is source, not an ML artifact directory.
+# Un-ignore the package and its Python sources only (not caches/artifacts).
+!src/amc/models/
+!src/amc/models/*.py
 
 # Notebooks
 .ipynb_checkpoints/
