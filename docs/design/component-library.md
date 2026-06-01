@@ -27,7 +27,7 @@ This is a **keep / refactor / add** inventory, not a greenfield list. Two facts 
 recommendation below; both were verified against the tree:
 
 1. **There are zero `*.module.css` files today.** All styling lives in one global stylesheet,
-   [`frontend/src/index.css`](../../frontend/src/index.css), addressed by global class names
+   `frontend/src/index.css`, addressed by global class names
    (`.runner__body`, `.palette__cell`, `.choice`, …). The "CSS Modules + co-located styles"
    convention in §2 is therefore a **planned migration**: as each component is built or
    refactored, its slice of `index.css` moves into a co-located `*.module.css`. `index.css`
@@ -43,17 +43,17 @@ What already exists (read for grounding):
 
 | Path | Role |
 |------|------|
-| [`components/Tex.tsx`](../../frontend/src/components/Tex.tsx) | KaTeX wrapper (`MathRenderer`), memoized, `htmlAndMathml` |
-| [`components/States.tsx`](../../frontend/src/components/States.tsx) | `Spinner`, `ErrorState`, `EmptyState` |
-| [`components/Layout.tsx`](../../frontend/src/components/Layout.tsx) | App shell: header nav (role-aware) + `<Outlet/>` |
-| [`components/ErrorBoundary.tsx`](../../frontend/src/components/ErrorBoundary.tsx) | Top-level render-crash boundary |
-| [`features/exam/Palette.tsx`](../../frontend/src/features/exam/Palette.tsx) | Question navigator grid |
-| [`features/exam/Question.tsx`](../../frontend/src/features/exam/Question.tsx) | One problem + A–E radiogroup |
-| [`features/exam/ExamReview.tsx`](../../frontend/src/features/exam/ExamReview.tsx) | Post-submit score + per-problem table |
-| [`features/exam/useCountdown.ts`](../../frontend/src/features/exam/useCountdown.ts) | Absolute-deadline timer hook + `formatDuration` |
-| [`features/exam/runnerState.ts`](../../frontend/src/features/exam/runnerState.ts) | Pure runner reducer (answers/flags/nav/phase) |
-| [`features/progress/ProgressView.tsx`](../../frontend/src/features/progress/ProgressView.tsx) | Dashboard: recommendation, algebra-gate warning, 2 tables |
-| [`pages/*`](../../frontend/src/pages) | Route components (lists, runners, auth, invite, progress) |
+| `components/Tex.tsx` | KaTeX wrapper (`MathRenderer`), memoized, `htmlAndMathml` |
+| `components/States.tsx` | `Spinner`, `ErrorState`, `EmptyState` |
+| `components/Layout.tsx` | App shell: header nav (role-aware) + `<Outlet/>` |
+| `components/ErrorBoundary.tsx` | Top-level render-crash boundary |
+| `features/exam/Palette.tsx` | Question navigator grid |
+| `features/exam/Question.tsx` | One problem + A–E radiogroup |
+| `features/exam/ExamReview.tsx` | Post-submit score + per-problem table |
+| `features/exam/useCountdown.ts` | Absolute-deadline timer hook + `formatDuration` |
+| `features/exam/runnerState.ts` | Pure runner reducer (answers/flags/nav/phase) |
+| `features/progress/ProgressView.tsx` | Dashboard: recommendation, algebra-gate warning, 2 tables |
+| `pages/*` | Route components (lists, runners, auth, invite, progress) |
 
 Existing accessibility patterns to **preserve** (the app already does these, and the inventory
 codifies them rather than reinventing them):
@@ -73,8 +73,8 @@ codifies them rather than reinventing them):
 **As-built deviations worth flagging (do not "fix" silently):**
 
 - The tech-spec names **axios** for the API client, but the code generates a **fetch** client
-  (`@hey-api/client-fetch`, see [`lib/api.ts`](../../frontend/src/lib/api.ts) /
-  [`client/`](../../frontend/src/client)). This doc follows the as-built fetch client. *(Tracked
+  (`@hey-api/client-fetch`, see `lib/api.ts` /
+  `client/`). This doc follows the as-built fetch client. *(Tracked
   as template/spec drift; see `docs/template_feedback.md` if it needs reconciling.)*
 - KaTeX is described as "auto-render" in the spec, but `Tex.tsx` deliberately uses
   `renderToString` inside `useMemo` instead of the global `renderMathInElement` scanner (it
@@ -194,7 +194,7 @@ applicable subset is listed per component).
 #### `RadioGroup` (the A–E answer choices) - **KEEP / refactor** ← critical component
 
 - **Purpose**: The exam answer choices. Lives today inside
-  [`features/exam/Question.tsx`](../../frontend/src/features/exam/Question.tsx) as a `<fieldset
+  `features/exam/Question.tsx` as a `<fieldset
   role="radiogroup">` of `<label><input type="radio">…</label>`. Extract the group mechanics into
   a reusable `ui/RadioGroup` so the diagnostic and any future MCQ reuse it; `Question` keeps the
   KaTeX choice rendering.
@@ -375,7 +375,7 @@ applicable subset is listed per component).
 #### `Palette` / `QuestionNavigator` - **KEEP / refactor for roving tabindex** ← critical
 
 - **Purpose**: Grid of problem numbers showing answered / flagged / current / voided
-  ([`Palette.tsx`](../../frontend/src/features/exam/Palette.tsx)). Renders as `<nav
+  (`Palette.tsx`). Renders as `<nav
   aria-label="Question navigator"><ul>` of `<button>`s, each with
   `aria-label="Question N: <status>"` and `aria-current` on the current one. Status is text +
   shape, not colour (answered = filled, flagged = thick border + "⚑", voided = strikethrough +
@@ -541,7 +541,7 @@ function Button({ variant = 'secondary', size = 'md', loading, className, ...res
 ## 3. Accessibility plan (testable, mapped to WCAG 2.1 AA)
 
 `eslint-plugin-jsx-a11y` is already wired (`recommended` ruleset, see
-[`frontend/eslint.config.js`](../../frontend/eslint.config.js)). That catches static markup
+`frontend/eslint.config.js`). That catches static markup
 defects (missing `alt`, label-less controls, bad roles). It does **not** test behaviour - the plan
 below adds the runtime/keyboard contract and the axe checks.
 
@@ -684,7 +684,7 @@ installed.**
 - **Behavioural a11y tests** (the gap jsx-a11y/axe can't fill), using `user-event` keyboard APIs:
   - **Palette roving tabindex**: Tab reaches the palette as a single stop; ArrowRight/Left/Up/Down
     move focus; Home/End jump; Enter/Space fires `onSelect`. Extend the existing
-    [`Palette.test.tsx`](../../frontend/src/features/exam/Palette.test.tsx) (which already asserts
+    `Palette.test.tsx` (which already asserts
     labels + `aria-current`).
   - **RadioGroup**: Arrow keys change selection; Tab treats the group as one stop; `<fieldset
     disabled>` blocks interaction after submit (assert no `onChange`).
@@ -754,7 +754,7 @@ Current: `.runner__body` is `grid-template-columns: 1fr` (stacked) and becomes `
   header) so the countdown is never scrolled away during an exam.
 - **Performance implication** (tech-spec: **exam page interactive < 2 s**, Lighthouse): KaTeX is
   the heavy dependency and is **already** lazy-loaded - the runner route is `React.lazy`-split in
-  [`App.tsx`](../../frontend/src/App.tsx), so KaTeX is not in the login/list bundle and only loads
+  `App.tsx`, so KaTeX is not in the login/list bundle and only loads
   when the runner mounts. Keep it that way: don't import `Tex`/`katex` into shared chunks (lists,
   layout). The drawer, milestone region, and roving-grid logic are tiny and must not pull KaTeX
   earlier. Consider prefetching the runner chunk on list-item hover/focus to shave first-paint of
@@ -795,7 +795,7 @@ styled by `.progress__table`. Five-column tables overflow at 360px.
 
 ## 5. Math rendering (KaTeX) - a11y + responsive
 
-Grounded in [`components/Tex.tsx`](../../frontend/src/components/Tex.tsx): a memoized `<Tex>` that
+Grounded in `components/Tex.tsx`: a memoized `<Tex>` that
 calls `katex.renderToString(tex, { displayMode, throwOnError: false, output: 'htmlAndMathml' })`
 and injects the result once via `dangerouslySetInnerHTML` into a `<span data-testid="math">`.
 KaTeX CSS is imported once in `main.tsx`. Used by `Question` (problem body + choices) and the
