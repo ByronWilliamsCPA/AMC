@@ -65,9 +65,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     rates = _file_rates(args.xml)
-    offenders = sorted(
-        (name, rate) for name, rate in rates.items() if rate < args.min
-    )
+    offenders = sorted((name, rate) for name, rate in rates.items() if rate < args.min)
     if offenders:
         print(f"Files below {args.min:.0f}% line coverage:", file=sys.stderr)
         for name, rate in offenders:

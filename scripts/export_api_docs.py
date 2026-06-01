@@ -90,7 +90,11 @@ def _request(
     request: dict[str, Any] = {
         "method": method,
         "header": [{"key": "Content-Type", "value": "application/json"}],
-        "url": {"raw": raw_url, "host": [_BASE_URL_VAR], "path": path.strip("/").split("/")},
+        "url": {
+            "raw": raw_url,
+            "host": [_BASE_URL_VAR],
+            "path": path.strip("/").split("/"),
+        },
     }
     if body is not None:
         request["body"] = {"mode": "raw", "raw": json.dumps(body, indent=2)}
