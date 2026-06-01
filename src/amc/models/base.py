@@ -8,7 +8,7 @@ columns).
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column
@@ -25,7 +25,7 @@ def utcnow() -> datetime:
         The current UTC time. Timezone-aware to satisfy strict datetime rules
         and to round-trip correctly through ``DateTime(timezone=True)`` columns.
     """
-    return datetime.now(tz=UTC)
+    return datetime.now(tz=timezone.utc)
 
 
 def uuid_pk() -> Mapped[uuid.UUID]:
