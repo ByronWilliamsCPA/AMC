@@ -117,12 +117,6 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
     Note: For production, use Redis-backed rate limiting:
         - slowapi (https://github.com/laurents/slowapi)
         - fastapi-limiter (https://github.com/long2ice/fastapi-limiter)
-
-    Args:
-        requests_per_minute: Maximum requests per IP per minute
-        burst_size: Maximum burst requests allowed
-        max_tracked_ips: Maximum IPs to track (prevents memory exhaustion)
-        cleanup_interval: Seconds between full cleanup cycles
     """
 
     def __init__(
@@ -133,7 +127,15 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         max_tracked_ips: int = 10000,
         cleanup_interval: int = 300,
     ) -> None:
-        """Initialize rate limiter."""
+        """Initialize rate limiter.
+
+        Args:
+            app: The ASGI application to wrap.
+            requests_per_minute: Maximum requests per IP per minute.
+            burst_size: Maximum burst requests allowed.
+            max_tracked_ips: Maximum IPs to track (prevents memory exhaustion).
+            cleanup_interval: Seconds between full cleanup cycles.
+        """
         super().__init__(app)
         self.requests_per_minute = requests_per_minute
         self.burst_size = burst_size

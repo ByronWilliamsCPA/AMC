@@ -223,6 +223,9 @@ async def client(db_session: AsyncSession) -> AsyncIterator[AsyncClient]:
     The app's ``get_db`` dependency is overridden to yield the per-test
     ``db_session`` so requests and assertions share one database.
 
+    ``session_cookie_secure`` is temporarily set to ``False`` so that
+    session cookies are not dropped by httpx on the plain-http test URL.
+
     Args:
         db_session: The per-test database session fixture.
 
@@ -231,20 +234,29 @@ async def client(db_session: AsyncSession) -> AsyncIterator[AsyncClient]:
     """
     from httpx import ASGITransport, AsyncClient
 
+    from amc.core.config import settings
     from amc.core.database import get_db
     from amc.main import create_app
 
-    app = create_app()
+    # #ASSUME: Test env: httpx 0.28+ silently drops Secure cookies on http://
+    # testserver URLs, causing sessions to appear unauthenticated.
+    # #VERIFY: Restore the original value in the finally block.
+    _original_secure = settings.session_cookie_secure
+    settings.session_cookie_secure = False
+    try:
+        app = create_app()
 
-    async def _override_get_db() -> AsyncIterator[AsyncSession]:
-        yield db_session
+        async def _override_get_db() -> AsyncIterator[AsyncSession]:
+            yield db_session
 
-    app.dependency_overrides[get_db] = _override_get_db
+        app.dependency_overrides[get_db] = _override_get_db
 
-    transport = ASGITransport(app=app)
-    async with AsyncClient(
-        transport=transport, base_url="http://testserver"
-    ) as http_client:
-        yield http_client
+        transport = ASGITransport(app=app)
+        async with AsyncClient(
+            transport=transport, base_url="http://testserver"
+        ) as http_client:
+            yield http_client
 
-    app.dependency_overrides.clear()
+        app.dependency_overrides.clear()
+    finally:
+        settings.session_cookie_secure = _original_secure

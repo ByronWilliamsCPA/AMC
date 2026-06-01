@@ -235,4 +235,3 @@ exclude: |
       models/|
       .*\.pyc
   )$
-
