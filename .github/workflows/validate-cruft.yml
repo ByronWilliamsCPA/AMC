@@ -58,6 +58,15 @@ jobs:
       - name: Verify cruft status
         run: |
           echo "Checking if project is in sync with template..."
+
+          # Skip if template is a local filesystem path (not a Git URL)
+          TEMPLATE=$(python3 -c "import json; print(json.load(open('.cruft.json'))['template'])" 2>/dev/null || echo "")
+          if [[ -n "$TEMPLATE" ]] && [[ "$TEMPLATE" != http://* ]] && [[ "$TEMPLATE" != https://* ]]; then
+            echo "Warning: Template '$TEMPLATE' is a local path; skipping cruft check in CI."
+            echo "Update .cruft.json 'template' to a GitHub URL to enable this check."
+            exit 0
+          fi
+
           if cruft check; then
             echo "✅ Project is up to date with template"
           else
