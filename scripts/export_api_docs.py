@@ -3,9 +3,9 @@
 
 Produces two artifacts under ``docs/api/``:
 
-- ``openapi.json`` — the app's OpenAPI 3.1 schema, importable into Postman or
+- ``openapi.json`` - the app's OpenAPI 3.1 schema, importable into Postman or
   any API client.
-- ``amc.postman_collection.json`` — a Postman v2.1 collection that chains the
+- ``amc.postman_collection.json`` - a Postman v2.1 collection that chains the
   core flow (login -> catalog -> submit -> progress) with monitoring assertions
   (status code, response latency, JSON validity, and the answer-key
   non-exposure guarantee). Run it with Newman for synthetic monitoring.

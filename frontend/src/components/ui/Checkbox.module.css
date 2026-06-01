@@ -1,4 +1,4 @@
-/* Checkbox — native input inside a clickable label with a comfortable hit area. */
+/* Checkbox - native input inside a clickable label with a comfortable hit area. */
 .checkbox {
   display: flex;
   gap: var(--space-2);

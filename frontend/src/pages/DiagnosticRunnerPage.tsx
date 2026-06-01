@@ -52,9 +52,9 @@ function DiagnosticInner({ instrument }: { instrument: DiagnosticDetail }) {
   if (result !== null) {
     return (
       <section className="diagnostic-result" aria-live="polite">
-        <h1>{instrument.course} — result</h1>
+        <h1>{instrument.course} - result</h1>
         <p>
-          <strong>{result.verdict.toUpperCase()}</strong> — {result.summary}
+          <strong>{result.verdict.toUpperCase()}</strong> - {result.summary}
         </p>
         <p>
           {result.correct} of {result.total} correct. {result.passed ? 'Passed.' : 'Did not pass.'}

@@ -10,7 +10,7 @@ tags:
   - integration
 ---
 
-AMC Trainer ships with **built-in authentication** — invite-only onboarding,
+AMC Trainer ships with **built-in authentication**: invite-only onboarding,
 Argon2 password hashing, and server-side sessions behind an HTTP-only cookie
 (see [`tech-spec.md`](../planning/tech-spec.md) §Security). That is the active,
 tested scheme.
@@ -40,7 +40,7 @@ Browser ──► FastAPI /auth/oidc/callback
   is the most secure option for a SPA + API and avoids the XSS token-theft
   surface of holding tokens in the browser.
 - **Nothing downstream changes.** The `Session` table, the RBAC dependency,
-  `GET /auth/me`, and the entire frontend `AuthContext` are identical — they
+  `GET /auth/me`, and the entire frontend `AuthContext` are identical; they
   already derive everything from the session, not from how login happened.
 - The only removal is the built-in password login (`POST /auth/login`) and the
   invite/register flow, which Authentik's enrollment replaces.
@@ -98,4 +98,4 @@ With `groups -> roles` (the chosen mapping), Authentik owns who is staff:
 | (any other member)     | `student` |
 
 If you later prefer the app to own roles/onboarding instead, keep the invite
-flow and ignore the group claim — the mapping function is the only thing to swap.
+flow and ignore the group claim; the mapping function is the only thing to swap.

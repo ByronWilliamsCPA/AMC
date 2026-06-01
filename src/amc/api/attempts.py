@@ -194,4 +194,4 @@ def _summary_line(course: str, verdict: diag_service.DiagnosticVerdict) -> str:
         A score line plus pass/fail phrasing.
     """
     state = "passed" if verdict.passed else "did not pass"
-    return f"{course}: {verdict.correct}/{verdict.total} correct — {state}."
+    return f"{course}: {verdict.correct}/{verdict.total} correct, {state}."

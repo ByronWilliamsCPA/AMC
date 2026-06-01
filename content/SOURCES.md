@@ -5,7 +5,7 @@ the re-fetch steps, and the trust caveats. Complements [`README.md`](README.md),
 [`CONTENT_CONTRACT.md`](CONTENT_CONTRACT.md), and [`CONSTANTS.md`](CONSTANTS.md).
 
 > **Licensing reminder:** AMC problems are MAA-copyrighted, used here for personal
-> study. Solutions are never embedded — each problem links out via its `sol`
+> study. Solutions are never embedded - each problem links out via its `sol`
 > field. Keep content behind auth; never expose it to crawlers.
 
 ## Summary
@@ -21,7 +21,7 @@ this, but it sits behind Cloudflare and blocks automated access, so it could not
 be scraped directly. It appears in the data only as the outbound `sol` solution
 link per problem.
 
-## AMC 8 — Po-Shen Loh LIVE archive
+## AMC 8 - Po-Shen Loh LIVE archive
 
 Problems, choices, diagrams, and a key cross-check all come from one source.
 
@@ -36,18 +36,18 @@ Problems, choices, diagrams, and a key cross-check all come from one source.
   Keys were verified two independent ways (problem-data keys vs. this PDF); all
   three sources agreed for the bundled years.
 
-## AMC 10 — split across two sources
+## AMC 10 - split across two sources
 
 - **Problem images:** the public GitHub archive
   [`ryanrudes/amc`](https://github.com/ryanrudes/amc). The build checked the repo
   out locally and read `amc-main/amcdata/AMC/10/<year>/<A|B>/<n>.png`; on GitHub
   the raw files live under `amcdata/AMC/10/...`. **Covers AMC 10 only, 2002–2020
-  — no AMC 8/12 and no answer keys.**
+  - no AMC 8/12 and no answer keys.**
 - **Answer keys:** Po-Shen Loh LIVE answer PDFs,
   `https://live.poshenloh.com/images/past-contests/pdf/amc10-<year><A|B>-answers.pdf`.
   `answer_keys.json` (AMC 10 keys for 2010–2020) was assembled from these PDFs.
 
-## AMC 12 — mirror problems, official keys
+## AMC 12 - mirror problems, official keys
 
 A deliberate split: the mirror's **problem text** is used, but its **keys are
 not**.
@@ -71,12 +71,12 @@ scripts. For each contest, produce content in the shape defined by
 - **AMC 8 (new year):** pull `__NEXT_DATA__` from the LIVE contest page; extract
   problems/choices and the `<n>.svg` diagrams (inline as `data:` URIs); take the
   key from the answers PDF.
-- **AMC 10 (new year):** the GitHub archive stops at 2020 — supply problem scans
+- **AMC 10 (new year):** the GitHub archive stops at 2020 - supply problem scans
   in the contract's `img` (data-URI) shape and the key from a LIVE answers PDF.
 - **AMC 12 (new year):** the mirror's problem text and figures already parse for
   additional years; the one thing each new paper needs is an **official AoPS
   answer-key screenshot** to source the key. (The 2025 AMC 12A was held back
-  because its official key listed problem 25 as having no correct choice — use the
+  because its official key listed problem 25 as having no correct choice - use the
   `voided` mechanism for such defects.)
 
 Always re-run the validator before seeding; it catches bad choice counts,

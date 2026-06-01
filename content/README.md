@@ -10,7 +10,7 @@ logic.
 | File | Status | What it is |
 |------|--------|------------|
 | `diag_data.json` | ✅ present | 10 placement diagnostics (218 items), the course ladder, and the catalog. Validates clean against the contract. |
-| `amc_data.json` | ⏳ pending | The nine AMC papers (225 problems, ~4 MB, base64 images). Not yet delivered into the repo — see below. |
+| `amc_data.json` | ⏳ pending | The nine AMC papers (225 problems, ~4 MB, base64 images). Not yet delivered into the repo - see below. |
 | `CONTENT_CONTRACT.md` | ✅ | Field-by-field schema for both files and the invariants the loader enforces. |
 | `CONSTANTS.md` | ✅ | Scoring modes, performance bands, AMC gates, ladder, pass thresholds, and the recommendation + auto-grader algorithms. |
 | `validate_content.py` | ✅ | Contract validator; exits 0 on pass, 1 with a list of problems. |

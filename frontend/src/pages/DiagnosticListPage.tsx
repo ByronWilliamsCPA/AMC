@@ -26,7 +26,7 @@ export function DiagnosticListPage() {
           {data.map((d) => (
             <Card as="li" interactive key={d.id}>
               <Link to={`/diagnostics/${d.id}`} className={styles.link}>
-                {d.course} <span className={styles.meta}>— {d.kind}</span>
+                {d.course} <span className={styles.meta}>- {d.kind}</span>
               </Link>
             </Card>
           ))}

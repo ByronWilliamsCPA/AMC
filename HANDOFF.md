@@ -1,4 +1,4 @@
-# AMC Trainer — Backend Handoff
+# AMC Trainer - Backend Handoff
 
 This document describes the backend implemented in this environment, what remains
 for the local team, and how to run and finish it. It complements the plan in
@@ -45,7 +45,7 @@ GET  /api/v1/users/{id}/progress          # self, or any user for staff
 
 ## What remains (local team)
 
-1. **Deliver `content/amc_data.json`** — the ~4 MB file with the nine AMC papers
+1. **Deliver `content/amc_data.json`** - the ~4 MB file with the nine AMC papers
    (225 problems, base64 images). It could not be transferred into this
    environment (only inline text reaches the container; large attachments do
    not). Everything that consumes it is ready:
@@ -54,22 +54,22 @@ GET  /api/v1/users/{id}/progress          # self, or any user for staff
      and seeds diagnostics only).
    - `src/amc/services/grading.py` grades it; the model and API serve it.
 
-2. **AMC score gates in the recommendation** — `synthesize` accepts an
+2. **AMC score gates in the recommendation** - `synthesize` accepts an
    `amc_gates` list but the progress endpoint passes `[]` until the diagnostic
    `catalog` (which carries the `gate: "amc"` / `min` rows) is seeded into a
    dedicated table or read from the seeded instruments. The ladder walk and the
    conjunction-warning logic are implemented and tested; wire the gates when the
    catalog is seeded. See `src/amc/api/progress.py:_build_progress`.
 
-3. **Frontend (React SPA)** — the `frontend/` scaffold exists; the exam runner,
+3. **Frontend (React SPA)** - the `frontend/` scaffold exists; the exam runner,
    diagnostics, and progress components are Phase 1/2 frontend work. The backend
    exposes an OpenAPI schema at `/openapi.json` and
    `scripts/generate-client.sh` regenerates the typed client.
 
-4. **Backup/restore drill** — Phase 0 deliverable 0.6; document a `pg_dump` +
+4. **Backup/restore drill** - Phase 0 deliverable 0.6; document a `pg_dump` +
    tested restore in the deploy guide.
 
-5. **Phase 3 polish** — answer-key verification against the AoPS Wiki, a11y /
+5. **Phase 3 polish** - answer-key verification against the AoPS Wiki, a11y /
    mobile pass, Lighthouse, and the security review.
 
 ## Running it

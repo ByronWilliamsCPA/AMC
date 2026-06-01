@@ -56,7 +56,7 @@ export function ExamListPage() {
               <Link to={`/exams/${exam.id}`} className={styles.link}>
                 {exam.contest} {exam.year}
                 {exam.variant ? exam.variant : ''}{' '}
-                <span className={styles.meta}>— {exam.num_problems} problems</span>
+                <span className={styles.meta}>- {exam.num_problems} problems</span>
               </Link>
             </Card>
           ))}

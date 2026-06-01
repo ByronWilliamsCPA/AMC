@@ -1,4 +1,4 @@
-/* Login page — co-located CSS Module consuming design tokens (prototype). */
+/* Login page - co-located CSS Module consuming design tokens (prototype). */
 .page {
   max-width: 28rem;
   margin: var(--space-7) auto;

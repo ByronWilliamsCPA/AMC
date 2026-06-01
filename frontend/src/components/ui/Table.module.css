@@ -1,4 +1,4 @@
-/* Table — semantic data table that collapses to labelled cards on narrow
+/* Table - semantic data table that collapses to labelled cards on narrow
    screens. The DOM stays a real <table> (header→value association preserved);
    on mobile each row becomes a card and each cell shows its column header. */
 .table {

@@ -3,7 +3,7 @@
  *
  * The session lives in an HTTP-only cookie the SPA cannot read, so "who am I"
  * comes from `GET /auth/me`. A 401 there is the *normal* logged-out signal, not
- * an error — the bootstrap must not redirect on it (that would loop on the
+ * an error - the bootstrap must not redirect on it (that would loop on the
  * login page). `login`/`register`/`logout` just call the endpoints; the browser
  * manages the cookie, and we re-derive state from `/auth/me`.
  */

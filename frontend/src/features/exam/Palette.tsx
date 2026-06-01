@@ -3,7 +3,7 @@
  * current / voided state. Status is conveyed by text (aria-label) and shape,
  * not colour alone.
  *
- * Keyboard model (roving tabindex): the palette is a single Tab stop — exactly
+ * Keyboard model (roving tabindex): the palette is a single Tab stop - exactly
  * one cell is tabbable (the current question). Arrow keys move focus between
  * cells (Left/Right by one, Up/Down by a row of five), Home/End jump to the
  * first/last, and Enter/Space (native button activation) selects.

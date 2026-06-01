@@ -2,7 +2,7 @@
 
 Covers the catalog contest filter, attempt history ordering, the AMC-10
 recommendation layering, exam grading in six-point mode, session expiry and
-sliding, and logout revocation — the flows a Newman monitor will exercise.
+sliding, and logout revocation: the flows a Newman monitor will exercise.
 """
 
 from __future__ import annotations

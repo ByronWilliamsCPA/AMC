@@ -161,7 +161,7 @@ preferable for library/web-app project types.
 
 **Issue**: The generated `.gitignore` contains an unanchored `models/` entry (under
 "Data and models") intended for ML weight artifacts. Because it is unanchored, it also
-matches `src/<package>/models/` — a very common name for an ORM/domain models package.
+matches `src/<package>/models/` - a very common name for an ORM/domain models package.
 A newly added models package is silently untracked; `git add` appears to succeed but the
 files never enter version control, which is easy to miss until CI fails to find the module.
 
@@ -183,11 +183,11 @@ robust fix.
 - **Category**: Configuration
 
 **Issue**: The standard Python-build section of `.gitignore` lists unanchored directory
-entries — `build/`, `lib/`, `lib64/`, `parts/`, `dist/`, etc. — meant for setuptools
+entries - `build/`, `lib/`, `lib64/`, `parts/`, `dist/`, etc. - meant for setuptools
 artifacts that only ever appear at the repo root. Because they are unanchored, `lib/` also
 matches `frontend/src/lib/` (a completely ordinary JS module directory: API client wrapper,
-endpoints, query config, helpers). The whole directory was silently untracked — `git add`
-reported success but the files never entered version control — so a fresh clone of the
+endpoints, query config, helpers). The whole directory was silently untracked - `git add`
+reported success but the files never entered version control - so a fresh clone of the
 frontend would not build (missing its entire API layer). Same failure mode as the `models/`
 entry above, but higher impact because it hit load-bearing source. (`build/` and `dist/`
 have the same latent collision with `frontend/build` / `frontend/dist`.)

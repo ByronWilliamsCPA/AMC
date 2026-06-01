@@ -2,7 +2,7 @@
  * Shared loading and error presentational components.
  *
  * Status is conveyed by text (and ARIA), never by colour alone, so it remains
- * accessible — the convention this app follows everywhere.
+ * accessible - the convention this app follows everywhere.
  */
 import type { ReactNode } from 'react'
 

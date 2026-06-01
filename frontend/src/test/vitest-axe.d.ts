@@ -1,7 +1,7 @@
 /**
  * Bridge vitest-axe's matcher types into vitest 3's `Assertion` interface.
  * vitest-axe@0.1.0 only augments the legacy `Vi.Assertion` global namespace,
- * which vitest 3 no longer uses for `expect()` — so we re-augment here (the
+ * which vitest 3 no longer uses for `expect()` - so we re-augment here (the
  * same pattern @testing-library/jest-dom uses for vitest).
  */
 import 'vitest'

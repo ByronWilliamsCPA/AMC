@@ -32,7 +32,7 @@ confirm-submit dialog, a low-time warning, a coach roster), it is called out exp
 
 | Constraint | Decision |
 |------------|----------|
-| Visual tone | **Clean & academic** — calm, focused, exam-serious, high legibility. No decorative chrome; generous whitespace; restrained color (color never the sole status carrier). |
+| Visual tone | **Clean & academic** - calm, focused, exam-serious, high legibility. No decorative chrome; generous whitespace; restrained color (color never the sole status carrier). |
 | Styling | **CSS Modules + design tokens.** Tokens (owned by a teammate) are referenced abstractly here: `primary accent`, `surface`, `surface-raised`, `text`, `muted-text`, `success`, `danger`, `warning`, `border`, `focus-ring`. No hex values in this doc. |
 | Auth (v1) | **Invite-only email/password with server-side sessions** (HTTP-only `amc_session` cookie). Authentik SSO is a documented future option; the Login screen is kept minimal so swapping the credential form for an SSO "Sign in" button is trivial (see [2.1](#21-login)). |
 | Math rendering | KaTeX via the existing `Tex` component (`frontend/src/components/Tex.tsx`). |
@@ -99,7 +99,7 @@ see one extra link.
 
 - The active route gets an underline/weight treatment via `NavLink`'s active state (color +
   a 2px `primary accent` underline so it is not color-only).
-- `/users/:userId/progress` is **not** a top-level nav item — a coach reaches it by drilling
+- `/users/:userId/progress` is **not** a top-level nav item - a coach reaches it by drilling
   in from a student roster. **[NEW]** The current build has no roster UI, so a coach cannot
   yet navigate to a student. See [4.2](#42-coach-journey-mint-an-invite-view-a-students-progress)
   and [Open question Q7](#8-open-ux-questions).
@@ -127,7 +127,7 @@ treat a server 403 as authoritative even if the client guard was bypassed.
 
 ### 2.1 Login
 
-`/login` — standalone, centered card on a calm `surface` background. Matches `LoginPage.tsx`.
+`/login` - standalone, centered card on a calm `surface` background. Matches `LoginPage.tsx`.
 
 ```text
                      ┌─────────────────────────────────────────┐
@@ -158,7 +158,7 @@ treat a server 403 as authoritative even if the client guard was bypassed.
 
 - **SSO-readiness (locked decision):** the credential `<form>` lives in one self-contained
   block. To later add Authentik SSO, drop a single **"Sign in with SSO"** button above (or in
-  place of) this form — the surrounding card, heading, and centering do not change. Keep a
+  place of) this form - the surrounding card, heading, and centering do not change. Keep a
   visual slot reserved between the `h1` and the Email field so the SSO button can be inserted
   without relayout.
 - Already-authenticated users hitting `/login` are redirected to `/` (no flash of the form).
@@ -171,11 +171,11 @@ treat a server 403 as authoritative even if the client guard was bypassed.
 | Submitting | Button label → `Signing in…`, button disabled. |
 | Error 401 | `role="alert"`: **"Invalid email or password."** Fields retain input; password not cleared automatically (user can retry). |
 | Error other | **"Could not sign in. Please try again."** |
-| Rate-limited | Login is rate-limited per email server-side; surface the generic **"Could not sign in. Please try again."** (do not reveal lockout specifics — avoids account enumeration). Consider copy **"Too many attempts. Wait a minute and try again."** if the API distinguishes it — see [Q8](#8-open-ux-questions). |
+| Rate-limited | Login is rate-limited per email server-side; surface the generic **"Could not sign in. Please try again."** (do not reveal lockout specifics - avoids account enumeration). Consider copy **"Too many attempts. Wait a minute and try again."** if the API distinguishes it - see [Q8](#8-open-ux-questions). |
 
 ### 2.2 Register (invite redemption)
 
-`/register?token=<token>` — standalone. Reads `token` from the query string, validates it via
+`/register?token=<token>` - standalone. Reads `token` from the query string, validates it via
 `GET /api/v1/auth/invites/{token}` for display, then `POST /api/v1/auth/register` creates the
 account and the server sets the session cookie. Matches `RegisterPage.tsx`.
 
@@ -237,7 +237,7 @@ account and the server sets the session cookie. Matches `RegisterPage.tsx`.
 ## 3. The exam experience (the heart of the app)
 
 The exam splits into two screens on **one route** (`/exams/:examId`): the **runner** (no key)
-and, after submit, the **review** (key revealed). They never coexist — this enforces the
+and, after submit, the **review** (key revealed). They never coexist - this enforces the
 answer-key constraint.
 
 ### 3.1 Exam list (`/exams`)
@@ -267,7 +267,7 @@ Catalog of papers with a contest filter (`All / AMC 8 / AMC 10 / AMC 12`), query
 ```
 
 **[NEW] refinement vs. current build:** the current list shows only
-`"{contest} {year}{variant} — {num_problems} problems"`. Add **duration** (from
+`"{contest} {year}{variant} - {num_problems} problems"`. Add **duration** (from
 `duration_sec`, formatted `75 min`) and a plain-language **score mode** label
 (`sixpoint → "6-point"`, `count → "count"`), so a student knows the time commitment and
 scoring before committing. These fields are already in `ExamSummary`.
@@ -276,19 +276,19 @@ scoring before committing. These fields are already in `ExamSummary`.
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading | `Spinner` — **"Loading tests…"** |
-| Error | `ErrorState` — **"Could not load tests"** |
-| Empty (`[]`) | `EmptyState` — **"No tests available yet."** |
+| Loading | `Spinner` - **"Loading tests…"** |
+| Error | `ErrorState` - **"Could not load tests"** |
+| Empty (`[]`) | `EmptyState` - **"No tests available yet."** |
 | Success | The list above. |
 
-### 3.2 Exam runner (`/exams/:examId`) — the centerpiece
+### 3.2 Exam runner (`/exams/:examId`) - the centerpiece
 
 Loads `ExamDetail` (key-free `problems[]`, each a `ProblemRead`). State lives in the
 `runnerState` reducer (`answers`, `flags`, `current`, `phase`); the timer is the
 absolute-deadline `useCountdown` that auto-submits once at zero. Matches `ExamRunnerPage.tsx`
 + `Palette` + `Question`.
 
-**Desktop layout** — header (title · timer · progress), then a two-column body: palette
+**Desktop layout** - header (title · timer · progress), then a two-column body: palette
 navigator on the left, the current problem + controls on the right.
 
 ```text
@@ -320,7 +320,7 @@ navigator on the left, the current problem + controls on the right.
 └──────────────────┴─────────────────────────────────────────────────────────────┘
 ```
 
-**Palette cell semantics** (from `Palette.tsx`) — status is conveyed by **text +
+**Palette cell semantics** (from `Palette.tsx`) - status is conveyed by **text +
 shape/border, never color alone** (accessibility rule the codebase follows):
 
 | Cell | Visual | `aria-label` |
@@ -337,21 +337,21 @@ every second.
 
 **Controls (exact behavior, from the reducer):**
 
-- **Previous / Next** — move `current`; Previous disabled at Q1, Next disabled at last problem.
-- **Flag** — toggles `flags[current]`; `aria-pressed`; label flips **Flag ⇄ Unflag**.
-- **Submit** — fires the single guarded submit; label → `Submitting…` while in flight.
-- **Choices** — A–E radiogroup; selecting sets the answer; **Clear answer** (link-button)
+- **Previous / Next** - move `current`; Previous disabled at Q1, Next disabled at last problem.
+- **Flag** - toggles `flags[current]`; `aria-pressed`; label flips **Flag ⇄ Unflag**.
+- **Submit** - fires the single guarded submit; label → `Submitting…` while in flight.
+- **Choices** - A–E radiogroup; selecting sets the answer; **Clear answer** (link-button)
   appears only when a choice is selected and removes it (back to blank).
 - Once `phase` leaves `active` (submitting/review), answers/flags freeze (`disabled`).
 
 **[NEW] refinements layered onto the runner** (the current build omits these; they are the
-main UX gaps — see [Open questions](#8-open-ux-questions)):
+main UX gaps - see [Open questions](#8-open-ux-questions)):
 
 1. **Low-time warning.** At **5:00 remaining**, give the timer a non-color emphasis (bold +
    a `⚠` glyph + an `aria-live="assertive"` one-shot announcement **"5 minutes remaining."**).
    At **1:00**, repeat once: **"1 minute remaining."** Recommended default: **on** (Q3).
 2. **Confirm-before-submit dialog** when the user clicks **Submit manually** (auto-submit at
-   zero must NOT confirm — there is no time to). Recommended default: **confirm only if
+   zero must NOT confirm - there is no time to). Recommended default: **confirm only if
    blanks remain** (Q1). Dialog wireframe:
 
 ```text
@@ -372,7 +372,7 @@ main UX gaps — see [Open questions](#8-open-ux-questions)):
 
 3. **Auto-submit-at-zero moment.** When the deadline passes, the runner submits automatically
    (no dialog). Show a brief inline, non-blocking notice as the review loads:
-   **"Time's up — submitting your test."** Then the review replaces the runner. Because submit
+   **"Time's up - submitting your test."** Then the review replaces the runner. Because submit
    is guarded, a manual click landing at the same instant cannot double-submit; a server
    **409** is treated as "already submitted" and also lands on review.
 
@@ -380,11 +380,11 @@ main UX gaps — see [Open questions](#8-open-ux-questions)):
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading exam | `Spinner` — **"Loading exam…"** |
-| Load error / not found (404) | `ErrorState` — **"Could not load this exam"** with a link back to `/exams`. |
+| Loading exam | `Spinner` - **"Loading exam…"** |
+| Load error / not found (404) | `ErrorState` - **"Could not load this exam"** with a link back to `/exams`. |
 | Active | The runner above; timer ticking. |
 | Submitting | Submit → `Submitting…`; controls frozen; auto-submit path shows the "Time's up" notice. |
-| Submit error (network, not 409) | Non-destructive inline `ErrorState` — **"Could not submit. Your answers are still here — try again."** Re-enable Submit so the student can retry (do **not** discard answers). |
+| Submit error (network, not 409) | Non-destructive inline `ErrorState` - **"Could not submit. Your answers are still here - try again."** Re-enable Submit so the student can retry (do **not** discard answers). |
 | Submit conflict (409) | Treat as already submitted → go to review (fetch latest if needed). |
 | Reviewed | Replaced by [3.3 Exam review](#33-exam-review-graded). |
 
@@ -432,29 +432,29 @@ each item `{ n, your, correct, ok, voided }`. Matches `ExamReview.tsx`.
   │  #  │  Your answer  │  Correct  │  Outcome    │
   ├─────┼───────────────┼───────────┼─────────────┤
   │  1  │      C        │     C     │  Correct    │   ok=true
-  │  2  │      —        │     B     │  Incorrect  │   your=null → "—"
+  │  2  │      -        │     B     │  Incorrect  │   your=null → "-"
   │  3  │      D        │     A     │  Incorrect  │
   │  …  │      …        │     …     │     …       │
-  │ 11  │      —        │     C     │  Void       │   voided=true → "Void" (excluded from score)
+  │ 11  │      -        │     C     │  Void       │   voided=true → "Void" (excluded from score)
   └─────┴───────────────┴───────────┴─────────────┘
 
   [ Back to tests ]            [ View my progress ]            ← [NEW] next-step actions
 ```
 
 - **Outcome** mapping (from code): `voided → "Void"`; else `ok ? "Correct" : "Incorrect"`.
-  Reinforce with a non-color glyph per row (✓ / ✗ / —) so outcome is not color-only.
-- `your` is `null` for blanks → render **"—"**.
+  Reinforce with a non-color glyph per row (✓ / ✗ / blank) so outcome is not color-only.
+- `your` is `null` for blanks → render **"-"** (blank indicator).
 - On submit success the code already invalidates the progress query, so the dashboard reflects
   this attempt immediately.
-- **[NEW]** Add two footer actions — **"Back to tests"** (`/exams`) and **"View my
-  progress"** (`/progress`) — so the review is not a dead end. Optionally surface
+- **[NEW]** Add two footer actions - **"Back to tests"** (`/exams`) and **"View my
+  progress"** (`/progress`) - so the review is not a dead end. Optionally surface
   `solution_url` per row as a **"Solution"** link if present (the data model has it; the
-  current `ReviewItemResponse` does not yet expose it — flag as [Q6]).
+  current `ReviewItemResponse` does not yet expose it - flag as [Q6]).
 - **States:** review only renders on a successful submit, so it has no independent
   loading/empty/error of its own; its error is the runner's submit error above.
 - **Mobile:** the score `<dl>` wraps to a 2×2 grid; the table becomes horizontally scrollable
-  within its container (keep `#`, `Outcome` visible; let `Your`/`Correct` scroll) — or, for
-  the academic-calm feel, render each problem as a stacked row card (`# 2 · your — · correct B
+  within its container (keep `#`, `Outcome` visible; let `Your`/`Correct` scroll) - or, for
+  the academic-calm feel, render each problem as a stacked row card (`# 2 · your - · correct B
   · Incorrect`).
 
 ---
@@ -470,14 +470,14 @@ Lists the AoPS instruments from `GET /api/v1/diagnostics` (`DiagnosticSummary`: 
   Placement diagnostics                                                    ← h1
 
   ┌──────────────────────────────────────────────────────────────────────────┐
-  │  Prealgebra 1  —  Are You Ready?                                   →      │
+  │  Prealgebra 1  -  Are You Ready?                                   →      │
   ├──────────────────────────────────────────────────────────────────────────┤
-  │  Prealgebra 1  —  Do You Know?                                     →      │
+  │  Prealgebra 1  -  Do You Know?                                     →      │
   ├──────────────────────────────────────────────────────────────────────────┤
-  │  Introduction to Algebra B  —  Are You Ready?                      →      │
+  │  Introduction to Algebra B  -  Are You Ready?                      →      │
   │  …                                                                        │
   └──────────────────────────────────────────────────────────────────────────┘
-       ↑ Link to /diagnostics/:instrumentId; label = "{course} — {kind}"
+       ↑ Link to /diagnostics/:instrumentId; label = "{course} - {kind}"
 ```
 
 **[NEW] optional grouping:** there are 10 instruments spanning several courses, each with an
@@ -488,9 +488,9 @@ Lists the AoPS instruments from `GET /api/v1/diagnostics` (`DiagnosticSummary`: 
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading | `Spinner` — **"Loading diagnostics…"** |
-| Error | `ErrorState` — **"Could not load diagnostics"** |
-| Empty | `EmptyState` — **"No diagnostics available yet."** |
+| Loading | `Spinner` - **"Loading diagnostics…"** |
+| Error | `ErrorState` - **"Could not load diagnostics"** |
+| Empty | `EmptyState` - **"No diagnostics available yet."** |
 | Success | The list above. |
 
 ### 4.2 Diagnostic runner (`/diagnostics/:instrumentId`)
@@ -502,7 +502,7 @@ worked on paper and **self-marked** with a checkbox. Submits `{responses, marks,
 Matches `DiagnosticRunnerPage.tsx`.
 
 ```text
-  Introduction to Algebra B — Are You Ready?                               ← h1 (course)
+  Introduction to Algebra B - Are You Ready?                               ← h1 (course)
 
   ┌────────────────────────────────────────────────────────────────────────────┐
   │  Work each problem on paper. Type your answer where there's a box; for       │  ← instructions
@@ -538,23 +538,23 @@ Matches `DiagnosticRunnerPage.tsx`.
 
 - **[NEW] section headers:** the data has `section_title` per item; the current build does not
   render it. Group items under their `section_title` (e.g. *Fundamentals* vs *Problem
-  solving*) — the AoPS instruments use these sections and they map to the `fund`/`ps` grading
+  solving*) - the AoPS instruments use these sections and they map to the `fund`/`ps` grading
   groups, so the grouping is meaningful, not cosmetic.
 - **No timer** by default (placement diagnostics are not strictly timed in the prototype),
   though `elapsed_sec` is captured silently from mount. If a soft timer is wanted, surface it
-  as a quiet stopwatch, not a countdown — see [Q4](#8-open-ux-questions).
-- **Self-mark honesty:** keep the manual-item copy plain and non-judgmental — **"I solved this
+  as a quiet stopwatch, not a countdown - see [Q4](#8-open-ux-questions).
+- **Self-mark honesty:** keep the manual-item copy plain and non-judgmental - **"I solved this
   correctly (self-marked)."** The verdict is recomputed server-side from marks + auto answers.
 
 **States**
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading | `Spinner` — **"Loading diagnostic…"** |
-| Load error / 404 | `ErrorState` — **"Could not load this diagnostic"** |
-| Filling | The form above; Submit always enabled (blanks allowed — they count as wrong/unmarked). |
+| Loading | `Spinner` - **"Loading diagnostic…"** |
+| Load error / 404 | `ErrorState` - **"Could not load this diagnostic"** |
+| Filling | The form above; Submit always enabled (blanks allowed - they count as wrong/unmarked). |
 | Submitting | Button → `Submitting…`, disabled. |
-| Submit error | `ErrorState` — **"Could not submit. Please try again."** (answers retained). |
+| Submit error | `ErrorState` - **"Could not submit. Please try again."** (answers retained). |
 | Result | Replaced by [4.3 Diagnostic result](#43-diagnostic-result-verdict). |
 
 **Mobile:** already single-column and stacks naturally; ensure text inputs are full-width and
@@ -568,7 +568,7 @@ Renders `DiagnosticResultResponse`: `verdict` (`win | mid | low`), `passed`, `co
 verdict + summary + correct/total; the wireframe below is the **[NEW]** fuller version.
 
 ```text
-  Introduction to Algebra B — result                                       ← h1, aria-live
+  Introduction to Algebra B - result                                       ← h1, aria-live
 
   ┌────────────────────────────────────────────────────────────────────────────┐
   │  WIN                                                                         │  ← verdict, prominent
@@ -597,12 +597,12 @@ verdict + summary + correct/total; the wireframe below is the **[NEW]** fuller v
   [ Back to diagnostics ]        [ View my progress ]         ← [NEW] next steps
 ```
 
-- **Verdict treatment:** map `win/mid/low` to calm, legible emphasis — a labeled badge with
+- **Verdict treatment:** map `win/mid/low` to calm, legible emphasis - a labeled badge with
   text (**Ready / Almost / Not yet** as friendly synonyms, or keep the raw `WIN/MID/LOW` the
   code currently uppercases). Reinforce with text, never color alone.
 - **Per-item review** is the only place a diagnostic `answer` is revealed (mirrors the exam
   key rule). Manual items show the student's self-mark, not a key.
-- The summary line is authoritative recommendation copy from the server — render it verbatim;
+- The summary line is authoritative recommendation copy from the server - render it verbatim;
   do not paraphrase.
 - On success the progress query is invalidated, so `/progress` reflects this attempt.
 
@@ -627,7 +627,7 @@ verdict + summary + correct/total; the wireframe below is the **[NEW]** fuller v
   │  Your diagnostics place you mid-ladder; your AMC 10 score clears the gate   │  ← recommendation_reason
   │  for Algebra B, so start there.                                             │
   │                                                                             │
-  │  ⚠ Your algebra fundamentals look shaky — review them before the first      │  ← algebra_warning
+  │  ⚠ Your algebra fundamentals look shaky - review them before the first      │  ← algebra_warning
   │     class.                                                                  │     (role="alert", only if present)
   │                                                                             │
   │  Your AMC score unlocks: Algebra B, Counting & Probability.                 │  ← unlocked_by_amc (if any)
@@ -646,7 +646,7 @@ verdict + summary + correct/total; the wireframe below is the **[NEW]** fuller v
   └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-- **Recommendation block first** — it is the headline output of the whole app. The
+- **Recommendation block first** - it is the headline output of the whole app. The
   `recommendation_reason` is server-authored; render verbatim.
 - `algebra_warning` renders as a `role="alert"` only when non-null (the prototype's algebra
   gate). `unlocked_by_amc` renders as a sentence only when the array is non-empty.
@@ -654,29 +654,29 @@ verdict + summary + correct/total; the wireframe below is the **[NEW]** fuller v
   **when**; the current `ProgressResponse.test_attempts` items are untyped (`items: {}` in the
   schema) and the table keys off `score/correct/wrong/blank/time_used_sec`. If the attempt
   objects carry an exam label/date, surface them as the first column; if not, flag the API gap
-  ([Q5]). Same for diagnostics (`instrument_id` is shown raw — prefer the human `course —
+  ([Q5]). Same for diagnostics (`instrument_id` is shown raw - prefer the human `course -
   kind` if available).
 
 **States**
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading | `Spinner` — **"Loading progress…"** |
-| Error | `ErrorState` — **"Could not load your progress"** |
-| No recommendation yet | `EmptyState` in the recommendation block — **"No recommendation yet."** (plus the `recommendation_reason`, which may explain what's missing, e.g. "Take a diagnostic to get a placement.") |
-| No contests | `EmptyState` — **"No contests taken yet."** |
-| No diagnostics | `EmptyState` — **"No diagnostics taken yet."** |
+| Loading | `Spinner` - **"Loading progress…"** |
+| Error | `ErrorState` - **"Could not load your progress"** |
+| No recommendation yet | `EmptyState` in the recommendation block - **"No recommendation yet."** (plus the `recommendation_reason`, which may explain what's missing, e.g. "Take a diagnostic to get a placement.") |
+| No contests | `EmptyState` - **"No contests taken yet."** |
+| No diagnostics | `EmptyState` - **"No diagnostics taken yet."** |
 | Fresh account (all empty) | All three empties stack; consider a single calming lead-in: **"Take a practice test or a diagnostic to get started."** with links to `/exams` and `/diagnostics`. **[NEW]** |
 
 **Mobile:** the three blocks stack (already vertical). The two history **tables** are the only
-wide elements — apply the same treatment as the review table: horizontal scroll within the
-card, or collapse each attempt into a stacked mini-card (`AMC 10 2022A · 105/150 · 17✓ 6✗ 2—
+wide elements - apply the same treatment as the review table: horizontal scroll within the
+card, or collapse each attempt into a stacked mini-card (`AMC 10 2022A · 105/150 · 17✓ 6✗ 2-
 · 4120s`). Keep the Recommendation block full-width and untruncated.
 
 ### 5.2 Coach's view of a student (`/users/:userId/progress`)
 
 Staff-only. Same `ProgressResponse` and the **same `ProgressView`** as 5.1, so the layout is
-identical — only the framing differs (h1 = **"Student progress"**, read-only). Matches
+identical - only the framing differs (h1 = **"Student progress"**, read-only). Matches
 `UserProgressPage.tsx`.
 
 ```text
@@ -692,22 +692,22 @@ identical — only the framing differs (h1 = **"Student progress"**, read-only).
 - **[NEW] student context bar:** the coach needs to know *whose* progress this is. The current
   page shows a generic "Student progress" heading with no name. Add a context bar with the
   student's `display_name` / `email` / `role` and a **"Back to students"** link. (Requires
-  either a roster endpoint or fetching the target user — see [Q7].)
+  either a roster endpoint or fetching the target user - see [Q7].)
 - Everything is **read-only**: a coach observes, never edits a student's attempts.
 
 **States** mirror 5.1, plus:
 
 | State | Copy / behavior |
 |-------|-----------------|
-| Loading | `Spinner` — **"Loading progress…"** |
+| Loading | `Spinner` - **"Loading progress…"** |
 | Error / 403 (non-staff) | Guard redirects non-staff home before render; a server 403 → `ErrorState` **"You don't have access to this student."** |
-| 404 (no such user) | `ErrorState` — **"Could not load this student's progress"** (matches current copy). |
+| 404 (no such user) | `ErrorState` - **"Could not load this student's progress"** (matches current copy). |
 
-### 5.3 Coach roster — the missing entry point [NEW]
+### 5.3 Coach roster - the missing entry point [NEW]
 
 There is currently **no UI path** from the coach's nav to `/users/:id/progress`; the route
 exists but is unreachable without typing a UUID. This is an IA gap. Proposed minimal solution
-(pending a list-students endpoint — [Q7]):
+(pending a list-students endpoint - [Q7]):
 
 ```text
   Students                                                                 ← [NEW] page, staff-only
@@ -726,7 +726,7 @@ exists but is unreachable without typing a UUID. This is an IA gap. Proposed min
 
 ---
 
-## 6. Invite (staff-only) — `/invite`
+## 6. Invite (staff-only) - `/invite`
 
 Mint a one-time invite via `POST /api/v1/invites` (`InviteCreateRequest`: `email`, `role`).
 The response (`InviteCreatedResponse`: `token`, `email`, `role`) returns the raw `token`
@@ -763,10 +763,10 @@ The response (`InviteCreatedResponse`: `token`, `email`, `role`) returns the raw
 - **One-time disclosure is the key UX risk.** The raw token is shown once and never again.
   Make this unmissable: heading **"Share this link once"**, helper **"It won't be shown
   again."**, and **[NEW]** a **Copy** button (the current build shows the link in a `<code>`
-  block with no copy affordance — easy to lose). After copying, confirm with **"Copied."**
+  block with no copy affordance - easy to lose). After copying, confirm with **"Copied."**
 - **[NEW] post-create affordances:** offer **"Create another invite"** (resets the form) and,
   once the invitee registers, a path to their progress (ties into the roster, [Q7]).
-- Role select defaults to **student**; coaches will rarely mint coach/admin — consider hiding
+- Role select defaults to **student**; coaches will rarely mint coach/admin - consider hiding
   `admin` for non-admins, or confirming on elevated roles. ([Q9])
 
 **States**
@@ -775,14 +775,14 @@ The response (`InviteCreatedResponse`: `token`, `email`, `role`) returns the raw
 |-------|-----------------|
 | Default | Empty email, role=student, Create enabled. |
 | Submitting | Button → `Creating…`, disabled. |
-| Error | `ErrorState` — **"Could not create the invite."** (e.g. invalid role, or non-staff 403). |
+| Error | `ErrorState` - **"Could not create the invite."** (e.g. invalid role, or non-staff 403). |
 | Success | The "Share this link once" panel (`aria-live="polite"`) with the link + Copy. |
 
 ---
 
 ## 7. Core user journeys (end to end)
 
-### US-001 — Take a timed AMC test → graded review
+### US-001 - Take a timed AMC test → graded review
 
 ```text
 [Login] ──► /exams ──► pick "AMC 10 2022A" ──► /exams/:id (RUNNER, key-free)
@@ -791,13 +791,13 @@ The response (`InviteCreatedResponse`: `token`, `email`, `role`) returns the raw
             │                                                                     │
             ▼                                                                     ▼
    manual Submit ──► [Confirm if blanks] ──► POST /exams/:id/attempts      timer hits 0
-                                                   │                        ──► "Time's up —
+                                                   │                        ──► "Time's up:
                                                    │   (same guarded submit)    submitting…"
                                                    ▼                              │
                                           ExamResultResponse  ◄────────────────────┘
                                                    │
                                                    ▼
-                                  /exams/:id (REVIEW — key revealed: score + per-problem)
+                                  /exams/:id (REVIEW - key revealed: score + per-problem)
                                                    │
                                    [Back to tests]  ·  [View my progress]
 ```
@@ -806,7 +806,7 @@ Acceptance hooks: timer counts down from `duration_sec` and auto-submits at zero
 palette navigation work; on submit the server grades and stores; review shows correct answers.
 The key is revealed only in the review (the runner never holds it).
 
-### US-002 — Redeem invite → register → first login
+### US-002 - Redeem invite → register → first login
 
 ```text
 Coach: /invite ──► POST /invites ──► copies  …/register?token=XYZ  ──► sends to student
@@ -825,10 +825,10 @@ Returning later: /login ──► email + password ──► POST /auth/login �
 Acceptance hooks: coach mints an invite; student sets a password and logs in; session persists
 via the secure cookie; `/auth/me` returns the user; history follows the account across devices.
 
-### US-003 — Take diagnostics → see placement recommendation
+### US-003 - Take diagnostics → see placement recommendation
 
 ```text
-/diagnostics ──► pick "Algebra B — Are You Ready?" ──► /diagnostics/:id (RUNNER)
+/diagnostics ──► pick "Algebra B - Are You Ready?" ──► /diagnostics/:id (RUNNER)
         │
         │   auto items: type answer        manual items: work on paper, ☑ self-mark
         ▼
@@ -846,13 +846,13 @@ Acceptance hooks: the recommendation reflects the latest attempts and matches th
 ladder + AMC-gate logic. Diagnostics feed `/progress`, where the AMC score and diagnostics are
 synthesized into one `recommendation_course` + `recommendation_reason`.
 
-### Coach journey — mint an invite, view a student's progress
+### Coach journey - mint an invite, view a student's progress
 
 ```text
 /invite ──► create invite ──► "Share this link once" (copy)  ──► [later] student registers
    │
    ▼
-[Students roster — NEW]  ──► pick "Bayden"  ──► /users/:id/progress
+[Students roster - NEW]  ──► pick "Bayden"  ──► /users/:id/progress
                                                      │
                                                      ▼
                               read-only ProgressView: recommendation + contest + diagnostics
@@ -860,7 +860,7 @@ synthesized into one `recommendation_course` + `recommendation_reason`.
 ```
 
 Acceptance hooks: a coach can open any student's progress; a student cannot open another's
-(403). **Gap:** the roster step is [NEW] — the route exists but the entry point does not (see
+(403). **Gap:** the roster step is [NEW] - the route exists but the entry point does not (see
 [5.3](#53-coach-roster--the-missing-entry-point-new) and [Q7]).
 
 ---
@@ -874,9 +874,9 @@ blocked.
 |---|----------|----------------|
 | **Q1** | **Confirm before a manual submit?** The current runner submits with no confirmation. | **Confirm only when blanks (or flags) remain**; skip the dialog if every problem is answered. Auto-submit at zero never confirms. |
 | **Q2** | **Show a ticking clock or a countdown?** | **Countdown** of time *remaining* (`M:SS`), matching `useCountdown`/`formatDuration` already built. A countdown maps to the real constraint better than elapsed time. |
-| **Q3** | **Warn at low time?** No warning exists today. | **Yes** — non-color emphasis + one-shot `aria-live` announcements at **5:00** and **1:00** remaining. |
+| **Q3** | **Warn at low time?** No warning exists today. | **Yes** - non-color emphasis + one-shot `aria-live` announcements at **5:00** and **1:00** remaining. |
 | **Q4** | **Time the diagnostics?** `elapsed_sec` is captured but not shown. | **No visible timer** (placement, not a contest); keep silent capture. If wanted, a quiet stopwatch, never a countdown. |
-| **Q5** | **What identifies a contest-history row?** `ProgressResponse.test_attempts` items are untyped; the table keys off score/correct/wrong/blank/time only. | Surface **exam label (AMC 10 2022A) + date** as the first column. Needs the attempt objects to carry an exam ref/timestamp — **API follow-up** if absent. |
+| **Q5** | **What identifies a contest-history row?** `ProgressResponse.test_attempts` items are untyped; the table keys off score/correct/wrong/blank/time only. | Surface **exam label (AMC 10 2022A) + date** as the first column. Needs the attempt objects to carry an exam ref/timestamp - **API follow-up** if absent. |
 | **Q6** | **Show solution links in the exam review?** `Problem.solution_url` exists in the data model but `ReviewItemResponse` does not expose it. | Add `solution_url` to the review item and render a per-row **"Solution"** link. **API follow-up.** |
 | **Q7** | **How does a coach reach a student?** `/users/:id/progress` has no entry point. | Add a **staff-only "Students" roster** (`/students`) backed by a list-students endpoint; rows link in. **API + route follow-up.** Until then the route is unreachable in normal use. |
 | **Q8** | **Surface login rate-limiting?** | Default to the generic error to avoid enumeration; only show a specific "too many attempts" message if the API returns a distinguishable signal. |
@@ -893,24 +893,24 @@ blocked.
   and `ExamReview.tsx`. This is both an accessibility requirement and a fit with the
   clean-academic tone.
 - **One canonical loading / empty / error vocabulary** via the shared `Spinner` / `EmptyState`
-  / `ErrorState` components — reuse them everywhere rather than bespoke states. Loading copy is
+  / `ErrorState` components - reuse them everywhere rather than bespoke states. Loading copy is
   always context-specific ("Loading tests…", "Loading exam…", "Loading progress…").
 - **Server copy is authoritative.** `recommendation_reason`, diagnostic `summary`, and
   `algebra_warning` are rendered verbatim; the UI frames them but does not rewrite them.
 - **Calm, exam-serious microcopy.** Short, declarative, no exclamation marks except the genuine
-  urgency of "Time's up". No celebratory or gamified language — this is a study aid for a coach
+  urgency of "Time's up". No celebratory or gamified language - this is a study aid for a coach
   and serious students.
 - **Focus & keyboard.** The palette grid, radiogroups, and dialogs are keyboard-navigable;
   focus is visible (`focus-ring` token) and moves into/out of the confirm dialog correctly. The
   runner must be fully operable without a mouse (palette jump, A–E selection, flag, submit).
 - **Responsive intent.** Desktop is the primary surface (a focused, exam-like single view);
-  mobile is a supported stacked variant. The two complex screens — the **runner** and the
-  **progress dashboard** — have explicit stacked layouts above; everything else stacks
+  mobile is a supported stacked variant. The two complex screens - the **runner** and the
+  **progress dashboard** - have explicit stacked layouts above; everything else stacks
   naturally in a single column.
 
 ---
 
-## Appendix A — Screen ⇄ API ⇄ source map
+## Appendix A - Screen ⇄ API ⇄ source map
 
 | Screen | Route | API (method path) | Key response fields | Existing source |
 |--------|-------|--------------------|---------------------|-----------------|
@@ -933,5 +933,5 @@ blocked.
 
 - [Project Vision](../planning/project-vision.md)
 - [Technical Spec](../planning/tech-spec.md)
-- [Roadmap](../planning/roadmap.md) — US-001 / US-002 / US-003
-- [OpenAPI schema](../api/openapi.json) — response shapes designed around
+- [Roadmap](../planning/roadmap.md) - US-001 / US-002 / US-003
+- [OpenAPI schema](../api/openapi.json) - response shapes designed around

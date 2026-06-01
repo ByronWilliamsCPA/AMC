@@ -3,7 +3,7 @@
  *
  * #CRITICAL: timing: the timer is computed from an absolute deadline
  * (`startedAt + durationSec`), not by decrementing a counter, so it does not
- * drift and does not pause when the tab is backgrounded — a backgrounded
+ * drift and does not pause when the tab is backgrounded - a backgrounded
  * `setInterval` is throttled, and a decrement-based timer would under-count.
  * #VERIFY: on reaching zero, `onExpire` is fired exactly once (guarded), so the
  * runner auto-submits a single time.

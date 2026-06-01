@@ -3,9 +3,9 @@
 A single async SQLAlchemy engine is created lazily from :data:`amc.core.config.settings`.
 Two access patterns are provided:
 
-- :func:`get_session` — an async context manager for use outside the request
+- :func:`get_session`: an async context manager for use outside the request
   cycle (health checks, seed scripts, background jobs).
-- :func:`get_db` — a FastAPI dependency that yields a request-scoped session and
+- :func:`get_db`: a FastAPI dependency that yields a request-scoped session and
   guarantees rollback on error and close on completion.
 
 The engine is process-global and created on first use so importing this module

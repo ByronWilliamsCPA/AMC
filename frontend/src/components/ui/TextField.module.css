@@ -1,4 +1,4 @@
-/* TextField — label + input + hint/error as one accessible unit. */
+/* TextField - label + input + hint/error as one accessible unit. */
 .field {
   display: flex;
   flex-direction: column;

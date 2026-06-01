@@ -1,4 +1,4 @@
-/* RadioGroup — native radios in a labelled fieldset. Native gives roving focus
+/* RadioGroup - native radios in a labelled fieldset. Native gives roving focus
    and arrow-key selection for free; we add row styling and a selected state. */
 .group {
   border: none;

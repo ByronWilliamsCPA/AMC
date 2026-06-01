@@ -1,5 +1,5 @@
 ---
-title: "AMC Trainer — Design System & Token Specification"
+title: "AMC Trainer - Design System & Token Specification"
 schema_type: common
 status: published
 owner: core-maintainer
@@ -29,7 +29,7 @@ These decisions are **locked**; this doc designs within them, it does not reliti
 |----------|-------|
 | Styling foundation | **CSS Modules + design tokens as CSS custom properties**. No Tailwind, no UI component library. |
 | Dependencies | Minimal-dependency ethos. The only styling-adjacent runtime dep is **KaTeX** (`katex` `^0.16`), already used by `frontend/src/components/Tex.tsx`. **No web fonts.** |
-| Visual tone | **Clean & academic** — calm, focused, exam-serious, high legibility for math, restrained single accent, minimal chrome. |
+| Visual tone | **Clean & academic** - calm, focused, exam-serious, high legibility for math, restrained single accent, minimal chrome. |
 | Target stack | React 19 + TypeScript 5.7 + Vite 6 (already set up). |
 | Performance budget | Exam page interactive **< 2 s** (`tech-spec.md` §Performance). System fonts + CSS vars keep CSS cost near-zero; this is a hard constraint on the design. |
 
@@ -38,7 +38,7 @@ These decisions are **locked**; this doc designs within them, it does not reliti
 `--color-border`, `--color-ok`, `--color-warn`, `--color-error`, `--color-surface`,
 `--space-1..5`, `--radius`, `--maxw`, `--font`). This spec is an **evolution, not a rewrite**:
 every existing name is preserved (some as the canonical token, some as a back-compat alias), and
-the existing hex values are kept wherever they already pass WCAG AA — which, after verification,
+the existing hex values are kept wherever they already pass WCAG AA - which, after verification,
 is all of them. New tokens are additive.
 
 ---
@@ -63,7 +63,7 @@ Six principles, ordered. When two conflict, the lower number wins.
    celebratory confetti. State changes are immediate and unambiguous.
 
 4. **Accessible by default, not as a retrofit.** Every text/background pair in this doc meets
-   **WCAG 2.1 AA** (4.5:1 body, 3:1 large/UI) — verified, see §2. Meaning is **never carried by
+   **WCAG 2.1 AA** (4.5:1 body, 3:1 large/UI) - verified, see §2. Meaning is **never carried by
    color alone**: answered/flagged/correct/incorrect/voided each pair color with a glyph, label,
    border, or text change. Visible keyboard focus everywhere (already in `index.css`). Touch
    targets ≥ 44px. Respect `prefers-reduced-motion` and `prefers-color-scheme`.
@@ -100,31 +100,31 @@ the pair must clear.** All listed pairs **PASS**.
 
 | Pair (light) | Ratio | Intent |
 |---|---|---|
-| `--color-text` `#1a1a2e` on `--color-bg` `#ffffff` | 17.06 | body 4.5:1 — primary reading text |
-| `--color-text` on `--color-surface` `#f4f6fb` | 15.78 | body 4.5:1 — text on cards/panels |
-| `--color-text` on `--color-surface-raised` `#eceff6` | 14.82 | body 4.5:1 — text on raised rows |
-| `--color-text-muted` `#54546b` on `#ffffff` | 7.35 | body 4.5:1 — secondary text |
-| `--color-text-muted` on `--color-surface` | 6.80 | body 4.5:1 — secondary text on panels |
-| `--color-text-subtle` `#6b6b85` on `#ffffff` | 5.16 | body 4.5:1 — metadata, hints |
-| `--color-primary` `#2d4ea2` on `#ffffff` | 7.71 | body 4.5:1 — links, accent text |
-| `--color-primary-strong` `#274690` on `#ffffff` | 8.88 | body 4.5:1 — hover/active accent text |
-| `--color-on-primary` `#ffffff` on `--color-primary` | 7.71 | body 4.5:1 — button label |
-| `--color-success-text` `#16703f` on `#ffffff` | 6.13 | body 4.5:1 — "correct" text |
-| `--color-success-text` on `--color-success-soft` `#e3f3e9` | 5.33 | body 4.5:1 — text in correct chip |
-| `--color-warning-text` `#8a4f00` on `#ffffff` | 6.56 | body 4.5:1 — "flagged"/caution text |
-| `--color-warning-text` on `--color-warning-soft` `#fbeed9` | 5.73 | body 4.5:1 — text in caution chip |
-| `--color-error-text` `#b00020` on `#ffffff` | 7.33 | body 4.5:1 — "incorrect" text |
-| `--color-error-text` on `--color-error-soft` `#fbe4e7` | 6.05 | body 4.5:1 — text in incorrect chip |
-| `--color-info-text` `#1f5fa8` on `#ffffff` | 6.44 | body 4.5:1 — info/notice text |
-| `--color-info-text` on `--color-info-soft` `#e4eefb` | 5.50 | body 4.5:1 — text in info chip |
-| `--color-voided-text` `#6b6b85` on `#ffffff` | 5.16 | body 4.5:1 — voided "doesn't count" text |
-| `--color-text` on any `*-soft` tint (success/warn/error/info/primary) | 14.1–14.9 | body 4.5:1 — body text on tinted rows |
-| `--color-focus` `#2d4ea2` ring on `#ffffff` | 7.71 | UI 3:1 — focus indicator |
+| `--color-text` `#1a1a2e` on `--color-bg` `#ffffff` | 17.06 | body 4.5:1 - primary reading text |
+| `--color-text` on `--color-surface` `#f4f6fb` | 15.78 | body 4.5:1 - text on cards/panels |
+| `--color-text` on `--color-surface-raised` `#eceff6` | 14.82 | body 4.5:1 - text on raised rows |
+| `--color-text-muted` `#54546b` on `#ffffff` | 7.35 | body 4.5:1 - secondary text |
+| `--color-text-muted` on `--color-surface` | 6.80 | body 4.5:1 - secondary text on panels |
+| `--color-text-subtle` `#6b6b85` on `#ffffff` | 5.16 | body 4.5:1 - metadata, hints |
+| `--color-primary` `#2d4ea2` on `#ffffff` | 7.71 | body 4.5:1 - links, accent text |
+| `--color-primary-strong` `#274690` on `#ffffff` | 8.88 | body 4.5:1 - hover/active accent text |
+| `--color-on-primary` `#ffffff` on `--color-primary` | 7.71 | body 4.5:1 - button label |
+| `--color-success-text` `#16703f` on `#ffffff` | 6.13 | body 4.5:1 - "correct" text |
+| `--color-success-text` on `--color-success-soft` `#e3f3e9` | 5.33 | body 4.5:1 - text in correct chip |
+| `--color-warning-text` `#8a4f00` on `#ffffff` | 6.56 | body 4.5:1 - "flagged"/caution text |
+| `--color-warning-text` on `--color-warning-soft` `#fbeed9` | 5.73 | body 4.5:1 - text in caution chip |
+| `--color-error-text` `#b00020` on `#ffffff` | 7.33 | body 4.5:1 - "incorrect" text |
+| `--color-error-text` on `--color-error-soft` `#fbe4e7` | 6.05 | body 4.5:1 - text in incorrect chip |
+| `--color-info-text` `#1f5fa8` on `#ffffff` | 6.44 | body 4.5:1 - info/notice text |
+| `--color-info-text` on `--color-info-soft` `#e4eefb` | 5.50 | body 4.5:1 - text in info chip |
+| `--color-voided-text` `#6b6b85` on `#ffffff` | 5.16 | body 4.5:1 - voided "doesn't count" text |
+| `--color-text` on any `*-soft` tint (success/warn/error/info/primary) | 14.1–14.9 | body 4.5:1 - body text on tinted rows |
+| `--color-focus` `#2d4ea2` ring on `#ffffff` | 7.71 | UI 3:1 - focus indicator |
 
 > **Borders are intentionally below 3:1.** `--color-border` `#d4d7e0` (1.44:1 on white) and
 > `--color-border-strong` `#b9bdcb` (1.87:1) are **decorative separators**, not the sole signal of
 > any state or control boundary. Per Principle 4, every interactive/stateful element also carries a
-> text label, glyph, fill, or focus ring — so the borders are not load-bearing for WCAG 1.4.11.
+> text label, glyph, fill, or focus ring - so the borders are not load-bearing for WCAG 1.4.11.
 
 Dark-theme pairs were verified identically (text on bg 15.14, muted 7.97, every semantic
 text-on-bg 7.7–9.0, every `fg-on-soft` 9.4–9.9). The dark ramp is defined in §2.4.
@@ -195,7 +195,7 @@ text-on-bg 7.7–9.0, every `fg-on-soft` 9.4–9.9). The dark ramp is defined in
 
 Dark mode is a **named-token contract defined now**; it may ship in a later phase, but the contract
 is fixed so no component hardcodes a light-only value. It is applied via `[data-theme="dark"]`
-(see §6). Only the values that change are overridden — the structural tokens (spacing, radius, type,
+(see §6). Only the values that change are overridden - the structural tokens (spacing, radius, type,
 z-index) are theme-independent.
 
 ```css
@@ -212,7 +212,7 @@ z-index) are theme-independent.
   --color-text-subtle:    #8d90a6;
   --color-text-inverse:   #12131a;
 
-  /* Accent — lightened so it reads on a dark bg (text on bg ≥ 8.6:1) */
+  /* Accent - lightened so it reads on a dark bg (text on bg ≥ 8.6:1) */
   --color-primary:        #8fb0ff;
   --color-primary-strong: #aec4ff;
   --color-primary-soft:   #17223d;
@@ -267,7 +267,7 @@ only if a metric demands it (it does not today).
              Arial, 'Noto Sans', sans-serif;            /* was --font */
 --font-mono: ui-monospace, 'SF Mono', 'Source Code Pro', Menlo, Monaco,
              Consolas, 'Courier New', monospace;        /* code, raw answers */
---font-math: 'KaTeX_Main', 'Latin Modern Math', serif;  /* documentary only — KaTeX sets its own */
+--font-math: 'KaTeX_Main', 'Latin Modern Math', serif;  /* documentary only - KaTeX sets its own */
 --font: var(--font-sans);                               /* back-compat alias */
 ```
 
@@ -281,35 +281,35 @@ only if a metric demands it (it does not today).
 ### 3.2 Type scale (modular, ~1.2 minor-third, rounded to clean px)
 
 Sizes are tokens in `rem` (root = 16px). Each size pairs with a default line-height token. The
-scale floor for body is **1rem/16px** — the legibility floor from Principle 1; nothing in reading
+scale floor for body is **1rem/16px** - the legibility floor from Principle 1; nothing in reading
 content goes below it.
 
 ```css
---font-size-xs:   0.75rem;  /* 12px — table captions, fine print, dt labels */
---font-size-sm:   0.875rem; /* 14px — secondary UI, metadata */
---font-size-base: 1rem;     /* 16px — body, problem prose, choices (floor) */
---font-size-md:   1.125rem; /* 18px — emphasized body, lead-in */
---font-size-lg:   1.25rem;  /* 20px — section headings, score figures */
---font-size-xl:   1.5rem;   /* 24px — page titles, the runner timer */
---font-size-2xl:  1.875rem; /* 30px — dashboard headline numbers */
---font-size-3xl:  2.25rem;  /* 36px — rare hero / verdict screens */
+--font-size-xs:   0.75rem;  /* 12px - table captions, fine print, dt labels */
+--font-size-sm:   0.875rem; /* 14px - secondary UI, metadata */
+--font-size-base: 1rem;     /* 16px - body, problem prose, choices (floor) */
+--font-size-md:   1.125rem; /* 18px - emphasized body, lead-in */
+--font-size-lg:   1.25rem;  /* 20px - section headings, score figures */
+--font-size-xl:   1.5rem;   /* 24px - page titles, the runner timer */
+--font-size-2xl:  1.875rem; /* 30px - dashboard headline numbers */
+--font-size-3xl:  2.25rem;  /* 36px - rare hero / verdict screens */
 
 /* Line-heights (unitless) */
 --line-height-tight:   1.2;  /* headings, the timer, large numerals */
 --line-height-snug:    1.35; /* choices, dense rows, palette labels */
---line-height-normal:  1.6;  /* body & problem prose — roomy for mixed math + text */
+--line-height-normal:  1.6;  /* body & problem prose - roomy for mixed math + text */
 --line-height-relaxed: 1.75; /* long solution explanations */
 
-/* Weights — system fonts: 400/600/700 only (avoid faux/odd weights) */
+/* Weights - system fonts: 400/600/700 only (avoid faux/odd weights) */
 --font-weight-regular:  400;
 --font-weight-medium:   600; /* choice letters, emphasized labels, buttons */
 --font-weight-bold:     700; /* headings, timer, score figures */
 
-/* Letter-spacing — minimal; only tighten large display, open up all-caps eyebrows */
+/* Letter-spacing - minimal; only tighten large display, open up all-caps eyebrows */
 --letter-spacing-tight: -0.01em; /* 2xl/3xl display numerals */
 --letter-spacing-caps:   0.04em; /* small all-caps labels, if used */
 
-/* Numerals — compare-by-column surfaces */
+/* Numerals - compare-by-column surfaces */
 --font-numeric-tabular: tabular-nums; /* timer, scores, palette, tables */
 ```
 
@@ -341,7 +341,7 @@ body {
 }
 ```
 
-### 3.5 Rendering math (KaTeX) legibly alongside prose — explicit guidance
+### 3.5 Rendering math (KaTeX) legibly alongside prose - explicit guidance
 
 `Tex.tsx` calls `katex.renderToString(..., { output: 'htmlAndMathml' })` and injects the result;
 KaTeX styling comes from the imported `katex.min.css`. Rules for keeping math legible **without
@@ -396,18 +396,18 @@ forking KaTeX's CSS**:
 ### 4.1 Spacing scale
 
 The existing `--space-1..5` ramp is kept exactly and **extended** (the runner already relies on its
-values). Base unit 4px; the ramp is intentionally not a strict geometric series — it matches what's
+values). Base unit 4px; the ramp is intentionally not a strict geometric series - it matches what's
 already in use, then adds larger steps for page-level rhythm.
 
 ```css
 --space-0:  0;
---space-1:  0.25rem; /* 4px  — kept */
---space-2:  0.5rem;  /* 8px  — kept */
---space-3:  1rem;    /* 16px — kept (default gap) */
---space-4:  1.5rem;  /* 24px — kept */
---space-5:  2rem;    /* 32px — kept */
---space-6:  3rem;    /* 48px — section separation */
---space-7:  4rem;    /* 64px — page-level vertical rhythm */
+--space-1:  0.25rem; /* 4px  - kept */
+--space-2:  0.5rem;  /* 8px  - kept */
+--space-3:  1rem;    /* 16px - kept (default gap) */
+--space-4:  1.5rem;  /* 24px - kept */
+--space-5:  2rem;    /* 32px - kept */
+--space-6:  3rem;    /* 48px - section separation */
+--space-7:  4rem;    /* 64px - page-level vertical rhythm */
 ```
 
 > **Touch targets (Principle 4):** choices, palette cells, and buttons must render ≥ 44px tall.
@@ -466,16 +466,16 @@ above scrolling content but below modals/toasts (a student should always see the
 
 ### 4.5 Breakpoints
 
-Mobile-first, min-width. `--bp-md` 720px is **kept** — it's the existing runner breakpoint where the
+Mobile-first, min-width. `--bp-md` 720px is **kept** - it's the existing runner breakpoint where the
 question palette becomes a sidebar (`@media (min-width: 720px)` in `index.css`). Max content width
 `--maxw` is kept.
 
 ```css
 --bp-sm:  480px;  /* large phone */
---bp-md:  720px;  /* tablet — runner palette sidebar appears (kept) */
---bp-lg:  960px;  /* small laptop — matches --maxw content width */
+--bp-md:  720px;  /* tablet - runner palette sidebar appears (kept) */
+--bp-lg:  960px;  /* small laptop - matches --maxw content width */
 --bp-xl:  1280px; /* large laptop / desktop */
---maxw:   960px;  /* kept — main content max width */
+--maxw:   960px;  /* kept - main content max width */
 ```
 
 > **Note:** CSS custom properties cannot be used inside `@media (min-width: …)` queries. The
@@ -506,7 +506,7 @@ Import order in `main.tsx` (extends the existing imports):
 
 ```ts
 import 'katex/dist/katex.min.css'
-import './styles/tokens.css'   // tokens first — everything below references them
+import './styles/tokens.css'   // tokens first - everything below references them
 import './index.css'           // resets + element defaults
 ```
 
@@ -534,7 +534,7 @@ import './index.css'           // resets + element defaults
 
 Rules:
 - **Semantic over raw.** Components reference role tokens (`--color-error-text`), never a raw palette
-  step. There is deliberately no `--blue-500`-style raw layer — at this scale it adds indirection
+  step. There is deliberately no `--blue-500`-style raw layer - at this scale it adds indirection
   without payoff.
 - **Soft / strong / text triad** for every semantic colour: `*-text` (readable on bg), `*-soft`
   (tinted surface), solid base (fills/icons). This is the contract review tables & the palette use.
@@ -545,7 +545,7 @@ Rules:
 
 ```css
 /* frontend/src/styles/tokens.css
-   Design tokens — single source of truth (see docs/design/design-system.md). */
+   Design tokens - single source of truth (see docs/design/design-system.md). */
 :root {
   /* ---------- Color: neutrals ---------- */
   --color-bg:             #ffffff;
@@ -636,7 +636,7 @@ Rules:
   --ease-standard: cubic-bezier(.2, 0, 0, 1);
 }
 
-/* Dark theme contract (ships later) — see §2.4 for full block */
+/* Dark theme contract (ships later) - see §2.4 for full block */
 [data-theme="dark"] {
   --color-bg: #12131a; --color-surface: #1a1c26; --color-surface-raised: #232634;
   --color-surface-sunken: #0e0f16; --color-border: #3a3d4d; --color-border-strong: #4c4f63;
@@ -658,7 +658,7 @@ Rules:
 
 ### 5.4 How CSS Modules consume tokens
 
-CSS Modules scope **class names**; they do **not** scope or isolate custom properties — `var(--*)`
+CSS Modules scope **class names**; they do **not** scope or isolate custom properties - `var(--*)`
 resolves against the cascade exactly as in plain CSS, so a `.module.css` references tokens directly.
 Example: the exam-runner choice cell, migrated from the global `.choice` rules.
 
@@ -681,7 +681,7 @@ Example: the exam-runner choice cell, migrated from the global `.choice` rules.
 
 .letter { font-weight: var(--font-weight-medium); }
 
-/* Selected: NOT colour-alone — tinted fill + accent border + the radio's own checked state */
+/* Selected: NOT colour-alone - tinted fill + accent border + the radio's own checked state */
 .choice[aria-checked='true'] {
   background: var(--color-primary-soft);
   border-color: var(--color-primary);
@@ -704,7 +704,7 @@ import styles from './Choice.module.css'
 ```
 
 > **Theming a token *for one component*** (rare): set the custom property on the component root and
-> children inherit it — e.g. `.voidedRow { --color-text: var(--color-voided-text); }` recolors its
+> children inherit it - e.g. `.voidedRow { --color-text: var(--color-voided-text); }` recolors its
 > prose *and its KaTeX math* in one line, because both read `--color-text`. Prefer the standard
 > tokens; reach for local overrides only for genuinely local semantics like this.
 
@@ -715,7 +715,7 @@ import styles from './Choice.module.css'
 - **Mechanism.** Light is the default `:root`. Dark is the `[data-theme="dark"]` override block in
   `tokens.css` (§2.4 / §5.3). Set the attribute on `<html>`:
   `document.documentElement.setAttribute('data-theme', 'dark')`. Because every component reads
-  tokens (Principle 5), nothing else changes — the whole app, **including KaTeX math** (glyphs
+  tokens (Principle 5), nothing else changes - the whole app, **including KaTeX math** (glyphs
   inherit `--color-text`), re-themes from this one attribute.
 
 - **Why an explicit attribute, not just media query.** An attribute lets a future settings toggle
@@ -728,7 +728,7 @@ import styles from './Choice.module.css'
   ```css
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      /* same overrides as [data-theme="dark"] — keep the two blocks in sync,
+      /* same overrides as [data-theme="dark"] - keep the two blocks in sync,
          or apply data-theme via a tiny inline <head> script to avoid duplication
          and a flash of the wrong theme (FOUC). */
     }
@@ -750,7 +750,7 @@ import styles from './Choice.module.css'
 
 ## 7. Motion
 
-Motion is **minimal and purposeful** (Principles 2 & 3) — it confirms an action or eases a state
+Motion is **minimal and purposeful** (Principles 2 & 3) - it confirms an action or eases a state
 change, and it is *never* decorative or attention-grabbing during a timed test. Specifically: **the
 timer never animates**, and nothing loops or pulses in the runner.
 
@@ -763,7 +763,7 @@ timer never animates**, and nothing loops or pulses in the runner.
 ```
 
 Use `--duration-fast` for state on existing elements, `--duration-base` for things appearing or
-leaving. Animate only cheap, non-layout properties — `opacity` and `transform` — to protect the
+leaving. Animate only cheap, non-layout properties - `opacity` and `transform` - to protect the
 < 2 s interactive budget and avoid jank on tablets. Don't animate `width`/`height`/`top`/`left`.
 
 ```css
@@ -791,7 +791,7 @@ near-instant; **movement** is removed.
 
 > Loading states use a static "Loading…" label or a non-spinning indicator under reduced motion;
 > the existing `.spinner` element should degrade to text rather than rotate. No spinner is acceptable
-> on the exam runner regardless — a detached timer must never be obscured by a spinner overlay.
+> on the exam runner regardless - a detached timer must never be obscured by a spinner overlay.
 
 ---
 
@@ -814,4 +814,4 @@ near-instant; **movement** is removed.
 - A high-contrast / forced-colors (`@media (forced-colors: active)`) pass for the runner is a good
   follow-up given the exam context, but is out of scope for v1.
 - If a brand/marketing surface ever needs a display typeface, that is the only justification to add a
-  web font — and it must be `font-display: swap`, subset, and kept off the exam runner path.
+  web font - and it must be `font-display: swap`, subset, and kept off the exam runner path.

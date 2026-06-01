@@ -1,6 +1,6 @@
 /**
  * Accessibility smoke tests for the UI primitives. axe runs in jsdom (which
- * can't compute real colour contrast — that's covered by the hand-verified
+ * can't compute real colour contrast - that's covered by the hand-verified
  * token palette in docs/design/design-system.md), so these catch structural
  * issues: roles, labels, name/role/value. Scoped to the WCAG A/AA tags so
  * page-level best-practice rules (landmarks, single-h1) don't flag isolated

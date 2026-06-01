@@ -1,5 +1,5 @@
 /* frontend/src/styles/tokens.css
-   Design tokens — single source of truth (see docs/design/design-system.md).
+   Design tokens - single source of truth (see docs/design/design-system.md).
    Imported in main.tsx before index.css, after the KaTeX CSS. */
 :root {
   /* ---------- Color: neutrals ---------- */

@@ -192,7 +192,7 @@ _TRAILING_UNIT_RE = re.compile(r"^(.*\d)\s*[a-z]+\.?$", re.IGNORECASE)
 # Unicode minus / dashes unified to ASCII hyphen-minus. The keys are
 # intentionally the non-ASCII forms (U+2212 minus, en/em dashes), so the ruff
 # ambiguous-character checks are suppressed here by design.
-_MINUS_CHARS = str.maketrans({"−": "-", "–": "-", "—": "-"})  # noqa: RUF001
+_MINUS_CHARS = str.maketrans({"−": "-", "–": "-", "\u2014": "-"})  # noqa: RUF001
 
 
 def _normalise_text(value: str) -> str:

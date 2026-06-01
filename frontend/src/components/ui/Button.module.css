@@ -1,4 +1,4 @@
-/* Button primitive — consumes design tokens only (design-system.md §5.4). */
+/* Button primitive - consumes design tokens only (design-system.md §5.4). */
 .button {
   display: inline-flex;
   align-items: center;

@@ -1,5 +1,5 @@
 ---
-title: "AMC Trainer — Timed Exam Runner UX Specification"
+title: "AMC Trainer - Timed Exam Runner UX Specification"
 schema_type: common
 status: draft
 owner: core-maintainer
@@ -20,9 +20,9 @@ This is a **deep-dive UX spec that refines a working implementation**, not a gre
 proposal. The runner already exists and works. Throughout, status callouts mark the
 relationship between this spec and the code:
 
-- **[MATCHES]** — the current code already does this; the spec documents and pins the behavior.
-- **[EXTENDS]** — a concrete addition or change layered on top of what exists today.
-- **[RISK]** — a current behavior that is a UX hazard; the spec recommends a stance.
+- **[MATCHES]** - the current code already does this; the spec documents and pins the behavior.
+- **[EXTENDS]** - a concrete addition or change layered on top of what exists today.
+- **[RISK]** - a current behavior that is a UX hazard; the spec recommends a stance.
 
 Real symbol names are used so this reads against the source. The reducer
 (`runnerReducer`, `RunnerState`, `RunnerPhase`, `RunnerAction`) in
@@ -38,7 +38,7 @@ specced. API shapes (`ExamDetail`, `ProblemRead`, `ExamSubmission`, `ExamResultR
 > (`.runner__timer`, `.palette__cell--answered`, …). This spec references the **real**
 > tokens (`--color-primary: #2d4ea2`, `--color-warn: #9a5b00`, `--color-error: #b00020`,
 > `--color-ok: #1b7f4b`, `--space-*`, `--radius`, `--maxw: 960px`). Where it says "add a
-> class", that means add to `index.css` (or a future co-located module) — the naming and
+> class", that means add to `index.css` (or a future co-located module) - the naming and
 > token usage are what matter, not the file boundary.
 
 ---
@@ -64,21 +64,21 @@ Every decision below serves five non-negotiable goals.
 3. **Never lose work.** Answers and flags live in the reducer
    (`RunnerState.answers`, `RunnerState.flags`) and are only ever read, never silently
    dropped, until submission. The largest residual risk here is **page refresh mid-exam**,
-   which today discards everything (see §7.1) — this spec flags it as the top correctness
+   which today discards everything (see §7.1) - this spec flags it as the top correctness
    issue and recommends persistence.
 
 4. **The timer is sacred.** The clock is an **absolute deadline**, computed from
    `startedAt + durationSec` (`useCountdown`), not a decrementing counter. It does not drift,
    does not pause when the tab is backgrounded, and **auto-submits exactly once** at zero.
    The UI must never present the timer as something that can be paused, gamed, or "stopped"
-   by leaving the page. **[MATCHES]** — this is the existing `useCountdown` contract, and the
+   by leaving the page. **[MATCHES]** - this is the existing `useCountdown` contract, and the
    spec's job is to make the *visible* timer faithful to it.
 
 5. **Integrity: no answer key before submission.** `ExamDetail` / `ProblemRead` deliberately
    carry **no `correct_answer` field** (the schema description says so explicitly). The
    review screen (`ExamReview`, rendering `ExamResultResponse.review`) is the **only** place
-   a correct answer ever appears. Nothing in the active runner — not a tooltip, not a hint,
-   not a "check answer" affordance — may reveal or imply correctness. This is a hard
+   a correct answer ever appears. Nothing in the active runner - not a tooltip, not a hint,
+   not a "check answer" affordance - may reveal or imply correctness. This is a hard
    acceptance criterion from the roadmap ("No `correct_answer` in any pre-submission API
    response or page source").
 
@@ -110,14 +110,14 @@ The runner is one route (`ExamRunnerPage` → `RunnerInner`) with three phases d
 a **header**, a **palette/navigator**, and a **question column** (body + controls). The
 container is capped at `--maxw` (960px) and centered.
 
-### 2.1 Desktop — active phase (≥ 720px)
+### 2.1 Desktop - active phase (≥ 720px)
 
 The current grid is `grid-template-columns: 12rem 1fr` at the `min-width: 720px`
 breakpoint (`.runner__body`), palette on the left, question on the right.
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────┐
-│  HEADER  (.runner__header — flex, wrap, baseline-aligned)                    │
+│  HEADER  (.runner__header - flex, wrap, baseline-aligned)                    │
 │                                                                             │
 │  AMC 10 2023 A                         ⏱ 1:04:18           14 of 25 answered │
 │  (contest year variant, <h1>)          (.runner__timer,    (.runner__progress│
@@ -150,23 +150,23 @@ breakpoint (`.runner__body`), palette on the left, question on the right.
 
 **Header anatomy** (`.runner__header`, flex / wrap / `align-items: baseline`):
 
-- **Contest title** — `<h1>` rendering `{exam.contest} {exam.year}{exam.variant}`
+- **Contest title** - `<h1>` rendering `{exam.contest} {exam.year}{exam.variant}`
   (e.g. "AMC 10 2023 A"). Left-aligned, the page's main heading.
-- **The timer** — `.runner__timer`, `role="timer"`, the visual anchor of the whole screen
+- **The timer** - `.runner__timer`, `role="timer"`, the visual anchor of the whole screen
   (see §3). `font-variant-numeric: tabular-nums` so digits don't jiggle as they tick.
-- **Answered-count progress** — `.runner__progress`, "{answeredCount(state)} of
+- **Answered-count progress** - `.runner__progress`, "{answeredCount(state)} of
   {state.numProblems} answered", `aria-live="polite"`. This is the at-a-glance "how far am
   I" readout. **[EXTENDS]** add a slim, non-color progress affordance (a thin underline bar
   whose width = answered/total) so progress is perceivable pre-attention, not only on read.
 
 **Question area** (`.runner__question`): problem number `<h2>` ("Problem {number}"), then
-the **body** (`.question__body` — KaTeX `display` via `<Tex>` or `<img>` scan), then the
+the **body** (`.question__body` - KaTeX `display` via `<Tex>` or `<img>` scan), then the
 A–E **radiogroup** (`.choices`), then a conditional **Clear answer** link-button.
 
 **Controls** (`.runner__controls`): Previous / Flag / Next / Submit. Submit is visually
 primary (`--color-primary` fill) and pushed to the right with `margin-left: auto`.
 
-### 2.2 Mobile — active phase (< 720px)
+### 2.2 Mobile - active phase (< 720px)
 
 At narrow widths the grid collapses to a single column (`grid-template-columns: 1fr`), and
 today the palette simply stacks **above** the question. That is workable but pushes the
@@ -201,7 +201,7 @@ away.
 Mobile specifics:
 
 - **Header is sticky** (`position: sticky; top: 0`) so the **timer is always visible** while
-  scrolling a long problem — on mobile the clock must never scroll away.
+  scrolling a long problem - on mobile the clock must never scroll away.
 - **Controls become a sticky bottom bar** so Prev/Flag/Next/Submit are reachable without
   scrolling to the end of a tall question. Submit retains primary styling but, on mobile,
   Prev/Next get larger 44×44px minimum hit targets.
@@ -211,11 +211,11 @@ Mobile specifics:
 
 ### 2.3 Phase layouts (submitting / review)
 
-- **`submitting`** — the active layout stays mounted but **frozen** (`frozen = state.phase
+- **`submitting`** - the active layout stays mounted but **frozen** (`frozen = state.phase
   !== 'active'`): radiogroup `disabled`, Flag/Submit disabled, Submit label reads
   "Submitting…". **[EXTENDS]** overlay a calm, non-blocking "Submitting your answers…"
   status with a spinner so the freeze is explained, not mysterious.
-- **`review`** — `RunnerInner` returns `<ExamReview result={result} />`, a full-width page
+- **`review`** - `RunnerInner` returns `<ExamReview result={result} />`, a full-width page
   (no palette, no timer). See §6.
 
 ---
@@ -223,11 +223,11 @@ Mobile specifics:
 ## 3. The Timer
 
 The timer is the single most important pixel on the screen. It is also the easiest thing to
-get wrong — a timer that drifts, pauses, or surprises the student destroys trust. The
+get wrong - a timer that drifts, pauses, or surprises the student destroys trust. The
 behavioral contract is already correct in `useCountdown`; this section specs the **visual
 and announcement** layer on top of it.
 
-### 3.1 Behavioral contract (pinned to `useCountdown`) — [MATCHES]
+### 3.1 Behavioral contract (pinned to `useCountdown`) - [MATCHES]
 
 - **Absolute deadline.** `deadline = startedAtMs + durationSec * 1000`. Every tick recomputes
   `remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000))`. **[RISK note]** the
@@ -242,7 +242,7 @@ and announcement** layer on top of it.
   `if (state.phase !== 'active') return` guard, auto-submit cannot double up with a manual
   submit.
 
-### 3.2 Format — [MATCHES] `formatDuration`
+### 3.2 Format - [MATCHES] `formatDuration`
 
 `formatDuration(totalSeconds)` renders `M:SS` under an hour and `H:MM:SS` at/over an hour.
 AMC durations make both real: AMC 8 (40 min) and AMC 10/12 (75 min) both start as
@@ -257,7 +257,7 @@ the transition so layout never shifts.
   weight (current `.runner__timer`). No border, no icon chrome beyond an optional small clock
   glyph, no animation. It reads like a clock on a wall.
 
-### 3.4 Escalating urgency — shape/text/ARIA, not color alone
+### 3.4 Escalating urgency - shape/text/ARIA, not color alone
 
 Urgency is conveyed **redundantly** (icon/shape + text label + ARIA), never by color alone,
 satisfying WCAG 1.4.1 (Use of Color). Three tiers, thresholds chosen to be meaningful for a
@@ -266,7 +266,7 @@ satisfying WCAG 1.4.1 (Use of Color). Three tiers, thresholds chosen to be meani
 | Tier | Threshold (`remaining`) | Visual treatment | Text/shape | ARIA / announce |
 |---|---|---|---|---|
 | **Normal** | `> 300` (more than 5:00) | `--color-fg`, plain | clock glyph `⏱`, no badge | label only; no live announce |
-| **Caution** | `≤ 300` and `> 60` (5:00–1:01) | `--color-warn` (#9a5b00) text + a subtle outlined "pill" around the timer; a small "5 min" milestone marker | append "— 5 minutes left" at the threshold crossing | one polite announcement at the 5:00 crossing |
+| **Caution** | `≤ 300` and `> 60` (5:00–1:01) | `--color-warn` (#9a5b00) text + a subtle outlined "pill" around the timer; a small "5 min" milestone marker | append "- 5 minutes left" at the threshold crossing | one polite announcement at the 5:00 crossing |
 | **Warning** | `≤ 60` (final minute) | `--color-error` (#b00020) text, **bordered** timer chip (border, not just color), `font-weight: 800` | a `▲` warning glyph + visible "1 min" badge | one assertive announcement at 1:00; then polite at 30s/10s (see §3.5) |
 
 Notes:
@@ -278,16 +278,16 @@ Notes:
   gentle one-shot scale "tick" at the 1:00 crossing is allowed; under reduced-motion it is
   suppressed entirely (§8.5). Anxiety reduction beats spectacle.
 - Compute the tier from `remaining` in `RunnerInner` (it already has `remaining` from
-  `useCountdown`); pass it to the timer element. This is purely presentational — **it never
+  `useCountdown`); pass it to the timer element. This is purely presentational - **it never
   changes the deadline or the fire-once behavior**.
 
 ### 3.5 The `aria-live` cadence (do NOT announce every second)
 
-Today the timer is `aria-live="off"` (correct — a per-second live region would flood a screen
+Today the timer is `aria-live="off"` (correct - a per-second live region would flood a screen
 reader and make the page unusable). But silence all the way to zero is its own hazard: a
 non-sighted student deserves the same "time is running out" cues a sighted one gets from the
 red chip. **[EXTENDS]** introduce a **separate, visually-hidden polite live region** that
-announces on a sparse, milestone schedule — the visible `role="timer"` stays `aria-live="off"`.
+announces on a sparse, milestone schedule - the visible `role="timer"` stays `aria-live="off"`.
 
 Proposed announcement schedule (fire each **once**, on the second it crosses the threshold):
 
@@ -312,7 +312,7 @@ experience must be **unambiguous and non-punitive**:
 
 1. The timer reads `0:00` and shows the warning treatment (red, bordered, `▲`).
 2. The live region announces "Time is up. Submitting your answers." (assertive).
-3. **No confirmation dialog** — time is up; asking "are you sure?" would be cruel and could
+3. **No confirmation dialog** - time is up; asking "are you sure?" would be cruel and could
    race the deadline. The auto path goes straight to `submitting`.
 4. The radiogroup and controls are already frozen; **[EXTENDS]** show the same "Submitting
    your answers…" overlay as the manual path so the transition is explained.
@@ -328,7 +328,7 @@ experience must be **unambiguous and non-punitive**:
 
 ## 4. Answering & Navigation
 
-### 4.1 Selecting and clearing a choice — [MATCHES] `Question.tsx`
+### 4.1 Selecting and clearing a choice - [MATCHES] `Question.tsx`
 
 - The five choices are a real **`role="radiogroup"`** (`.choices` fieldset), one
   `<input type="radio">` per choice, `name="problem-{number}"`, `checked` bound to
@@ -343,10 +343,10 @@ experience must be **unambiguous and non-punitive**:
   (`answers[index] = null`). This matters because **blank ≠ wrong** in `sixpoint` scoring
   (blank earns 1.5; wrong earns 0), so the student needs a first-class way to *un-answer* a
   guess. **[EXTENDS]** the visual selected-state on the chosen `.choice` should be stronger
-  than the OS radio dot — e.g. a left accent bar + `--color-surface` fill on the selected
-  label — so the current answer is unmistakable at a glance.
+  than the OS radio dot - e.g. a left accent bar + `--color-surface` fill on the selected
+  label - so the current answer is unmistakable at a glance.
 
-### 4.2 Flagging — [MATCHES] reducer + controls
+### 4.2 Flagging - [MATCHES] reducer + controls
 
 - The **Flag** control toggles `{ type: 'toggleFlag', index: state.current }`; the button
   carries `aria-pressed={state.flags[current]}` and swaps its label between "Flag" / "Unflag".
@@ -355,28 +355,28 @@ experience must be **unambiguous and non-punitive**:
   a warning-colored border (`.palette__cell--flagged`), so flagging is visible globally, not
   just on the current question.
 
-### 4.3 Moving between questions — [MATCHES]
+### 4.3 Moving between questions - [MATCHES]
 
 - **Prev / Next** dispatch `prev` / `next`; the reducer `clampIndex`-es so they're safe at the
   ends, and the buttons are `disabled` at index 0 and `numProblems - 1` respectively.
-- **Palette jump** — clicking a `.palette__cell` dispatches `{ type: 'goto', index }`; the
+- **Palette jump** - clicking a `.palette__cell` dispatches `{ type: 'goto', index }`; the
   reducer clamps. The current cell shows `aria-current="true"` and a primary outline
   (`.palette__cell--current`).
 - **Navigation is always free.** There is no forced linear order and no "you must answer to
-  proceed" gate — a student can skip, flag, and return. This is correct for a real contest and
+  proceed" gate - a student can skip, flag, and return. This is correct for a real contest and
   must be preserved.
 - **[EXTENDS]** after selecting a choice, do **not** auto-advance. On a timed math test the
   student often wants to re-read or change an answer; auto-advance is a classic source of
   "it jumped and I lost my place" complaints. Advancing stays an explicit Next / palette
   action.
 
-### 4.4 Keyboard model (full spec) — [EXTENDS] (none of this exists yet)
+### 4.4 Keyboard model (full spec) - [EXTENDS] (none of this exists yet)
 
 There is **no keyboard shortcut layer today** beyond native radio/button behavior. For a
 power surface like a timed test, keyboard fluency is a major speed and accessibility win.
 Bindings below are chosen to avoid clobbering browser defaults and to be discoverable.
 
-**Within the choices (native radiogroup — already works):**
+**Within the choices (native radiogroup - already works):**
 
 | Key | Action |
 |---|---|
@@ -386,7 +386,7 @@ Bindings below are chosen to avoid clobbering browser defaults and to be discove
 | `Tab` | Move focus out of the radiogroup to the next control |
 
 > Because `↑↓←→` are owned by the radiogroup when focus is inside it, **question navigation
-> must not also use bare arrows** — that would conflict. Hence the letter/number bindings below.
+> must not also use bare arrows** - that would conflict. Hence the letter/number bindings below.
 
 **Global runner shortcuts (active phase, when focus is not in a text field):**
 
@@ -411,11 +411,11 @@ Rules:
 - Letter keys for answering must use `event.key` case-insensitively and ignore when modifier
   keys (`Ctrl`/`Meta`/`Alt`) are held, so browser shortcuts (Ctrl+F, etc.) are untouched.
 
-**Palette keyboard model — roving tabindex** (the palette is a `<nav>` of buttons today):
+**Palette keyboard model - roving tabindex** (the palette is a `<nav>` of buttons today):
 
 - The palette grid implements **roving tabindex**: exactly one cell has `tabindex="0"` (the
   current problem), the rest `tabindex="-1"`. Arrow keys move focus within the grid (`←/→`
-  by one, `↑/↓` by a row of 5 — matching the `repeat(5, 1fr)` layout), `Home`/`End` to first/
+  by one, `↑/↓` by a row of 5 - matching the `repeat(5, 1fr)` layout), `Home`/`End` to first/
   last, `Enter`/`Space` to jump (`goto`). This makes the navigator a single Tab stop instead
   of 25, which is essential for keyboard and screen-reader users on a 25-cell grid.
 
@@ -428,10 +428,10 @@ is the boundary where the answer key appears. The flow maps directly onto `Runne
 (`active` → `submitting` → `review`) and the single `triggerSubmit` entry point in
 `RunnerInner`.
 
-### 5.1 Manual submit — confirm first — [EXTENDS]
+### 5.1 Manual submit - confirm first - [EXTENDS]
 
 Today the **Submit** button calls `triggerSubmit` **immediately** with no confirmation. For a
-timed test where Submit ends the attempt, this is a footgun — a misclick (or a hurried student
+timed test where Submit ends the attempt, this is a footgun - a misclick (or a hurried student
 who meant to press Next) ends everything. **[EXTENDS]** add a **confirmation dialog** on the
 *manual* path only.
 
@@ -449,7 +449,7 @@ The dialog summarizes the consequences using reducer-derived counts (cheap to co
 │  • 11 unanswered                               │
 │  • 3 flagged for review                        │
 │                                                │
-│  Submitting is final — you can't change        │
+│  Submitting is final - you can't change        │
 │  answers afterward.                            │
 │                                                │
 │  Time remaining: 1:04:18                       │
@@ -463,47 +463,47 @@ The dialog summarizes the consequences using reducer-derived counts (cheap to co
 - **Submit now** calls `triggerSubmit`; **Keep working** / `Esc` / backdrop dismisses and
   returns focus to the Submit button.
 - When `unanswered > 0` the copy is slightly emphasized ("11 unanswered") so the student
-  doesn't submit a half-finished paper by accident — but submitting is never *blocked*.
+  doesn't submit a half-finished paper by accident - but submitting is never *blocked*.
 - This dialog exists **only** on the manual path. The auto-submit path (§3.6, §5.2) bypasses
   it entirely.
 
-### 5.2 Auto-submit path — no confirmation — [MATCHES] mechanism
+### 5.2 Auto-submit path - no confirmation - [MATCHES] mechanism
 
 When the deadline passes, `useCountdown` → `onExpire` → `triggerSubmit` runs once. There is
 **no dialog** (time is up; consent is moot). The reducer flips `active → submitting`, the
 mutation posts, and on success `submitted → review`. This is the existing wiring; the spec
 only adds the "Submitting…" overlay and the §7.2 failure safety net.
 
-### 5.3 Guarding against double-submit — [MATCHES]
+### 5.3 Guarding against double-submit - [MATCHES]
 
 Three independent guards already make double-submit impossible; the spec pins all three:
 
-1. **Page guard** — `triggerSubmit` returns early if `state.phase !== 'active'`.
-2. **Reducer guard** — `startSubmit` is idempotent: it only transitions *out of* `active`
+1. **Page guard** - `triggerSubmit` returns early if `state.phase !== 'active'`.
+2. **Reducer guard** - `startSubmit` is idempotent: it only transitions *out of* `active`
    once (`state.phase === 'active' ? … : state`).
-3. **Disabled controls** — once `frozen`, the Submit button is `disabled` and its label is
+3. **Disabled controls** - once `frozen`, the Submit button is `disabled` and its label is
    "Submitting…", so it can't be clicked again.
 
 Together these mean the **timer firing and the button being pressed at nearly the same
 instant** still results in exactly one POST. (Documented in `RunnerInner`'s header comment;
-this spec elevates it to a tested invariant — see §9.)
+this spec elevates it to a tested invariant - see §9.)
 
-### 5.3a The submit payload — [MATCHES] `ExamSubmission`
+### 5.3a The submit payload - [MATCHES] `ExamSubmission`
 
 `submitExam(exam.id, { answers, flags, time_used_sec })`. `RunnerState.answers` /
 `flags` are already the exact `ExamSubmission` shape (the reducer was built to avoid
 translation), and `time_used_sec = round((Date.now() - startedAtRef.current) / 1000)`. No
 mapping layer is needed; the spec preserves this 1:1 alignment.
 
-### 5.4 Handling the server's "already submitted" (409) — [MATCHES] intent
+### 5.4 Handling the server's "already submitted" (409) - [MATCHES] intent
 
 The mutation's `onError` checks `error instanceof ApiError && error.status === 409` and, if so,
-dispatches `submitted` — treating the conflict as "this attempt already exists". **[EXTENDS,
+dispatches `submitted` - treating the conflict as "this attempt already exists". **[EXTENDS,
 small]** today a 409 transitions to `review` but `result` may be `null`, and `RunnerInner`'s
-review branch requires `result !== null` — so a 409 with no body would leave a frozen active
+review branch requires `result !== null` - so a 409 with no body would leave a frozen active
 screen. The spec requires: on 409, **fetch/return the existing `ExamResultResponse`** (the
 endpoint should return the prior result body on conflict, or the client refetches the attempt)
-and only then show review. The user-facing message is calm: "This exam was already submitted —
+and only then show review. The user-facing message is calm: "This exam was already submitted:
 here's your result," never an error.
 
 > **Note for the API:** the submit endpoint currently documents only 200/422 in
@@ -537,7 +537,7 @@ Review (`ExamReview.tsx`, fed `ExamResultResponse`) is the payoff and the **only
 answer key appears. It must feel like getting a graded paper back: clear headline, honest
 breakdown, and a per-problem table you can actually scan.
 
-### 6.1 Score breakdown — [MATCHES] with framing additions
+### 6.1 Score breakdown - [MATCHES] with framing additions
 
 Current `ExamReview` renders a `<dl class="review__score">`: **Score** (`score / max_score`),
 **Correct**, **Wrong**, **Blank**. Keep all four. **[EXTENDS]** make the framing
@@ -555,7 +555,7 @@ does, so `RunnerInner` can pass it to `ExamReview`):
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
-│  Your result — AMC 10 2023 A                                    │
+│  Your result - AMC 10 2023 A                                    │
 │                                                                  │
 │   Score          Correct      Wrong       Blank                  │
 │   103.5 / 138      16            5           4                    │
@@ -565,18 +565,18 @@ does, so `RunnerInner` can pass it to `ExamReview`):
 └────────────────────────────────────────────────────────────────┘
 ```
 
-### 6.2 Per-problem table — [MATCHES] columns, [EXTENDS] scannability
+### 6.2 Per-problem table - [MATCHES] columns, [EXTENDS] scannability
 
 Current `<table class="review__table">` maps `result.review` (each `ReviewItemResponse`):
-**# (`item.n`)**, **Your answer (`item.your ?? '—'`)**, **Correct (`item.correct`)**,
+**# (`item.n`)**, **Your answer (`item.your ?? '-'`)**, **Correct (`item.correct`)**,
 **Outcome** (`outcome(item.voided, item.ok)` → "Void" / "Correct" / "Incorrect"). Keep these
 columns; the field-by-field source of truth is:
 
 | Column | Source field | Notes |
 |---|---|---|
 | `#` | `item.n` | 1-based problem number |
-| Your answer | `item.your` | `null` → render `—` (a true blank) |
-| Correct | `item.correct` | **The answer key — only appears here** |
+| Your answer | `item.your` | `null` → render `"-"` (a true blank) |
+| Correct | `item.correct` | **The answer key - only appears here** |
 | Outcome | `item.ok`, `item.voided` | voided wins: "Void"; else `ok` → "Correct"/"Incorrect" |
 
 Making **25 rows scannable** (these papers are always 25 problems):
@@ -586,15 +586,15 @@ Making **25 rows scannable** (these papers are always 25 problems):
 - **Quiet zebra striping** and a **sticky `<thead>`** so the header stays while scrolling 25
   rows.
 - **Visually distinguish wrong-vs-blank**: a wrong answer (`your` set, `ok=false`) reads
-  differently from a blank (`your` null) — the blank row shows `—` and a muted "Blank"
+  differently from a blank (`your` null) - the blank row shows `"-"` and a muted "Blank"
   sub-label on Outcome, because under `sixpoint` they have very different point values and the
   student's review intent differs ("I missed this" vs. "I skipped this").
 - **Right-align** the short answer columns (single letters) and keep `#` narrow so the eye
   tracks rows quickly.
-- **[EXTENDS] filter chips** — "All / Incorrect / Flagged / Blank" — let a student jump
+- **[EXTENDS] filter chips** - "All / Incorrect / Flagged / Blank" - let a student jump
   straight to what they got wrong on a 25-row table. (Flagged requires carrying the
   submission's `flags` into review, which `RunnerInner` already holds in `state.flags`.)
-- **[EXTENDS] solution link out** — link each row to the AoPS Wiki solution. **This does not
+- **[EXTENDS] solution link out** - link each row to the AoPS Wiki solution. **This does not
   exist today**: `ReviewItemResponse` carries no per-problem URL, and `ExamResultResponse` no
   exam-level link. The server *does* store `Exam.source_url` (the AoPS Wiki page, per
   tech-spec) but it is **not exposed** in any response. Recommendation: add an optional
@@ -606,7 +606,7 @@ Making **25 rows scannable** (these papers are always 25 problems):
 ### 6.3 Review affordances
 
 - A **"Back to dashboard / history"** action (the submit already invalidated the progress
-  query, so history is fresh). Review is terminal for the attempt — there is no "resume".
+  query, so history is fresh). Review is terminal for the attempt - there is no "resume".
 - The section is `aria-live="polite"` (already) so its arrival is announced; pair with the
   focus move in §8.3.
 
@@ -614,13 +614,13 @@ Making **25 rows scannable** (these papers are always 25 problems):
 
 ## 7. Edge Cases & States
 
-### 7.1 Refresh / return mid-exam — [RISK — top priority]
+### 7.1 Refresh / return mid-exam - [RISK - top priority]
 
 **Current behavior:** state is `useReducer(runnerReducer, exam.num_problems, initRunner)` and
 `startedAtRef = useRef(Date.now())`, both **in memory only**. A page refresh, accidental
 back-navigation, or tab crash **wipes every answer and flag and restarts the clock from full
 duration**. This directly threatens goals #3 ("never lose work") and #4 ("the timer is
-sacred" — a refresh effectively *grants more time*, which is also an integrity problem).
+sacred" - a refresh effectively *grants more time*, which is also an integrity problem).
 
 **Recommended stance (ranked):**
 
@@ -635,14 +635,14 @@ sacred" — a refresh effectively *grants more time*, which is also an integrity
    `startedAt`, so the clock keeps counting down rather than resetting). Clear on submit.
    Cheaper, no API change, but trusts the client clock.
 3. **Explicit warning (floor).** At minimum, a `beforeunload` guard ("You have an exam in
-   progress — leaving will lose your answers") so refresh/close isn't silent. This is a
+   progress - leaving will lose your answers") so refresh/close isn't silent. This is a
    stopgap, not a fix.
 
 This spec **recommends option 1 as the target and option 2 as the immediate mitigation**, and
 calls the current "starts fresh" behavior out as the single biggest UX/integrity gap in the
 runner.
 
-### 7.2 Network failure on submit — [EXTENDS]
+### 7.2 Network failure on submit - [EXTENDS]
 
 The mutation handles 409 but **not** generic failure: on a 5xx/timeout/offline, `onError`
 falls through, the page stays `active`-but-the-attempt-may-or-may-not-have-landed, and the
@@ -652,7 +652,7 @@ the buzzer could lose the whole attempt).
 **Recommended retry UX:**
 
 - On non-409 error, **stay in a recoverable state**: show a non-dismissable banner "Couldn't
-  submit — check your connection" with a **Retry** button that re-fires `submitMutation.mutate()`.
+  submit - check your connection" with a **Retry** button that re-fires `submitMutation.mutate()`.
   Because the POST is idempotent server-side per attempt (a repeat returns 409 → existing
   result), retry is safe.
 - **Do not** flip out of `submitting` into a dead end; either land on `review` (success/409) or
@@ -660,19 +660,19 @@ the buzzer could lose the whole attempt).
   times with backoff before showing the manual Retry, so a transient blip self-heals.
 - Preserve answers in memory (and, with §7.1 option 2, in storage) across retries so the
   student never re-enters anything.
-- If the failure is **401** (session expired), route to login and, on return, resubmit — never
+- If the failure is **401** (session expired), route to login and, on return, resubmit - never
   silently drop the attempt.
 
-### 7.3 Very long equations — [EXTENDS]
+### 7.3 Very long equations - [EXTENDS]
 
 KaTeX display blocks (`<Tex display>`) can overflow horizontally (long algebraic expressions,
 big matrices). Spec: the `.question__body` allows **horizontal scroll within the block**
 (`overflow-x: auto`) rather than letting a wide equation blow out the page layout or shove the
 choices off-screen. Choices (inline `<Tex>`) wrap normally. Malformed TeX already degrades
-gracefully — `throwOnError: false` renders a visible error string instead of crashing the
+gracefully - `throwOnError: false` renders a visible error string instead of crashing the
 runner mid-exam (the `Tex.tsx` rationale), which the spec keeps.
 
-### 7.4 Image-mode papers (AMC 10 scans) — [MATCHES] with polish
+### 7.4 Image-mode papers (AMC 10 scans) - [MATCHES] with polish
 
 When `render_mode === 'image'`, `Question` renders `<img src={image_path}
 alt="Problem {number}">` and **suppresses choice bodies**, showing only A–E letters (the scan
@@ -681,20 +681,20 @@ contains the options). Spec additions:
 - The image must be **responsive** (`max-width: 100%`, never overflow) and ideally
   **zoomable** (tap/click to enlarge, or pinch on mobile) since scanned text can be small.
 - **Loading & failure states**: a placeholder while the scan loads and a clear "Couldn't load
-  this problem image" with a retry if `image_path` 404s — a missing image must not leave a
+  this problem image" with a retry if `image_path` 404s - a missing image must not leave a
   blank, unanswerable question with the clock running.
 - The radiogroup remains fully functional and keyboard-navigable on image papers (it already
   is), so a scan that fails to load still lets the student answer if they can read it elsewhere.
 
-### 7.5 All-blank submission — [MATCHES] allowed, [EXTENDS] gentle nudge
+### 7.5 All-blank submission - [MATCHES] allowed, [EXTENDS] gentle nudge
 
 `ExamSubmission.answers` may be all `null`; the server grades it (all blank → for `sixpoint`,
-`blank * 1.5`; for `count`, 0). Nothing blocks it, and nothing should — a student may run out
+`blank * 1.5`; for `count`, 0). Nothing blocks it, and nothing should - a student may run out
 of time. The manual confirm dialog (§5.1) naturally surfaces "0 of 25 answered" so an
 *accidental* empty submit is caught, while the **auto** path submits whatever exists without
 ceremony.
 
-### 7.6 Voided problems in palette + review — [MATCHES]
+### 7.6 Voided problems in palette + review - [MATCHES]
 
 A problem number in `ExamDetail.voided` is excluded from scoring (tech-spec). UX treatment:
 
@@ -703,11 +703,11 @@ A problem number in `ExamDetail.voided` is excluded from scoring (tech-spec). UX
   to "voided"). The student can still navigate to it. **[EXTENDS]** add a short tooltip/legend
   note "This problem was voided and doesn't count" so the strike-through isn't a mystery.
 - **Question**: a voided problem should show a calm inline banner "This problem has been voided
-  — it won't be scored," while still rendering it (a student may want to attempt it for
+  - it won't be scored," while still rendering it (a student may want to attempt it for
   practice). Whether to disable its radiogroup is a product call; the spec recommends leaving
   it answerable but visually marked, since voiding is a scoring concept, not a content one.
 - **Review**: the row's Outcome is "∅ Void" (`outcome()` checks `voided` first), regardless of
-  `ok`, and it is excluded from the Correct/Wrong/Blank tallies — consistent with the
+  `ok`, and it is excluded from the Correct/Wrong/Blank tallies - consistent with the
   server's scoring.
 
 ### 7.7 State matrix (quick reference)
@@ -720,7 +720,7 @@ A problem number in `ExamDetail.voided` is excluded from scoring (tech-spec). UX
 | Pressed Submit | `active` → confirm | Confirm dialog (manual only) |
 | Submitting | `submitting` | Frozen runner + "Submitting…" overlay |
 | Submit failed (network) | `submitting` | Retry banner (§7.2) |
-| Already submitted (409) | `submitting` → `review` | "Already submitted — here's your result" |
+| Already submitted (409) | `submitting` → `review` | "Already submitted - here's your result" |
 | Graded | `review` | `<ExamReview>`, key revealed |
 | Time expired | `active` → `submitting` → `review` | "Time is up" announce → auto-submit → review |
 
@@ -731,22 +731,22 @@ A problem number in `ExamDetail.voided` is excluded from scoring (tech-spec). UX
 Accessibility is a phase-3 acceptance item ("keyboard navigation and basic a11y pass") and is
 woven through this spec; consolidated here.
 
-### 8.1 Radiogroup semantics — [MATCHES]
+### 8.1 Radiogroup semantics - [MATCHES]
 
 The choices are a native `role="radiogroup"` fieldset of `<input type="radio">` with a group
 `aria-label` ("Answer choices for problem {number}"). Native radios give correct arrow-key
-roving, `checked` state, and announcement for free — the spec **keeps native radios** rather
+roving, `checked` state, and announcement for free - the spec **keeps native radios** rather
 than rebuilding with ARIA, which is the more robust choice. `disabled` on the fieldset (when
 `frozen`) correctly removes them from the tab order during `submitting`/`review`.
 
-### 8.2 `role="timer"` — [MATCHES] + [EXTENDS]
+### 8.2 `role="timer"` - [MATCHES] + [EXTENDS]
 
 The visible timer is `role="timer"` with an `aria-label` ("Time remaining: M:SS") and
 `aria-live="off"` (so it isn't read every second). The §3.5 milestone announcements live in a
-**separate** visually-hidden polite/assertive region — keeping the `role="timer"` element
+**separate** visually-hidden polite/assertive region - keeping the `role="timer"` element
 silent while still giving non-sighted students the urgency cues.
 
-### 8.3 Focus management on phase changes — [EXTENDS]
+### 8.3 Focus management on phase changes - [EXTENDS]
 
 Today, transitioning `active → submitting → review` swaps the whole subtree but does **not**
 move focus, so a keyboard/SR user can be left with focus on a now-unmounted button. Spec:
@@ -759,21 +759,21 @@ move focus, so a keyboard/SR user can be left with focus on a now-unmounted butt
 - On **auto-submit**, the assertive "Time is up" announcement covers the transition; focus
   then follows the review rule.
 
-### 8.4 Announcements — [MATCHES] + [EXTENDS]
+### 8.4 Announcements - [MATCHES] + [EXTENDS]
 
-- Progress line `.runner__progress` is `aria-live="polite"` — answered-count changes are
+- Progress line `.runner__progress` is `aria-live="polite"` - answered-count changes are
   announced (already). Keep it, but ensure updates are not so chatty that rapid A→B→C changes
   spam the SR (debounce the announcement, not the state).
 - Timer milestones per §3.5.
 - Submit status ("Submitting your answers…", success → review, failure → "Couldn't submit,
   retry available") via a polite region so the student knows what's happening without watching.
 
-### 8.5 Reduced motion — [EXTENDS]
+### 8.5 Reduced motion - [EXTENDS]
 
 There is **no `prefers-reduced-motion` handling today.** Spec: gate every non-essential
 animation (the optional 1:00 timer "tick", any sheet slide-in, zebra/hover transitions) behind
 `@media (prefers-reduced-motion: no-preference)`. Under reduced motion, urgency is conveyed
-purely by the static shape/color/text changes (§3.4) and announcements — never by motion. This
+purely by the static shape/color/text changes (§3.4) and announcements - never by motion. This
 matters doubly on an anxiety-sensitive, timed surface.
 
 ### 8.6 Contrast & color independence
@@ -792,15 +792,15 @@ M ≈ 1–2 days, L > 2 days incl. API work).
 
 | # | Recommendation | Why it matters | Effort | Touches |
 |---|---|---|---|---|
-| **1** | **Persist in-progress attempt (survive refresh) + anchor timer on server `started_at`** | Today a refresh **wipes all answers and resets the clock** — the single biggest violation of "never lose work" *and* an integrity hole ("refresh = free time"). §7.1 option 1 is the real fix; option 2 (localStorage mirror) is the fast mitigation. | L (server) / M (localStorage interim) | `RunnerInner`, `useCountdown` anchor, attempt API |
+| **1** | **Persist in-progress attempt (survive refresh) + anchor timer on server `started_at`** | Today a refresh **wipes all answers and resets the clock** - the single biggest violation of "never lose work" *and* an integrity hole ("refresh = free time"). §7.1 option 1 is the real fix; option 2 (localStorage mirror) is the fast mitigation. | L (server) / M (localStorage interim) | `RunnerInner`, `useCountdown` anchor, attempt API |
 | **2** | **Confirm-before-submit dialog (manual path only)** | Submit is irreversible and ends the attempt; one misclick loses everything. A dialog summarizing unanswered/flagged counts (from `answeredCount` + `flags`) is cheap insurance. Auto-submit deliberately skips it. | S–M | new dialog, `triggerSubmit` |
 | **3** | **Network-failure retry on submit (esp. auto path)** | Only 409 is handled now; a blip at the buzzer can lose the whole attempt with no feedback. A Retry banner over a frozen `submitting` state, plus auto-retry-with-backoff on the timer path, closes a data-loss gap. | M | mutation `onError`, `RunnerInner` |
 | **4** | **Make a 409 actually show the prior result** | The 409 branch dispatches `submitted` but `result` stays `null`, and the review branch needs `result !== null` → dead screen. Server should return the existing `ExamResultResponse` on repeat; client renders it. | S (client) + API | mutation, submit endpoint |
-| **5** | **Timer urgency tiers + milestone aria-live (5-min / 1-min)** | Calm-by-default with caution@5:00 and warning@1:00 via **shape+text+ARIA** (not color), plus a sparse announcement schedule, gives every student (incl. SR users) honest "time's running out" cues without per-second chatter. Purely presentational — never changes the deadline. | M | `.runner__timer` styles, hidden live region, `RunnerInner` |
+| **5** | **Timer urgency tiers + milestone aria-live (5-min / 1-min)** | Calm-by-default with caution@5:00 and warning@1:00 via **shape+text+ARIA** (not color), plus a sparse announcement schedule, gives every student (incl. SR users) honest "time's running out" cues without per-second chatter. Purely presentational - never changes the deadline. | M | `.runner__timer` styles, hidden live region, `RunnerInner` |
 | **6** | **Keyboard shortcut layer + roving-tabindex palette** | None exists today. Letter keys to answer, `N/P` to navigate, `F` to flag, and a single-tab-stop palette make a power surface fast for keyboard and SR users and collapse 25 tab stops to one. | M | new key handler, `Palette` tabindex |
 | **7** | **Mobile palette → drawer/sheet + sticky timer/controls** | On mobile the palette currently shoves the question below the fold and the timer can scroll away. A sheet + sticky header/footer keeps the clock visible and the question the hero. | M | layout, `Palette` sheet variant |
 | **8** | **Review scannability: icons+words on Outcome, sticky header, wrong-vs-blank distinction, filters** | A 25-row table is the payoff; redundant-encoded outcomes (✓/✗/∅), a sticky `<thead>`, and an "Incorrect/Flagged/Blank" filter turn it from a wall of rows into something a student learns from. | M | `ExamReview`, styles |
-| **9** | **Surface solution links in review** | Students want to *learn* from misses. `Exam.source_url` exists server-side but isn't exposed; add `solution_url`/`source_url` to the result and render "Solution ↗" per row. Omit until the field exists — don't fabricate. | M (API + client) | `ReviewItemResponse`/`ExamResultResponse`, `ExamReview` |
+| **9** | **Surface solution links in review** | Students want to *learn* from misses. `Exam.source_url` exists server-side but isn't exposed; add `solution_url`/`source_url` to the result and render "Solution ↗" per row. Omit until the field exists - don't fabricate. | M (API + client) | `ReviewItemResponse`/`ExamResultResponse`, `ExamReview` |
 | **10** | **`prefers-reduced-motion` gating + focus management on phase change** | No reduced-motion handling today, and phase swaps don't move focus (SR/keyboard users get stranded). Gate animations; move focus to the review heading; trap/return focus in dialogs. | S–M | global CSS, `RunnerInner`, dialogs |
 | **11** | **Stronger selected-choice visual + progress bar in header** | The OS radio dot is a weak "this is my answer" signal under time pressure; a left accent + fill and a thin answered-progress bar make current state pre-attentive. | S | `Question`/`.choice` styles, header |
 
@@ -812,7 +812,7 @@ polish that compounds well with the phase-3 a11y/mobile pass already on the road
 
 ---
 
-## Appendix A — Symbol & field cross-reference
+## Appendix A - Symbol & field cross-reference
 
 | This spec calls it | Code / schema symbol | File |
 |---|---|---|
@@ -828,14 +828,14 @@ polish that compounds well with the phase-3 a11y/mobile pass already on the road
 | API: submission | `ExamSubmission` (`answers`, `flags`, `time_used_sec`) | `docs/api/openapi.json` |
 | API: graded result | `ExamResultResponse`, `ReviewItemResponse` (`n`, `your`, `correct`, `ok`, `voided`) | `docs/api/openapi.json` |
 
-## Appendix B — Spec-vs-code status legend
+## Appendix B - Spec-vs-code status legend
 
 - **[MATCHES]** the current implementation: §1.4/§3.1/§3.2 (timer contract & format),
   §4.1–4.3 (answer/flag/navigate), §5.2–5.4 (auto-submit, double-submit guards, 409 intent,
   payload), §6.1–6.2 (score breakdown + table columns), §7.4/§7.6 (image mode, voided).
 - **[EXTENDS]** beyond current code: §2.2 (mobile sheet), §3.4–3.6 (urgency tiers, milestone
-  announcements, submit overlay), §4.4 (keyboard model — none today), §5.1 (confirm dialog),
-  §6.2 (filters, solution links — field doesn't exist), §7.1–7.3 (persistence, retry, equation
-  overflow), §8.3/§8.5 (focus mgmt, reduced motion — none today).
+  announcements, submit overlay), §4.4 (keyboard model - none today), §5.1 (confirm dialog),
+  §6.2 (filters, solution links - field doesn't exist), §7.1–7.3 (persistence, retry, equation
+  overflow), §8.3/§8.5 (focus mgmt, reduced motion - none today).
 - **[RISK]** current behavior to change: §7.1 refresh wipes state + resets clock (top issue);
   §5.4 a bare 409 can dead-end review; §7.2 unhandled non-409 submit failure.

@@ -25,7 +25,7 @@ export function ExamReview({ result }: { result: ExamResultResponse }) {
     key: String(item.n),
     cells: {
       n: item.n,
-      your: item.your ?? '—',
+      your: item.your ?? '-',
       correct: item.correct,
       outcome: outcome(item.voided, item.ok),
     },

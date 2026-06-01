@@ -17,7 +17,7 @@ describe('Tex', () => {
   })
 
   it('does not throw on malformed LaTeX (renders a visible error instead)', () => {
-    // throwOnError: false — a bad problem must not crash the runner mid-exam.
+    // throwOnError: false - a bad problem must not crash the runner mid-exam.
     expect(() => render(<Tex tex="\frac{1}{" />)).not.toThrow()
     expect(screen.getByTestId('math')).toBeInTheDocument()
   })

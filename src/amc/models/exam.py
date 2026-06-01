@@ -2,7 +2,7 @@
 
 An :class:`Exam` is one AMC paper; it owns an ordered set of :class:`Problem`
 rows. ``Problem.correct_answer`` is the answer key and is *never* serialized in a
-pre-submission API response — see ``amc.schemas.exam`` for the read models that
+pre-submission API response; see ``amc.schemas.exam`` for the read models that
 enforce this structurally.
 """
 

@@ -1,4 +1,4 @@
-/* Question palette — token-driven cell states (design-system.md §2).
+/* Question palette - token-driven cell states (design-system.md §2).
    Status is conveyed by fill/border/strike + the aria-label, never colour alone. */
 .palette {
   /* Override the local text colour so the cells read against tinted fills. */

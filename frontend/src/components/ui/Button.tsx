@@ -1,7 +1,7 @@
 /**
  * Button primitive (design prototype).
  *
- * The single styled action element — replaces raw `<button>` + the global
+ * The single styled action element - replaces raw `<button>` + the global
  * `button {}` rule. Always a real `<button>` (never a clickable div). Variants
  * map to local CSS-Module classes; ARIA state (`aria-busy`) drives the loading
  * presentation so visual and accessible state can't drift.

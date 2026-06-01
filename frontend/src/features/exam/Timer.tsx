@@ -1,7 +1,7 @@
 /**
  * Exam countdown chip.
  *
- * The visible time is a silent `role="timer"` (`aria-live="off"`) — announcing
+ * The visible time is a silent `role="timer"` (`aria-live="off"`) - announcing
  * every second would flood a screen reader. Instead a separate polite region
  * announces milestones as they're crossed (10/5/1 min, 30 s, time's up). The
  * urgency tier is shown by colour AND a text caption so it never rests on
@@ -23,7 +23,7 @@ const MILESTONES: Milestone[] = [
   { at: 300, message: '5 minutes remaining' },
   { at: 60, message: '1 minute remaining' },
   { at: 30, message: '30 seconds remaining' },
-  { at: 0, message: "Time's up — submitting your test." },
+  { at: 0, message: "Time's up - submitting your test." },
 ]
 
 function tier(remaining: number): 'normal' | 'caution' | 'warning' {

@@ -70,7 +70,7 @@ export function Dialog({ open, onClose, title, placement = 'center', children }:
 
   return (
     // Backdrop click-to-dismiss is a mouse convenience; the keyboard equivalent
-    // (Esc) is handled on the dialog, and focus is trapped inside it — so the
+    // (Esc) is handled on the dialog, and focus is trapped inside it - so the
     // static-interaction lint warning is a false positive here.
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div

@@ -1,4 +1,4 @@
-/** UI primitives barrel — token-driven, library-free components. */
+/** UI primitives barrel - token-driven, library-free components. */
 export { Alert, type AlertProps, type AlertSeverity } from './Alert'
 export { Badge, type BadgeProps, type BadgeTone } from './Badge'
 export { Button, type ButtonProps } from './Button'

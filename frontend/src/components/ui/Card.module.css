@@ -1,4 +1,4 @@
-/* Card — a bordered content container with consistent padding and radius. */
+/* Card - a bordered content container with consistent padding and radius. */
 .card {
   padding: var(--space-3) var(--space-4);
   background: var(--color-bg);

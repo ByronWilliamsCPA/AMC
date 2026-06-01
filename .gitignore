@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-# Python build artifacts — anchored to the repo root so they don't collide with
+# Python build artifacts - anchored to the repo root so they don't collide with
 # source dirs of the same name elsewhere (e.g. frontend/src/lib, a JS module dir).
 /build/
 /develop-eggs/
