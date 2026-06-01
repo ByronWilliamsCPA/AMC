@@ -131,3 +131,65 @@ path = [
 ]
 SPDX-License-Identifier = "CC0-1.0"
 SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Frontend project files (build config, static assets, lock files) - CC0-1.0
+[[annotations]]
+path = ["frontend/**"]
+SPDX-License-Identifier = "CC0-1.0"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Frontend source code - MIT (overrides the broad frontend/** above)
+[[annotations]]
+path = ["frontend/src/**"]
+SPDX-License-Identifier = "MIT"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Content documentation files - CC-BY-4.0
+[[annotations]]
+path = ["content/*.md", "content/**/*.md"]
+SPDX-License-Identifier = "CC-BY-4.0"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Content data files - ODbL-1.0
+[[annotations]]
+path = ["content/*.json", "content/**/*.json"]
+SPDX-License-Identifier = "ODbL-1.0"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Miscellaneous config dotfiles and project files not covered above - CC0-1.0
+[[annotations]]
+path = [
+    ".dockerignore",
+    ".editorconfig",
+    ".env.example",
+    ".markdownlint.json",
+    ".markdownlintignore",
+    ".mutmut_config",
+    ".prettierrc",
+    ".secrets.baseline",
+    ".shellcheckrc",
+    ".yamllint",
+    "alembic.ini",
+    "Dockerfile",
+    "uv.lock",
+    ".claude/settings.local.json.example",
+    ".claude/**/*.py",
+    "*.json",
+    "*.ini",
+    "*.cfg",
+    "codecov.yml",
+]
+SPDX-License-Identifier = "CC0-1.0"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Database migration files - MIT
+[[annotations]]
+path = ["migrations/**"]
+SPDX-License-Identifier = "MIT"
+SPDX-FileCopyrightText = "2025 Byron Williams"
+
+# Documentation in non-docs directories - CC-BY-4.0
+[[annotations]]
+path = ["scripts/*.md", "scripts/**/*.md"]
+SPDX-License-Identifier = "CC-BY-4.0"
+SPDX-FileCopyrightText = "2025 Byron Williams"
