@@ -50,8 +50,14 @@ _OPENAPI_TAGS = [
     {"name": "health", "description": "Liveness/readiness probes (unauthenticated)."},
     {"name": "auth", "description": "Login, logout, registration, and current user."},
     {"name": "invites", "description": "Mint one-time invites (coach/admin only)."},
-    {"name": "catalog", "description": "Exams and diagnostics served without answer keys."},
-    {"name": "attempts", "description": "Submit exams/diagnostics for server-side grading."},
+    {
+        "name": "catalog",
+        "description": "Exams and diagnostics served without answer keys.",
+    },
+    {
+        "name": "attempts",
+        "description": "Submit exams/diagnostics for server-side grading.",
+    },
     {"name": "progress", "description": "History plus the synthesized recommendation."},
 ]
 

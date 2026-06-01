@@ -92,7 +92,7 @@ jobs:
           report_type: test_results
           fail_ci_if_error: false
 
-frontend:
+  frontend:
     name: Frontend (Node 22)
     runs-on: ubuntu-latest
     defaults:
@@ -145,7 +145,7 @@ frontend:
           fail_ci_if_error: false
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-ci-gate:
+  ci-gate:
     name: CI Gate
     runs-on: ubuntu-latest
     needs: [test, frontend]
