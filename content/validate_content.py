@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Validate content files against the contract (see CONTENT_CONTRACT.md).
+"""Validate content files against the contract (see CONTENT_CONTRACT.md).
 
 Usage:
     python validate_content.py [amc_data.json] [diag_data.json]
@@ -11,29 +10,38 @@ script should run before assembly; if it passes, the data drops into
 the prototype without app changes.
 """
 
-import json, sys, os, re
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Any
 
 CONTESTS = {"AMC 8", "AMC 10", "AMC 12"}
 DATA_URI = re.compile(r"^data:")
-EXT_IMG = re.compile(r'<img[^>]+src="(?!data:)', re.I)
+EXT_IMG = re.compile(r'<img[^>]+src="(?!data:)', re.IGNORECASE)
 
 
 class Report:
-    def __init__(self):
-        self.errs = []
-        self.warns = []
+    """Accumulates validation errors and warnings."""
 
-    def err(self, m):
+    def __init__(self) -> None:
+        """Initialise with empty error and warning lists."""
+        self.errs: list[str] = []
+        self.warns: list[str] = []
+
+    def err(self, m: str) -> None:
+        """Append an error message."""
         self.errs.append(m)
 
-    def warn(self, m):
+    def warn(self, m: str) -> None:
+        """Append a warning message."""
         self.warns.append(m)
 
 
-def validate_amc(d, r):
-    if set(d) < {"tests", "byContest", "keyedTests"}:
-        # keyedTests may be absent; tests and byContest are required
-        pass
+def validate_amc(d: dict[str, Any], r: Report) -> None:  # noqa: C901
+    """Validate the top-level AMC data structure."""
     tests = d.get("tests")
     by = d.get("byContest")
     if not isinstance(tests, dict):
@@ -45,7 +53,7 @@ def validate_amc(d, r):
     if set(by) != CONTESTS:
         r.err(f"amc: byContest keys {sorted(by)} != {sorted(CONTESTS)}")
     # every listed id resolves, no dupes, grouping covers tests
-    listed = []
+    listed: list[str] = []
     for c, ids in by.items():
         for tid in ids:
             listed.append(tid)
@@ -64,7 +72,8 @@ def validate_amc(d, r):
         validate_test(tid, t, r)
 
 
-def validate_test(tid, t, r):
+def validate_test(tid: str, t: dict[str, Any], r: Report) -> None:  # noqa: C901, PLR0912
+    """Validate a single AMC test entry."""
     if t.get("id") != tid:
         r.err(f"amc:{tid} id field {t.get('id')!r} != key")
     if t.get("contest") not in CONTESTS:
@@ -121,16 +130,17 @@ def validate_test(tid, t, r):
                     f"amc:{tid} problem {idx} has {len(ch) if isinstance(ch, list) else 'no'} choices (need 5)"
                 )
             else:
-                for j, (L, c) in enumerate(zip("ABCDE", ch)):
-                    if c.get("L") != L:
+                for j, (letter, c) in enumerate(zip("ABCDE", ch, strict=True)):
+                    if c.get("L") != letter:
                         r.err(
-                            f"amc:{tid} problem {idx} choice {j} L={c.get('L')!r} != {L}"
+                            f"amc:{tid} problem {idx} choice {j} L={c.get('L')!r} != {letter}"
                         )
                     if not (c.get("html") or "").strip():
-                        r.err(f"amc:{tid} problem {idx} choice {L} empty html")
+                        r.err(f"amc:{tid} problem {idx} choice {letter} empty html")
 
 
-def validate_diag(d, r):
+def validate_diag(d: dict[str, Any], r: Report) -> None:  # noqa: C901, PLR0912
+    """Validate the top-level diagnostic data structure."""
     inst = d.get("instruments")
     order = d.get("order")
     ladder = d.get("ladder")
@@ -173,7 +183,8 @@ def validate_diag(d, r):
         validate_instrument(iid, v, r)
 
 
-def validate_instrument(iid, v, r):
+def validate_instrument(iid: str, v: dict[str, Any], r: Report) -> None:  # noqa: C901, PLR0912
+    """Validate a single diagnostic instrument entry."""
     if v.get("id") != iid:
         r.err(f"diag:{iid} id field {v.get('id')!r} != key")
     if v.get("role") not in {"AYR", "DYK"}:
@@ -217,38 +228,42 @@ def validate_instrument(iid, v, r):
     else:
         r.err(f"diag:{iid} bad grading mode {mode!r}")
     for it in items:
-        if not it.get("manual"):
-            if it.get("v") is None and not (it.get("accept") or []):
-                r.err(
-                    f"diag:{iid} item {it.get('id')} auto-graded but has neither v nor accept"
-                )
+        if (
+            not it.get("manual")
+            and it.get("v") is None
+            and not (it.get("accept") or [])
+        ):
+            r.err(
+                f"diag:{iid} item {it.get('id')} auto-graded but has neither v nor accept"
+            )
         if not (it.get("ans") or "").strip():
             r.warn(f"diag:{iid} item {it.get('id')} blank ans")
 
 
-def main():
-    here = os.path.dirname(os.path.abspath(__file__))
-    amc_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, "amc_data.json")
-    diag_path = (
-        sys.argv[2] if len(sys.argv) > 2 else os.path.join(here, "diag_data.json")
-    )
+def main() -> None:
+    """Run validation of AMC and diagnostic content files."""
+    here = Path(__file__).resolve().parent
+    amc_path = sys.argv[1] if len(sys.argv) > 1 else str(here / "amc_data.json")
+    diag_path = sys.argv[2] if len(sys.argv) > 2 else str(here / "diag_data.json")
     r = Report()
     try:
-        validate_amc(json.load(open(amc_path, encoding="utf-8")), r)
-    except Exception as e:
+        with Path(amc_path).open(encoding="utf-8") as fh:
+            validate_amc(json.load(fh), r)
+    except (OSError, ValueError) as e:
         r.err(f"amc: could not load {amc_path}: {e}")
     try:
-        validate_diag(json.load(open(diag_path, encoding="utf-8")), r)
-    except Exception as e:
+        with Path(diag_path).open(encoding="utf-8") as fh:
+            validate_diag(json.load(fh), r)
+    except (OSError, ValueError) as e:
         r.err(f"diag: could not load {diag_path}: {e}")
     for w in r.warns:
-        print("WARN:", w)
+        print("WARN:", w)  # noqa: T201
     for e in r.errs:
-        print("FAIL:", e)
+        print("FAIL:", e)  # noqa: T201
     if r.errs:
-        print(f"\n{len(r.errs)} error(s), {len(r.warns)} warning(s). NOT READY.")
+        print(f"\n{len(r.errs)} error(s), {len(r.warns)} warning(s). NOT READY.")  # noqa: T201
         sys.exit(1)
-    print(
+    print(  # noqa: T201
         f"\nOK. 0 errors, {len(r.warns)} warning(s). Content conforms to the contract."
     )
     sys.exit(0)
