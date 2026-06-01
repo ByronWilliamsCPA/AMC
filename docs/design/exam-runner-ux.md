@@ -1,23 +1,15 @@
 ---
 title: "AMC Trainer — Timed Exam Runner UX Specification"
-schema_type: design
+schema_type: common
 status: draft
-owner: product-design
-purpose: "Definitive, implementation-ready UX spec for the timed exam runner (US-001)."
+owner: core-maintainer
+purpose: "Definitive, implementation-ready UX spec for the timed exam runner."
 tags:
   - design
-  - ux
+  - user_experience
   - accessibility
-  - exam-runner
-component: Frontend
-related_code:
-  - frontend/src/pages/ExamRunnerPage.tsx
-  - frontend/src/features/exam/runnerState.ts
-  - frontend/src/features/exam/useCountdown.ts
-  - frontend/src/features/exam/Palette.tsx
-  - frontend/src/features/exam/Question.tsx
-  - frontend/src/features/exam/ExamReview.tsx
-  - frontend/src/components/Tex.tsx
+  - frontend
+  - specifications
 ---
 
 > **Status**: Draft | **Updated**: 2026-05-31 | **Scope**: US-001, the timed exam runner

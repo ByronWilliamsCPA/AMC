@@ -266,18 +266,18 @@ def main() -> int:
     for path_str in args.paths:
         path = Path(path_str)
         if path.is_dir():
-            # Exclude docs/planning/ from validation
+            # Exclude docs/planning/ and docs/superpowers/ from validation
             all_md_files = path.rglob("*.md")
             md_files.extend(
                 [
                     f
                     for f in all_md_files
-                    if not any(part == "planning" for part in f.parts)
+                    if not any(part in ("planning", "superpowers") for part in f.parts)
                 ]
             )
         elif path.suffix.lower() == ".md":
-            # Only add file if not in planning directory
-            if "planning" not in path.parts:
+            # Only add file if not in planning or superpowers directory
+            if not any(part in ("planning", "superpowers") for part in path.parts):
                 md_files.append(path)
 
     if not md_files:

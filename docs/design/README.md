@@ -1,4 +1,14 @@
-# AMC Trainer — Frontend Design Plan
+---
+title: "AMC Trainer — Frontend Design Plan"
+schema_type: common
+status: published
+owner: core-maintainer
+purpose: "Index of implementation-ready frontend design specs for the AMC Trainer web app."
+tags:
+  - design
+  - frontend
+  - overview
+---
 
 The design plan for the AMC Trainer frontend, produced as a set of
 implementation-ready specs. This index ties them together, records the locked

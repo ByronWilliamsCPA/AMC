@@ -8,6 +8,13 @@ allowed:
   - utilities
   - helpers
 
+  # Frontend & Design
+  - design
+  - user_experience
+  - accessibility
+  - frontend
+  - user_interface
+
   # Development & Tooling
   - testing
   - validation

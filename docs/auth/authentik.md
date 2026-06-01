@@ -1,4 +1,14 @@
-# Authentik / OIDC SSO (optional, not yet enabled)
+---
+title: "Authentik / OIDC SSO (optional, not yet enabled)"
+schema_type: common
+status: draft
+owner: core-maintainer
+purpose: "Ready-to-enable path for single sign-on against a locally hosted Authentik instance."
+tags:
+  - architecture
+  - security
+  - integration
+---
 
 AMC Trainer ships with **built-in authentication** — invite-only onboarding,
 Argon2 password hashing, and server-side sessions behind an HTTP-only cookie

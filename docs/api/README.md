@@ -1,4 +1,14 @@
-# API documentation & monitoring
+---
+title: "API documentation & monitoring"
+schema_type: common
+status: published
+owner: core-maintainer
+purpose: "Machine-readable API docs and a Newman-ready monitoring collection for the AMC Trainer."
+tags:
+  - api
+  - api_reference
+  - documentation
+---
 
 Machine-readable API docs and a Newman-ready monitoring collection.
 

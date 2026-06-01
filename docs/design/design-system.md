@@ -1,4 +1,15 @@
-# AMC Trainer — Design System & Token Specification
+---
+title: "AMC Trainer — Design System & Token Specification"
+schema_type: common
+status: published
+owner: core-maintainer
+purpose: "Source-of-truth design system and design token specification for the AMC Trainer frontend."
+tags:
+  - design
+  - frontend
+  - specifications
+  - architecture
+---
 
 > **Status**: Canonical · **Version**: 1.0 · **Updated**: 2026-05-31
 > **Scope**: This is the source-of-truth design-system and design-token spec for the AMC

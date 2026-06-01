@@ -1,15 +1,14 @@
 ---
 title: "AMC Trainer - UX Flows, IA & Wireframes"
-schema_type: design
+schema_type: common
 status: draft
-owner: ux
+owner: core-maintainer
 purpose: "Implementation-ready UX flows, information architecture, and wireframes for the AMC Trainer web app."
 tags:
   - design
-  - ux
-  - wireframes
-  - information-architecture
-component: Frontend
+  - user_experience
+  - frontend
+  - specifications
 ---
 
 > **Status**: Draft for engineering | **Version**: 1.0 | **Updated**: 2026-05-31

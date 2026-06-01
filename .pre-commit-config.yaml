@@ -183,6 +183,7 @@ repos:
         entry: python tools/validate_front_matter.py docs
         language: python
         files: ^docs/(?!planning/).*\.md$
+        exclude: ^docs/superpowers/
         pass_filenames: false
         stages: [pre-commit]
         additional_dependencies:

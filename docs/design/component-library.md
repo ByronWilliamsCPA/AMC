@@ -1,4 +1,15 @@
-# AMC Trainer — Component Library, Accessibility & Responsive Plan
+---
+title: "AMC Trainer — Component Library, Accessibility & Responsive Plan"
+schema_type: common
+status: draft
+owner: core-maintainer
+purpose: "Reusable component inventory, accessibility plan, and responsive plan for the AMC Trainer frontend."
+tags:
+  - design
+  - frontend
+  - accessibility
+  - specifications
+---
 
 > **Status**: Design / implementation-ready. Authored against the as-built `frontend/src/` tree.
 > **Scope**: Reusable component inventory, file/composition conventions, the accessibility plan,
