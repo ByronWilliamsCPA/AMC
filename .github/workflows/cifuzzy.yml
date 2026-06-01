@@ -65,6 +65,7 @@ jobs:
         with:
           language: python
           sanitizer: ${{  matrix.sanitizer  }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Fuzzers
         if: steps.check-fuzz.outputs.has-targets == 'true'

@@ -120,3 +120,39 @@ class TestExceptionHandlerOverHttp:
         assert resp.status_code == 400
         body = resp.json()
         assert body["error"] == "ValidationError"
+
+
+class TestHealthEndpoints:
+    """Health check endpoints exercise api/health.py."""
+
+    async def test_liveness_returns_200(self, client: object) -> None:
+        from httpx import AsyncClient
+
+        assert isinstance(client, AsyncClient)
+        resp = await client.get("/health/live")
+        assert resp.status_code == 200
+        assert resp.json()["status"] == "ok"
+
+    async def test_startup_returns_200(self, client: object) -> None:
+        from httpx import AsyncClient
+
+        assert isinstance(client, AsyncClient)
+        resp = await client.get("/health/startup")
+        assert resp.status_code == 200
+        assert resp.json()["status"] == "started"
+
+    async def test_health_root_alias(self, client: object) -> None:
+        from httpx import AsyncClient
+
+        assert isinstance(client, AsyncClient)
+        resp = await client.get("/health/")
+        assert resp.status_code == 200
+        assert resp.json()["status"] == "ok"
+
+    async def test_readiness_returns_status(self, client: object) -> None:
+        from httpx import AsyncClient
+
+        assert isinstance(client, AsyncClient)
+        resp = await client.get("/health/ready")
+        # DB connectivity may succeed (200) or fail (503) in unit test environment.
+        assert resp.status_code in (200, 503)
