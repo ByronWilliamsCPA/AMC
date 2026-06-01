@@ -144,3 +144,45 @@ are resolved by the same single upstream upgrade.
 | Review Date | Reviewer | Notes |
 |-------------|----------|-------|
 | 2026-06-01 | Byron Williams | Initial creation. Two npm devDependency vulnerabilities documented (handlebars, tar). Both resolved by upgrading @hey-api/openapi-ts to 0.98.0+. |
+
+## GHSA-5xrq-8626-4rwp | vitest | Critical
+
+| Field | Value |
+|-------|-------|
+| **CVE ID** | GHSA-5xrq-8626-4rwp |
+| **Package** | vitest, @vitest/coverage-v8 |
+| **Affected Version** | <4.1.0 (3.2.4 installed) |
+| **Fixed Version** | 4.1.0+ |
+| **Severity** | Critical (CVSS 9.8) |
+| **CVSS Score** | 9.8 (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H) |
+| **Discovered** | 2026-06-01 |
+| **Reassessment Due** | 2026-07-31 |
+| **Blocking Release** | No |
+
+### Description
+
+When the Vitest UI server is listening, arbitrary files can be read and executed.
+The Vitest UI is a development-only debug dashboard.
+
+### Impact on This Project
+
+`vitest` and `@vitest/coverage-v8` are devDependencies used only for running unit
+tests in CI and on developer machines. The UI server feature (`--ui` flag) is not
+used; our test commands run `vitest run` (headless). The vulnerable code path
+requires explicitly launching the Vitest UI server, which this project never does.
+The attack surface does not exist in production or in normal CI runs.
+
+### Remediation Plan
+
+- [ ] Upgrade `vitest` and `@vitest/coverage-v8` from 3.2.x to 4.1.0+
+- [ ] Verify test suite passes with vitest 4.x (API changes may require test updates)
+- [ ] Target completion: before first production release
+
+### Why Not Fixed Yet
+
+vitest 4.0 is a major version with breaking API changes. Deferring until after
+the initial implementation milestone to avoid disrupting the test suite.
+
+### References
+
+- [GHSA-5xrq-8626-4rwp](https://github.com/advisories/GHSA-5xrq-8626-4rwp)
