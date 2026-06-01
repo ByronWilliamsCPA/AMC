@@ -122,9 +122,11 @@ jobs:
 
       - name: Run Newman (external target)
         if: ${{ github.event.inputs.base_url != '' }}
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url }}
         run: |
           newman run docs/api/amc.postman_collection.json \
-            --env-var base_url=${{ github.event.inputs.base_url }} \
+            --env-var "base_url=$BASE_URL" \
             --env-var email=${{ secrets.MONITOR_EMAIL }} \
             --env-var password=${{ secrets.MONITOR_PASSWORD }} \
             -r cli,json --reporter-json-export newman-report.json

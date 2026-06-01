@@ -4,6 +4,7 @@
 # =============================================================================
 # Stage 1: Builder - Install dependencies
 # =============================================================================
+# TODO: Pin to digest for reproducibility: docker pull python:3.12-slim && docker inspect --format='{{.Id}}' python:3.12-slim
 FROM python:3.12-slim AS builder
 
 # Set working directory
@@ -17,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install UV for fast dependency management
+# TODO: Pin to digest for reproducibility: docker pull ghcr.io/astral-sh/uv:latest && docker inspect --format='{{.Id}}' ghcr.io/astral-sh/uv:latest
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Copy dependency files
@@ -40,6 +42,7 @@ RUN uv sync --frozen --no-dev
 # =============================================================================
 # Stage 2: Runtime - Minimal production image
 # =============================================================================
+# TODO: Pin to digest for reproducibility: docker pull python:3.12-slim && docker inspect --format='{{.Id}}' python:3.12-slim
 FROM python:3.12-slim
 
 # Metadata labels (OCI standard)
@@ -47,8 +50,8 @@ LABEL org.opencontainers.image.title="AMC"
 LABEL org.opencontainers.image.description="Web app for practice math tests"
 LABEL org.opencontainers.image.version="0.1.0"
 LABEL org.opencontainers.image.authors="Byron Williams <byronawilliams@gmail.com>"
-LABEL org.opencontainers.image.url="https://github.com/williaby/AMC"
-LABEL org.opencontainers.image.source="https://github.com/williaby/AMC"
+LABEL org.opencontainers.image.url="https://github.com/ByronWilliamsCPA/AMC"
+LABEL org.opencontainers.image.source="https://github.com/ByronWilliamsCPA/AMC"
 LABEL org.opencontainers.image.licenses="MIT"
 
 # Install runtime dependencies only

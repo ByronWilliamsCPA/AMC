@@ -6,7 +6,7 @@
 version = 1
 SPDX-PackageName = "amc"
 SPDX-PackageSupplier = "Byron Williams"
-SPDX-PackageDownloadLocation = "https://github.com/williaby/AMC"
+SPDX-PackageDownloadLocation = "https://github.com/ByronWilliamsCPA/AMC"
 
 # Source code (Python, tools, tests) - MIT
 [[annotations]]
@@ -15,6 +15,7 @@ path = [
     "tools/**",
     "tests/**",
     "validation/**",
+    "content/**/*.py",
     "fuzz/**",
     "benchmarks/**/*.py",
     "scripts/**/*.py",

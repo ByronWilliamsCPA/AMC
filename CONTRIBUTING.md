@@ -15,7 +15,7 @@ Thank you for your interest in contributing to AMC! This document provides guide
 
 ## Code of Conduct
 
-This project adheres to the [williaby organization Code of Conduct](https://github.com/williaby/.github/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to byronawilliams@gmail.com.
+This project adheres to the [ByronWilliamsCPA organization Code of Conduct](https://github.com/ByronWilliamsCPA/.github/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to <byronawilliams@gmail.com>.
 
 ## Getting Started
 
@@ -30,7 +30,7 @@ This project adheres to the [williaby organization Code of Conduct](https://gith
 
 ```bash
 # Clone the repository
-git clone https://github.com/williaby/AMC.git
+git clone https://github.com/ByronWilliamsCPA/AMC.git
 cd amc
 
 # Install dependencies with UV
@@ -321,6 +321,7 @@ See migration guide in docs/migration/v1.0.0.md
 ### Submitting a Pull Request
 
 1. **Push your branch**:
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -380,10 +381,10 @@ Use the feature request template and include:
 
 ## Questions?
 
-- **General Questions**: Open a [GitHub Discussion](https://github.com/williaby/AMC/discussions)
-- **Bug Reports**: Open a [GitHub Issue](https://github.com/williaby/AMC/issues)
-- **Security Issues**: See [williaby Security Policy](https://github.com/williaby/.github/blob/main/SECURITY.md)
-- **Email**: byronawilliams@gmail.com
+- **General Questions**: Open a [GitHub Discussion](https://github.com/ByronWilliamsCPA/AMC/discussions)
+- **Bug Reports**: Open a [GitHub Issue](https://github.com/ByronWilliamsCPA/AMC/issues)
+- **Security Issues**: See [ByronWilliamsCPA Security Policy](https://github.com/ByronWilliamsCPA/.github/blob/main/SECURITY.md)
+- **Email**: <byronawilliams@gmail.com>
 
 ## Recognition
 

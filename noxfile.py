@@ -9,12 +9,11 @@ Test Pyramid Sessions:
     nox -s integration     # Run integration tests (70%+ coverage target)
     nox -s fast            # Fast dev loop - excludes slow tests
     nox -s security_tests  # Run security assertion tests
-    nox -s perf            # Run performance tests (if load testing enabled)
     nox -s mutate          # Run mutation testing (if mutation testing enabled)
 
 Code Quality Sessions:
     nox -s lint            # Run Ruff linting across Python 3.10-3.14
-    nox -s typecheck       # Run MyPy type checking across Python 3.10-3.14
+    nox -s typecheck       # Run BasedPyright type checking across Python 3.10-3.14
     nox -s docstrings      # Check docstring coverage
 
 Documentation Sessions:
@@ -42,7 +41,7 @@ with contextlib.suppress(ImportError):
     import nox_uv  # noqa: F401 - Required for uv backend support
 
 # Default sessions and options
-nox.options.sessions = ["test", "lint", "docs"]
+nox.options.sessions = ["test", "lint", "docs", "typecheck"]
 nox.options.reuse_existing_virtualenvs = True
 nox.options.default_venv_backend = "uv"
 

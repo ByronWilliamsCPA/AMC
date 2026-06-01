@@ -94,10 +94,12 @@ applicable subset is listed per component).
 ### 1.1 Primitives - `src/components/ui/`
 
 #### `Button` - **ADD**
+
 - **Purpose**: The single styled action element. Replaces the global `button {}` rule and the
   one-off `.runner__submit` / `.link-button` styles so every button is consistent and
   token-driven. Used by the runner controls, filter bar, auth/invite forms.
 - **Props**:
+
   ```ts
   interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'primary' | 'secondary' | 'ghost' | 'link'  // default 'secondary'
@@ -106,6 +108,7 @@ applicable subset is listed per component).
     iconOnly?: boolean       // requires aria-label; enforces square min-target
   }
   ```
+
 - **States**: default, hover, focus (inherits global `:focus-visible`), active, disabled
   (`opacity .5; cursor not-allowed`, native `disabled`), loading (`aria-busy="true"`, disabled,
   label → `"Submitting…"`).
@@ -119,6 +122,7 @@ applicable subset is listed per component).
   `--color-fg`), spacing (`--space-2/3`), radius (`--radius`), focus-ring token (new, §4.1).
 
 #### `Link` / `NavLink` - **KEEP (wrap thinly)**
+
 - **Purpose**: Client-side navigation. The header already uses React Router `NavLink`
   (`Layout.tsx`); lists use `Link` (`ExamListPage`, `DiagnosticListPage`).
 - **Props**: pass-through of `react-router-dom` `LinkProps` / `NavLinkProps`. Optional thin
@@ -132,6 +136,7 @@ applicable subset is listed per component).
 - **Tokens**: color (`--color-primary`), spacing, focus-ring.
 
 #### `VisuallyHidden` - **KEEP (promote utility → component)**
+
 - **Purpose**: Screen-reader-only text. The `.visually-hidden` class already exists in `index.css`
   and is used inline; promote to `<VisuallyHidden>` for ergonomics (skip-link target text,
   table-context labels, "current question" announcements).
@@ -140,11 +145,13 @@ applicable subset is listed per component).
 ### 1.2 Form controls - `src/components/ui/`
 
 #### `TextField` - **ADD** (used by Login, Register, Invite, Diagnostic typed answers)
+
 - **Purpose**: Label + input + error message as one accessible unit. Today each form re-wires
   `<label htmlFor>` + `<input id>` + a `role="alert"` `<p>` by hand (`LoginPage`, `RegisterPage`,
   `InvitePage`, `DiagnosticRunnerPage`). Centralise the wiring so labelling/error association is
   correct by construction.
 - **Props**:
+
   ```ts
   interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'id'> {
     label: string
@@ -154,6 +161,7 @@ applicable subset is listed per component).
     visuallyHiddenLabel?: boolean   // for the diagnostic typed-answer case
   }
   ```
+
 - **States**: default, focus, disabled, **error** (`aria-invalid="true"`, red border + `--color-error`
   text, message in an element referenced by `aria-describedby`).
 - **A11y** (WCAG 1.3.1, 3.3.1, 3.3.2, 4.1.3): generate a stable `id` (`useId`); `<label htmlFor>`
@@ -164,6 +172,7 @@ applicable subset is listed per component).
 - **Tokens**: color (border/error/fg/muted), spacing, radius, focus-ring.
 
 #### `Select` - **ADD** (Invite role picker; exam-list contest filter could migrate)
+
 - **Purpose**: Labelled native `<select>` wrapper (`InvitePage` role picker is the live case).
 - **Props**: `{ label, name, options: {value,label}[], value, onChange, error?, hint? }`.
 - **States**: default, focus, disabled, error.
@@ -173,6 +182,7 @@ applicable subset is listed per component).
 - **Tokens**: color, spacing, radius, focus-ring.
 
 #### `Checkbox` - **ADD / refactor** (diagnostic self-mark "I solved this correctly")
+
 - **Purpose**: Labelled boolean. Live use: the self-mark checkbox in `DiagnosticRunnerPage`
   (`.diagnostic__selfmark`).
 - **Props**: `{ label: ReactNode, name, checked, onChange, disabled? }`.
@@ -182,12 +192,14 @@ applicable subset is listed per component).
 - **Tokens**: color, spacing, focus-ring.
 
 #### `RadioGroup` (the A–E answer choices) - **KEEP / refactor** ← critical component
+
 - **Purpose**: The exam answer choices. Lives today inside
   [`features/exam/Question.tsx`](../../frontend/src/features/exam/Question.tsx) as a `<fieldset
   role="radiogroup">` of `<label><input type="radio">…</label>`. Extract the group mechanics into
   a reusable `ui/RadioGroup` so the diagnostic and any future MCQ reuse it; `Question` keeps the
   KaTeX choice rendering.
 - **Props**:
+
   ```ts
   interface RadioGroupProps {
     legend: string                       // -> aria-label / <legend> ("Answer choices for problem 7")
@@ -198,6 +210,7 @@ applicable subset is listed per component).
     onChange: (value: string) => void
   }
   ```
+
 - **States**: default, hover (row), focus (the checked radio, or first if none), checked, disabled
   (frozen after submit). No "error" state for the exam (blank is a valid answer).
 - **A11y** (WCAG 2.1.1, 1.3.1, 4.1.2): native radios give **roving focus and arrow-key selection
@@ -212,6 +225,7 @@ applicable subset is listed per component).
 ### 1.3 Feedback / status - `src/components/ui/`
 
 #### `Spinner` / `LoadingState` - **KEEP** (`States.tsx`)
+
 - **Purpose**: Async-pending indicator. Currently `<output className="spinner" aria-live="polite">`.
 - **Props**: `{ label?: string }` (default `"Loading…"`).
 - **States**: loading only.
@@ -222,6 +236,7 @@ applicable subset is listed per component).
 - **Tokens**: color (`--color-muted`).
 
 #### `ErrorState` - **KEEP** (`States.tsx`)
+
 - **Purpose**: Inline error block (`role="alert"`). Used by every page's `isError` branch and the
   diagnostic submit failure.
 - **Props**: `{ title?: string; children?: ReactNode }`.
@@ -231,6 +246,7 @@ applicable subset is listed per component).
 - **Tokens**: color (`--color-error`), spacing, radius.
 
 #### `EmptyState` - **KEEP** (`States.tsx`)
+
 - **Purpose**: "No data yet" messaging (empty exam list, no contests/diagnostics taken).
 - **Props**: `{ children: ReactNode }`.
 - **States**: default.
@@ -239,10 +255,12 @@ applicable subset is listed per component).
 - **Tokens**: color (`--color-muted`).
 
 #### `Alert` / `Callout` (incl. the algebra-gate warning) - **ADD** (generalise `progress__warning`)
+
 - **Purpose**: A standing, non-transient message box with severities. The motivating case is the
   **algebra-gate warning** (`ProgressView`, `data.algebra_warning`, currently a bare `<p
   role="alert" className="progress__warning">`). Generalise to `info | success | warning | error`.
 - **Props**:
+
   ```ts
   interface AlertProps {
     severity: 'info' | 'success' | 'warning' | 'error'
@@ -251,6 +269,7 @@ applicable subset is listed per component).
     role?: 'status' | 'alert'   // default: 'alert' for error/warning, 'status' otherwise
   }
   ```
+
 - **States**: one per severity (visual), plus an optional dismissible variant (not needed yet).
 - **A11y** (1.4.1, 4.1.3): **colour is never the only signal** - render a per-severity text/icon
   prefix ("Warning:", "Error:") and an `aria-hidden` icon, with the severity word visible. Use
@@ -262,6 +281,7 @@ applicable subset is listed per component).
   in §4.1), spacing, radius, border.
 
 #### `Badge` / `Tag` (verdict, voided, role) - **ADD**
+
 - **Purpose**: Compact status pills. Cases found in the data:
   - **Verdict** (`ProgressView` diagnostics table → `verdict`, e.g. PASS/REVIEW/FAIL; diagnostic
     result `result.verdict.toUpperCase()`).
@@ -276,6 +296,7 @@ applicable subset is listed per component).
 - **Tokens**: color (tone + fg), spacing (`--space-1/2`), radius.
 
 #### `Toast` (optional) - **ADD (deferred)**
+
 - **Purpose**: Transient confirmations (e.g. "Invite link copied", future autosave). **Not
   required for Phase 3** - current confirmations are inline (`InvitePage` "Share this link once"
   block, `aria-live="polite"`). If added: a single app-level `aria-live="polite"` region (a
@@ -286,6 +307,7 @@ applicable subset is listed per component).
 ### 1.4 Data display - `src/components/ui/`
 
 #### `Card` - **ADD**
+
 - **Purpose**: A bordered content container with consistent padding/radius. Primary driver: the
   **responsive progress dashboard**, where wide tables collapse to **stacked cards** on mobile
   (§4.3). Also useful to upgrade the exam/diagnostic **list rows** (`.exam-list li`) into tappable
@@ -300,6 +322,7 @@ applicable subset is listed per component).
 - **Tokens**: color (surface/border), spacing (`--space-3/4`), radius.
 
 #### `Table` (review + progress) - **KEEP / refactor into a shared shell**
+
 - **Purpose**: Tabular data. Three live tables share structure and the `.review__table /
   .progress__table` styles: `ExamReview` per-problem table, and the two `ProgressView` tables
   (contest history, diagnostics). Extract a thin `ui/Table` (semantic `<table>` with a slot for
@@ -317,6 +340,7 @@ applicable subset is listed per component).
 - **Tokens**: color (border/muted), spacing.
 
 #### `MathRenderer` (KaTeX wrapper) - **KEEP** (`components/Tex.tsx`, exported as `Tex`)
+
 - See §5 for full a11y + responsive treatment. Inventory summary:
 - **Purpose**: Render a LaTeX string with KaTeX, React-safely.
 - **Props**: `{ tex: string; display?: boolean }`.
@@ -330,6 +354,7 @@ applicable subset is listed per component).
 ### 1.5 Exam-runner-specific - `src/features/exam/`
 
 #### `Timer` / `Countdown` - **KEEP** (`useCountdown.ts` hook + `.runner__timer` markup)
+
 - **Purpose**: Drift-free countdown from an **absolute deadline** (`startedAt + durationSec`),
   auto-submitting once at zero. The hook is correct and unit-tested
   (`useCountdown.test.ts`); the `#CRITICAL: timing` rationale (no decrement, survives a
@@ -348,6 +373,7 @@ applicable subset is listed per component).
 - **Tokens**: color (`--color-fg`, `--color-warn`), typography (size/weight), `tabular-nums`.
 
 #### `Palette` / `QuestionNavigator` - **KEEP / refactor for roving tabindex** ← critical
+
 - **Purpose**: Grid of problem numbers showing answered / flagged / current / voided
   ([`Palette.tsx`](../../frontend/src/features/exam/Palette.tsx)). Renders as `<nav
   aria-label="Question navigator"><ul>` of `<button>`s, each with
@@ -375,6 +401,7 @@ applicable subset is listed per component).
   layout uses `aspect-ratio: 1` cells in a `repeat(5, 1fr)` grid (touch-sizing in §4.2).
 
 #### `Question` - **KEEP** (`features/exam/Question.tsx`)
+
 - **Purpose**: Renders one problem (image-mode `<img alt>` or latex-mode `<Tex display>`) + the
   A–E `RadioGroup` + a "Clear answer" link-button. Already accessible; once `ui/RadioGroup` is
   extracted, `Question` composes it.
@@ -386,6 +413,7 @@ applicable subset is listed per component).
 - **Tokens**: spacing, border, radius, color.
 
 #### `ExamReview` - **KEEP** (`features/exam/ExamReview.tsx`)
+
 - **Purpose**: The only place the answer key is shown; renders score `<dl>` + per-problem `<table>`.
 - **A11y**: wrapper is `aria-live="polite"` so the result is announced when it replaces the runner
   (good - pairs with focus management in §3.2). Outcome column is **text** ("Correct"/"Incorrect"/
@@ -395,6 +423,7 @@ applicable subset is listed per component).
 ### 1.6 Layout - `src/components/`
 
 #### `Layout` / `AppShell` - **KEEP / refactor (add skip link + focus mgmt)**
+
 - **Purpose**: Header (role-aware `NavLink`s: Tests, Diagnostics, Progress, Invite-if-staff, user +
   Sign out) over a routed `<main>` (`Layout.tsx`).
 - **Props**: none (reads `useAuth`). Renders `<Outlet/>`.
@@ -407,6 +436,7 @@ applicable subset is listed per component).
 - **Tokens**: color (border/fg/primary), spacing, `--maxw` (content max-width), `--font`.
 
 #### `ErrorBoundary` - **KEEP** (`components/ErrorBoundary.tsx`)
+
 - **Purpose**: Top-level render-crash fallback (`role="alert"`, reload button). Keep. Consider
   routing render-crashes to a focus-managed message so AT users aren't stranded on a silently
   swapped tree.
@@ -530,6 +560,7 @@ Target tab order on the runner page, top to bottom:
 6. **Controls** - Previous, Flag (`aria-pressed`), Next, Submit - each a tab stop, all reachable;
    disabled buttons are skipped by browsers (acceptable) but their disabled reason is visible.
    **Flag and Submit are keyboard-reachable** (requirement met by being real `<button>`s).
+
 - **No keyboard trap** anywhere (WCAG 2.1.2) - verify focus can always leave the palette via Tab.
 - **No positive `tabindex`** (only `0`/`-1`). Lint + a test assert this.
 
@@ -639,6 +670,7 @@ installed.**
 
 - **Add** `vitest-axe` (or `jest-axe`) + `axe-core` as devDeps and a `toHaveNoViolations` matcher
   in `src/test/setup.ts`. Per-component smoke test:
+
   ```ts
   import { axe } from 'vitest-axe'
   it('has no axe violations', async () => {
@@ -646,6 +678,7 @@ installed.**
     expect(await axe(container)).toHaveNoViolations()
   })
   ```
+
   (jsdom can't compute real colour contrast, so run an **axe contrast pass in CI against the
   built app** - Playwright + `@axe-core/playwright` on the key routes - to cover 1.4.3 properly.)
 - **Behavioural a11y tests** (the gap jsx-a11y/axe can't fill), using `user-event` keyboard APIs:

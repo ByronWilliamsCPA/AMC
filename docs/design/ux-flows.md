@@ -286,7 +286,7 @@ scoring before committing. These fields are already in `ExamSummary`.
 Loads `ExamDetail` (key-free `problems[]`, each a `ProblemRead`). State lives in the
 `runnerState` reducer (`answers`, `flags`, `current`, `phase`); the timer is the
 absolute-deadline `useCountdown` that auto-submits once at zero. Matches `ExamRunnerPage.tsx`
-+ `Palette` + `Question`.
+- `Palette` + `Question`.
 
 **Desktop layout** - header (title · timer · progress), then a two-column body: palette
 navigator on the left, the current problem + controls on the right.
@@ -366,11 +366,11 @@ main UX gaps - see [Open questions](#8-open-ux-questions)):
         └───────────────────────────────────────────────┘
 ```
 
-   - If no blanks and no flags: copy simplifies to **"Once you submit, you can't change your
+- If no blanks and no flags: copy simplifies to **"Once you submit, you can't change your
      answers."** (or skip the dialog entirely per Q1).
-   - Focus moves into the dialog; `Esc` / "Keep working" returns to the runner unchanged.
+- Focus moves into the dialog; `Esc` / "Keep working" returns to the runner unchanged.
 
-3. **Auto-submit-at-zero moment.** When the deadline passes, the runner submits automatically
+1. **Auto-submit-at-zero moment.** When the deadline passes, the runner submits automatically
    (no dialog). Show a brief inline, non-blocking notice as the review loads:
    **"Time's up - submitting your test."** Then the review replaces the runner. Because submit
    is guarded, a manual click landing at the same instant cannot double-submit; a server

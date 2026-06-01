@@ -28,7 +28,7 @@ jobs:
   # ==========================================================================
   core-validation:
     name: Core Validation
-    uses: williaby/.github/.github/workflows/python-pr-validation.yml@main
+    uses: williaby/.github/.github/workflows/python-pr-validation.yml@40ff5b5615e786ee0867e1b9e8f21a4735036e63 # main
     with:
       python-version: '3.12'
       source-directory: 'src'
@@ -168,6 +168,11 @@ jobs:
     needs: [core-validation, dead-code, changelog, link-check]
     if: always()
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
       - name: Check validation results
         run: |
           echo "## Dependency & Standards Validation" >> $GITHUB_STEP_SUMMARY

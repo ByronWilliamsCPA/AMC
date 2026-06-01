@@ -6,7 +6,7 @@ This document describes how AMC is governed, who makes decisions, and how contri
 
 The current maintainer is:
 
-- **Byron Williams** (byronawilliams@gmail.com)
+- **Byron Williams** (<byronawilliams@gmail.com>)
 
 Maintainers have commit access and are responsible for reviewing and merging pull requests, triaging issues, and cutting releases.
 

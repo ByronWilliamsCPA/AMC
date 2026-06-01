@@ -53,7 +53,7 @@ in this project.
 ### Remediation Plan
 
 - [ ] Upgrade `@hey-api/openapi-ts` from `0.61.3` to `0.98.0+` (breaking change; see
-  migration guide at https://heyapi.dev/openapi-ts/changelog)
+  migration guide at <https://heyapi.dev/openapi-ts/changelog>)
 - [ ] After upgrade, regenerate API client stubs and validate frontend compilation
 - [ ] Target completion: before first production release
 

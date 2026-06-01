@@ -533,6 +533,7 @@ import './index.css'           // resets + element defaults
 | `--math-scale`, `--color-image-mat` | math-specific |
 
 Rules:
+
 - **Semantic over raw.** Components reference role tokens (`--color-error-text`), never a raw palette
   step. There is deliberately no `--blue-500`-style raw layer - at this scale it adds indirection
   without payoff.

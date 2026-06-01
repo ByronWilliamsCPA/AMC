@@ -288,3 +288,6 @@ output/
 # Keep the directory, but ignore .tmp-* files inside it
 tmp_cleanup/.tmp-*
 !tmp_cleanup/.gitkeep
+
+# Git worktrees (always local, never committed)
+.worktrees/

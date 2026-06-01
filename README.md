@@ -1,26 +1,28 @@
 # AMC
 
 ## Quality & Security
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/williaby/amc/badge)](https://securityscorecards.dev/viewer/?uri=github.com/williaby/amc)
-[![codecov](https://codecov.io/gh/williaby/amc/graph/badge.svg)](https://codecov.io/gh/williaby/amc)
-[![REUSE Compliance](https://github.com/williaby/amc/actions/workflows/reuse.yml/badge.svg)](https://github.com/williaby/amc/actions/workflows/reuse.yml)
+
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/ByronWilliamsCPA/AMC/badge)](https://securityscorecards.dev/viewer/?uri=github.com/ByronWilliamsCPA/AMC)
+[![codecov](https://codecov.io/gh/ByronWilliamsCPA/AMC/graph/badge.svg)](https://codecov.io/gh/ByronWilliamsCPA/AMC)
+[![REUSE Compliance](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/reuse.yml/badge.svg)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/reuse.yml)
 
 ## CI/CD Status
-[![CI Pipeline](https://github.com/williaby/amc/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/williaby/amc/actions/workflows/ci.yml?query=branch%3Amain)
-[![Security Analysis](https://github.com/williaby/amc/actions/workflows/security-analysis.yml/badge.svg?branch=main)](https://github.com/williaby/amc/actions/workflows/security-analysis.yml?query=branch%3Amain)
-[![Documentation](https://github.com/williaby/amc/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/williaby/amc/actions/workflows/docs.yml?query=branch%3Amain)
-[![ClusterFuzzLite](https://github.com/williaby/amc/actions/workflows/cifuzzy.yml/badge.svg?branch=main)](https://github.com/williaby/amc/actions/workflows/cifuzzy.yml?query=branch%3Amain)
-[![SBOM & Security Scan](https://github.com/williaby/amc/actions/workflows/sbom.yml/badge.svg?branch=main)](https://github.com/williaby/amc/actions/workflows/sbom.yml?query=branch%3Amain)
-[![PR Validation](https://github.com/williaby/amc/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/williaby/amc/actions/workflows/pr-validation.yml)
-[![Release](https://github.com/williaby/amc/actions/workflows/release.yml/badge.svg)](https://github.com/williaby/amc/actions/workflows/release.yml)
-[![PyPI Publish](https://github.com/williaby/amc/actions/workflows/publish-pypi.yml/badge.svg)](https://github.com/williaby/amc/actions/workflows/publish-pypi.yml)
+
+[![CI Pipeline](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/ci.yml?query=branch%3Amain)
+[![Security Analysis](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/security-analysis.yml/badge.svg?branch=main)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/security-analysis.yml?query=branch%3Amain)
+[![Documentation](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/docs.yml?query=branch%3Amain)
+[![ClusterFuzzLite](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/cifuzzy.yml/badge.svg?branch=main)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/cifuzzy.yml?query=branch%3Amain)
+[![SBOM & Security Scan](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/sbom.yml/badge.svg?branch=main)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/sbom.yml?query=branch%3Amain)
+[![PR Validation](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/pr-validation.yml)
+[![Release](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/release.yml/badge.svg)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/release.yml)
+[![PyPI Publish](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/publish-pypi.yml/badge.svg)](https://github.com/ByronWilliamsCPA/AMC/actions/workflows/publish-pypi.yml)
 
 ## Project Info
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/williaby/.github/blob/main/CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/ByronWilliamsCPA/.github/blob/main/CODE_OF_CONDUCT.md)
 
 | | |
 |---|---|
@@ -35,6 +37,7 @@
 Web app for practice math tests
 
 This project provides:
+
 - Core functionality for web app for practice math tests
 - Production-ready code with comprehensive testing
 - Well-documented API and architecture
@@ -108,7 +111,7 @@ npm install
 npm run dev
 ```
 
-Frontend runs at http://localhost:3000 with hot reload.
+Frontend runs at <http://localhost:3000> with hot reload.
 
 ### Available Scripts
 
@@ -152,6 +155,7 @@ This project can use **Google Assured OSS** as the primary package source for en
 ### Enabling Supply Chain Security
 
 To enable full supply chain security features, regenerate this project with:
+
 ```bash
 cruft update
 # Select include_supply_chain_security: yes
@@ -225,6 +229,7 @@ These rules catch bugs that standard linting misses and enforce production-quali
 This project includes standardized Claude Code configuration via git subtree:
 
 **Directory Structure**:
+
 ```text
 .claude/
 ├── claude.md          # Project-specific Claude guidelines
@@ -236,6 +241,7 @@ This project includes standardized Claude Code configuration via git subtree:
 ```
 
 **Updating Standards**:
+
 ```bash
 # Pull latest standards from upstream
 ./scripts/update-claude-standards.sh
@@ -246,6 +252,7 @@ git subtree pull --prefix .claude/standard \
 ```
 
 **What's Included**:
+
 - Universal development best practices
 - Response-Aware Development (RAD) system for assumption tagging
 - Agent assignment patterns and workflow
@@ -417,9 +424,9 @@ uv run pytest --cov=amc --cov-fail-under=80
 
 ### Reporting Security Issues
 
-Please report security vulnerabilities to byronawilliams@gmail.com rather than using the public issue tracker.
+Please report security vulnerabilities to <byronawilliams@gmail.com> rather than using the public issue tracker.
 
-See the [williaby Security Policy](https://github.com/williaby/.github/blob/main/SECURITY.md) for complete disclosure policy and response timelines.
+See the [ByronWilliamsCPA Security Policy](https://github.com/ByronWilliamsCPA/.github/blob/main/SECURITY.md) for complete disclosure policy and response timelines.
 
 ## Contributing
 
@@ -547,7 +554,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 - **Issues**: [GitHub Issues](https://github.com/ByronWilliamsCPA/AMC/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ByronWilliamsCPA/AMC/discussions)
-- **Email**: byronawilliams@gmail.com
+- **Email**: <byronawilliams@gmail.com>
 
 ## Acknowledgments
 
@@ -555,4 +562,4 @@ Thank you to all contributors and the open-source community!
 
 ---
 
-**Made with by [Byron Williams](https://github.com/williaby)**
+**Made with by [Byron Williams](https://github.com/ByronWilliamsCPA)**

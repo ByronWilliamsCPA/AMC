@@ -12,14 +12,14 @@
 ci:
   autoupdate_schedule: monthly
   autofix_prs: true
-  skip: [validate-front-matter, qlty-check, qlty-full, trufflehog, bandit, bandit-full]  # Skip local-only hooks
+  skip: [validate-front-matter, qlty-check, qlty-full, bandit, bandit-full]  # Skip local-only hooks
 
 repos:
   # ============================================================================
   # Fast File Checks (Lightweight, run on every commit)
   # ============================================================================
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # v4.5.0
+    rev: c4a0b883114b00d8d76b479c820ce7950211c99b  # v4.5.0  # pragma: allowlist secret
     hooks:
       - id: trailing-whitespace
         stages: [pre-commit]
@@ -53,20 +53,39 @@ repos:
         stages: [pre-commit]
 
   # ============================================================================
-  # Secret Detection - TruffleHog
+  # No Em-Dash
   # ============================================================================
-  # Advanced secret detection beyond detect-private-key
-  # Detects API keys, tokens, credentials, and other secrets
-  # Uses local system-installed trufflehog to avoid Go build issues
-  # Install: brew install trufflehog (macOS) or see https://github.com/trufflesecurity/trufflehog#installation
+  - repo: local
+    hooks:
+      - id: no-em-dash
+        name: No em-dash characters
+        language: pygrep
+        entry: "—"
+        types: [text]
+        exclude: '\.lock$|CHANGELOG\.md|\.baseline$|\.pre-commit-config\.yaml$'
+        stages: [pre-commit]
+
+  # ============================================================================
+  # Secret Detection - TruffleHog (fail-closed, staged files only)
+  # ============================================================================
   - repo: local
     hooks:
       - id: trufflehog
         name: TruffleHog Secret Scanner
-        description: Detect secrets in your data before committing
-        entry: bash -c 'command -v trufflehog >/dev/null 2>&1 && trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail || echo "TruffleHog not installed - skipping secret scan"'
+        entry: trufflehog git file://. --since-commit HEAD --only-verified --fail
         language: system
         pass_filenames: false
+        stages: [pre-commit]
+
+  # ============================================================================
+  # Secret Detection - detect-secrets (baseline regression guard)
+  # ============================================================================
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: "68e8b45440415753fff70a312ece8da92ba85b4a"  # v1.5.0  # pragma: allowlist secret
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: uv\.lock|\.secrets\.baseline
         stages: [pre-commit]
 
   # ============================================================================
@@ -76,7 +95,7 @@ repos:
   # Runs on changed files during pre-commit, full scan on pre-push
   # Configuration in pyproject.toml [tool.bandit]
   - repo: https://github.com/PyCQA/bandit
-    rev: 36fd65054fc8864b4037d0918904f9331512feb5  # 1.7.10
+    rev: 36fd65054fc8864b4037d0918904f9331512feb5  # 1.7.10  # pragma: allowlist secret
     hooks:
       - id: bandit
         name: Bandit Security Scan (changed files)
@@ -100,7 +119,7 @@ repos:
   # ============================================================================
   # Enforces conventional commit message format for semantic versioning
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: 406f0d1a4ffcd9eb0be9f0f6b824df619b38f41e  # v3.4.0
+    rev: 406f0d1a4ffcd9eb0be9f0f6b824df619b38f41e  # v3.4.0  # pragma: allowlist secret
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
@@ -110,7 +129,7 @@ repos:
   # pyproject.toml Validation
   # ============================================================================
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: 435e09f5ed9fe57f3444ebfa54c663d0ac8033fe  # v0.20.2
+    rev: 435e09f5ed9fe57f3444ebfa54c663d0ac8033fe  # v0.20.2  # pragma: allowlist secret
     hooks:
       - id: validate-pyproject
         stages: [pre-commit]
@@ -119,7 +138,7 @@ repos:
   # GitHub Workflow Validation
   # ============================================================================
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 4e7291655d44e99511858efd33bea0bdbb58d835  # 0.29.4
+    rev: 4e7291655d44e99511858efd33bea0bdbb58d835  # 0.29.4  # pragma: allowlist secret
     hooks:
       - id: check-github-workflows
         stages: [pre-commit]
@@ -128,12 +147,44 @@ repos:
   # Ruff Linting and Formatting (Fast, pre-commit stage)
   # ============================================================================
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: fa1ed65ba95bfa7771a71003a9d74402541f5a5c  # v0.14.6
+    rev: fa1ed65ba95bfa7771a71003a9d74402541f5a5c  # v0.14.6  # pragma: allowlist secret
     hooks:
       - id: ruff
         stages: [pre-commit]
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
+        stages: [pre-commit]
+
+  # ============================================================================
+  # Type Checking - BasedPyright (local, fail-closed)
+  # ============================================================================
+  - repo: local
+    hooks:
+      - id: basedpyright
+        name: BasedPyright type check
+        entry: uv run --no-sync basedpyright src/
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+
+  # ============================================================================
+  # YAML Linting
+  # ============================================================================
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: "2d931b5a817337fa88aef4325bf613e794e14d52"  # v1.9.0  # pragma: allowlist secret
+    hooks:
+      - id: yamllint
+        args: ['-d', 'relaxed']
+        stages: [pre-commit]
+        exclude: mkdocs.yml
+
+  # ============================================================================
+  # Markdown Linting
+  # ============================================================================
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: "e72a3ca1632f0b11a07d171449fe447a7ff6795e"  # v0.48.0  # pragma: allowlist secret
+    hooks:
+      - id: markdownlint
         stages: [pre-commit]
 
   # ============================================================================
@@ -178,14 +229,6 @@ repos:
   # ============================================================================
   - repo: local
     hooks:
-      - id: no-em-dash
-        name: No em-dash characters (PC-011)
-        entry: bash -c 'em=$(printf "\xe2\x80\x94"); files=$(grep -rl "$em" "$@" 2>/dev/null); [ -z "$files" ] && exit 0; echo "Em-dash (U+2014) found in:"; echo "$files"; exit 1' --
-        language: system
-        types: [text]
-        exclude: '^(\.git/|frontend/node_modules/|\.venv/|venv/)'
-        stages: [pre-commit]
-
       - id: validate-front-matter
         name: Validate documentation front matter
         entry: python tools/validate_front_matter.py docs
@@ -206,7 +249,7 @@ repos:
   # Interrogate ensures all Python code has proper docstrings
   # Target: 85% coverage
   - repo: https://github.com/econchick/interrogate
-    rev: 4894019dc8876092bc9b6d56878798c550fad998  # 1.7.0
+    rev: 4894019dc8876092bc9b6d56878798c550fad998  # 1.7.0  # pragma: allowlist secret
     hooks:
       - id: interrogate
         args: ['-v', '-c', 'pyproject.toml', 'src/']
@@ -220,7 +263,7 @@ repos:
   # pydoclint validates that docstring arguments match function signatures
   # Configuration in pyproject.toml [tool.pydoclint]
   - repo: https://github.com/jsh9/pydoclint
-    rev: 88d83c94156c5e51a09938e77019f2c58e92ab58  # 0.8.4
+    rev: 88d83c94156c5e51a09938e77019f2c58e92ab58  # 0.8.4  # pragma: allowlist secret
     hooks:
       - id: pydoclint
         args: ["--config=pyproject.toml"]

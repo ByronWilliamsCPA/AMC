@@ -28,7 +28,7 @@ This feedback will be shared with the template team to improve the cookiecutter 
 **Name**: AMC
 **Description**: Web app for practice math tests
 **Author**: Byron Williams <byronawilliams@gmail.com>
-**Repository**: https://github.com/ByronWilliamsCPA/AMC
+**Repository**: <https://github.com/ByronWilliamsCPA/AMC>
 **Created**: 2026-05-31
 
 ### Technology Stack
@@ -40,6 +40,7 @@ This feedback will be shared with the template team to improve the cookiecutter 
 - **Security**: Bandit, pip-audit, OSV-Scanner
 - **Documentation**: MkDocs Material
 - **Containerization**: Docker
+
 ---
 
 <!--
@@ -151,6 +152,7 @@ When working on this project, always suggest appropriate security measures:
 - **APIs**: Suggest authentication, rate limiting, input validation
 - **Data**: Suggest encryption at rest and in transit, access controls
 - **Containers**: Suggest image vulnerability scanning (Trivy)
+
 ### 2. Never Bypass Security Issues
 
 - **ALL security findings** from scanners (Semgrep, SonarQube, Bandit, Checkov) should be addressed, not dismissed
@@ -174,11 +176,13 @@ When working on this project, always suggest appropriate security measures:
 For deployment on FIPS-enabled systems (Ubuntu LTS with fips-updates, government systems, healthcare, finance):
 
 **Prohibited algorithms** (will fail in FIPS mode):
+
 - MD5, MD4, SHA-1 (for security purposes)
 - DES, 3DES, RC2, RC4, Blowfish
 - Non-approved key exchange methods
 
 **Required patterns**:
+
 ```python
 # ✗ WRONG - Will fail on FIPS systems
 import hashlib
@@ -192,11 +196,13 @@ h = hashlib.sha256(data)
 ```
 
 **Check FIPS compatibility**:
+
 ```bash
 uv run python scripts/check_fips_compatibility.py --fix-hints
 ```
 
 **Problematic packages** (need verification or replacement):
+
 - `bcrypt` → Use `passlib` with PBKDF2 or `argon2-cffi`
 - `pycrypto` → Use `pycryptodome` with FIPS mode
 - Verify `cryptography` version >= 3.4.6 with OpenSSL FIPS provider
@@ -452,6 +458,7 @@ docs/                       # MkDocs documentation
 - Logging: Structured logging via `src/amc/utils/logging.py`
 - Error Handling: Custom exceptions in `src/amc/core/exceptions.py`
 - Correlation: Request tracing via `src/amc/middleware/correlation.py`
+
 ### Exception Hierarchy
 
 Use the centralized exception hierarchy for consistent error handling:
@@ -496,6 +503,7 @@ except ValidationError as e:
 | `APIError` | External API errors |
 | `DatabaseError` | Database operation errors |
 | `BusinessLogicError` | Domain rule violations |
+
 ### Correlation ID Patterns (Observability)
 
 Request correlation enables distributed tracing and log correlation:
@@ -680,6 +688,7 @@ uv run pytest tests/unit/test_example.py::test_function_name -v
 - BasedPyright type checking
 - Security scans (no high/critical)
 - Pre-commit hooks
+
 ---
 
 ## Third-Party Integrations
@@ -815,6 +824,22 @@ These contain project-specific customizations:
 | `.standards/REUSE.baseline.toml` | `REUSE.toml` | SPDX licensing |
 
 See `.standards/README.md` for detailed merge instructions.
+
+---
+
+## Model Selection
+
+| Task type | Model | When |
+| --- | --- | --- |
+| Complex reasoning, planning, architecture | Opus 4.7 | Multi-step decisions, ADRs, deep code review |
+| Standard development work | Sonnet 4.6 (default) | Most coding, editing, PR descriptions |
+| Read-only exploration | Haiku 4.5 | File scanning, structure mapping, quick lookups |
+
+In subagent configuration, set `model: haiku` for the built-in `Explore` subagent
+(read-only codebase discovery). Agents that write code or produce deliverables default to
+`sonnet` unless the task requires deep reasoning, in which case specify `model: opus`.
+
+> Per-agent model defaults and orchestration patterns: see `.claude/rules/supervisor.md`
 
 ---
 

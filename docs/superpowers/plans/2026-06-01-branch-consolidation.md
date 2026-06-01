@@ -24,6 +24,7 @@
 ### Task 1: Advance local `main` to match `origin/main`
 
 **Files:**
+
 - No file edits - git state change only
 
 - [ ] **Step 1: Verify clean working tree**
@@ -42,6 +43,7 @@ git pull origin main
 ```
 
 Expected output includes:
+
 ```
 Fast-forward
  docs/planning/PROJECT-PLAN.md | 349 ++++...
@@ -62,6 +64,7 @@ Expected first line: `13e2ae1 docs(planning): finalize plan, adopt React SPA fro
 ### Task 2: Create a local tracking branch for the claude implementation work
 
 **Files:**
+
 - No file edits - git state change only
 
 - [ ] **Step 1: Check out the remote branch as a local tracking branch**
@@ -73,6 +76,7 @@ git checkout -b feat/implementation origin/claude/great-allen-WrIB9
 The name `feat/implementation` follows the project branch naming convention (CLAUDE.md). Choose a different name if you prefer, but keep the `feat/` prefix and avoid spaces.
 
 Expected:
+
 ```
 Branch 'feat/implementation' set up to track remote branch 'claude/great-allen-WrIB9' from 'origin'.
 Switched to a new branch 'feat/implementation'
@@ -101,6 +105,7 @@ Expected: `CLEAN`
 ### Task 3: Install frontend dependencies so the working tree is ready
 
 **Files:**
+
 - `frontend/node_modules/` (generated, not tracked)
 
 The claude branch added/changed `frontend/package.json` and `frontend/package-lock.json`. The `node_modules` directory does not exist on this branch yet.
