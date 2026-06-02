@@ -1,0 +1,34 @@
+/* One problem: heading, body (KaTeX or image), and the A–E choice content. */
+.question {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.number {
+  margin: 0;
+}
+
+.body {
+  /* Wide equations scroll within their own box rather than the page. */
+  overflow-x: auto;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  /* Scanned problems are raster on white; keep a paper mat in any theme. */
+  background: var(--color-image-mat);
+}
+
+.letter {
+  font-weight: var(--font-weight-medium);
+}
+
+.choiceBody {
+  /* Keep an over-wide inline expression inside the row, not the page. */
+  overflow-x: auto;
+}
+
+.clear {
+  justify-self: start;
+}

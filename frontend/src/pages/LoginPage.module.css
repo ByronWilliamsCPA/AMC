@@ -1,0 +1,21 @@
+/* Login page - co-located CSS Module consuming design tokens (prototype). */
+.page {
+  max-width: 28rem;
+  margin: var(--space-7) auto;
+  padding: 0 var(--space-3);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.submit {
+  margin-top: var(--space-2);
+}
+
+.footer {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+}

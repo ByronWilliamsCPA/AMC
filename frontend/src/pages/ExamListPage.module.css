@@ -1,0 +1,36 @@
+/* Practice-test list. */
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* Active filter: accent fill + aria-pressed in the markup (not colour alone). */
+.filter[aria-pressed='true'] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  color: var(--color-text-muted);
+}

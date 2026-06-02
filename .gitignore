@@ -8,20 +8,22 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
+# Python build artifacts - anchored to the repo root so they don't collide with
+# source dirs of the same name elsewhere (e.g. frontend/src/lib, a JS module dir).
+/build/
+/develop-eggs/
+/dist/
+/downloads/
+/eggs/
+/.eggs/
+/lib/
+/lib64/
+/parts/
+/sdist/
+/var/
+/wheels/
+/pip-wheel-metadata/
+/share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -266,8 +268,13 @@ logs/
 # Data and models (customize as needed)
 data/raw/
 data/processed/
-models/
+# ML model artifacts (top-level only; do not swallow the src/amc/models package)
+/models/
 weights/
+# The application's ORM models package is source, not an ML artifact directory.
+# Un-ignore the package and its Python sources only (not caches/artifacts).
+!src/amc/models/
+!src/amc/models/*.py
 
 # Notebooks
 .ipynb_checkpoints/
@@ -282,3 +289,5 @@ output/
 tmp_cleanup/.tmp-*
 !tmp_cleanup/.gitkeep
 
+# Git worktrees (always local, never committed)
+.worktrees/

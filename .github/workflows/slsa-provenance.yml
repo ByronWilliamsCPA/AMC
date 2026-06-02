@@ -62,9 +62,11 @@ jobs:
 
       - name: Determine version
         id: version
+        env:
+          VERSION_INPUT: ${{ github.event.inputs.version }}
         run: |
-          if [ -n "${{ github.event.inputs.version }}" ]; then
-            VERSION="${{ github.event.inputs.version }}"
+          if [ -n "$VERSION_INPUT" ]; then
+            VERSION="$VERSION_INPUT"
           else
             VERSION=$(grep -Po '(?<=^version = ")[^"]*' pyproject.toml)
           fi
@@ -98,7 +100,7 @@ jobs:
   slsa:
     name: SLSA Level 3
     needs: [build]
-    uses: williaby/.github/.github/workflows/python-slsa.yml@main
+    uses: williaby/.github/.github/workflows/python-slsa.yml@40ff5b5615e786ee0867e1b9e8f21a4735036e63 # main
     with:
       base64-subjects: ${{ needs.build.outputs.hashes }}
       upload-assets: true

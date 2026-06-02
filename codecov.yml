@@ -59,6 +59,11 @@ flags:
     paths:
       - src/amc/
 
+  frontend:
+    carryforward: true
+    paths:
+      - frontend/src/
+
   # Python version flags (CI workflow uploads)
   python-3.10:
     carryforward: true

@@ -5,11 +5,22 @@ This module provides:
 - Pytest markers for test categorization
 - Shared fixtures for common test resources
 - Temporary directory management
+- An isolated in-memory async database and HTTP client for API tests
 """
 
+from __future__ import annotations
+
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
+import pytest_asyncio
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncIterator
+
+    from httpx import AsyncClient
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 # ============================================================================
 # Test Fixture Paths
@@ -155,3 +166,97 @@ def setup_logging() -> None:
     from amc.utils.logging import setup_logging
 
     setup_logging(level="DEBUG", json_logs=False, include_timestamp=False)
+
+
+# ============================================================================
+# Async Database & API Client Fixtures
+# ============================================================================
+#
+# Tests run against a fresh in-memory SQLite database per test, using a single
+# shared connection (StaticPool) so every session in the test sees the same
+# schema and data. The FastAPI ``get_db`` dependency is overridden to draw from
+# this engine, giving integration tests a real database without Postgres.
+
+
+@pytest_asyncio.fixture
+async def db_session() -> AsyncIterator[AsyncSession]:
+    """Yield a session bound to a fresh in-memory database.
+
+    A new engine and schema are created for each test and disposed afterwards,
+    guaranteeing isolation regardless of test execution order.
+
+    Yields:
+        An active :class:`~sqlalchemy.ext.asyncio.AsyncSession`.
+    """
+    from sqlalchemy.ext.asyncio import (
+        AsyncSession,
+        async_sessionmaker,
+        create_async_engine,
+    )
+    from sqlalchemy.pool import StaticPool
+
+    from amc.models import Base
+
+    engine = create_async_engine(
+        "sqlite+aiosqlite://",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    factory = async_sessionmaker(
+        bind=engine, class_=AsyncSession, expire_on_commit=False
+    )
+    session = factory()
+    try:
+        yield session
+    finally:
+        await session.close()
+        await engine.dispose()
+
+
+@pytest_asyncio.fixture
+async def client(db_session: AsyncSession) -> AsyncIterator[AsyncClient]:
+    """Yield an HTTP client wired to the app with the test database.
+
+    The app's ``get_db`` dependency is overridden to yield the per-test
+    ``db_session`` so requests and assertions share one database.
+
+    ``session_cookie_secure`` is temporarily set to ``False`` so that
+    session cookies are not dropped by httpx on the plain-http test URL.
+
+    Args:
+        db_session: The per-test database session fixture.
+
+    Yields:
+        An :class:`httpx.AsyncClient` bound to the ASGI app via ASGITransport.
+    """
+    from httpx import ASGITransport, AsyncClient
+
+    from amc.core.config import settings
+    from amc.core.database import get_db
+    from amc.main import create_app
+
+    # #ASSUME: Test env: httpx 0.28+ silently drops Secure cookies on http://
+    # testserver URLs, causing sessions to appear unauthenticated.
+    # #VERIFY: Restore the original value in the finally block.
+    _original_secure = settings.session_cookie_secure
+    settings.session_cookie_secure = False
+    try:
+        app = create_app()
+
+        async def _override_get_db() -> AsyncIterator[AsyncSession]:
+            yield db_session
+
+        app.dependency_overrides[get_db] = _override_get_db
+
+        transport = ASGITransport(app=app)
+        async with AsyncClient(
+            transport=transport, base_url="http://testserver"
+        ) as http_client:
+            yield http_client
+
+        app.dependency_overrides.clear()
+    finally:
+        settings.session_cookie_secure = _original_secure

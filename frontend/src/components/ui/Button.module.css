@@ -1,0 +1,66 @@
+/* Button primitive - consumes design tokens only (design-system.md §5.4). */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px; /* touch target */
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--color-surface-raised);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary: the main call to action on a screen. */
+.primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-primary-strong);
+  border-color: var(--color-primary-strong);
+}
+
+/* Subtle: a low-emphasis, borderless action (e.g. "clear answer"). */
+.subtle {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-link);
+  text-decoration: underline;
+  min-height: auto;
+  padding: 0;
+}
+
+.subtle:hover:not(:disabled) {
+  background: transparent;
+  color: var(--color-primary-strong);
+}
+
+/* Full-width within its container. */
+.block {
+  width: 100%;
+}

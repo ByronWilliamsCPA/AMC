@@ -1,53 +1,81 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-import { ApiStatus } from '@/components/ApiStatus'
+/**
+ * App routing.
+ *
+ * Public routes (login, register) sit outside the auth guard; everything else is
+ * wrapped in {@link RequireAuth}. The coach progress view is additionally
+ * staff-only. Feature routes are lazy-loaded so the login bundle stays small
+ * (the exam runner pulls in KaTeX, which is heavy).
+ */
+import { Suspense, lazy } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { RequireAuth } from '@/auth/RequireAuth'
+import { Layout } from '@/components/Layout'
+import { Spinner } from '@/components/States'
+
+const ExamListPage = lazy(() =>
+  import('@/pages/ExamListPage').then((m) => ({ default: m.ExamListPage }))
+)
+const ExamRunnerPage = lazy(() =>
+  import('@/pages/ExamRunnerPage').then((m) => ({ default: m.ExamRunnerPage }))
+)
+const DiagnosticListPage = lazy(() =>
+  import('@/pages/DiagnosticListPage').then((m) => ({
+    default: m.DiagnosticListPage,
+  }))
+)
+const DiagnosticRunnerPage = lazy(() =>
+  import('@/pages/DiagnosticRunnerPage').then((m) => ({
+    default: m.DiagnosticRunnerPage,
+  }))
+)
+const ProgressPage = lazy(() =>
+  import('@/pages/ProgressPage').then((m) => ({ default: m.ProgressPage }))
+)
+const UserProgressPage = lazy(() =>
+  import('@/pages/UserProgressPage').then((m) => ({
+    default: m.UserProgressPage,
+  }))
+)
+const InvitePage = lazy(() => import('@/pages/InvitePage').then((m) => ({ default: m.InvitePage })))
+const LoginPage = lazy(() => import('@/pages/LoginPage').then((m) => ({ default: m.LoginPage })))
+const RegisterPage = lazy(() =>
+  import('@/pages/RegisterPage').then((m) => ({ default: m.RegisterPage }))
+)
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>{{ cookiecutter.project_name }}</h1>
-        <p>{{ cookiecutter.project_short_description }}</p>
-      </header>
+    <Suspense fallback={<Spinner />}>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
-      <main className="app-main">
-        <section className="demo-section">
-          <h2>React + TypeScript + Vite</h2>
-          <div className="card">
-            <button onClick={() => setCount((count) => count + 1)}>
-              Count is {count}
-            </button>
-            <p>
-              Edit <code>src/App.tsx</code> and save to test HMR
-            </p>
-          </div>
-        </section>
+        <Route
+          element={
+            <RequireAuth>
+              <Layout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<Navigate to="/exams" replace />} />
+          <Route path="exams" element={<ExamListPage />} />
+          <Route path="exams/:examId" element={<ExamRunnerPage />} />
+          <Route path="diagnostics" element={<DiagnosticListPage />} />
+          <Route path="diagnostics/:instrumentId" element={<DiagnosticRunnerPage />} />
+          <Route path="progress" element={<ProgressPage />} />
+          <Route
+            path="users/:userId/progress"
+            element={
+              <RequireAuth staffOnly>
+                <UserProgressPage />
+              </RequireAuth>
+            }
+          />
+          <Route path="invite" element={<InvitePage />} />
+        </Route>
 
-        <section className="api-section">
-          <h2>Backend API Status</h2>
-          <ApiStatus />
-        </section>
-      </main>
-
-      <footer className="app-footer">
-        <p>
-          Built with{' '}
-          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-            Vite
-          </a>
-          {' + '}
-          <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-            React
-          </a>
-          {' + '}
-          <a href="https://fastapi.tiangolo.com" target="_blank" rel="noopener noreferrer">
-            FastAPI
-          </a>
-        </p>
-      </footer>
-    </div>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   )
 }
 

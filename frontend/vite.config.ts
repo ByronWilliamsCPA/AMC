@@ -13,35 +13,23 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      // Proxy API requests to backend during development
+      // Dev-only: proxy same-origin /api and /health to the backend so the
+      // browser sees one origin (matching the production reverse proxy) and the
+      // session cookie is sent. The app itself always calls relative '/api'.
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:8000',
+        target: process.env.VITE_DEV_API_TARGET || 'http://localhost:8000',
         changeOrigin: true,
       },
-      '/openapi.json': {
-        target: process.env.VITE_API_URL || 'http://localhost:8000',
+      '/health': {
+        target: process.env.VITE_DEV_API_TARGET || 'http://localhost:8000',
         changeOrigin: true,
       },
     },
   },
   build: {
     outDir: 'dist',
-    sourcemap: true,
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html', 'lcov'],
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        'src/client/',
-        '**/*.d.ts',
-        '**/*.config.*',
-      ],
-    },
+    // Hidden source maps: generated for Sentry upload but not referenced from
+    // the served bundles, so source isn't exposed to clients.
+    sourcemap: 'hidden',
   },
 })

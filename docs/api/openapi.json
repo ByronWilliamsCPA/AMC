@@ -1,0 +1,1566 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AMC Trainer API",
+    "summary": "Practice AMC contests and AoPS placement diagnostics.",
+    "description": "Server-backed AMC Trainer API.\n\nAuthentication is invite-only and session-cookie based: call `POST /api/v1/auth/login` (or `/register`) to receive an HTTP-only `amc_session` cookie, which authorises the protected endpoints. Answer keys are never present in any pre-submission response; they appear only in the graded review returned by the attempt endpoints.",
+    "contact": {
+      "name": "AMC Trainer",
+      "url": "https://github.com/ByronWilliamsCPA/AMC"
+    },
+    "license": {
+      "name": "MIT"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health/live": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Liveness probe",
+        "description": "Indicates if the application is running. Used by Kubernetes liveness probe.",
+        "operationId": "liveness_health_live_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health/ready": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Readiness probe",
+        "description": "Checks if the application can serve traffic. Used by Kubernetes readiness probe.",
+        "operationId": "readiness_health_ready_get",
+        "responses": {
+          "200": {
+            "description": "Application is ready to serve traffic",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessStatus"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Application is not ready (dependencies unavailable)"
+          }
+        }
+      }
+    },
+    "/health/startup": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Startup probe",
+        "description": "Indicates if the application has completed startup. Used by Kubernetes startup probe.",
+        "operationId": "startup_health_startup_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "description": "Authenticate and start a session.\n\nLogin attempts are rate-limited per email to mitigate credential stuffing.\n\nArgs:\n    payload: The login credentials.\n    response: The response (the session cookie is set on it).\n    db: The request-scoped database session.\n\nReturns:\n    The authenticated user.\n\nRaises:\n    AuthenticationError: On bad credentials or when rate-limited.",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logout",
+        "description": "End the current session, if any.\n\nAlways clears the cookie and returns 204, even if no valid session is present,\nso logout is idempotent.\n\nArgs:\n    request: The incoming request (for the session cookie).\n    response: The response (the cookie is cleared on it).\n    db: The request-scoped database session.\n\nReturns:\n    An empty 204 response.",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/me": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Me",
+        "description": "Return the currently authenticated user.\n\nArgs:\n    user: The authenticated user (from the session cookie).\n\nReturns:\n    The current user.",
+        "operationId": "me_api_v1_auth_me_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Register",
+        "description": "Redeem an invite, create the account, and start a session.\n\nArgs:\n    payload: The invite token, display name, and chosen password.\n    response: The response (the session cookie is set on it).\n    db: The request-scoped database session.\n\nReturns:\n    The newly created user.\n\nRaises:\n    ValidationError: If the invite is invalid/expired or the email is taken.",
+        "operationId": "register_api_v1_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/invites/{token}": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Validate Invite",
+        "description": "Validate an invite token without redeeming it.\n\nArgs:\n    token: The raw invite token from the invite link.\n    db: The request-scoped database session.\n\nReturns:\n    Whether the token is valid and, if so, the email and role it grants.",
+        "operationId": "validate_invite_api_v1_auth_invites__token__get",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InviteValidationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/invites": {
+      "post": {
+        "tags": [
+          "invites"
+        ],
+        "summary": "Create Invite",
+        "description": "Mint a one-time invite token (coach/admin only).\n\nThe raw token is returned exactly once for the issuer to share; only its hash\nis stored.\n\nArgs:\n    payload: The invitee email and role to grant.\n    staff: The authenticated coach/admin issuing the invite.\n    db: The request-scoped database session.\n\nReturns:\n    The created invite including the one-time raw token.\n\nRaises:\n    ValidationError: If the requested role is invalid.",
+        "operationId": "create_invite_api_v1_invites_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InviteCreatedResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/exams": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "List Exams",
+        "description": "List available exams, optionally filtered by contest.\n\nArgs:\n    _user: The authenticated user (auth required).\n    db: The request-scoped database session.\n    contest: Optional contest filter (e.g. ``AMC 10``).\n\nReturns:\n    Exam summaries.",
+        "operationId": "list_exams_api_v1_exams_get",
+        "parameters": [
+          {
+            "name": "contest",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Contest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamSummary"
+                  },
+                  "title": "Response List Exams Api V1 Exams Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/exams/{exam_id}": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Exam",
+        "description": "Return an exam and its problems, without the answer key.\n\nArgs:\n    exam_id: The exam id.\n    _user: The authenticated user (auth required).\n    db: The request-scoped database session.\n\nReturns:\n    The exam detail with key-free problems.\n\nRaises:\n    ResourceNotFoundError: If the exam does not exist.",
+        "operationId": "get_exam_api_v1_exams__exam_id__get",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Exam Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "List Diagnostics",
+        "description": "List available diagnostic instruments.\n\nArgs:\n    _user: The authenticated user (auth required).\n    db: The request-scoped database session.\n\nReturns:\n    Diagnostic summaries.",
+        "operationId": "list_diagnostics_api_v1_diagnostics_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DiagnosticSummary"
+                  },
+                  "type": "array",
+                  "title": "Response List Diagnostics Api V1 Diagnostics Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/{instrument_id}": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Diagnostic",
+        "description": "Return a diagnostic instrument and its items, without answers.\n\nArgs:\n    instrument_id: The instrument slug.\n    _user: The authenticated user (auth required).\n    db: The request-scoped database session.\n\nReturns:\n    The instrument detail with key-free items.\n\nRaises:\n    ResourceNotFoundError: If the instrument does not exist.",
+        "operationId": "get_diagnostic_api_v1_diagnostics__instrument_id__get",
+        "parameters": [
+          {
+            "name": "instrument_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Instrument Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/exams/{exam_id}/attempts": {
+      "post": {
+        "tags": [
+          "attempts"
+        ],
+        "summary": "Submit Exam",
+        "description": "Grade and store an exam submission, returning the reviewed result.\n\nArgs:\n    exam_id: The exam being submitted.\n    payload: The student's answers, flags, and time used.\n    user: The authenticated submitting user.\n    db: The request-scoped database session.\n\nReturns:\n    The graded result, including the per-problem review with answers.\n\nRaises:\n    ResourceNotFoundError: If the exam does not exist.",
+        "operationId": "submit_exam_api_v1_exams__exam_id__attempts_post",
+        "parameters": [
+          {
+            "name": "exam_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Exam Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamSubmission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/diagnostics/{instrument_id}/attempts": {
+      "post": {
+        "tags": [
+          "attempts"
+        ],
+        "summary": "Submit Diagnostic",
+        "description": "Grade and store a diagnostic submission, returning the verdict.\n\nAuto-graded items are checked server-side; manual items use the student's\nself-mark. The verdict is recomputed from the instrument's grading config.\n\nArgs:\n    instrument_id: The instrument being submitted.\n    payload: The student's responses, self-marks, and elapsed time.\n    user: The authenticated submitting user.\n    db: The request-scoped database session.\n\nReturns:\n    The graded result, including verdict and per-item review.\n\nRaises:\n    ResourceNotFoundError: If the instrument does not exist.",
+        "operationId": "submit_diagnostic_api_v1_diagnostics__instrument_id__attempts_post",
+        "parameters": [
+          {
+            "name": "instrument_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Instrument Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosticSubmission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticResultResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/progress": {
+      "get": {
+        "tags": [
+          "progress"
+        ],
+        "summary": "Get My Progress",
+        "description": "Return the authenticated user's progress and recommendation.\n\nArgs:\n    user: The authenticated user.\n    db: The request-scoped database session.\n\nReturns:\n    The user's history and synthesized recommendation.",
+        "operationId": "get_my_progress_api_v1_progress_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/progress": {
+      "get": {
+        "tags": [
+          "progress"
+        ],
+        "summary": "Get User Progress",
+        "description": "Return a specific user's progress (self, or any user for staff).\n\nArgs:\n    user_id: The target user's id.\n    viewer: The authenticated requesting user.\n    db: The request-scoped database session.\n\nReturns:\n    The target user's history and synthesized recommendation.\n\nRaises:\n    AuthorizationError: If a non-staff viewer requests another user's data.\n    ResourceNotFoundError: If the target user does not exist.",
+        "operationId": "get_user_progress_api_v1_users__user_id__progress_get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DiagnosticDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "course": {
+            "type": "string",
+            "title": "Course"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "instructions": {
+            "type": "string",
+            "title": "Instructions"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticItemRead"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "course",
+          "kind",
+          "role",
+          "instructions",
+          "items"
+        ],
+        "title": "DiagnosticDetail",
+        "description": "A diagnostic instrument with its items, served before submission."
+      },
+      "DiagnosticItemRead": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "section_title": {
+            "type": "string",
+            "title": "Section Title"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "manual": {
+            "type": "boolean",
+            "title": "Manual"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "section_title",
+          "label",
+          "prompt",
+          "manual"
+        ],
+        "title": "DiagnosticItemRead",
+        "description": "A diagnostic item served before submission (no answer key).\n\n``manual`` is exposed so the runner knows which items are self-marked;\n``answer`` / ``v`` / ``accept`` are intentionally absent."
+      },
+      "DiagnosticItemReview": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "correct": {
+            "type": "boolean",
+            "title": "Correct"
+          },
+          "manual": {
+            "type": "boolean",
+            "title": "Manual"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "correct",
+          "manual",
+          "answer"
+        ],
+        "title": "DiagnosticItemReview",
+        "description": "One item's post-submission review (answer revealed here)."
+      },
+      "DiagnosticResultResponse": {
+        "properties": {
+          "attempt_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attempt Id"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "verdict": {
+            "type": "string",
+            "title": "Verdict"
+          },
+          "correct": {
+            "type": "integer",
+            "title": "Correct"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "group_scores": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Group Scores"
+          },
+          "review": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticItemReview"
+            },
+            "type": "array",
+            "title": "Review"
+          }
+        },
+        "type": "object",
+        "required": [
+          "attempt_id",
+          "passed",
+          "verdict",
+          "correct",
+          "total",
+          "summary"
+        ],
+        "title": "DiagnosticResultResponse",
+        "description": "The graded result of a diagnostic submission."
+      },
+      "DiagnosticSubmission": {
+        "properties": {
+          "responses": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Responses"
+          },
+          "marks": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "type": "object",
+            "title": "Marks"
+          },
+          "elapsed_sec": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Elapsed Sec",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "DiagnosticSubmission",
+        "description": "A student's diagnostic submission.\n\nAttributes:\n    responses: Item id -> raw typed answer (for auto-graded items).\n    marks: Item id -> bool, the student's self-marks for manual items.\n    elapsed_sec: Seconds spent before submission."
+      },
+      "DiagnosticSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "course": {
+            "type": "string",
+            "title": "Course"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "course",
+          "kind",
+          "role"
+        ],
+        "title": "DiagnosticSummary",
+        "description": "A diagnostic instrument in a catalog listing (no items)."
+      },
+      "ExamDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "contest": {
+            "type": "string",
+            "title": "Contest"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "variant": {
+            "type": "string",
+            "title": "Variant"
+          },
+          "duration_sec": {
+            "type": "integer",
+            "title": "Duration Sec"
+          },
+          "score_mode": {
+            "type": "string",
+            "title": "Score Mode"
+          },
+          "num_problems": {
+            "type": "integer",
+            "title": "Num Problems"
+          },
+          "voided": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Voided"
+          },
+          "problems": {
+            "items": {
+              "$ref": "#/components/schemas/ProblemRead"
+            },
+            "type": "array",
+            "title": "Problems"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "contest",
+          "year",
+          "variant",
+          "duration_sec",
+          "score_mode",
+          "num_problems",
+          "voided",
+          "problems"
+        ],
+        "title": "ExamDetail",
+        "description": "An exam with its problems, served before submission (no answer key)."
+      },
+      "ExamResultResponse": {
+        "properties": {
+          "attempt_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Attempt Id"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "max_score": {
+            "type": "number",
+            "title": "Max Score"
+          },
+          "correct": {
+            "type": "integer",
+            "title": "Correct"
+          },
+          "wrong": {
+            "type": "integer",
+            "title": "Wrong"
+          },
+          "blank": {
+            "type": "integer",
+            "title": "Blank"
+          },
+          "review": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewItemResponse"
+            },
+            "type": "array",
+            "title": "Review"
+          }
+        },
+        "type": "object",
+        "required": [
+          "attempt_id",
+          "score",
+          "max_score",
+          "correct",
+          "wrong",
+          "blank",
+          "review"
+        ],
+        "title": "ExamResultResponse",
+        "description": "The graded result of an exam submission."
+      },
+      "ExamSubmission": {
+        "properties": {
+          "answers": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Answers"
+          },
+          "flags": {
+            "items": {
+              "type": "boolean"
+            },
+            "type": "array",
+            "title": "Flags"
+          },
+          "time_used_sec": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Time Used Sec",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "answers"
+        ],
+        "title": "ExamSubmission",
+        "description": "A student's exam submission."
+      },
+      "ExamSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "contest": {
+            "type": "string",
+            "title": "Contest"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "variant": {
+            "type": "string",
+            "title": "Variant"
+          },
+          "duration_sec": {
+            "type": "integer",
+            "title": "Duration Sec"
+          },
+          "score_mode": {
+            "type": "string",
+            "title": "Score Mode"
+          },
+          "num_problems": {
+            "type": "integer",
+            "title": "Num Problems"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "contest",
+          "year",
+          "variant",
+          "duration_sec",
+          "score_mode",
+          "num_problems"
+        ],
+        "title": "ExamSummary",
+        "description": "An exam in a catalog listing (no problems)."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Overall status: ok, degraded, or error"
+          },
+          "timestamp": {
+            "type": "number",
+            "title": "Timestamp",
+            "description": "Unix timestamp"
+          },
+          "uptime_seconds": {
+            "type": "number",
+            "title": "Uptime Seconds",
+            "description": "Application uptime in seconds"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version",
+            "description": "Application version",
+            "default": "0.1.0"
+          },
+          "python_version": {
+            "type": "string",
+            "title": "Python Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "uptime_seconds"
+        ],
+        "title": "HealthStatus",
+        "description": "Health check response model."
+      },
+      "InviteCreateRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "student"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "title": "InviteCreateRequest",
+        "description": "Request to mint a one-time invite (coach/admin only)."
+      },
+      "InviteCreatedResponse": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token",
+          "email",
+          "role"
+        ],
+        "title": "InviteCreatedResponse",
+        "description": "The freshly minted invite; ``token`` is shown exactly once."
+      },
+      "InviteValidationResponse": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "email"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid"
+        ],
+        "title": "InviteValidationResponse",
+        "description": "Public validation result for an invite token."
+      },
+      "LoginRequest": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1,
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginRequest",
+        "description": "Credentials for starting a session."
+      },
+      "ProblemRead": {
+        "properties": {
+          "number": {
+            "type": "integer",
+            "title": "Number"
+          },
+          "render_mode": {
+            "type": "string",
+            "title": "Render Mode"
+          },
+          "body_latex": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body Latex"
+          },
+          "image_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Path"
+          },
+          "choices": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Choices"
+          }
+        },
+        "type": "object",
+        "required": [
+          "number",
+          "render_mode"
+        ],
+        "title": "ProblemRead",
+        "description": "A problem as served before submission.\n\nNote the deliberate absence of any ``correct_answer`` field."
+      },
+      "ProgressResponse": {
+        "properties": {
+          "test_attempts": {
+            "items": {},
+            "type": "array",
+            "title": "Test Attempts"
+          },
+          "diagnostic_attempts": {
+            "items": {},
+            "type": "array",
+            "title": "Diagnostic Attempts"
+          },
+          "recommendation_course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recommendation Course"
+          },
+          "recommendation_reason": {
+            "type": "string",
+            "title": "Recommendation Reason"
+          },
+          "unlocked_by_amc": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unlocked By Amc"
+          },
+          "algebra_warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Algebra Warning"
+          }
+        },
+        "type": "object",
+        "required": [
+          "test_attempts",
+          "diagnostic_attempts",
+          "recommendation_course",
+          "recommendation_reason"
+        ],
+        "title": "ProgressResponse",
+        "description": "A user's combined progress and recommendation."
+      },
+      "ReadinessCheck": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Dependency name"
+          },
+          "status": {
+            "type": "boolean",
+            "title": "Status",
+            "description": "Check passed"
+          },
+          "latency_ms": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latency Ms",
+            "description": "Check latency in milliseconds"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error",
+            "description": "Error message if failed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "status"
+        ],
+        "title": "ReadinessCheck",
+        "description": "Individual dependency check result."
+      },
+      "ReadinessStatus": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Overall status: ok, degraded, or error"
+          },
+          "timestamp": {
+            "type": "number",
+            "title": "Timestamp",
+            "description": "Unix timestamp"
+          },
+          "uptime_seconds": {
+            "type": "number",
+            "title": "Uptime Seconds",
+            "description": "Application uptime in seconds"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version",
+            "description": "Application version",
+            "default": "0.1.0"
+          },
+          "python_version": {
+            "type": "string",
+            "title": "Python Version"
+          },
+          "checks": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ReadinessCheck"
+            },
+            "type": "object",
+            "title": "Checks",
+            "description": "Individual dependency checks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "uptime_seconds"
+        ],
+        "title": "ReadinessStatus",
+        "description": "Readiness check response with dependency details."
+      },
+      "RegisterRequest": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Token"
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name"
+          },
+          "password": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 8,
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token",
+          "display_name",
+          "password"
+        ],
+        "title": "RegisterRequest",
+        "description": "Invite redemption: set a password and create the account."
+      },
+      "ReviewItemResponse": {
+        "properties": {
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "your": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Your"
+          },
+          "correct": {
+            "type": "string",
+            "title": "Correct"
+          },
+          "ok": {
+            "type": "boolean",
+            "title": "Ok"
+          },
+          "voided": {
+            "type": "boolean",
+            "title": "Voided"
+          }
+        },
+        "type": "object",
+        "required": [
+          "n",
+          "your",
+          "correct",
+          "ok",
+          "voided"
+        ],
+        "title": "ReviewItemResponse",
+        "description": "One problem's post-submission review (answer key revealed here)."
+      },
+      "UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "display_name",
+          "role"
+        ],
+        "title": "UserResponse",
+        "description": "A user, safe to return to the authenticated client."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "health",
+      "description": "Liveness/readiness probes (unauthenticated)."
+    },
+    {
+      "name": "auth",
+      "description": "Login, logout, registration, and current user."
+    },
+    {
+      "name": "invites",
+      "description": "Mint one-time invites (coach/admin only)."
+    },
+    {
+      "name": "catalog",
+      "description": "Exams and diagnostics served without answer keys."
+    },
+    {
+      "name": "attempts",
+      "description": "Submit exams/diagnostics for server-side grading."
+    },
+    {
+      "name": "progress",
+      "description": "History plus the synthesized recommendation."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+name: "CodeQL configuration for AMC"
+
+# Include standard security and quality queries.
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+# Suppress false positives:
+#
+# py/unsafe-cyclic-import and py/undefined-name:
+#   SQLAlchemy 2.x uses TYPE_CHECKING guards for circular-import forward references.
+#   With `from __future__ import annotations` (PEP 563), all annotations are strings
+#   evaluated lazily; the cycle is safe at runtime. CodeQL does not model PEP 563
+#   deferred evaluation and reports false positives for this standard ORM pattern.
+#   Ruff covers real undefined-name and import-cycle issues in non-annotation code.
+#
+# py/unused-global-variable (paths: migrations/):
+#   Alembic uses module-level globals (revision, down_revision, branch_labels,
+#   depends_on) that appear unused to static analysis but are consumed by the
+#   Alembic runtime framework.
+query-filters:
+  - exclude:
+      id: py/unsafe-cyclic-import
+  - exclude:
+      id: py/undefined-name

@@ -1,0 +1,58 @@
+# CodeQL Analysis for AMC
+# Performs GitHub CodeQL static analysis to detect security vulnerabilities.
+#
+# Triggers on push to main, pull requests, and a weekly schedule.
+# Results are uploaded to the GitHub Security tab as SARIF.
+name: CodeQL Analysis
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master, develop]
+  schedule:
+    # Weekly scan on Wednesdays at 10:30 UTC
+    - cron: '30 10 * * 3'
+  workflow_dispatch:
+
+# Cancel in-progress runs for the same PR/branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python]
+
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@051e2f90686233507fe9283ff167d2e709304b30 # v3.36.0
+        with:
+          languages: ${{ matrix.language }}
+          config-file: .github/codeql/codeql-config.yml
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@051e2f90686233507fe9283ff167d2e709304b30 # v3.36.0
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@051e2f90686233507fe9283ff167d2e709304b30 # v3.36.0
+        with:
+          category: '/language:${{ matrix.language }}'

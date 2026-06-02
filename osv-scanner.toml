@@ -61,18 +61,77 @@ The py package is unmaintained but poses no security risk in this context.
 See: https://nvd.nist.gov/vuln/detail/CVE-2022-42969
 """
 
+# ----------------------------------------------------------------------------
+# handlebars devDependency (via @hey-api/openapi-ts@0.61.3) - 8 GHSA entries
+# Documented in docs/known-vulnerabilities.md (2026-06-01)
+# Remediation: upgrade @hey-api/openapi-ts to 0.98.0+ (deferred to release)
+# ----------------------------------------------------------------------------
 [[IgnoredVulns]]
-id = "PYSEC-2022-42969"
-reason = """
-Same as CVE-2022-42969 - DISPUTED ReDoS in py package via interrogate.
-Dev dependency only, affects SVN parsing which is not used.
-"""
+id = "GHSA-3mfm-83xf-c92r"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production; no attacker-controlled input. See docs/known-vulnerabilities.md"
 
 [[IgnoredVulns]]
-id = "GHSA-w596-4wvx-j9j6"
-reason = """
-GitHub Security Advisory for py ReDoS (same as CVE-2022-42969).
-DISPUTED vulnerability affecting SVN path parsing.
-interrogate (dev dependency) transitively requires py, but this project
-does not interact with Subversion repositories.
-"""
+id = "GHSA-2w6w-674q-4c4q"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-2qvq-rjwj-gvw9"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-7rx3-28cr-v5wh"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-442j-39wm-28r2"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-xhpv-hc6g-r9c6"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-9cx6-37pm-9jff"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-xjpj-3mr7-gcpf"
+reason = "handlebars devDependency via @hey-api/openapi-ts; never bundled in production. See docs/known-vulnerabilities.md"
+
+# ----------------------------------------------------------------------------
+# tar devDependency (via @hey-api/openapi-ts -> c12 -> giget -> tar) - 6 GHSA entries
+# Documented in docs/known-vulnerabilities.md (2026-06-01)
+# Remediation: upgrade @hey-api/openapi-ts to 0.98.0+ (same fix as handlebars)
+# ----------------------------------------------------------------------------
+[[IgnoredVulns]]
+id = "GHSA-34x7-hfp2-rc4v"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production; fetches only trusted upstream sources. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-8qq5-rm4j-mr97"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-83g3-92jg-28cx"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-qffp-2rhf-9h96"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-9ppj-qmqm-q256"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production. See docs/known-vulnerabilities.md"
+
+[[IgnoredVulns]]
+id = "GHSA-r6q2-hw4h-h46w"
+reason = "tar devDependency via @hey-api/openapi-ts chain; never in production. See docs/known-vulnerabilities.md"
+
+# ----------------------------------------------------------------------------
+# vitest devDependency - GHSA-5xrq-8626-4rwp (Critical, CVSS 9.8)
+# Documented in docs/known-vulnerabilities.md (2026-06-01)
+# Remediation: upgrade vitest to 4.1.0+ (deferred to release; breaking change)
+# ----------------------------------------------------------------------------
+[[IgnoredVulns]]
+id = "GHSA-5xrq-8626-4rwp"
+reason = "vitest devDependency; UI server feature (--ui) is never used; attack surface does not exist. See docs/known-vulnerabilities.md"

@@ -62,6 +62,9 @@ jobs:
             --junitxml=junit.xml \
             -o junit_family=xunit2
 
+      - name: Enforce per-file coverage floor
+        run: uv run python scripts/check_per_file_coverage.py --min 80
+
       - name: Run type checker
         run: uv run basedpyright src/
 
@@ -89,7 +92,7 @@ jobs:
           report_type: test_results
           fail_ci_if_error: false
 
-frontend:
+  frontend:
     name: Frontend (Node 22)
     runs-on: ubuntu-latest
     defaults:
@@ -116,6 +119,12 @@ frontend:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check API client is in sync with the committed OpenAPI schema
+        run: |
+          npm run generate-client:ci
+          git diff --exit-code src/client \
+            || (echo "::error::Generated API client is stale. Run 'npm run generate-client:ci' and commit src/client." && exit 1)
+
       - name: Lint
         run: npm run lint
 
@@ -136,7 +145,7 @@ frontend:
           fail_ci_if_error: false
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-ci-gate:
+  ci-gate:
     name: CI Gate
     runs-on: ubuntu-latest
     needs: [test, frontend]

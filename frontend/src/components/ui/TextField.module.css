@@ -1,0 +1,42 @@
+/* TextField - label + input + hint/error as one accessible unit. */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.input {
+  font: inherit;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+}
+
+.error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error-text);
+}

@@ -82,6 +82,11 @@
       "pinDigests": true
     },
     {
+      "matchManagers": ["npm"],
+      "matchFileNames": ["frontend/package.json"],
+      "groupName": "frontend npm dependencies"
+    },
+    {
       "description": "Pydantic v2 - maintain major version",
       "matchPackageNames": ["pydantic", "pydantic-settings"],
       "matchUpdateTypes": ["major"],
@@ -129,6 +134,7 @@
   ],
   "enabledManagers": [
     "pep621",
-    "github-actions"
+    "github-actions",
+    "npm"
   ]
 }

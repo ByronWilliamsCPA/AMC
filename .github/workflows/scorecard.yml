@@ -66,4 +66,3 @@ jobs:
           name: scorecard-results
           path: results.sarif
           retention-days: 5
-

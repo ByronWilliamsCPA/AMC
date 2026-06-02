@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial project setup and structure
 
+### Changed
+
+- Apply full repo-compliance audit: REUSE licensing, pre-commit hooks (no-em-dash,
+  yamllint, markdownlint, basedpyright, detect-secrets), CI workflow fixes
+  (CodeQL, REUSE, security scan, compatibility matrix, docs strict mode),
+  settings.json permission syntax, and OpenSSF baseline improvements
+- Raise test coverage from 76.68% to 80.51% with targeted unit tests for
+  seed.py, core security, auth schemas, and health endpoints
+- Fix Python 3.10 compatibility (datetime.UTC replaced with timezone.utc;
+  ruff target-version aligned with requires-python)
+
 ## [0.1.0] - TBD
 
 ### Added
