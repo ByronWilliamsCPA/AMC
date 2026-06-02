@@ -21,20 +21,21 @@ class TestSeedCounts:
 
     @pytest.mark.unit
     def test_construction_and_fields(self) -> None:
-        counts = SeedCounts(exams=3, problems=90, instruments=2, items=40)
+        counts = SeedCounts(exams=3, problems=90, instruments=2, items=40, catalog=10)
         assert counts.exams == 3
         assert counts.problems == 90
         assert counts.instruments == 2
         assert counts.items == 40
+        assert counts.catalog == 10
 
     @pytest.mark.unit
     def test_zero_counts(self) -> None:
-        counts = SeedCounts(exams=0, problems=0, instruments=0, items=0)
+        counts = SeedCounts(exams=0, problems=0, instruments=0, items=0, catalog=0)
         assert counts.exams == 0
 
     @pytest.mark.unit
     def test_frozen(self) -> None:
-        counts = SeedCounts(exams=1, problems=30, instruments=1, items=15)
+        counts = SeedCounts(exams=1, problems=30, instruments=1, items=15, catalog=5)
         with pytest.raises(AttributeError):
             counts.exams = 99  # type: ignore[misc]
 

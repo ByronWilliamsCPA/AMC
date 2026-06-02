@@ -9,8 +9,12 @@ from __future__ import annotations
 from amc.models.attempt import DiagnosticAttempt, TestAttempt
 from amc.models.base import Base
 from amc.models.diagnostic import (
+    GATE_AMC,
+    GATE_DIAGNOSTIC,
+    GATE_PREREQ,
     GRADING_MODE_FUNDPS,
     GRADING_MODE_THRESHOLD,
+    DiagnosticCatalogEntry,
     DiagnosticInstrument,
     DiagnosticItem,
 )
@@ -35,6 +39,9 @@ from amc.models.user import (
 )
 
 __all__ = [
+    "GATE_AMC",
+    "GATE_DIAGNOSTIC",
+    "GATE_PREREQ",
     "GRADING_MODE_FUNDPS",
     "GRADING_MODE_THRESHOLD",
     "RENDER_MODE_IMAGE",
@@ -49,6 +56,7 @@ __all__ = [
     "VALID_SCORE_MODES",
     "Base",
     "DiagnosticAttempt",
+    "DiagnosticCatalogEntry",
     "DiagnosticInstrument",
     "DiagnosticItem",
     "Exam",

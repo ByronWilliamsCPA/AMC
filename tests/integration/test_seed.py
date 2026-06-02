@@ -15,12 +15,14 @@ import pytest
 from sqlalchemy import select
 
 from amc.models import (
+    DiagnosticCatalogEntry,
     DiagnosticInstrument,
     DiagnosticItem,
     Exam,
     Problem,
 )
-from amc.seed import seed_amc, seed_diag
+from amc.repositories.catalog import DiagnosticRepository
+from amc.seed import seed_amc, seed_catalog, seed_diag
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -127,6 +129,52 @@ class TestSeedDiag:
         assert item.numeric_value == 3660.0
         assert "3,660" in item.accept
         assert item.manual is False
+
+
+class TestSeedCatalog:
+    """Seeding the diagnostic course catalog and reading its AMC gates."""
+
+    async def test_seeds_catalog_with_amc_gates(self, db_session: AsyncSession) -> None:
+        with _DIAG_PATH.open(encoding="utf-8") as handle:
+            data = json.load(handle)
+
+        count = await seed_catalog(db_session, data)
+        # The bundle documents 10 catalog rows.
+        assert count == 10
+
+        rows = (
+            (await db_session.execute(select(DiagnosticCatalogEntry))).scalars().all()
+        )
+        amc = {r.course: r for r in rows if r.gate == "amc"}
+        # Only the two AMC-gated courses carry a score threshold (CONSTANTS §3).
+        assert amc["AMC 10 Problem Series"].min_score == pytest.approx(60.0)
+        assert amc["AMC 10 Final Fives"].min_score == pytest.approx(80.0)
+
+    async def test_idempotent_reseed(self, db_session: AsyncSession) -> None:
+        with _DIAG_PATH.open(encoding="utf-8") as handle:
+            data = json.load(handle)
+        await seed_catalog(db_session, data)
+        await seed_catalog(db_session, data)
+        rows = (
+            (await db_session.execute(select(DiagnosticCatalogEntry))).scalars().all()
+        )
+        # Re-running upserts by course rather than duplicating rows.
+        assert len(rows) == 10
+
+    async def test_list_amc_gates_sorted_by_min_score(
+        self, db_session: AsyncSession
+    ) -> None:
+        with _DIAG_PATH.open(encoding="utf-8") as handle:
+            data = json.load(handle)
+        await seed_catalog(db_session, data)
+
+        gates = await DiagnosticRepository(db_session).list_amc_gates()
+        # Only amc rows, lowest bar first; prereq/diagnostic rows are excluded.
+        assert [g.course for g in gates] == [
+            "AMC 10 Problem Series",
+            "AMC 10 Final Fives",
+        ]
+        assert [g.min_score for g in gates] == pytest.approx([60.0, 80.0])
 
 
 class TestSeedCli:

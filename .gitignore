@@ -291,3 +291,6 @@ tmp_cleanup/.tmp-*
 
 # Git worktrees (always local, never committed)
 .worktrees/
+
+# Local-only AMC content bundle (official problem scans; never commit - redistribution risk, see docs/planning risk register)
+content/amc_data.json

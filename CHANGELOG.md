@@ -9,8 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial project setup and structure
+- Diagnostic course catalog: `DiagnosticCatalogEntry` model and migration, seeded
+  from `diag_data.json`, persisting how each course is reached (diagnostic /
+  prereq / amc) and the AMC-10 score thresholds for gated courses
 
 ### Changed
+
+- Wire AMC-10 score gates into the placement recommendation: the progress
+  endpoint now sources `gate: "amc"` thresholds from the seeded catalog
+  (CONSTANTS.md section 3) instead of passing an empty gate list, so a student's
+  AMC-10 score unlocks the catalog courses it clears (Problem Series at 60+,
+  Final Fives at 80+)
+- Apply full repo-compliance audit: REUSE licensing, pre-commit hooks (no-em-dash,
+  yamllint, markdownlint, basedpyright, detect-secrets), CI workflow fixes
+  (CodeQL, REUSE, security scan, compatibility matrix, docs strict mode),
+  settings.json permission syntax, and OpenSSF baseline improvements
+- Raise test coverage from 76.68% to 80.51% with targeted unit tests for
+  seed.py, core security, auth schemas, and health endpoints
+- Fix Python 3.10 compatibility (datetime.UTC replaced with timezone.utc;
+  ruff target-version aligned with requires-python)
 
 - Apply full repo-compliance audit: REUSE licensing, pre-commit hooks (no-em-dash,
   yamllint, markdownlint, basedpyright, detect-secrets), CI workflow fixes

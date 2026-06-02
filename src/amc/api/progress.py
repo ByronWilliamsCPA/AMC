@@ -26,6 +26,7 @@ from amc.schemas.diagnostic import (
 )
 from amc.schemas.exam import TestAttemptSummary
 from amc.services.recommendation import (
+    AmcGate,
     InstrumentResult,
     Recommendation,
     synthesize,
@@ -90,23 +91,43 @@ async def _build_progress(user_id: uuid.UUID, db: DbSession) -> ProgressResponse
     test_attempts = await TestAttemptRepository(db).list_for_user(user_id)
     diag_attempts = await DiagnosticAttemptRepository(db).list_for_user(user_id)
 
-    instruments = await DiagnosticRepository(db).list_instruments()
+    diagnostics = DiagnosticRepository(db)
+    instruments = await diagnostics.list_instruments()
     by_id = {inst.id: inst for inst in instruments}
 
     ladder = _ladder_from(instruments)
     results = _latest_results(diag_attempts, by_id)
     amc10 = await _best_amc10(test_attempts, db)
+    amc_gates = await _amc_gates_from(diagnostics)
 
     recommendation = synthesize(
         ladder=ladder,
         results=results,
         amc10_score=amc10,
-        # The diagnostic catalog (ladder + AMC gates) is seeded from
-        # diag_data.json; until the seed script lands, no AMC gates are applied
-        # and the recommendation runs on the ladder walk alone.
-        amc_gates=[],
+        amc_gates=amc_gates,
     )
     return _to_response(test_attempts, diag_attempts, recommendation)
+
+
+async def _amc_gates_from(diagnostics: DiagnosticRepository) -> list[AmcGate]:
+    """Return the AMC-10 score gates from the seeded diagnostic catalog.
+
+    The catalog's ``gate``-``amc`` rows (CONSTANTS.md §3) drive the advisory list
+    of courses an AMC-10 score unlocks. Sourcing them from seeded content keeps
+    the thresholds out of application code, so re-seeding changes behaviour.
+
+    Args:
+        diagnostics: The diagnostic repository bound to the request session.
+
+    Returns:
+        Catalog AMC gates as :class:`AmcGate` inputs for ``synthesize``.
+    """
+    entries = await diagnostics.list_amc_gates()
+    return [
+        AmcGate(course=entry.course, min_score=entry.min_score, note=entry.note)
+        for entry in entries
+        if entry.min_score is not None
+    ]
 
 
 def _ladder_from(instruments: list[DiagnosticInstrument]) -> list[str]:

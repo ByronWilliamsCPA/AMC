@@ -21,6 +21,11 @@ from amc.models.base import Base, uuid_pk
 GRADING_MODE_THRESHOLD = "threshold"  # single ``need`` cut-off
 GRADING_MODE_FUNDPS = "fundps"  # separate fundamentals / problem-solving cuts
 
+# Catalog gate kinds carried in ``DiagnosticCatalogEntry.gate`` (CONSTANTS.md §3).
+GATE_DIAGNOSTIC = "diagnostic"  # placed by a diagnostic instrument
+GATE_PREREQ = "prereq"  # placed by a prerequisite course (no diagnostic)
+GATE_AMC = "amc"  # unlocked by an AMC-10 score at or above ``min_score``
+
 
 class DiagnosticInstrument(Base):
     """One AoPS placement instrument.
@@ -93,3 +98,29 @@ class DiagnosticItem(Base):
     manual: Mapped[bool] = mapped_column(Boolean, default=False)
 
     instrument: Mapped[DiagnosticInstrument] = relationship(back_populates="items")
+
+
+class DiagnosticCatalogEntry(Base):
+    """One row of the course catalog (``diag_data.json`` ``catalog``).
+
+    The catalog is the placement engine's reference table: each course is reached
+    by a diagnostic, a prerequisite, or an AMC-10 score gate. Only ``gate``-``amc``
+    rows carry a ``min_score``; the recommendation service reads them to build the
+    advisory "unlocked by your AMC 10 score" list (CONSTANTS.md §3). ``course`` is
+    the natural primary key because the synthesize step joins courses by exact
+    string, and each course appears once in the catalog.
+
+    Attributes:
+        course: Course name; matches instrument/ladder course strings exactly.
+        gate: How the course is reached (``diagnostic``, ``prereq``, or ``amc``).
+        min_score: Inclusive AMC-10 score that unlocks the course; ``None`` unless
+            ``gate`` is ``amc``.
+        note: Advisory text shown alongside the course.
+    """
+
+    __tablename__ = "diagnostic_catalog"
+
+    course: Mapped[str] = mapped_column(String(120), primary_key=True)
+    gate: Mapped[str] = mapped_column(String(16))
+    min_score: Mapped[float | None] = mapped_column(Float, nullable=True)
+    note: Mapped[str] = mapped_column(String, default="")
