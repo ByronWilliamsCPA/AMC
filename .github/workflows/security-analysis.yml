@@ -84,7 +84,12 @@ jobs:
           retention-days: 30
 
   security-gate-success:
-    name: Security Gate Validation
+    # The job display name IS the status-check context. The org ruleset
+    # requires the context "Security Analysis / Security Gate Validation"
+    # (the Caller / Job format the org's reusable security workflow emits).
+    # This standalone workflow must name the job to match that string exactly,
+    # or the required check waits forever as "Expected".
+    name: Security Analysis / Security Gate Validation
     runs-on: ubuntu-latest
     needs: [security]
     if: always()
