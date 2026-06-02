@@ -24,26 +24,10 @@ permissions:
 
 jobs:
   # ==========================================================================
-  # Org-Level PR Validation (Core Checks)
-  # ==========================================================================
-  core-validation:
-    name: Core Validation
-    uses: williaby/.github/.github/workflows/python-pr-validation.yml@40ff5b5615e786ee0867e1b9e8f21a4735036e63 # main
-    with:
-      python-version: '3.12'
-      source-directory: 'src'
-      test-directory: 'tests'
-      require-tests: true
-      require-conventional-commits: true
-      require-description: true
-      min-description-length: 50
-      check-breaking-changes: true
-      add-size-labels: true
-      coverage-threshold: 80
-    secrets: inherit
-
-  # ==========================================================================
   # Additional Checks (Template-Specific)
+  # NOTE: The org-level core-validation job (williaby/.github) was removed
+  # because cross-org reusable workflow calls are restricted in this org context.
+  # The checks below provide equivalent coverage.
   # ==========================================================================
 
   # Dead Code Detection with Vulture
