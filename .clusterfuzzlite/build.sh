@@ -1,21 +1,23 @@
 #!/bin/bash -eu
 # ClusterFuzzLite Build Script
-# Compiles Python fuzz targets with coverage instrumentation
+# Compiles Python fuzz targets into self-contained fuzzer executables.
 #
 # Reference: https://google.github.io/clusterfuzzlite/build-integration/python/
 
 # shellcheck disable=SC2154
-# Note: $SRC and $OUT are provided by ClusterFuzzLite runtime environment
+# Note: $SRC and $OUT, and the compile_python_fuzzer helper, are provided by
+# the gcr.io/oss-fuzz-base/base-builder-python runtime environment.
 
-# Install the package with fuzzing support
+# Install the package so fuzz targets can import project code.
 pip3 install -e .
 
-# Copy fuzz targets to the output directory
-# Each Python file in fuzz/ directory becomes a fuzz target
+# Compile each fuzz target with compile_python_fuzzer. This helper runs
+# PyInstaller to bundle the target plus its dependencies into a standalone
+# executable in $OUT (along with the .options metadata file). A plain
+# `cp` of the .py file is NOT a recognised fuzz target and fails the
+# bad-build-check with "No fuzz targets found".
 for fuzzer in "$SRC"/amc/fuzz/fuzz_*.py; do
     if [ -f "$fuzzer" ]; then
-        fuzzer_basename=$(basename -s .py "$fuzzer")
-        cp "$fuzzer" "$OUT/$fuzzer_basename"
-        chmod +x "$OUT/$fuzzer_basename"
+        compile_python_fuzzer "$fuzzer"
     fi
 done
