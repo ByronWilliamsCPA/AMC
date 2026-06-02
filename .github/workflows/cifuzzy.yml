@@ -1,8 +1,10 @@
-# AMC - Continuous Fuzzing
-# ClusterFuzzLite workflow for automated security testing
+# AMC - Scheduled Fuzzing
+# ClusterFuzzLite workflow for automated security testing.
 #
-# This workflow uses Google's ClusterFuzzLite to continuously fuzz test
-# the codebase for vulnerabilities, crashes, and edge cases.
+# This workflow uses Google's ClusterFuzzLite to fuzz test the codebase for
+# vulnerabilities, crashes, and edge cases. It runs on a weekly schedule (and
+# on demand), not on pull requests or pushes, because a full batch fuzz run is
+# too heavy for per-commit CI.
 #
 # Fuzzing Targets:
 #   - Input validation functions
@@ -15,15 +17,12 @@
 name: Continuous Fuzzing
 
 on:
+  # Fuzzing is heavy; run it on a weekly schedule and on demand only, not on
+  # every push or pull request.
+  schedule:
+    # Mondays at 07:13 UTC (off-peak minute to avoid scheduler contention).
+    - cron: '13 7 * * 1'
   workflow_dispatch:  # Manual trigger
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
 
 permissions:
   contents: read
@@ -66,7 +65,6 @@ jobs:
           language: python
           sanitizer: ${{  matrix.sanitizer  }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          keep-unaffected-fuzz-targets: true
 
       - name: Run Fuzzers
         if: steps.check-fuzz.outputs.has-targets == 'true'
@@ -75,7 +73,7 @@ jobs:
         with:
           github-token: ${{  secrets.GITHUB_TOKEN  }}
           fuzz-seconds: 600
-          mode: 'code-change'
+          mode: 'batch'
           sanitizer: ${{  matrix.sanitizer  }}
           output-sarif: true
 
