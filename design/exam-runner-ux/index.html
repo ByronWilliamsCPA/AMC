@@ -1,0 +1,3195 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Web app for practice math tests">
+      
+      
+        <meta name="author" content="Byron Williams">
+      
+      
+        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/design/exam-runner-ux/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AMC Trainer - Timed Exam Runner UX Specification - AMC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-read-this-spec" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AMC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AMC Trainer - Timed Exam Runner UX Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guides/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api-reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../development/architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../auth/authentik/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Authentication
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../known-vulnerabilities/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AMC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/code-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Quality
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Authentication
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth/authentik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentik
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../known-vulnerabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Vulnerabilities
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-this-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to read this spec
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-goals-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Goals &amp; Constraints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Goals &amp; Constraints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-the-five-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 The five goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-constraints-inherited-from-the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Constraints inherited from the architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-out-of-scope-so-the-runner-stays-focused" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Out of scope (so the runner stays focused)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-layout-anatomy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Layout &amp; Anatomy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Layout &amp; Anatomy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-desktop-active-phase-720px" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Desktop - active phase (≥ 720px)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-mobile-active-phase-720px" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Mobile - active phase (&lt; 720px)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-phase-layouts-submitting-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Phase layouts (submitting / review)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The Timer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The Timer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-behavioral-contract-pinned-to-usecountdown-matches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Behavioral contract (pinned to useCountdown) - [MATCHES]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-format-matches-formatduration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Format - [MATCHES] formatDuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-placement-calm-by-default-styling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Placement &amp; calm-by-default styling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-escalating-urgency-shapetextaria-not-color-alone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Escalating urgency - shape/text/ARIA, not color alone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-the-aria-live-cadence-do-not-announce-every-second" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 The aria-live cadence (do NOT announce every second)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-the-auto-submit-at-zero-moment-what-the-student-sees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 The auto-submit-at-zero moment (what the student sees)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-answering-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Answering &amp; Navigation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Answering &amp; Navigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-selecting-and-clearing-a-choice-matches-questiontsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Selecting and clearing a choice - [MATCHES] Question.tsx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-flagging-matches-reducer-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Flagging - [MATCHES] reducer + controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-moving-between-questions-matches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Moving between questions - [MATCHES]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-keyboard-model-full-spec-extends-none-of-this-exists-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Keyboard model (full spec) - [EXTENDS] (none of this exists yet)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-submitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Submitting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Submitting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-manual-submit-confirm-first-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Manual submit - confirm first - [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-auto-submit-path-no-confirmation-matches-mechanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Auto-submit path - no confirmation - [MATCHES] mechanism
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-guarding-against-double-submit-matches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Guarding against double-submit - [MATCHES]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53a-the-submit-payload-matches-examsubmission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3a The submit payload - [MATCHES] ExamSubmission
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-handling-the-servers-already-submitted-409-matches-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Handling the server's "already submitted" (409) - [MATCHES] intent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-phase-mapping-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Phase mapping summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-review-screen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The Review Screen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. The Review Screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-score-breakdown-matches-with-framing-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Score breakdown - [MATCHES] with framing additions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-per-problem-table-matches-columns-extends-scannability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Per-problem table - [MATCHES] columns, [EXTENDS] scannability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-review-affordances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Review affordances
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-edge-cases-states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Edge Cases &amp; States
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Edge Cases &amp; States">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-refresh-return-mid-exam-risk-top-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Refresh / return mid-exam - [RISK - top priority]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-network-failure-on-submit-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Network failure on submit - [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-very-long-equations-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Very long equations - [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-image-mode-papers-amc-10-scans-matches-with-polish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Image-mode papers (AMC 10 scans) - [MATCHES] with polish
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-all-blank-submission-matches-allowed-extends-gentle-nudge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 All-blank submission - [MATCHES] allowed, [EXTENDS] gentle nudge
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-voided-problems-in-palette-review-matches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6 Voided problems in palette + review - [MATCHES]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77-state-matrix-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7 State matrix (quick reference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-accessibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Accessibility
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Accessibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-radiogroup-semantics-matches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Radiogroup semantics - [MATCHES]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-roletimer-matches-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 role="timer" - [MATCHES] + [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-focus-management-on-phase-changes-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Focus management on phase changes - [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-announcements-matches-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Announcements - [MATCHES] + [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-reduced-motion-extends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Reduced motion - [EXTENDS]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-contrast-color-independence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 Contrast &amp; color independence
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-prioritized-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Prioritized Recommendations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Prioritized Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sequencing-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequencing note
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-symbol-field-cross-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A - Symbol &amp; field cross-reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-b-spec-vs-code-status-legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix B - Spec-vs-code status legend
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>AMC Trainer - Timed Exam Runner UX Specification</h1>
+
+<blockquote>
+<p><strong>Status</strong>: Draft | <strong>Updated</strong>: 2026-05-31 | <strong>Scope</strong>: US-001, the timed exam runner</p>
+</blockquote>
+<h2 id="how-to-read-this-spec">How to read this spec<a class="headerlink" href="#how-to-read-this-spec" title="Permanent link">&para;</a></h2>
+<p>This is a <strong>deep-dive UX spec that refines a working implementation</strong>, not a greenfield
+proposal. The runner already exists and works. Throughout, status callouts mark the
+relationship between this spec and the code:</p>
+<ul>
+<li><strong>[MATCHES]</strong> - the current code already does this; the spec documents and pins the behavior.</li>
+<li><strong>[EXTENDS]</strong> - a concrete addition or change layered on top of what exists today.</li>
+<li><strong>[RISK]</strong> - a current behavior that is a UX hazard; the spec recommends a stance.</li>
+</ul>
+<p>Real symbol names are used so this reads against the source. The reducer
+(<code>runnerReducer</code>, <code>RunnerState</code>, <code>RunnerPhase</code>, <code>RunnerAction</code>) in
+<code>frontend/src/features/exam/runnerState.ts</code>, the timer (<code>useCountdown</code>,
+<code>formatDuration</code>) in <code>useCountdown.ts</code>, and the components <code>Palette</code>, <code>Question</code>,
+<code>ExamReview</code>, <code>Tex</code>, plus the page <code>ExamRunnerPage</code> (<code>RunnerInner</code>) are the things being
+specced. API shapes (<code>ExamDetail</code>, <code>ProblemRead</code>, <code>ExamSubmission</code>, <code>ExamResultResponse</code>,
+<code>ReviewItemResponse</code>) come from <code>docs/api/openapi.json</code>.</p>
+<blockquote>
+<p><strong>Note on styling source of truth.</strong> The project brief describes "CSS Modules + design
+tokens". The current implementation uses a <strong>single global stylesheet</strong>
+<code>frontend/src/index.css</code> with design tokens in <code>:root</code> and BEM-ish class names
+(<code>.runner__timer</code>, <code>.palette__cell--answered</code>, …). This spec references the <strong>real</strong>
+tokens (<code>--color-primary: #2d4ea2</code>, <code>--color-warn: #9a5b00</code>, <code>--color-error: #b00020</code>,
+<code>--color-ok: #1b7f4b</code>, <code>--space-*</code>, <code>--radius</code>, <code>--maxw: 960px</code>). Where it says "add a
+class", that means add to <code>index.css</code> (or a future co-located module) - the naming and
+token usage are what matter, not the file boundary.</p>
+</blockquote>
+<hr />
+<h2 id="1-goals-constraints">1. Goals &amp; Constraints<a class="headerlink" href="#1-goals-constraints" title="Permanent link">&para;</a></h2>
+<p>The exam runner is the product's centerpiece. A timed test is an inherently high-stress,
+low-tolerance-for-ambiguity surface: a student under a ticking clock has no spare attention
+for a confusing UI, and a lost answer or a surprise auto-submit is a trust-destroying event.
+Every decision below serves five non-negotiable goals.</p>
+<h3 id="11-the-five-goals">1.1 The five goals<a class="headerlink" href="#11-the-five-goals" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Reduce anxiety.</strong> The default visual state is calm and academic (the project's tone).
+   The clock does not shout until it must. Nothing flashes, pulses, or turns red without a
+   real reason. The student should feel they are sitting a paper, not playing a game-show.</p>
+</li>
+<li>
+<p><strong>Zero ambiguity about state.</strong> At every moment the student can answer, without thinking:
+   <em>How much time is left? Which question am I on? Which have I answered? Which did I flag?
+   What happens if I press Submit?</em> The palette (<code>Palette.tsx</code>) and the header progress line
+   carry most of this load; the spec tightens them so state is never inferred, always shown.</p>
+</li>
+<li>
+<p><strong>Never lose work.</strong> Answers and flags live in the reducer
+   (<code>RunnerState.answers</code>, <code>RunnerState.flags</code>) and are only ever read, never silently
+   dropped, until submission. The largest residual risk here is <strong>page refresh mid-exam</strong>,
+   which today discards everything (see §7.1) - this spec flags it as the top correctness
+   issue and recommends persistence.</p>
+</li>
+<li>
+<p><strong>The timer is sacred.</strong> The clock is an <strong>absolute deadline</strong>, computed from
+   <code>startedAt + durationSec</code> (<code>useCountdown</code>), not a decrementing counter. It does not drift,
+   does not pause when the tab is backgrounded, and <strong>auto-submits exactly once</strong> at zero.
+   The UI must never present the timer as something that can be paused, gamed, or "stopped"
+   by leaving the page. <strong>[MATCHES]</strong> - this is the existing <code>useCountdown</code> contract, and the
+   spec's job is to make the <em>visible</em> timer faithful to it.</p>
+</li>
+<li>
+<p><strong>Integrity: no answer key before submission.</strong> <code>ExamDetail</code> / <code>ProblemRead</code> deliberately
+   carry <strong>no <code>correct_answer</code> field</strong> (the schema description says so explicitly). The
+   review screen (<code>ExamReview</code>, rendering <code>ExamResultResponse.review</code>) is the <strong>only</strong> place
+   a correct answer ever appears. Nothing in the active runner - not a tooltip, not a hint,
+   not a "check answer" affordance - may reveal or imply correctness. This is a hard
+   acceptance criterion from the roadmap ("No <code>correct_answer</code> in any pre-submission API
+   response or page source").</p>
+</li>
+</ol>
+<h3 id="12-constraints-inherited-from-the-architecture">1.2 Constraints inherited from the architecture<a class="headerlink" href="#12-constraints-inherited-from-the-architecture" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Source</th>
+<th>UX consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grading is server-side only</td>
+<td>tech-spec; <code>submitExam</code> → <code>ExamResultResponse</code></td>
+<td>The client cannot show a score or mark a question correct until the POST returns. No optimistic scoring.</td>
+</tr>
+<tr>
+<td>Single submission per attempt; 409 on repeat</td>
+<td><code>RunnerInner</code> <code>onError</code> handles <code>status === 409</code></td>
+<td>Submit must be guarded against double-fire (timer + button); a 409 is treated as "already submitted, show result".</td>
+</tr>
+<tr>
+<td>Absolute-deadline timer, fires once</td>
+<td><code>useCountdown</code> (<code>firedRef</code> guard)</td>
+<td>Auto-submit is unconditional at zero; the visible timer must not lie about remaining time.</td>
+</tr>
+<tr>
+<td>Two render modes per problem</td>
+<td><code>ProblemRead.render_mode</code> ∈ <code>latex</code> | <code>image</code></td>
+<td>The question area must handle both KaTeX bodies and scanned-image papers (AMC 10 scans).</td>
+</tr>
+<tr>
+<td>Two score modes</td>
+<td><code>score_mode</code> ∈ <code>sixpoint</code> | <code>count</code></td>
+<td>Review framing differs (6-point vs. raw count); blank ≠ wrong for <code>sixpoint</code>.</td>
+</tr>
+<tr>
+<td>Voided problems exist</td>
+<td><code>ExamDetail.voided</code> (1-based numbers)</td>
+<td>Voided problems must be visibly distinct in palette and review and excluded from scoring.</td>
+</tr>
+<tr>
+<td>Same-origin SPA, session cookie</td>
+<td>ADR-002</td>
+<td>Submit is a normal authenticated POST; auth errors (401) are possible and must be handled (see §7.2).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-out-of-scope-so-the-runner-stays-focused">1.3 Out of scope (so the runner stays focused)<a class="headerlink" href="#13-out-of-scope-so-the-runner-stays-focused" title="Permanent link">&para;</a></h3>
+<p>Per the roadmap, the runner is US-001 only. <strong>Not</strong> in scope here: catalog/selection,
+login/onboarding (US-002), diagnostics (US-003), the progress dashboard, or coach views.
+The runner <em>invalidates</em> the progress query on submit
+(<code>queryClient.invalidateQueries({ queryKey: queryKeys.progress() })</code>) but does not render it.</p>
+<hr />
+<h2 id="2-layout-anatomy">2. Layout &amp; Anatomy<a class="headerlink" href="#2-layout-anatomy" title="Permanent link">&para;</a></h2>
+<p>The runner is one route (<code>ExamRunnerPage</code> → <code>RunnerInner</code>) with three phases driven by
+<code>RunnerPhase</code> (<code>active</code> → <code>submitting</code> → <code>review</code>). The <strong>active</strong> layout has three regions:
+a <strong>header</strong>, a <strong>palette/navigator</strong>, and a <strong>question column</strong> (body + controls). The
+container is capped at <code>--maxw</code> (960px) and centered.</p>
+<h3 id="21-desktop-active-phase-720px">2.1 Desktop - active phase (≥ 720px)<a class="headerlink" href="#21-desktop-active-phase-720px" title="Permanent link">&para;</a></h3>
+<p>The current grid is <code>grid-template-columns: 12rem 1fr</code> at the <code>min-width: 720px</code>
+breakpoint (<code>.runner__body</code>), palette on the left, question on the right.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌───────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│  HEADER  (.runner__header - flex, wrap, baseline-aligned)                    │
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│                                                                             │
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  AMC 10 2023 A                         ⏱ 1:04:18           14 of 25 answered │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  (contest year variant, &lt;h1&gt;)          (.runner__timer,    (.runner__progress│
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│                                         role=&quot;timer&quot;)       aria-live polite)│
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├──────────────┬──────────────────────────────────────────────────────────────┤
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│  PALETTE     │  QUESTION COLUMN  (.runner__question)                         │
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│ (.palette,   │                                                               │
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  &lt;nav&gt;)      │   Problem 12               (.question__number, &lt;h2&gt;)          │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│              │                                                               │
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  ┌─┬─┬─┬─┬─┐ │   ┌───────────────────────────────────────────────────────┐  │
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│  │1│2│3│4│5│ │   │  Let x be a real number such that … (KaTeX display)    │  │
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│  ├─┼─┼─┼─┼─┤ │   │  or  [ scanned problem image, render_mode=&quot;image&quot; ]    │  │
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│  │6│7│8│9│⑩│ │   └───────────────────────────────────────────────────────┘  │
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│  ├─┼─┼─┼─┼─┤ │                                                               │
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│  │⑪│▣│13│14│15│  CHOICES (.choices, role=&quot;radiogroup&quot;)                       │
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│  ├─┼─┼─┼─┼─┤ │   ( ) A   2/5                                                 │
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│  │…│…│…│…│25│ │   (•) B   3/5     ← selected                                 │
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│  └─┴─┴─┴─┴─┘ │   ( ) C   4/5                                                 │
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│              │   ( ) D   1                                                    │
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│  legend ↓    │   ( ) E   6/5                                                 │
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│  ▣ flagged   │                                                               │
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│  ⑩ current   │   [ Clear answer ]   (.link-button, only when an answer set)  │
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│  ░ voided    │                                                               │
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│  █ answered  │   CONTROLS (.runner__controls)                                │
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│              │   [ Previous ] [ Flag ] [ Next ]            [   Submit   ]     │
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│              │    disabled at 0  toggles  disabled at end   (.runner__submit, │
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│              │                                               right-aligned)   │
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>└──────────────┴──────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<p><strong>Header anatomy</strong> (<code>.runner__header</code>, flex / wrap / <code>align-items: baseline</code>):</p>
+<ul>
+<li><strong>Contest title</strong> - <code>&lt;h1&gt;</code> rendering <code>{exam.contest} {exam.year}{exam.variant}</code>
+  (e.g. "AMC 10 2023 A"). Left-aligned, the page's main heading.</li>
+<li><strong>The timer</strong> - <code>.runner__timer</code>, <code>role="timer"</code>, the visual anchor of the whole screen
+  (see §3). <code>font-variant-numeric: tabular-nums</code> so digits don't jiggle as they tick.</li>
+<li><strong>Answered-count progress</strong> - <code>.runner__progress</code>, "{answeredCount(state)} of
+  {state.numProblems} answered", <code>aria-live="polite"</code>. This is the at-a-glance "how far am
+  I" readout. <strong>[EXTENDS]</strong> add a slim, non-color progress affordance (a thin underline bar
+  whose width = answered/total) so progress is perceivable pre-attention, not only on read.</li>
+</ul>
+<p><strong>Question area</strong> (<code>.runner__question</code>): problem number <code>&lt;h2&gt;</code> ("Problem {number}"), then
+the <strong>body</strong> (<code>.question__body</code> - KaTeX <code>display</code> via <code>&lt;Tex&gt;</code> or <code>&lt;img&gt;</code> scan), then the
+A–E <strong>radiogroup</strong> (<code>.choices</code>), then a conditional <strong>Clear answer</strong> link-button.</p>
+<p><strong>Controls</strong> (<code>.runner__controls</code>): Previous / Flag / Next / Submit. Submit is visually
+primary (<code>--color-primary</code> fill) and pushed to the right with <code>margin-left: auto</code>.</p>
+<h3 id="22-mobile-active-phase-720px">2.2 Mobile - active phase (&lt; 720px)<a class="headerlink" href="#22-mobile-active-phase-720px" title="Permanent link">&para;</a></h3>
+<p>At narrow widths the grid collapses to a single column (<code>grid-template-columns: 1fr</code>), and
+today the palette simply stacks <strong>above</strong> the question. That is workable but pushes the
+question below the fold and wastes vertical space on a 25-cell grid. <strong>[EXTENDS]</strong> convert
+the palette into a <strong>drawer/sheet</strong> so the question is the hero and the navigator is one tap
+away.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌─────────────────────────────────┐    Tapping &quot;Questions ▾&quot; or the
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│ AMC 10 2023 A                   │    progress chip opens the sheet:
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│ ⏱ 1:04:18      14/25 answered   │
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├─────────────────────────────────┤    ┌─────────────────────────────┐
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│ [ ☰ Questions ▾ ]   (sticky)    │    │  Question navigator      [✕]│
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>├─────────────────────────────────┤    │  ┌─┬─┬─┬─┬─┐                │
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│ Problem 12                      │    │  │1│2│3│4│5│  █ answered     │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│                                 │    │  ├─┼─┼─┼─┼─┤  ▣ flagged      │
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│  (KaTeX body / image scan)      │    │  │6│7│8│9│⑩│  ⑩ current     │
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│                                 │    │  ├─┼─┼─┼─┼─┤  ░ voided       │
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│  ( ) A   2/5                    │    │  │⑪│▣│…│…│15│                │
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│  (•) B   3/5                    │    │  └─┴─┴─┴─┴─┘                │
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│  ( ) C   4/5                    │    │  (tap a cell → jumps,       │
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│  ( ) D   1                      │    │   sheet closes)             │
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│  ( ) E   6/5                    │    └─────────────────────────────┘
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│  [ Clear answer ]               │
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>├─────────────────────────────────┤    The header (timer) stays fixed/
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│ STICKY FOOTER BAR               │    sticky at the top so the clock is
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│ [‹ Prev] [⚑ Flag] [Next ›]      │    always visible while scrolling a
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│           [   Submit   ]        │    long problem.
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>└─────────────────────────────────┘
+</span></code></pre></div>
+<p>Mobile specifics:</p>
+<ul>
+<li><strong>Header is sticky</strong> (<code>position: sticky; top: 0</code>) so the <strong>timer is always visible</strong> while
+  scrolling a long problem - on mobile the clock must never scroll away.</li>
+<li><strong>Controls become a sticky bottom bar</strong> so Prev/Flag/Next/Submit are reachable without
+  scrolling to the end of a tall question. Submit retains primary styling but, on mobile,
+  Prev/Next get larger 44×44px minimum hit targets.</li>
+<li><strong>Palette → sheet</strong>: a labeled trigger ("Questions") that announces flagged/unanswered
+  counts; the sheet is a <code>role="dialog"</code> with a focus trap and <code>Esc</code>/backdrop to close.
+  Selecting a cell dispatches <code>goto</code> and closes the sheet, returning focus to the question.</li>
+</ul>
+<h3 id="23-phase-layouts-submitting-review">2.3 Phase layouts (submitting / review)<a class="headerlink" href="#23-phase-layouts-submitting-review" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><code>submitting</code></strong> - the active layout stays mounted but <strong>frozen</strong> (<code>frozen = state.phase
+  !== 'active'</code>): radiogroup <code>disabled</code>, Flag/Submit disabled, Submit label reads
+  "Submitting…". <strong>[EXTENDS]</strong> overlay a calm, non-blocking "Submitting your answers…"
+  status with a spinner so the freeze is explained, not mysterious.</li>
+<li><strong><code>review</code></strong> - <code>RunnerInner</code> returns <code>&lt;ExamReview result={result} /&gt;</code>, a full-width page
+  (no palette, no timer). See §6.</li>
+</ul>
+<hr />
+<h2 id="3-the-timer">3. The Timer<a class="headerlink" href="#3-the-timer" title="Permanent link">&para;</a></h2>
+<p>The timer is the single most important pixel on the screen. It is also the easiest thing to
+get wrong - a timer that drifts, pauses, or surprises the student destroys trust. The
+behavioral contract is already correct in <code>useCountdown</code>; this section specs the <strong>visual
+and announcement</strong> layer on top of it.</p>
+<h3 id="31-behavioral-contract-pinned-to-usecountdown-matches">3.1 Behavioral contract (pinned to <code>useCountdown</code>) - [MATCHES]<a class="headerlink" href="#31-behavioral-contract-pinned-to-usecountdown-matches" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Absolute deadline.</strong> <code>deadline = startedAtMs + durationSec * 1000</code>. Every tick recomputes
+  <code>remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000))</code>. <strong>[RISK note]</strong> the
+  deadline anchors on <code>startedAtRef = Date.now()</code> at mount (client clock), not a server-issued
+  <code>started_at</code>; see §7.1 for the refresh implication and recommendation.</li>
+<li><strong>No drift, no pause on backgrounding.</strong> Because the value is derived from wall-clock time,
+  a throttled background <code>setInterval</code> only makes updates <em>less frequent</em>, never <em>wrong</em>. When
+  the tab refocuses, the displayed value snaps to the truth. The UI must <strong>not</strong> imply the
+  clock can be paused.</li>
+<li><strong>Fires exactly once.</strong> The <code>firedRef</code> guard ensures <code>onExpire</code> (→ <code>triggerSubmit</code>) runs a
+  single time at zero. Combined with the reducer's idempotent <code>startSubmit</code> and the page's
+  <code>if (state.phase !== 'active') return</code> guard, auto-submit cannot double up with a manual
+  submit.</li>
+</ul>
+<h3 id="32-format-matches-formatduration">3.2 Format - [MATCHES] <code>formatDuration</code><a class="headerlink" href="#32-format-matches-formatduration" title="Permanent link">&para;</a></h3>
+<p><code>formatDuration(totalSeconds)</code> renders <code>M:SS</code> under an hour and <code>H:MM:SS</code> at/over an hour.
+AMC durations make both real: AMC 8 (40 min) and AMC 10/12 (75 min) both start as
+<code>H:MM:SS</code> and cross into <code>M:SS</code> at the hour mark. <code>tabular-nums</code> keeps width stable across
+the transition so layout never shifts.</p>
+<h3 id="33-placement-calm-by-default-styling">3.3 Placement &amp; calm-by-default styling<a class="headerlink" href="#33-placement-calm-by-default-styling" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Placement.</strong> Top of the header, second item, baseline-aligned with the title. On mobile,
+  inside the sticky header so it is always on screen.</li>
+<li><strong>Calm default.</strong> Normal state uses <code>--color-fg</code> on the default background at 1.5rem / 700
+  weight (current <code>.runner__timer</code>). No border, no icon chrome beyond an optional small clock
+  glyph, no animation. It reads like a clock on a wall.</li>
+</ul>
+<h3 id="34-escalating-urgency-shapetextaria-not-color-alone">3.4 Escalating urgency - shape/text/ARIA, not color alone<a class="headerlink" href="#34-escalating-urgency-shapetextaria-not-color-alone" title="Permanent link">&para;</a></h3>
+<p>Urgency is conveyed <strong>redundantly</strong> (icon/shape + text label + ARIA), never by color alone,
+satisfying WCAG 1.4.1 (Use of Color). Three tiers, thresholds chosen to be meaningful for a
+40–75 min paper:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Threshold (<code>remaining</code>)</th>
+<th>Visual treatment</th>
+<th>Text/shape</th>
+<th>ARIA / announce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Normal</strong></td>
+<td><code>&gt; 300</code> (more than 5:00)</td>
+<td><code>--color-fg</code>, plain</td>
+<td>clock glyph <code>⏱</code>, no badge</td>
+<td>label only; no live announce</td>
+</tr>
+<tr>
+<td><strong>Caution</strong></td>
+<td><code>≤ 300</code> and <code>&gt; 60</code> (5:00–1:01)</td>
+<td><code>--color-warn</code> (#9a5b00) text + a subtle outlined "pill" around the timer; a small "5 min" milestone marker</td>
+<td>append "- 5 minutes left" at the threshold crossing</td>
+<td>one polite announcement at the 5:00 crossing</td>
+</tr>
+<tr>
+<td><strong>Warning</strong></td>
+<td><code>≤ 60</code> (final minute)</td>
+<td><code>--color-error</code> (#b00020) text, <strong>bordered</strong> timer chip (border, not just color), <code>font-weight: 800</code></td>
+<td>a <code>▲</code> warning glyph + visible "1 min" badge</td>
+<td>one assertive announcement at 1:00; then polite at 30s/10s (see §3.5)</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li>The <strong>shape change</strong> (no chrome → outlined pill → bordered chip with glyph) makes the tier
+  legible to color-blind users and in grayscale. The data attribute <code>data-urgency="normal" |
+  "caution" | "warning"</code> on <code>.runner__timer</code> drives CSS so the logic lives in one place.</li>
+<li><strong>No flashing/pulsing by default.</strong> Under <code>prefers-reduced-motion: no-preference</code> a single,
+  gentle one-shot scale "tick" at the 1:00 crossing is allowed; under reduced-motion it is
+  suppressed entirely (§8.5). Anxiety reduction beats spectacle.</li>
+<li>Compute the tier from <code>remaining</code> in <code>RunnerInner</code> (it already has <code>remaining</code> from
+  <code>useCountdown</code>); pass it to the timer element. This is purely presentational - <strong>it never
+  changes the deadline or the fire-once behavior</strong>.</li>
+</ul>
+<h3 id="35-the-aria-live-cadence-do-not-announce-every-second">3.5 The <code>aria-live</code> cadence (do NOT announce every second)<a class="headerlink" href="#35-the-aria-live-cadence-do-not-announce-every-second" title="Permanent link">&para;</a></h3>
+<p>Today the timer is <code>aria-live="off"</code> (correct - a per-second live region would flood a screen
+reader and make the page unusable). But silence all the way to zero is its own hazard: a
+non-sighted student deserves the same "time is running out" cues a sighted one gets from the
+red chip. <strong>[EXTENDS]</strong> introduce a <strong>separate, visually-hidden polite live region</strong> that
+announces on a sparse, milestone schedule - the visible <code>role="timer"</code> stays <code>aria-live="off"</code>.</p>
+<p>Proposed announcement schedule (fire each <strong>once</strong>, on the second it crosses the threshold):</p>
+<table>
+<thead>
+<tr>
+<th><code>remaining</code> crosses</th>
+<th>Announcement</th>
+<th>politeness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600 (10:00)</td>
+<td>"10 minutes remaining."</td>
+<td>polite</td>
+</tr>
+<tr>
+<td>300 (5:00)</td>
+<td>"5 minutes remaining."</td>
+<td>polite</td>
+</tr>
+<tr>
+<td>120 (2:00)</td>
+<td>"2 minutes remaining."</td>
+<td>polite</td>
+</tr>
+<tr>
+<td>60 (1:00)</td>
+<td>"1 minute remaining."</td>
+<td><strong>assertive</strong></td>
+</tr>
+<tr>
+<td>30</td>
+<td>"30 seconds remaining."</td>
+<td>assertive</td>
+</tr>
+<tr>
+<td>10</td>
+<td>"10 seconds remaining."</td>
+<td>assertive</td>
+</tr>
+<tr>
+<td>0</td>
+<td>"Time is up. Submitting your answers."</td>
+<td>assertive</td>
+</tr>
+</tbody>
+</table>
+<p>Implementation: keep a <code>useRef&lt;Set&lt;number&gt;&gt;</code> of already-announced milestones (mirrors the
+<code>firedRef</code> pattern) so each fires exactly once even though <code>tick()</code> runs every second. This
+gives parity with the visual urgency tiers without per-second chatter.</p>
+<h3 id="36-the-auto-submit-at-zero-moment-what-the-student-sees">3.6 The auto-submit-at-zero moment (what the student sees)<a class="headerlink" href="#36-the-auto-submit-at-zero-moment-what-the-student-sees" title="Permanent link">&para;</a></h3>
+<p>When <code>remaining</code> hits 0, <code>useCountdown</code> calls <code>onExpire</code> → <code>triggerSubmit</code> once. The student
+experience must be <strong>unambiguous and non-punitive</strong>:</p>
+<ol>
+<li>The timer reads <code>0:00</code> and shows the warning treatment (red, bordered, <code>▲</code>).</li>
+<li>The live region announces "Time is up. Submitting your answers." (assertive).</li>
+<li><strong>No confirmation dialog</strong> - time is up; asking "are you sure?" would be cruel and could
+   race the deadline. The auto path goes straight to <code>submitting</code>.</li>
+<li>The radiogroup and controls are already frozen; <strong>[EXTENDS]</strong> show the same "Submitting
+   your answers…" overlay as the manual path so the transition is explained.</li>
+<li>On success, <code>dispatch({ type: 'submitted' })</code> → review. The student lands on their graded
+   result with no extra clicks. If the POST fails, see §7.2 (the auto path needs a safety net
+   so a network blip at the buzzer doesn't strand the student with no result).</li>
+</ol>
+<blockquote>
+<p><strong>Distinction that matters:</strong> manual submit <em>asks first</em> (§5.1); auto submit <em>never asks</em>.
+The two share the single <code>triggerSubmit</code> entry point but differ in whether a confirmation
+precedes the call.</p>
+</blockquote>
+<hr />
+<h2 id="4-answering-navigation">4. Answering &amp; Navigation<a class="headerlink" href="#4-answering-navigation" title="Permanent link">&para;</a></h2>
+<h3 id="41-selecting-and-clearing-a-choice-matches-questiontsx">4.1 Selecting and clearing a choice - [MATCHES] <code>Question.tsx</code><a class="headerlink" href="#41-selecting-and-clearing-a-choice-matches-questiontsx" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The five choices are a real <strong><code>role="radiogroup"</code></strong> (<code>.choices</code> fieldset), one
+  <code>&lt;input type="radio"&gt;</code> per choice, <code>name="problem-{number}"</code>, <code>checked</code> bound to
+  <code>selected === choice.letter</code>. Selecting dispatches
+  <code>{ type: 'answer', index: state.current, choice }</code>.</li>
+<li><strong>Choice rendering.</strong> In <code>latex</code> mode each choice's HTML is rendered through <code>&lt;Tex&gt;</code> after
+  <code>stripDelimiters</code> removes wrapping <code>\( \)</code> / <code>$ $</code>. In <code>image</code> mode the choice body is
+  omitted (the scan shows the options); only the <strong>A–E letters</strong> render, so the radiogroup is
+  still fully usable on image papers. The letter (<code>.choice__letter</code>, bold) is always shown.</li>
+<li><strong>Clearing.</strong> When an answer is set and not frozen, a <strong>Clear answer</strong> link-button
+  (<code>.link-button</code>) dispatches <code>{ type: 'clearAnswer', index }</code>, returning the problem to blank
+  (<code>answers[index] = null</code>). This matters because <strong>blank ≠ wrong</strong> in <code>sixpoint</code> scoring
+  (blank earns 1.5; wrong earns 0), so the student needs a first-class way to <em>un-answer</em> a
+  guess. <strong>[EXTENDS]</strong> the visual selected-state on the chosen <code>.choice</code> should be stronger
+  than the OS radio dot - e.g. a left accent bar + <code>--color-surface</code> fill on the selected
+  label - so the current answer is unmistakable at a glance.</li>
+</ul>
+<h3 id="42-flagging-matches-reducer-controls">4.2 Flagging - [MATCHES] reducer + controls<a class="headerlink" href="#42-flagging-matches-reducer-controls" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The <strong>Flag</strong> control toggles <code>{ type: 'toggleFlag', index: state.current }</code>; the button
+  carries <code>aria-pressed={state.flags[current]}</code> and swaps its label between "Flag" / "Unflag".</li>
+<li>Flags are advisory only: they never affect scoring and are submitted in
+  <code>ExamSubmission.flags</code> for the record. In the palette, a flagged cell shows a <code>⚑</code> glyph and
+  a warning-colored border (<code>.palette__cell--flagged</code>), so flagging is visible globally, not
+  just on the current question.</li>
+</ul>
+<h3 id="43-moving-between-questions-matches">4.3 Moving between questions - [MATCHES]<a class="headerlink" href="#43-moving-between-questions-matches" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Prev / Next</strong> dispatch <code>prev</code> / <code>next</code>; the reducer <code>clampIndex</code>-es so they're safe at the
+  ends, and the buttons are <code>disabled</code> at index 0 and <code>numProblems - 1</code> respectively.</li>
+<li><strong>Palette jump</strong> - clicking a <code>.palette__cell</code> dispatches <code>{ type: 'goto', index }</code>; the
+  reducer clamps. The current cell shows <code>aria-current="true"</code> and a primary outline
+  (<code>.palette__cell--current</code>).</li>
+<li><strong>Navigation is always free.</strong> There is no forced linear order and no "you must answer to
+  proceed" gate - a student can skip, flag, and return. This is correct for a real contest and
+  must be preserved.</li>
+<li><strong>[EXTENDS]</strong> after selecting a choice, do <strong>not</strong> auto-advance. On a timed math test the
+  student often wants to re-read or change an answer; auto-advance is a classic source of
+  "it jumped and I lost my place" complaints. Advancing stays an explicit Next / palette
+  action.</li>
+</ul>
+<h3 id="44-keyboard-model-full-spec-extends-none-of-this-exists-yet">4.4 Keyboard model (full spec) - [EXTENDS] (none of this exists yet)<a class="headerlink" href="#44-keyboard-model-full-spec-extends-none-of-this-exists-yet" title="Permanent link">&para;</a></h3>
+<p>There is <strong>no keyboard shortcut layer today</strong> beyond native radio/button behavior. For a
+power surface like a timed test, keyboard fluency is a major speed and accessibility win.
+Bindings below are chosen to avoid clobbering browser defaults and to be discoverable.</p>
+<p><strong>Within the choices (native radiogroup - already works):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>↑</code> / <code>←</code></td>
+<td>Move selection to previous choice (native radio behavior)</td>
+</tr>
+<tr>
+<td><code>↓</code> / <code>→</code></td>
+<td>Move selection to next choice (native radio behavior)</td>
+</tr>
+<tr>
+<td><code>Space</code></td>
+<td>Select the focused choice</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>Move focus out of the radiogroup to the next control</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Because <code>↑↓←→</code> are owned by the radiogroup when focus is inside it, <strong>question navigation
+must not also use bare arrows</strong> - that would conflict. Hence the letter/number bindings below.</p>
+</blockquote>
+<p><strong>Global runner shortcuts (active phase, when focus is not in a text field):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+<th>Dispatch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code> <code>B</code> <code>C</code> <code>D</code> <code>E</code></td>
+<td>Select that choice for the current problem</td>
+<td><code>{ type: 'answer', choice }</code></td>
+</tr>
+<tr>
+<td><code>1</code>–<code>9</code>, then multi-digit entry</td>
+<td>Jump to that problem number (type "1" "2" → problem 12, short debounce)</td>
+<td><code>{ type: 'goto', index: n-1 }</code></td>
+</tr>
+<tr>
+<td><code>N</code> or <code>]</code> or <code>PageDown</code></td>
+<td>Next problem</td>
+<td><code>{ type: 'next' }</code></td>
+</tr>
+<tr>
+<td><code>P</code> or <code>[</code> or <code>PageUp</code></td>
+<td>Previous problem</td>
+<td><code>{ type: 'prev' }</code></td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>Toggle flag on current problem</td>
+<td><code>{ type: 'toggleFlag', index }</code></td>
+</tr>
+<tr>
+<td><code>Backspace</code> or <code>Delete</code></td>
+<td>Clear current answer</td>
+<td><code>{ type: 'clearAnswer', index }</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Open a keyboard-shortcuts help sheet</td>
+<td>(UI only)</td>
+</tr>
+<tr>
+<td><code>Esc</code></td>
+<td>Close any open sheet/dialog (palette sheet, help, confirm)</td>
+<td>(UI only)</td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ul>
+<li>Shortcuts are <strong>suppressed while a dialog/sheet is open</strong> (the dialog owns the keyboard),
+  and while focus is in an input/textarea (none today, but future-proof).</li>
+<li>Shortcuts are <strong>disabled once <code>phase !== 'active'</code></strong> (frozen), mirroring the reducer's edit
+  guard, so a stray keystroke during <code>submitting</code> does nothing.</li>
+<li>A small, dismissible "Press ? for keyboard shortcuts" hint on first load aids discovery.</li>
+<li>Letter keys for answering must use <code>event.key</code> case-insensitively and ignore when modifier
+  keys (<code>Ctrl</code>/<code>Meta</code>/<code>Alt</code>) are held, so browser shortcuts (Ctrl+F, etc.) are untouched.</li>
+</ul>
+<p><strong>Palette keyboard model - roving tabindex</strong> (the palette is a <code>&lt;nav&gt;</code> of buttons today):</p>
+<ul>
+<li>The palette grid implements <strong>roving tabindex</strong>: exactly one cell has <code>tabindex="0"</code> (the
+  current problem), the rest <code>tabindex="-1"</code>. Arrow keys move focus within the grid (<code>←/→</code>
+  by one, <code>↑/↓</code> by a row of 5 - matching the <code>repeat(5, 1fr)</code> layout), <code>Home</code>/<code>End</code> to first/
+  last, <code>Enter</code>/<code>Space</code> to jump (<code>goto</code>). This makes the navigator a single Tab stop instead
+  of 25, which is essential for keyboard and screen-reader users on a 25-cell grid.</li>
+</ul>
+<hr />
+<h2 id="5-submitting">5. Submitting<a class="headerlink" href="#5-submitting" title="Permanent link">&para;</a></h2>
+<p>Submission is the moment of highest stakes: it is irreversible, it freezes the attempt, and it
+is the boundary where the answer key appears. The flow maps directly onto <code>RunnerPhase</code>
+(<code>active</code> → <code>submitting</code> → <code>review</code>) and the single <code>triggerSubmit</code> entry point in
+<code>RunnerInner</code>.</p>
+<h3 id="51-manual-submit-confirm-first-extends">5.1 Manual submit - confirm first - [EXTENDS]<a class="headerlink" href="#51-manual-submit-confirm-first-extends" title="Permanent link">&para;</a></h3>
+<p>Today the <strong>Submit</strong> button calls <code>triggerSubmit</code> <strong>immediately</strong> with no confirmation. For a
+timed test where Submit ends the attempt, this is a footgun - a misclick (or a hurried student
+who meant to press Next) ends everything. <strong>[EXTENDS]</strong> add a <strong>confirmation dialog</strong> on the
+<em>manual</em> path only.</p>
+<p>The dialog summarizes the consequences using reducer-derived counts (cheap to compute):</p>
+<ul>
+<li><code>unanswered = state.numProblems - answeredCount(state)</code></li>
+<li><code>flagged = state.flags.filter(Boolean).length</code></li>
+<li>(voided is informational; voided problems can't be "answered" for score)</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌───────────────────────────────────────────────┐
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│  Submit your exam?                        [✕]  │
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│                                                │
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│  You have answered 14 of 25 problems.          │
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│  • 11 unanswered                               │
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│  • 3 flagged for review                        │
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│                                                │
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│  Submitting is final - you can&#39;t change        │
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│  answers afterward.                            │
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│                                                │
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│  Time remaining: 1:04:18                       │
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>│                                                │
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│         [ Keep working ]   [ Submit now ]      │
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>└───────────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li><code>role="dialog"</code>, <code>aria-modal="true"</code>, labelled by its heading, focus trapped; initial focus
+  on <strong>Keep working</strong> (the safe default) so an accidental <code>Enter</code> does not submit.</li>
+<li><strong>Submit now</strong> calls <code>triggerSubmit</code>; <strong>Keep working</strong> / <code>Esc</code> / backdrop dismisses and
+  returns focus to the Submit button.</li>
+<li>When <code>unanswered &gt; 0</code> the copy is slightly emphasized ("11 unanswered") so the student
+  doesn't submit a half-finished paper by accident - but submitting is never <em>blocked</em>.</li>
+<li>This dialog exists <strong>only</strong> on the manual path. The auto-submit path (§3.6, §5.2) bypasses
+  it entirely.</li>
+</ul>
+<h3 id="52-auto-submit-path-no-confirmation-matches-mechanism">5.2 Auto-submit path - no confirmation - [MATCHES] mechanism<a class="headerlink" href="#52-auto-submit-path-no-confirmation-matches-mechanism" title="Permanent link">&para;</a></h3>
+<p>When the deadline passes, <code>useCountdown</code> → <code>onExpire</code> → <code>triggerSubmit</code> runs once. There is
+<strong>no dialog</strong> (time is up; consent is moot). The reducer flips <code>active → submitting</code>, the
+mutation posts, and on success <code>submitted → review</code>. This is the existing wiring; the spec
+only adds the "Submitting…" overlay and the §7.2 failure safety net.</p>
+<h3 id="53-guarding-against-double-submit-matches">5.3 Guarding against double-submit - [MATCHES]<a class="headerlink" href="#53-guarding-against-double-submit-matches" title="Permanent link">&para;</a></h3>
+<p>Three independent guards already make double-submit impossible; the spec pins all three:</p>
+<ol>
+<li><strong>Page guard</strong> - <code>triggerSubmit</code> returns early if <code>state.phase !== 'active'</code>.</li>
+<li><strong>Reducer guard</strong> - <code>startSubmit</code> is idempotent: it only transitions <em>out of</em> <code>active</code>
+   once (<code>state.phase === 'active' ? … : state</code>).</li>
+<li><strong>Disabled controls</strong> - once <code>frozen</code>, the Submit button is <code>disabled</code> and its label is
+   "Submitting…", so it can't be clicked again.</li>
+</ol>
+<p>Together these mean the <strong>timer firing and the button being pressed at nearly the same
+instant</strong> still results in exactly one POST. (Documented in <code>RunnerInner</code>'s header comment;
+this spec elevates it to a tested invariant - see §9.)</p>
+<h3 id="53a-the-submit-payload-matches-examsubmission">5.3a The submit payload - [MATCHES] <code>ExamSubmission</code><a class="headerlink" href="#53a-the-submit-payload-matches-examsubmission" title="Permanent link">&para;</a></h3>
+<p><code>submitExam(exam.id, { answers, flags, time_used_sec })</code>. <code>RunnerState.answers</code> /
+<code>flags</code> are already the exact <code>ExamSubmission</code> shape (the reducer was built to avoid
+translation), and <code>time_used_sec = round((Date.now() - startedAtRef.current) / 1000)</code>. No
+mapping layer is needed; the spec preserves this 1:1 alignment.</p>
+<h3 id="54-handling-the-servers-already-submitted-409-matches-intent">5.4 Handling the server's "already submitted" (409) - [MATCHES] intent<a class="headerlink" href="#54-handling-the-servers-already-submitted-409-matches-intent" title="Permanent link">&para;</a></h3>
+<p>The mutation's <code>onError</code> checks <code>error instanceof ApiError &amp;&amp; error.status === 409</code> and, if so,
+dispatches <code>submitted</code> - treating the conflict as "this attempt already exists". <strong>[EXTENDS,
+small]</strong> today a 409 transitions to <code>review</code> but <code>result</code> may be <code>null</code>, and <code>RunnerInner</code>'s
+review branch requires <code>result !== null</code> - so a 409 with no body would leave a frozen active
+screen. The spec requires: on 409, <strong>fetch/return the existing <code>ExamResultResponse</code></strong> (the
+endpoint should return the prior result body on conflict, or the client refetches the attempt)
+and only then show review. The user-facing message is calm: "This exam was already submitted:
+here's your result," never an error.</p>
+<blockquote>
+<p><strong>Note for the API:</strong> the submit endpoint currently documents only 200/422 in
+<code>openapi.json</code>. The 409 path is implemented client-side defensively; the server contract
+should be updated to <strong>return the existing result on a repeat submission</strong> so the review can
+render. Logged as template/API feedback, not changed here.</p>
+</blockquote>
+<h3 id="55-phase-mapping-summary">5.5 Phase mapping summary<a class="headerlink" href="#55-phase-mapping-summary" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>        manual Submit ──► [confirm dialog] ──┐
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                                             ├─► triggerSubmit() ─► dispatch(startSubmit)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>   timer hits 0 ─► onExpire (once) ──────────┘        │  phase: active → submitting
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                                                       ▼
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                                          submitExam(...) POST
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                                            │                 │
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                    onSuccess(graded)     onError
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                            │              ├─ 409 → treat as submitted
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                                  setResult(graded)        └─ other → retry UX (§7.2)
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                                  dispatch(submitted)
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                                  phase: submitting → review
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                                            ▼
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                                  &lt;ExamReview result=… /&gt;
+</span></code></pre></div>
+<hr />
+<h2 id="6-the-review-screen">6. The Review Screen<a class="headerlink" href="#6-the-review-screen" title="Permanent link">&para;</a></h2>
+<p>Review (<code>ExamReview.tsx</code>, fed <code>ExamResultResponse</code>) is the payoff and the <strong>only</strong> place the
+answer key appears. It must feel like getting a graded paper back: clear headline, honest
+breakdown, and a per-problem table you can actually scan.</p>
+<h3 id="61-score-breakdown-matches-with-framing-additions">6.1 Score breakdown - [MATCHES] with framing additions<a class="headerlink" href="#61-score-breakdown-matches-with-framing-additions" title="Permanent link">&para;</a></h3>
+<p>Current <code>ExamReview</code> renders a <code>&lt;dl class="review__score"&gt;</code>: <strong>Score</strong> (<code>score / max_score</code>),
+<strong>Correct</strong>, <strong>Wrong</strong>, <strong>Blank</strong>. Keep all four. <strong>[EXTENDS]</strong> make the framing
+score-mode-aware (the result doesn't carry <code>score_mode</code>, but the originating <code>ExamDetail</code>
+does, so <code>RunnerInner</code> can pass it to <code>ExamReview</code>):</p>
+<ul>
+<li><strong><code>sixpoint</code></strong> (AMC 10/12): a one-line note that <strong>blanks score 1.5 each and wrong scores 0</strong>,
+  so the "Blank" stat reads as a deliberate strategy, not just "didn't finish". Show
+  <code>score / max_score</code> with one decimal (scores like <code>103.5</code> are normal under this rule).</li>
+<li><strong><code>count</code></strong> (AMC 8): <code>score / max_score</code> as whole numbers; the note simplifies to "1 point
+  per correct answer".</li>
+<li>Headline emphasis on <strong>Score / max</strong>; Correct / Wrong / Blank are the supporting stats.
+  Optionally surface a percentage and (later) percentile, but never invent data the server
+  didn't send.</li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>┌────────────────────────────────────────────────────────────────┐
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>│  Your result - AMC 10 2023 A                                    │
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│                                                                  │
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   Score          Correct      Wrong       Blank                  │
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   103.5 / 138      16            5           4                    │
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│   (.review__score dl/dt/dd)                                      │
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│                                                                  │
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│   Blanks score 1.5 each; wrong answers score 0. (sixpoint note)  │
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>└────────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<h3 id="62-per-problem-table-matches-columns-extends-scannability">6.2 Per-problem table - [MATCHES] columns, [EXTENDS] scannability<a class="headerlink" href="#62-per-problem-table-matches-columns-extends-scannability" title="Permanent link">&para;</a></h3>
+<p>Current <code>&lt;table class="review__table"&gt;</code> maps <code>result.review</code> (each <code>ReviewItemResponse</code>):
+<strong># (<code>item.n</code>)</strong>, <strong>Your answer (<code>item.your ?? '-'</code>)</strong>, <strong>Correct (<code>item.correct</code>)</strong>,
+<strong>Outcome</strong> (<code>outcome(item.voided, item.ok)</code> → "Void" / "Correct" / "Incorrect"). Keep these
+columns; the field-by-field source of truth is:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Source field</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>#</code></td>
+<td><code>item.n</code></td>
+<td>1-based problem number</td>
+</tr>
+<tr>
+<td>Your answer</td>
+<td><code>item.your</code></td>
+<td><code>null</code> → render <code>"-"</code> (a true blank)</td>
+</tr>
+<tr>
+<td>Correct</td>
+<td><code>item.correct</code></td>
+<td><strong>The answer key - only appears here</strong></td>
+</tr>
+<tr>
+<td>Outcome</td>
+<td><code>item.ok</code>, <code>item.voided</code></td>
+<td>voided wins: "Void"; else <code>ok</code> → "Correct"/"Incorrect"</td>
+</tr>
+</tbody>
+</table>
+<p>Making <strong>25 rows scannable</strong> (these papers are always 25 problems):</p>
+<ul>
+<li><strong>Outcome carries an icon + word</strong>, not color alone: <code>✓ Correct</code> (<code>--color-ok</code>),
+  <code>✗ Incorrect</code> (<code>--color-error</code>), <code>∅ Void</code> (muted). Redundant encoding = WCAG 1.4.1.</li>
+<li><strong>Quiet zebra striping</strong> and a <strong>sticky <code>&lt;thead&gt;</code></strong> so the header stays while scrolling 25
+  rows.</li>
+<li><strong>Visually distinguish wrong-vs-blank</strong>: a wrong answer (<code>your</code> set, <code>ok=false</code>) reads
+  differently from a blank (<code>your</code> null) - the blank row shows <code>"-"</code> and a muted "Blank"
+  sub-label on Outcome, because under <code>sixpoint</code> they have very different point values and the
+  student's review intent differs ("I missed this" vs. "I skipped this").</li>
+<li><strong>Right-align</strong> the short answer columns (single letters) and keep <code>#</code> narrow so the eye
+  tracks rows quickly.</li>
+<li><strong>[EXTENDS] filter chips</strong> - "All / Incorrect / Flagged / Blank" - let a student jump
+  straight to what they got wrong on a 25-row table. (Flagged requires carrying the
+  submission's <code>flags</code> into review, which <code>RunnerInner</code> already holds in <code>state.flags</code>.)</li>
+<li><strong>[EXTENDS] solution link out</strong> - link each row to the AoPS Wiki solution. <strong>This does not
+  exist today</strong>: <code>ReviewItemResponse</code> carries no per-problem URL, and <code>ExamResultResponse</code> no
+  exam-level link. The server <em>does</em> store <code>Exam.source_url</code> (the AoPS Wiki page, per
+  tech-spec) but it is <strong>not exposed</strong> in any response. Recommendation: add an optional
+  per-problem <code>solution_url</code> (or at minimum surface the exam-level <code>source_url</code>) to
+  <code>ReviewItemResponse</code> / <code>ExamResultResponse</code>, then render a "Solution ↗" link per row that
+  opens in a new tab (<code>rel="noopener noreferrer"</code>). Until that field exists, omit the link
+  rather than fabricate one. (Flagged as API feedback.)</li>
+</ul>
+<h3 id="63-review-affordances">6.3 Review affordances<a class="headerlink" href="#63-review-affordances" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A <strong>"Back to dashboard / history"</strong> action (the submit already invalidated the progress
+  query, so history is fresh). Review is terminal for the attempt - there is no "resume".</li>
+<li>The section is <code>aria-live="polite"</code> (already) so its arrival is announced; pair with the
+  focus move in §8.3.</li>
+</ul>
+<hr />
+<h2 id="7-edge-cases-states">7. Edge Cases &amp; States<a class="headerlink" href="#7-edge-cases-states" title="Permanent link">&para;</a></h2>
+<h3 id="71-refresh-return-mid-exam-risk-top-priority">7.1 Refresh / return mid-exam - [RISK - top priority]<a class="headerlink" href="#71-refresh-return-mid-exam-risk-top-priority" title="Permanent link">&para;</a></h3>
+<p><strong>Current behavior:</strong> state is <code>useReducer(runnerReducer, exam.num_problems, initRunner)</code> and
+<code>startedAtRef = useRef(Date.now())</code>, both <strong>in memory only</strong>. A page refresh, accidental
+back-navigation, or tab crash <strong>wipes every answer and flag and restarts the clock from full
+duration</strong>. This directly threatens goals #3 ("never lose work") and #4 ("the timer is
+sacred" - a refresh effectively <em>grants more time</em>, which is also an integrity problem).</p>
+<p><strong>Recommended stance (ranked):</strong></p>
+<ol>
+<li><strong>Server-authoritative attempt (best).</strong> On exam start, create the attempt server-side and
+   return a real <code>started_at</code>; the runner anchors <code>useCountdown</code> on the <strong>server</strong> deadline,
+   not <code>Date.now()</code>. Autosave answers/flags (debounced PATCH, or localStorage mirror keyed by
+   <code>attempt_id</code>) so a refresh <strong>rehydrates</strong> answers <em>and</em> resumes the <strong>same</strong> countdown.
+   This fixes both data loss and the "refresh = free time" exploit at once.</li>
+<li><strong>Local persistence (interim).</strong> Mirror <code>RunnerState</code> + <code>startedAtRef</code> to <code>localStorage</code>
+   under a key like <code>amc:attempt:{exam.id}</code>; on mount, if a non-expired snapshot exists, offer
+   "Resume your in-progress exam?" and rehydrate (recompute <code>remaining</code> from the <strong>stored</strong>
+   <code>startedAt</code>, so the clock keeps counting down rather than resetting). Clear on submit.
+   Cheaper, no API change, but trusts the client clock.</li>
+<li><strong>Explicit warning (floor).</strong> At minimum, a <code>beforeunload</code> guard ("You have an exam in
+   progress - leaving will lose your answers") so refresh/close isn't silent. This is a
+   stopgap, not a fix.</li>
+</ol>
+<p>This spec <strong>recommends option 1 as the target and option 2 as the immediate mitigation</strong>, and
+calls the current "starts fresh" behavior out as the single biggest UX/integrity gap in the
+runner.</p>
+<h3 id="72-network-failure-on-submit-extends">7.2 Network failure on submit - [EXTENDS]<a class="headerlink" href="#72-network-failure-on-submit-extends" title="Permanent link">&para;</a></h3>
+<p>The mutation handles 409 but <strong>not</strong> generic failure: on a 5xx/timeout/offline, <code>onError</code>
+falls through, the page stays <code>active</code>-but-the-attempt-may-or-may-not-have-landed, and the
+student gets no feedback. This is especially dangerous on the <strong>auto-submit</strong> path (a blip at
+the buzzer could lose the whole attempt).</p>
+<p><strong>Recommended retry UX:</strong></p>
+<ul>
+<li>On non-409 error, <strong>stay in a recoverable state</strong>: show a non-dismissable banner "Couldn't
+  submit - check your connection" with a <strong>Retry</strong> button that re-fires <code>submitMutation.mutate()</code>.
+  Because the POST is idempotent server-side per attempt (a repeat returns 409 → existing
+  result), retry is safe.</li>
+<li><strong>Do not</strong> flip out of <code>submitting</code> into a dead end; either land on <code>review</code> (success/409) or
+  surface Retry. For the <strong>auto path</strong>, keep the answers frozen and retry automatically a few
+  times with backoff before showing the manual Retry, so a transient blip self-heals.</li>
+<li>Preserve answers in memory (and, with §7.1 option 2, in storage) across retries so the
+  student never re-enters anything.</li>
+<li>If the failure is <strong>401</strong> (session expired), route to login and, on return, resubmit - never
+  silently drop the attempt.</li>
+</ul>
+<h3 id="73-very-long-equations-extends">7.3 Very long equations - [EXTENDS]<a class="headerlink" href="#73-very-long-equations-extends" title="Permanent link">&para;</a></h3>
+<p>KaTeX display blocks (<code>&lt;Tex display&gt;</code>) can overflow horizontally (long algebraic expressions,
+big matrices). Spec: the <code>.question__body</code> allows <strong>horizontal scroll within the block</strong>
+(<code>overflow-x: auto</code>) rather than letting a wide equation blow out the page layout or shove the
+choices off-screen. Choices (inline <code>&lt;Tex&gt;</code>) wrap normally. Malformed TeX already degrades
+gracefully - <code>throwOnError: false</code> renders a visible error string instead of crashing the
+runner mid-exam (the <code>Tex.tsx</code> rationale), which the spec keeps.</p>
+<h3 id="74-image-mode-papers-amc-10-scans-matches-with-polish">7.4 Image-mode papers (AMC 10 scans) - [MATCHES] with polish<a class="headerlink" href="#74-image-mode-papers-amc-10-scans-matches-with-polish" title="Permanent link">&para;</a></h3>
+<p>When <code>render_mode === 'image'</code>, <code>Question</code> renders <code>&lt;img src={image_path}
+alt="Problem {number}"&gt;</code> and <strong>suppresses choice bodies</strong>, showing only A–E letters (the scan
+contains the options). Spec additions:</p>
+<ul>
+<li>The image must be <strong>responsive</strong> (<code>max-width: 100%</code>, never overflow) and ideally
+  <strong>zoomable</strong> (tap/click to enlarge, or pinch on mobile) since scanned text can be small.</li>
+<li><strong>Loading &amp; failure states</strong>: a placeholder while the scan loads and a clear "Couldn't load
+  this problem image" with a retry if <code>image_path</code> 404s - a missing image must not leave a
+  blank, unanswerable question with the clock running.</li>
+<li>The radiogroup remains fully functional and keyboard-navigable on image papers (it already
+  is), so a scan that fails to load still lets the student answer if they can read it elsewhere.</li>
+</ul>
+<h3 id="75-all-blank-submission-matches-allowed-extends-gentle-nudge">7.5 All-blank submission - [MATCHES] allowed, [EXTENDS] gentle nudge<a class="headerlink" href="#75-all-blank-submission-matches-allowed-extends-gentle-nudge" title="Permanent link">&para;</a></h3>
+<p><code>ExamSubmission.answers</code> may be all <code>null</code>; the server grades it (all blank → for <code>sixpoint</code>,
+<code>blank * 1.5</code>; for <code>count</code>, 0). Nothing blocks it, and nothing should - a student may run out
+of time. The manual confirm dialog (§5.1) naturally surfaces "0 of 25 answered" so an
+<em>accidental</em> empty submit is caught, while the <strong>auto</strong> path submits whatever exists without
+ceremony.</p>
+<h3 id="76-voided-problems-in-palette-review-matches">7.6 Voided problems in palette + review - [MATCHES]<a class="headerlink" href="#76-voided-problems-in-palette-review-matches" title="Permanent link">&para;</a></h3>
+<p>A problem number in <code>ExamDetail.voided</code> is excluded from scoring (tech-spec). UX treatment:</p>
+<ul>
+<li><strong>Palette</strong>: <code>.palette__cell--voided</code> renders the cell at reduced opacity with a
+  <code>line-through</code>, and its <code>aria-label</code> says "voided" (the <code>statusLabel</code> helper short-circuits
+  to "voided"). The student can still navigate to it. <strong>[EXTENDS]</strong> add a short tooltip/legend
+  note "This problem was voided and doesn't count" so the strike-through isn't a mystery.</li>
+<li><strong>Question</strong>: a voided problem should show a calm inline banner "This problem has been voided</li>
+<li>it won't be scored," while still rendering it (a student may want to attempt it for
+  practice). Whether to disable its radiogroup is a product call; the spec recommends leaving
+  it answerable but visually marked, since voiding is a scoring concept, not a content one.</li>
+<li><strong>Review</strong>: the row's Outcome is "∅ Void" (<code>outcome()</code> checks <code>voided</code> first), regardless of
+  <code>ok</code>, and it is excluded from the Correct/Wrong/Blank tallies - consistent with the
+  server's scoring.</li>
+</ul>
+<h3 id="77-state-matrix-quick-reference">7.7 State matrix (quick reference)<a class="headerlink" href="#77-state-matrix-quick-reference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Phase</th>
+<th>What the student sees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading exam</td>
+<td>n/a</td>
+<td><code>&lt;Spinner label="Loading exam…"&gt;</code></td>
+</tr>
+<tr>
+<td>Load failed</td>
+<td>n/a</td>
+<td><code>&lt;ErrorState title="Could not load this exam"&gt;</code></td>
+</tr>
+<tr>
+<td>Taking the test</td>
+<td><code>active</code></td>
+<td>Full runner, editable, timer live</td>
+</tr>
+<tr>
+<td>Pressed Submit</td>
+<td><code>active</code> → confirm</td>
+<td>Confirm dialog (manual only)</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td><code>submitting</code></td>
+<td>Frozen runner + "Submitting…" overlay</td>
+</tr>
+<tr>
+<td>Submit failed (network)</td>
+<td><code>submitting</code></td>
+<td>Retry banner (§7.2)</td>
+</tr>
+<tr>
+<td>Already submitted (409)</td>
+<td><code>submitting</code> → <code>review</code></td>
+<td>"Already submitted - here's your result"</td>
+</tr>
+<tr>
+<td>Graded</td>
+<td><code>review</code></td>
+<td><code>&lt;ExamReview&gt;</code>, key revealed</td>
+</tr>
+<tr>
+<td>Time expired</td>
+<td><code>active</code> → <code>submitting</code> → <code>review</code></td>
+<td>"Time is up" announce → auto-submit → review</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-accessibility">8. Accessibility<a class="headerlink" href="#8-accessibility" title="Permanent link">&para;</a></h2>
+<p>Accessibility is a phase-3 acceptance item ("keyboard navigation and basic a11y pass") and is
+woven through this spec; consolidated here.</p>
+<h3 id="81-radiogroup-semantics-matches">8.1 Radiogroup semantics - [MATCHES]<a class="headerlink" href="#81-radiogroup-semantics-matches" title="Permanent link">&para;</a></h3>
+<p>The choices are a native <code>role="radiogroup"</code> fieldset of <code>&lt;input type="radio"&gt;</code> with a group
+<code>aria-label</code> ("Answer choices for problem {number}"). Native radios give correct arrow-key
+roving, <code>checked</code> state, and announcement for free - the spec <strong>keeps native radios</strong> rather
+than rebuilding with ARIA, which is the more robust choice. <code>disabled</code> on the fieldset (when
+<code>frozen</code>) correctly removes them from the tab order during <code>submitting</code>/<code>review</code>.</p>
+<h3 id="82-roletimer-matches-extends">8.2 <code>role="timer"</code> - [MATCHES] + [EXTENDS]<a class="headerlink" href="#82-roletimer-matches-extends" title="Permanent link">&para;</a></h3>
+<p>The visible timer is <code>role="timer"</code> with an <code>aria-label</code> ("Time remaining: M:SS") and
+<code>aria-live="off"</code> (so it isn't read every second). The §3.5 milestone announcements live in a
+<strong>separate</strong> visually-hidden polite/assertive region - keeping the <code>role="timer"</code> element
+silent while still giving non-sighted students the urgency cues.</p>
+<h3 id="83-focus-management-on-phase-changes-extends">8.3 Focus management on phase changes - [EXTENDS]<a class="headerlink" href="#83-focus-management-on-phase-changes-extends" title="Permanent link">&para;</a></h3>
+<p>Today, transitioning <code>active → submitting → review</code> swaps the whole subtree but does <strong>not</strong>
+move focus, so a keyboard/SR user can be left with focus on a now-unmounted button. Spec:</p>
+<ul>
+<li>On entering <strong>review</strong>, move focus to the review <code>&lt;h2&gt;</code> ("Your result") and ensure it's the
+  first thing announced (the section is already <code>aria-live="polite"</code>).</li>
+<li>On opening any <strong>dialog/sheet</strong> (confirm, palette sheet, help), trap focus inside and set
+  initial focus to the safe default (Keep working / first cell / close button); on close,
+  <strong>return focus</strong> to the trigger.</li>
+<li>On <strong>auto-submit</strong>, the assertive "Time is up" announcement covers the transition; focus
+  then follows the review rule.</li>
+</ul>
+<h3 id="84-announcements-matches-extends">8.4 Announcements - [MATCHES] + [EXTENDS]<a class="headerlink" href="#84-announcements-matches-extends" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Progress line <code>.runner__progress</code> is <code>aria-live="polite"</code> - answered-count changes are
+  announced (already). Keep it, but ensure updates are not so chatty that rapid A→B→C changes
+  spam the SR (debounce the announcement, not the state).</li>
+<li>Timer milestones per §3.5.</li>
+<li>Submit status ("Submitting your answers…", success → review, failure → "Couldn't submit,
+  retry available") via a polite region so the student knows what's happening without watching.</li>
+</ul>
+<h3 id="85-reduced-motion-extends">8.5 Reduced motion - [EXTENDS]<a class="headerlink" href="#85-reduced-motion-extends" title="Permanent link">&para;</a></h3>
+<p>There is <strong>no <code>prefers-reduced-motion</code> handling today.</strong> Spec: gate every non-essential
+animation (the optional 1:00 timer "tick", any sheet slide-in, zebra/hover transitions) behind
+<code>@media (prefers-reduced-motion: no-preference)</code>. Under reduced motion, urgency is conveyed
+purely by the static shape/color/text changes (§3.4) and announcements - never by motion. This
+matters doubly on an anxiety-sensitive, timed surface.</p>
+<h3 id="86-contrast-color-independence">8.6 Contrast &amp; color independence<a class="headerlink" href="#86-contrast-color-independence" title="Permanent link">&para;</a></h3>
+<p>All tokens used for state already have non-color partners (icons, text, shape): timer tiers
+(§3.4), palette states (<code>line-through</code> for void, <code>⚑</code> for flag, outline for current), review
+outcomes (✓/✗/∅ + words). Verify <code>--color-warn</code> (#9a5b00) and <code>--color-error</code> (#b00020) meet
+4.5:1 against their backgrounds at the timer's weight/size during the phase-3 contrast pass.</p>
+<hr />
+<h2 id="9-prioritized-recommendations">9. Prioritized Recommendations<a class="headerlink" href="#9-prioritized-recommendations" title="Permanent link">&para;</a></h2>
+<p>Ranked by impact on the five goals, with rationale and rough effort (S ≤ ~half-day,
+M ≈ 1–2 days, L &gt; 2 days incl. API work).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Recommendation</th>
+<th>Why it matters</th>
+<th>Effort</th>
+<th>Touches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Persist in-progress attempt (survive refresh) + anchor timer on server <code>started_at</code></strong></td>
+<td>Today a refresh <strong>wipes all answers and resets the clock</strong> - the single biggest violation of "never lose work" <em>and</em> an integrity hole ("refresh = free time"). §7.1 option 1 is the real fix; option 2 (localStorage mirror) is the fast mitigation.</td>
+<td>L (server) / M (localStorage interim)</td>
+<td><code>RunnerInner</code>, <code>useCountdown</code> anchor, attempt API</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Confirm-before-submit dialog (manual path only)</strong></td>
+<td>Submit is irreversible and ends the attempt; one misclick loses everything. A dialog summarizing unanswered/flagged counts (from <code>answeredCount</code> + <code>flags</code>) is cheap insurance. Auto-submit deliberately skips it.</td>
+<td>S–M</td>
+<td>new dialog, <code>triggerSubmit</code></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Network-failure retry on submit (esp. auto path)</strong></td>
+<td>Only 409 is handled now; a blip at the buzzer can lose the whole attempt with no feedback. A Retry banner over a frozen <code>submitting</code> state, plus auto-retry-with-backoff on the timer path, closes a data-loss gap.</td>
+<td>M</td>
+<td>mutation <code>onError</code>, <code>RunnerInner</code></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Make a 409 actually show the prior result</strong></td>
+<td>The 409 branch dispatches <code>submitted</code> but <code>result</code> stays <code>null</code>, and the review branch needs <code>result !== null</code> → dead screen. Server should return the existing <code>ExamResultResponse</code> on repeat; client renders it.</td>
+<td>S (client) + API</td>
+<td>mutation, submit endpoint</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Timer urgency tiers + milestone aria-live (5-min / 1-min)</strong></td>
+<td>Calm-by-default with caution@5:00 and warning@1:00 via <strong>shape+text+ARIA</strong> (not color), plus a sparse announcement schedule, gives every student (incl. SR users) honest "time's running out" cues without per-second chatter. Purely presentational - never changes the deadline.</td>
+<td>M</td>
+<td><code>.runner__timer</code> styles, hidden live region, <code>RunnerInner</code></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Keyboard shortcut layer + roving-tabindex palette</strong></td>
+<td>None exists today. Letter keys to answer, <code>N/P</code> to navigate, <code>F</code> to flag, and a single-tab-stop palette make a power surface fast for keyboard and SR users and collapse 25 tab stops to one.</td>
+<td>M</td>
+<td>new key handler, <code>Palette</code> tabindex</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>Mobile palette → drawer/sheet + sticky timer/controls</strong></td>
+<td>On mobile the palette currently shoves the question below the fold and the timer can scroll away. A sheet + sticky header/footer keeps the clock visible and the question the hero.</td>
+<td>M</td>
+<td>layout, <code>Palette</code> sheet variant</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>Review scannability: icons+words on Outcome, sticky header, wrong-vs-blank distinction, filters</strong></td>
+<td>A 25-row table is the payoff; redundant-encoded outcomes (✓/✗/∅), a sticky <code>&lt;thead&gt;</code>, and an "Incorrect/Flagged/Blank" filter turn it from a wall of rows into something a student learns from.</td>
+<td>M</td>
+<td><code>ExamReview</code>, styles</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td><strong>Surface solution links in review</strong></td>
+<td>Students want to <em>learn</em> from misses. <code>Exam.source_url</code> exists server-side but isn't exposed; add <code>solution_url</code>/<code>source_url</code> to the result and render "Solution ↗" per row. Omit until the field exists - don't fabricate.</td>
+<td>M (API + client)</td>
+<td><code>ReviewItemResponse</code>/<code>ExamResultResponse</code>, <code>ExamReview</code></td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><strong><code>prefers-reduced-motion</code> gating + focus management on phase change</strong></td>
+<td>No reduced-motion handling today, and phase swaps don't move focus (SR/keyboard users get stranded). Gate animations; move focus to the review heading; trap/return focus in dialogs.</td>
+<td>S–M</td>
+<td>global CSS, <code>RunnerInner</code>, dialogs</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td><strong>Stronger selected-choice visual + progress bar in header</strong></td>
+<td>The OS radio dot is a weak "this is my answer" signal under time pressure; a left accent + fill and a thin answered-progress bar make current state pre-attentive.</td>
+<td>S</td>
+<td><code>Question</code>/<code>.choice</code> styles, header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sequencing-note">Sequencing note<a class="headerlink" href="#sequencing-note" title="Permanent link">&para;</a></h3>
+<p>Recommendations <strong>1–4</strong> are correctness/data-integrity and should land first (1 is the
+headline). <strong>5–8</strong> are the experience upgrades that make the runner feel finished. <strong>9–11</strong> are
+polish that compounds well with the phase-3 a11y/mobile pass already on the roadmap.</p>
+<hr />
+<h2 id="appendix-a-symbol-field-cross-reference">Appendix A - Symbol &amp; field cross-reference<a class="headerlink" href="#appendix-a-symbol-field-cross-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>This spec calls it</th>
+<th>Code / schema symbol</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reducer / state machine</td>
+<td><code>runnerReducer</code>, <code>RunnerState</code>, <code>RunnerAction</code>, <code>RunnerPhase</code>, <code>initRunner</code>, <code>answeredCount</code>, <code>clampIndex</code></td>
+<td><code>frontend/src/features/exam/runnerState.ts</code></td>
+</tr>
+<tr>
+<td>Timer</td>
+<td><code>useCountdown</code> (<code>deadline</code>, <code>remaining</code>, <code>firedRef</code>, <code>onExpire</code>), <code>formatDuration</code></td>
+<td><code>frontend/src/features/exam/useCountdown.ts</code></td>
+</tr>
+<tr>
+<td>Navigator</td>
+<td><code>Palette</code>, <code>statusLabel</code>, <code>.palette__cell--{answered,flagged,current,voided}</code></td>
+<td><code>frontend/src/features/exam/Palette.tsx</code></td>
+</tr>
+<tr>
+<td>Question + choices</td>
+<td><code>Question</code>, <code>readChoices</code>, <code>stripDelimiters</code>, <code>role="radiogroup"</code></td>
+<td><code>frontend/src/features/exam/Question.tsx</code></td>
+</tr>
+<tr>
+<td>Math render</td>
+<td><code>Tex</code> (<code>renderToString</code>, <code>throwOnError: false</code>)</td>
+<td><code>frontend/src/components/Tex.tsx</code></td>
+</tr>
+<tr>
+<td>Review</td>
+<td><code>ExamReview</code>, <code>outcome</code></td>
+<td><code>frontend/src/features/exam/ExamReview.tsx</code></td>
+</tr>
+<tr>
+<td>Page / orchestration</td>
+<td><code>ExamRunnerPage</code>, <code>RunnerInner</code>, <code>triggerSubmit</code>, <code>submitMutation</code>, <code>startedAtRef</code>, <code>frozen</code></td>
+<td><code>frontend/src/pages/ExamRunnerPage.tsx</code></td>
+</tr>
+<tr>
+<td>Submit wrapper / errors</td>
+<td><code>submitExam</code>, <code>getExam</code>, <code>ApiError</code></td>
+<td><code>frontend/src/lib/endpoints.ts</code></td>
+</tr>
+<tr>
+<td>API: exam (key-free)</td>
+<td><code>ExamDetail</code>, <code>ProblemRead</code> (no <code>correct_answer</code>)</td>
+<td><code>docs/api/openapi.json</code></td>
+</tr>
+<tr>
+<td>API: submission</td>
+<td><code>ExamSubmission</code> (<code>answers</code>, <code>flags</code>, <code>time_used_sec</code>)</td>
+<td><code>docs/api/openapi.json</code></td>
+</tr>
+<tr>
+<td>API: graded result</td>
+<td><code>ExamResultResponse</code>, <code>ReviewItemResponse</code> (<code>n</code>, <code>your</code>, <code>correct</code>, <code>ok</code>, <code>voided</code>)</td>
+<td><code>docs/api/openapi.json</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-b-spec-vs-code-status-legend">Appendix B - Spec-vs-code status legend<a class="headerlink" href="#appendix-b-spec-vs-code-status-legend" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>[MATCHES]</strong> the current implementation: §1.4/§3.1/§3.2 (timer contract &amp; format),
+  §4.1–4.3 (answer/flag/navigate), §5.2–5.4 (auto-submit, double-submit guards, 409 intent,
+  payload), §6.1–6.2 (score breakdown + table columns), §7.4/§7.6 (image mode, voided).</li>
+<li><strong>[EXTENDS]</strong> beyond current code: §2.2 (mobile sheet), §3.4–3.6 (urgency tiers, milestone
+  announcements, submit overlay), §4.4 (keyboard model - none today), §5.1 (confirm dialog),
+  §6.2 (filters, solution links - field doesn't exist), §7.1–7.3 (persistence, retry, equation
+  overflow), §8.3/§8.5 (focus mgmt, reduced motion - none today).</li>
+<li><strong>[RISK]</strong> current behavior to change: §7.1 refresh wipes state + resets clock (top issue);
+  §5.4 a bare 409 can dead-end review; §7.2 unhandled non-409 submit failure.</li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Byron Williams
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ByronWilliamsCPA" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

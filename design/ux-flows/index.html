@@ -1,0 +1,3087 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Web app for practice math tests">
+      
+      
+        <meta name="author" content="Byron Williams">
+      
+      
+        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/design/ux-flows/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AMC Trainer - UX Flows, IA & Wireframes - AMC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tldr" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AMC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AMC Trainer - UX Flows, IA & Wireframes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guides/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api-reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../development/architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../auth/authentik/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Authentication
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../known-vulnerabilities/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AMC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/code-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Quality
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Authentication
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth/authentik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentik
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../known-vulnerabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Vulnerabilities
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TL;DR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TL;DR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#locked-design-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locked design constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-information-architecture-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Information Architecture &amp; Navigation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Information Architecture &amp; Navigation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-route-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Route map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-primary-navigation-role-aware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Primary navigation (role-aware)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-role-access-model-what-each-role-sees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Role &amp; access model (what each role sees)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-auth-screens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Auth screens
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Auth screens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-register-invite-redemption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Register (invite redemption)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-exam-experience-the-heart-of-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The exam experience (the heart of the app)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The exam experience (the heart of the app)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-exam-list-exams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Exam list (/exams)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-exam-runner-examsexamid-the-centerpiece" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Exam runner (/exams/:examId) - the centerpiece
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-exam-review-graded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Exam review (graded)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-diagnostic-placement-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The diagnostic &amp; placement experience
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. The diagnostic &amp; placement experience">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-diagnostic-list-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Diagnostic list (/diagnostics)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-diagnostic-runner-diagnosticsinstrumentid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Diagnostic runner (/diagnostics/:instrumentId)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-diagnostic-result-verdict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Diagnostic result (verdict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-progress-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Progress &amp; recommendation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Progress &amp; recommendation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-my-progress-dashboard-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 My progress dashboard (/progress)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-coachs-view-of-a-student-usersuseridprogress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Coach's view of a student (/users/:userId/progress)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-coach-roster-the-missing-entry-point-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Coach roster - the missing entry point [NEW]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-invite-staff-only-invite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Invite (staff-only) - /invite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-core-user-journeys-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Core user journeys (end to end)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Core user journeys (end to end)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us-001-take-a-timed-amc-test-graded-review" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-001 - Take a timed AMC test → graded review
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-002-redeem-invite-register-first-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-002 - Redeem invite → register → first login
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-003-take-diagnostics-see-placement-recommendation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-003 - Take diagnostics → see placement recommendation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coach-journey-mint-an-invite-view-a-students-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coach journey - mint an invite, view a student's progress
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-open-ux-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Open UX questions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-cross-cutting-ux-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cross-cutting UX standards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-screen-api-source-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A - Screen ⇄ API ⇄ source map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related documents
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>AMC Trainer - UX Flows, IA & Wireframes</h1>
+
+<blockquote>
+<p><strong>Status</strong>: Draft for engineering | <strong>Version</strong>: 1.0 | <strong>Updated</strong>: 2026-05-31</p>
+</blockquote>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>This document defines the UX for <strong>AMC Trainer</strong>: a private, invite-only web app where a
+math coach (staff) and up to ~30 students take timed AMC 8/10/12 practice contests and AoPS
+placement diagnostics, then receive a synthesized starting-course recommendation. It covers
+the information architecture, the four core journeys, a labeled wireframe for every screen,
+the loading/empty/error/success states, and the microcopy.</p>
+<p><strong>Design is grounded in what already exists</strong> under <code>frontend/src/</code> (routes in <code>App.tsx</code>,
+components under <code>features/</code> and <code>pages/</code>) and the <strong>exact</strong> API response shapes in
+<code>docs/api/openapi.json</code>. Where a wireframe adds something the code does not yet have (a
+confirm-submit dialog, a low-time warning, a coach roster), it is called out explicitly as a
+<strong>[NEW]</strong> refinement, and the open decisions are collected in
+<a href="#8-open-ux-questions">Section 8: Open UX questions</a>.</p>
+<h3 id="locked-design-constraints">Locked design constraints<a class="headerlink" href="#locked-design-constraints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visual tone</td>
+<td><strong>Clean &amp; academic</strong> - calm, focused, exam-serious, high legibility. No decorative chrome; generous whitespace; restrained color (color never the sole status carrier).</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td><strong>CSS Modules + design tokens.</strong> Tokens (owned by a teammate) are referenced abstractly here: <code>primary accent</code>, <code>surface</code>, <code>surface-raised</code>, <code>text</code>, <code>muted-text</code>, <code>success</code>, <code>danger</code>, <code>warning</code>, <code>border</code>, <code>focus-ring</code>. No hex values in this doc.</td>
+</tr>
+<tr>
+<td>Auth (v1)</td>
+<td><strong>Invite-only email/password with server-side sessions</strong> (HTTP-only <code>amc_session</code> cookie). Authentik SSO is a documented future option; the Login screen is kept minimal so swapping the credential form for an SSO "Sign in" button is trivial (see <a href="#21-login">2.1</a>).</td>
+</tr>
+<tr>
+<td>Math rendering</td>
+<td>KaTeX via the existing <code>Tex</code> component (<code>frontend/src/components/Tex.tsx</code>).</td>
+</tr>
+<tr>
+<td>The hard rule</td>
+<td><strong>Answer keys never leak pre-submission.</strong> <code>ExamDetail</code> / <code>ProblemRead</code> carry no <code>correct_answer</code>; <code>DiagnosticItemRead</code> carries no <code>answer</code>. Keys appear <strong>only</strong> in the graded review returned by the attempt POST. This single constraint is why the <strong>runner</strong> (key-free) and the <strong>review</strong> (key-bearing) are separate screens that never coexist.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-information-architecture-navigation">1. Information Architecture &amp; Navigation<a class="headerlink" href="#1-information-architecture-navigation" title="Permanent link">&para;</a></h2>
+<h3 id="11-route-map">1.1 Route map<a class="headerlink" href="#11-route-map" title="Permanent link">&para;</a></h3>
+<p>All authenticated screens render inside the app shell (<code>Layout</code>, persistent header nav).
+<code>/login</code> and <code>/register</code> render standalone (no nav), since the user has no session yet.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PUBLIC (no session, no app shell)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  /login                         Sign in (email + password)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  /register?token=&lt;token&gt;        Invite redemption -&gt; account creation
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>AUTHENTICATED (app shell + role-aware nav; guarded by RequireAuth)
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  /                              -&gt; redirects to /exams
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  /exams                         Practice-test catalog (contest filter)
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  /exams/:examId                 Exam runner  (timed)  ──submit──► graded review (same route)
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  /diagnostics                   Diagnostic catalog
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  /diagnostics/:instrumentId     Diagnostic runner ──submit──► verdict result (same route)
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  /progress                      My progress dashboard (recommendation + history)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>STAFF ONLY (coach / admin; RequireAuth staffOnly -&gt; non-staff redirected to /)
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>  /users/:userId/progress        A student&#39;s progress (read-only, coach view)
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  /invite                        Mint a one-time invite
+</span></code></pre></div>
+<p>Notes that match the current router (<code>frontend/src/App.tsx</code>):</p>
+<ul>
+<li><code>index</code> redirects to <code>/exams</code> (the app "home" is the test catalog, since taking tests is
+  the primary job).</li>
+<li>Unknown paths (<code>*</code>) redirect to <code>/</code> and then to <code>/exams</code>.</li>
+<li>Feature routes are lazy-loaded; the runner pulls in KaTeX, so it loads on demand. Plan for
+  a brief route-level <code>Spinner</code> (label <code>"Loading…"</code>) on first navigation to a heavy route.</li>
+</ul>
+<h3 id="12-primary-navigation-role-aware">1.2 Primary navigation (role-aware)<a class="headerlink" href="#12-primary-navigation-role-aware" title="Permanent link">&para;</a></h3>
+<p>The header (<code>Layout</code>) is a single horizontal bar: brand on the left, primary nav center-left,
+user identity + sign-out on the right. It is <strong>the same shell for all roles</strong>; staff simply
+see one extra link.</p>
+<p><strong>Student nav</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│  AMC Trainer        Tests   Diagnostics   Progress              Bayden  [Sign out] │
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>└──────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>       brand            └──── primary nav (NavLink) ────┘        display_name   button
+</span></code></pre></div>
+<p><strong>Coach / admin nav</strong> (adds <strong>Invite</strong>; <code>isStaff</code> = role ∈ {coach, admin})</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌──────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│  AMC Trainer    Tests   Diagnostics   Progress   Invite          Coach  [Sign out] │
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>└──────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>                                                   ▲ staff-only
+</span></code></pre></div>
+<ul>
+<li>The active route gets an underline/weight treatment via <code>NavLink</code>'s active state (color +
+  a 2px <code>primary accent</code> underline so it is not color-only).</li>
+<li><code>/users/:userId/progress</code> is <strong>not</strong> a top-level nav item - a coach reaches it by drilling
+  in from a student roster. <strong>[NEW]</strong> The current build has no roster UI, so a coach cannot
+  yet navigate to a student. See <a href="#42-coach-journey-mint-an-invite-view-a-students-progress">4.2</a>
+  and <a href="#8-open-ux-questions">Open question Q7</a>.</li>
+<li><strong>Mobile (&lt; ~640px):</strong> the brand stays; the three/four nav links collapse under a "Menu"
+  disclosure (hamburger) that expands a vertical list; the user identity + Sign out move to
+  the bottom of that expanded panel. Keep it a plain disclosure, not an animated drawer
+  (academic, calm).</li>
+</ul>
+<h3 id="13-role-access-model-what-each-role-sees">1.3 Role &amp; access model (what each role sees)<a class="headerlink" href="#13-role-access-model-what-each-role-sees" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th style="text-align: center;">Student</th>
+<th style="text-align: center;">Coach / Admin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Take tests &amp; diagnostics</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>See <strong>own</strong> progress (<code>/progress</code>)</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>See <strong>another</strong> student's progress (<code>/users/:id/progress</code>)</td>
+<td style="text-align: center;">no (403 → redirect home)</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td>Mint invites (<code>/invite</code>)</td>
+<td style="text-align: center;">no (nav hidden + route redirect)</td>
+<td style="text-align: center;">yes</td>
+</tr>
+</tbody>
+</table>
+<p><code>RequireAuth</code> enforces this client-side (unauth → <code>/login</code> preserving <code>from</code>; non-staff on a
+staff route → <code>/</code>); the server enforces it for real (403 <code>AuthorizationError</code>). The UI must
+treat a server 403 as authoritative even if the client guard was bypassed.</p>
+<hr />
+<h2 id="2-auth-screens">2. Auth screens<a class="headerlink" href="#2-auth-screens" title="Permanent link">&para;</a></h2>
+<h3 id="21-login">2.1 Login<a class="headerlink" href="#21-login" title="Permanent link">&para;</a></h3>
+<p><code>/login</code> - standalone, centered card on a calm <code>surface</code> background. Matches <code>LoginPage.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>                     ┌─────────────────────────────────────────┐
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                     │                                         │
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                     │              AMC Trainer                │   ← wordmark (brand)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                     │                                         │
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                     │   Sign in                               │   ← h1
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                     │                                         │
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                     │   Email                                 │
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                     │   │ you@example.com                 │   │   autocomplete=username
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                     │                                         │
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                     │   Password                              │
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                     │   │ ••••••••••                       │   │   autocomplete=current-password
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                     │                                         │
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>                     │   [ ⚠ Invalid email or password. ]      │   ← role=&quot;alert&quot;, only on error
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>                     │                                         │
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>                     │   │            Sign in              │   │   ← primary; &quot;Signing in…&quot; while busy
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>                     │                                         │
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>                     │   Have an invite? Set up your account → │   ← link to /register
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>                     └─────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li><strong>SSO-readiness (locked decision):</strong> the credential <code>&lt;form&gt;</code> lives in one self-contained
+  block. To later add Authentik SSO, drop a single <strong>"Sign in with SSO"</strong> button above (or in
+  place of) this form - the surrounding card, heading, and centering do not change. Keep a
+  visual slot reserved between the <code>h1</code> and the Email field so the SSO button can be inserted
+  without relayout.</li>
+<li>Already-authenticated users hitting <code>/login</code> are redirected to <code>/</code> (no flash of the form).</li>
+</ul>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Behavior / copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>Empty fields; Sign in enabled.</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td>Button label → <code>Signing in…</code>, button disabled.</td>
+</tr>
+<tr>
+<td>Error 401</td>
+<td><code>role="alert"</code>: <strong>"Invalid email or password."</strong> Fields retain input; password not cleared automatically (user can retry).</td>
+</tr>
+<tr>
+<td>Error other</td>
+<td><strong>"Could not sign in. Please try again."</strong></td>
+</tr>
+<tr>
+<td>Rate-limited</td>
+<td>Login is rate-limited per email server-side; surface the generic <strong>"Could not sign in. Please try again."</strong> (do not reveal lockout specifics - avoids account enumeration). Consider copy <strong>"Too many attempts. Wait a minute and try again."</strong> if the API distinguishes it - see <a href="#8-open-ux-questions">Q8</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-register-invite-redemption">2.2 Register (invite redemption)<a class="headerlink" href="#22-register-invite-redemption" title="Permanent link">&para;</a></h3>
+<p><code>/register?token=&lt;token&gt;</code> - standalone. Reads <code>token</code> from the query string, validates it via
+<code>GET /api/v1/auth/invites/{token}</code> for display, then <code>POST /api/v1/auth/register</code> creates the
+account and the server sets the session cookie. Matches <code>RegisterPage.tsx</code>.</p>
+<p><strong>Valid invite:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>                     ┌─────────────────────────────────────────┐
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                     │   Set up your account                   │   ← h1
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                     │                                         │
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>                     │   Creating an account for               │   ← from invite (read-only)
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                     │   bayden@example.com                    │
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                     │                                         │
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                     │   Display name                          │
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                     │   │ Bayden                          │   │
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                     │                                         │
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                     │   Password (8+ characters)              │
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>                     │   │ ••••••••••                       │   │   minLength=8, new-password
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>                     │                                         │
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>                     │   ┌─────────────────────────────────┐   │
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>                     │   │         Create account          │   │   ← &quot;Creating…&quot; while busy
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>                     │   └─────────────────────────────────┘   │
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>                     │                                         │
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>                     │   Already set up? Sign in →             │
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>                     └─────────────────────────────────────────┘
+</span></code></pre></div>
+<p><strong>Invalid / missing / expired invite</strong> (no token, or <code>valid:false</code>):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>                     ┌─────────────────────────────────────────┐
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                     │   Set up your account                   │
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                     │                                         │
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>                     │   ⚠ This invite link is invalid or has  │   ← role=&quot;alert&quot;
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                     │     expired. Ask your coach for a new   │
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>                     │     one.                                │
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                     │                                         │
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                     │   Already set up? Sign in →             │   ← always offered
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>                     └─────────────────────────────────────────┘
+</span></code></pre></div>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Behavior / copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validating token</td>
+<td>Brief check on mount; render nothing form-side until <code>valid</code> resolves (avoid a flash of the form then an error). A <code>Spinner</code> (<code>"Checking your invite…"</code>) is acceptable if validation is slow.</td>
+</tr>
+<tr>
+<td>Valid</td>
+<td>Show form, pre-fill nothing but display the invite email.</td>
+</tr>
+<tr>
+<td>Invalid/expired/missing</td>
+<td>Show the alert above; <strong>hide the form</strong> (cannot register).</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td>Button → <code>Creating…</code>, disabled.</td>
+</tr>
+<tr>
+<td>Error 422 (weak password)</td>
+<td><strong>"Password must be at least 8 characters."</strong></td>
+</tr>
+<tr>
+<td>Error other (used/invalid invite at submit)</td>
+<td><strong>"Could not create your account. The invite may be invalid or used."</strong></td>
+</tr>
+<tr>
+<td>Success</td>
+<td>Server sets cookie; redirect to <code>/</code> → <code>/exams</code>. (First login lands the student directly in the test catalog.)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-the-exam-experience-the-heart-of-the-app">3. The exam experience (the heart of the app)<a class="headerlink" href="#3-the-exam-experience-the-heart-of-the-app" title="Permanent link">&para;</a></h2>
+<p>The exam splits into two screens on <strong>one route</strong> (<code>/exams/:examId</code>): the <strong>runner</strong> (no key)
+and, after submit, the <strong>review</strong> (key revealed). They never coexist - this enforces the
+answer-key constraint.</p>
+<h3 id="31-exam-list-exams">3.1 Exam list (<code>/exams</code>)<a class="headerlink" href="#31-exam-list-exams" title="Permanent link">&para;</a></h3>
+<p>Catalog of papers with a contest filter (<code>All / AMC 8 / AMC 10 / AMC 12</code>), querying
+<code>GET /api/v1/exams?contest=</code>. Matches <code>ExamListPage.tsx</code>; each row uses <code>ExamSummary</code>
+(<code>contest</code>, <code>year</code>, <code>variant</code>, <code>num_problems</code>, <code>duration_sec</code>, <code>score_mode</code>).</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>┌── app shell header ───────────────────────────────────────────────────────────┐
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>│  AMC Trainer    Tests   Diagnostics   Progress   (Invite)        Name [Sign out]│
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>└────────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  Practice tests                                                            ← h1
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>  Filter by contest:  [ All ]  [ AMC 8 ]  [ AMC 10 ]  [ AMC 12 ]            ← aria-pressed
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                        ▲ active button gets filled/underlined treatment
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>  ┌──────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>  │  AMC 10 2022A  ·  25 problems  ·  75 min  ·  6-point               →      │
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>  ├──────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>  │  AMC 10 2021B  ·  25 problems  ·  75 min  ·  6-point               →      │
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>  ├──────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>  │  AMC 8  2023   ·  25 problems  ·  40 min  ·  count                 →      │
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>  └──────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        ↑ each row is a Link to /exams/:examId; whole row is the click target
+</span></code></pre></div>
+<p><strong>[NEW] refinement vs. current build:</strong> the current list shows only
+<code>"{contest} {year}{variant} - {num_problems} problems"</code>. Add <strong>duration</strong> (from
+<code>duration_sec</code>, formatted <code>75 min</code>) and a plain-language <strong>score mode</strong> label
+(<code>sixpoint → "6-point"</code>, <code>count → "count"</code>), so a student knows the time commitment and
+scoring before committing. These fields are already in <code>ExamSummary</code>.</p>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td><code>Spinner</code> - <strong>"Loading tests…"</strong></td>
+</tr>
+<tr>
+<td>Error</td>
+<td><code>ErrorState</code> - <strong>"Could not load tests"</strong></td>
+</tr>
+<tr>
+<td>Empty (<code>[]</code>)</td>
+<td><code>EmptyState</code> - <strong>"No tests available yet."</strong></td>
+</tr>
+<tr>
+<td>Success</td>
+<td>The list above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-exam-runner-examsexamid-the-centerpiece">3.2 Exam runner (<code>/exams/:examId</code>) - the centerpiece<a class="headerlink" href="#32-exam-runner-examsexamid-the-centerpiece" title="Permanent link">&para;</a></h3>
+<p>Loads <code>ExamDetail</code> (key-free <code>problems[]</code>, each a <code>ProblemRead</code>). State lives in the
+<code>runnerState</code> reducer (<code>answers</code>, <code>flags</code>, <code>current</code>, <code>phase</code>); the timer is the
+absolute-deadline <code>useCountdown</code> that auto-submits once at zero. Matches <code>ExamRunnerPage.tsx</code>
+- <code>Palette</code> + <code>Question</code>.</p>
+<p><strong>Desktop layout</strong> - header (title · timer · progress), then a two-column body: palette
+navigator on the left, the current problem + controls on the right.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>┌────────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>│  AMC 10 2022A                      ⏱ 1:04:12                12 of 25 answered     │  ← header
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>│  (contest year+variant)            role=&quot;timer&quot;            aria-live=polite       │
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>├──────────────────┬─────────────────────────────────────────────────────────────┤
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>│  QUESTION         │   Problem 13                                                  │
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>│  NAVIGATOR        │                                                              │
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>│                   │   ┌──────────────────────────────────────────────────────┐  │
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>│  ┌──┬──┬──┬──┬──┐ │   │  A regular hexagon has area 24√3.  What is the        │  │
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>│  │ 1│ 2│ 3│ 4│ 5│ │   │  length of one side?           (KaTeX / image)        │  │
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>│  ├──┼──┼──┼──┼──┤ │   └──────────────────────────────────────────────────────┘  │
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>│  │ 6│ 7│ 8│ 9│10│ │                                                              │
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>│  ├──┼──┼──┼──┼──┤ │   ( ) A   2√2                                                 │
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>│  │11│12│13│14│15│ │   ( ) B   2√3        ◄ radiogroup, A–E, one per row          │
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>│  ├──┼──┼──┼──┼──┤ │   (•) C   4          ◄ selected                              │
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>│  │16│17│18│19│20│ │   ( ) D   4√2                                                 │
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>│  ├──┼──┼──┼──┼──┤ │   ( ) E   4√3                                                 │
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>│  │21│22│23│24│25│ │                                                              │
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>│  └──┴──┴──┴──┴──┘ │   Clear answer                ◄ link-button, only if selected │
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>│                   │                                                              │
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>│  Legend:          │   ┌──────────┬────────┬────────┬──────────────────────────┐ │
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>│  ▦ answered       │   │ Previous │  Flag  │  Next  │        Submit            │ │
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>│  ⚑ flagged        │   └──────────┴────────┴────────┴──────────────────────────┘ │
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>│  ▣ current        │     disabled        toggles      disabled       primary      │
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>│  ░ voided         │     on Q1          (aria-         on last                    │
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>│                   │                     pressed)                                  │
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>└──────────────────┴─────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<p><strong>Palette cell semantics</strong> (from <code>Palette.tsx</code>) - status is conveyed by <strong>text +
+shape/border, never color alone</strong> (accessibility rule the codebase follows):</p>
+<table>
+<thead>
+<tr>
+<th>Cell</th>
+<th>Visual</th>
+<th><code>aria-label</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unanswered</td>
+<td>plain <code>surface</code>, thin <code>border</code></td>
+<td><code>Question N: unanswered</code></td>
+</tr>
+<tr>
+<td>Answered</td>
+<td>filled <code>surface-raised</code>, heavier border</td>
+<td><code>Question N: answered</code></td>
+</tr>
+<tr>
+<td>Flagged</td>
+<td>shows a <code>⚑</code> glyph + edge marker (combinable with answered)</td>
+<td><code>Question N: answered, flagged</code></td>
+</tr>
+<tr>
+<td>Current</td>
+<td>thick <code>primary accent</code> ring, <code>aria-current="true"</code></td>
+<td>(label as above)</td>
+</tr>
+<tr>
+<td>Voided</td>
+<td>muted/hatched, still selectable to view</td>
+<td><code>Question N: voided</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Header timer:</strong> <code>role="timer"</code>, label <code>Time remaining: M:SS</code> (or <code>H:MM:SS</code> past an hour, via
+<code>formatDuration</code>). <code>aria-live="off"</code> on the ticking value so it does not spam a screen reader
+every second.</p>
+<p><strong>Controls (exact behavior, from the reducer):</strong></p>
+<ul>
+<li><strong>Previous / Next</strong> - move <code>current</code>; Previous disabled at Q1, Next disabled at last problem.</li>
+<li><strong>Flag</strong> - toggles <code>flags[current]</code>; <code>aria-pressed</code>; label flips <strong>Flag ⇄ Unflag</strong>.</li>
+<li><strong>Submit</strong> - fires the single guarded submit; label → <code>Submitting…</code> while in flight.</li>
+<li><strong>Choices</strong> - A–E radiogroup; selecting sets the answer; <strong>Clear answer</strong> (link-button)
+  appears only when a choice is selected and removes it (back to blank).</li>
+<li>Once <code>phase</code> leaves <code>active</code> (submitting/review), answers/flags freeze (<code>disabled</code>).</li>
+</ul>
+<p><strong>[NEW] refinements layered onto the runner</strong> (the current build omits these; they are the
+main UX gaps - see <a href="#8-open-ux-questions">Open questions</a>):</p>
+<ol>
+<li><strong>Low-time warning.</strong> At <strong>5:00 remaining</strong>, give the timer a non-color emphasis (bold +
+   a <code>⚠</code> glyph + an <code>aria-live="assertive"</code> one-shot announcement <strong>"5 minutes remaining."</strong>).
+   At <strong>1:00</strong>, repeat once: <strong>"1 minute remaining."</strong> Recommended default: <strong>on</strong> (Q3).</li>
+<li><strong>Confirm-before-submit dialog</strong> when the user clicks <strong>Submit manually</strong> (auto-submit at
+   zero must NOT confirm - there is no time to). Recommended default: <strong>confirm only if
+   blanks remain</strong> (Q1). Dialog wireframe:</li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        ┌───────────────────────────────────────────────┐
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        │  Submit your test?                            │
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        │                                               │
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        │  You have 3 unanswered problems (and 2        │   ← derived from answers/flags
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        │  flagged). Once you submit, you can&#39;t change   │
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        │  your answers.                                │
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        │                                               │
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        │            [ Keep working ]   [ Submit ]      │   ← Submit = primary/danger-ish
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        └───────────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li>If no blanks and no flags: copy simplifies to <strong>"Once you submit, you can't change your
+     answers."</strong> (or skip the dialog entirely per Q1).</li>
+<li>
+<p>Focus moves into the dialog; <code>Esc</code> / "Keep working" returns to the runner unchanged.</p>
+</li>
+<li>
+<p><strong>Auto-submit-at-zero moment.</strong> When the deadline passes, the runner submits automatically
+   (no dialog). Show a brief inline, non-blocking notice as the review loads:
+   <strong>"Time's up - submitting your test."</strong> Then the review replaces the runner. Because submit
+   is guarded, a manual click landing at the same instant cannot double-submit; a server
+   <strong>409</strong> is treated as "already submitted" and also lands on review.</p>
+</li>
+</ul>
+<p><strong>Runner states</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading exam</td>
+<td><code>Spinner</code> - <strong>"Loading exam…"</strong></td>
+</tr>
+<tr>
+<td>Load error / not found (404)</td>
+<td><code>ErrorState</code> - <strong>"Could not load this exam"</strong> with a link back to <code>/exams</code>.</td>
+</tr>
+<tr>
+<td>Active</td>
+<td>The runner above; timer ticking.</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td>Submit → <code>Submitting…</code>; controls frozen; auto-submit path shows the "Time's up" notice.</td>
+</tr>
+<tr>
+<td>Submit error (network, not 409)</td>
+<td>Non-destructive inline <code>ErrorState</code> - <strong>"Could not submit. Your answers are still here - try again."</strong> Re-enable Submit so the student can retry (do <strong>not</strong> discard answers).</td>
+</tr>
+<tr>
+<td>Submit conflict (409)</td>
+<td>Treat as already submitted → go to review (fetch latest if needed).</td>
+</tr>
+<tr>
+<td>Reviewed</td>
+<td>Replaced by <a href="#33-exam-review-graded">3.3 Exam review</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mobile / stacked variant (runner).</strong> The two-column body collapses to a single column:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>┌───────────────────────────────────────────┐
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>│ AMC 10 2022A         ⏱ 1:04:12             │  ← header stays sticky at top
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>│ 12 of 25 answered                          │
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>├───────────────────────────────────────────┤
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>│ [ ▸ Questions (12/25) ]                    │  ← palette collapses to a disclosure
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>├───────────────────────────────────────────┤   (expands the number grid inline)
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>│ Problem 13                                 │
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>│ ┌───────────────────────────────────────┐ │
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>│ │ … prompt (KaTeX / image, scrolls) …   │ │
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>│ └───────────────────────────────────────┘ │
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>│ ( ) A …   (•) C …   ( ) E …                │  ← choices stack full-width
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>├───────────────────────────────────────────┤
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>│  ◀ Prev    ⚑ Flag    Next ▶    [ Submit ]  │  ← controls become a sticky bottom bar
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>└───────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li>Timer stays pinned (sticky header) so it is always visible while scrolling a long problem.</li>
+<li>Palette is a collapsible disclosure showing the answered count in its label; tapping a cell
+  jumps and auto-collapses.</li>
+<li>Controls become a <strong>sticky bottom action bar</strong> (thumb-reachable).</li>
+<li>Problem images: constrain to viewport width, allow pinch-zoom (do not lock scaling).</li>
+</ul>
+<h3 id="33-exam-review-graded">3.3 Exam review (graded)<a class="headerlink" href="#33-exam-review-graded" title="Permanent link">&para;</a></h3>
+<p>The <strong>only</strong> screen that shows correct answers. Renders <code>ExamResultResponse</code>: score breakdown
+(<code>score</code>, <code>max_score</code>, <code>correct</code>, <code>wrong</code>, <code>blank</code>) + a per-problem table from <code>review[]</code>,
+each item <code>{ n, your, correct, ok, voided }</code>. Matches <code>ExamReview.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  Your result                                                              ← h2, aria-live
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>  ┌────────────┬───────────┬───────────┬───────────┐
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>  │  Score     │  Correct  │  Wrong    │  Blank    │
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>  │  105 / 150 │    17     │     6     │     2     │      ← &lt;dl&gt; score summary
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>  └────────────┴───────────┴───────────┴───────────┘
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  Per-problem review                                                       ← &lt;caption&gt;
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>  ┌─────┬───────────────┬───────────┬─────────────┐
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>  │  #  │  Your answer  │  Correct  │  Outcome    │
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>  ├─────┼───────────────┼───────────┼─────────────┤
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>  │  1  │      C        │     C     │  Correct    │   ok=true
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>  │  2  │      -        │     B     │  Incorrect  │   your=null → &quot;-&quot;
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>  │  3  │      D        │     A     │  Incorrect  │
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>  │  …  │      …        │     …     │     …       │
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>  │ 11  │      -        │     C     │  Void       │   voided=true → &quot;Void&quot; (excluded from score)
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>  └─────┴───────────────┴───────────┴─────────────┘
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>  [ Back to tests ]            [ View my progress ]            ← [NEW] next-step actions
+</span></code></pre></div>
+<ul>
+<li><strong>Outcome</strong> mapping (from code): <code>voided → "Void"</code>; else <code>ok ? "Correct" : "Incorrect"</code>.
+  Reinforce with a non-color glyph per row (✓ / ✗ / blank) so outcome is not color-only.</li>
+<li><code>your</code> is <code>null</code> for blanks → render <strong>"-"</strong> (blank indicator).</li>
+<li>On submit success the code already invalidates the progress query, so the dashboard reflects
+  this attempt immediately.</li>
+<li><strong>[NEW]</strong> Add two footer actions - <strong>"Back to tests"</strong> (<code>/exams</code>) and <strong>"View my
+  progress"</strong> (<code>/progress</code>) - so the review is not a dead end. Optionally surface
+  <code>solution_url</code> per row as a <strong>"Solution"</strong> link if present (the data model has it; the
+  current <code>ReviewItemResponse</code> does not yet expose it - flag as [Q6]).</li>
+<li><strong>States:</strong> review only renders on a successful submit, so it has no independent
+  loading/empty/error of its own; its error is the runner's submit error above.</li>
+<li><strong>Mobile:</strong> the score <code>&lt;dl&gt;</code> wraps to a 2×2 grid; the table becomes horizontally scrollable
+  within its container (keep <code>#</code>, <code>Outcome</code> visible; let <code>Your</code>/<code>Correct</code> scroll) - or, for
+  the academic-calm feel, render each problem as a stacked row card (<code># 2 · your - · correct B
+  · Incorrect</code>).</li>
+</ul>
+<hr />
+<h2 id="4-the-diagnostic-placement-experience">4. The diagnostic &amp; placement experience<a class="headerlink" href="#4-the-diagnostic-placement-experience" title="Permanent link">&para;</a></h2>
+<h3 id="41-diagnostic-list-diagnostics">4.1 Diagnostic list (<code>/diagnostics</code>)<a class="headerlink" href="#41-diagnostic-list-diagnostics" title="Permanent link">&para;</a></h3>
+<p>Lists the AoPS instruments from <code>GET /api/v1/diagnostics</code> (<code>DiagnosticSummary</code>: <code>id</code>,
+<code>course</code>, <code>kind</code>, <code>role</code>). Matches <code>DiagnosticListPage.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  Placement diagnostics                                                    ← h1
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>  ┌──────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>  │  Prealgebra 1  -  Are You Ready?                                   →      │
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>  ├──────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  │  Prealgebra 1  -  Do You Know?                                     →      │
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  ├──────────────────────────────────────────────────────────────────────────┤
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  │  Introduction to Algebra B  -  Are You Ready?                      →      │
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  │  …                                                                        │
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  └──────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>       ↑ Link to /diagnostics/:instrumentId; label = &quot;{course} - {kind}&quot;
+</span></code></pre></div>
+<p><strong>[NEW] optional grouping:</strong> there are 10 instruments spanning several courses, each with an
+"Are You Ready?" (AYR) and/or "Do You Know?" (DYK) role. Grouping rows by <code>course</code> with the
+<code>kind</code> as the secondary label improves scannability. Low effort; nice-to-have.</p>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td><code>Spinner</code> - <strong>"Loading diagnostics…"</strong></td>
+</tr>
+<tr>
+<td>Error</td>
+<td><code>ErrorState</code> - <strong>"Could not load diagnostics"</strong></td>
+</tr>
+<tr>
+<td>Empty</td>
+<td><code>EmptyState</code> - <strong>"No diagnostics available yet."</strong></td>
+</tr>
+<tr>
+<td>Success</td>
+<td>The list above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-diagnostic-runner-diagnosticsinstrumentid">4.2 Diagnostic runner (<code>/diagnostics/:instrumentId</code>)<a class="headerlink" href="#42-diagnostic-runner-diagnosticsinstrumentid" title="Permanent link">&para;</a></h3>
+<p>Loads <code>DiagnosticDetail</code> (<code>instructions</code> + key-free <code>items[]</code>, each <code>DiagnosticItemRead</code> with
+<code>section_title</code>, <code>label</code>, <code>prompt</code>, <strong><code>manual</code></strong>). The <code>manual</code> flag is the pivotal UX
+distinction: <strong>auto-graded</strong> items take a typed text answer; <strong>manual</strong> (symbolic) items are
+worked on paper and <strong>self-marked</strong> with a checkbox. Submits <code>{responses, marks, elapsed_sec}</code>.
+Matches <code>DiagnosticRunnerPage.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  Introduction to Algebra B - Are You Ready?                               ← h1 (course)
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  ┌────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  │  Work each problem on paper. Type your answer where there&#39;s a box; for       │  ← instructions
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  │  problems marked &quot;self-mark,&quot; check the box if your written solution is      │     (from API)
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  │  correct.                                                                    │
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>  └────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  ── Fundamentals ───────────────────────────────  ◄ section_title (group header) [NEW]
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>  1.  Evaluate  3x + 5  when  x = 4.                          ← prompt (KaTeX via Tex)
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>      Your answer:  ┌──────────────────┐                     ← auto: text input
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>                    │ 17               │
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>                    └──────────────────┘
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>  2.  Simplify  (2/3) ÷ (4/9).                                ← auto item
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>      Your answer:  ┌──────────────────┐
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>                    │ 3/2              │                       ← accepts 3/2, 1 1/2, etc. (server parses)
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>                    └──────────────────┘
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>  ── Problem solving ────────────────────────────  ◄ section_title
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>  3.  Prove that √2 is irrational.                            ← manual (symbolic)
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>      ☐  I solved this correctly (self-marked)                ← checkbox, marks[item.id]
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>  4.  Factor  x² − 5x + 6  completely.                        ← manual
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>      ☑  I solved this correctly (self-marked)
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>  ┌─────────────────────────────────────┐
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>  │        Submit diagnostic           │                      ← &quot;Submitting…&quot; while pending
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>  └─────────────────────────────────────┘
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>  [ ⚠ Could not submit. Please try again. ]                   ← role=alert on error
+</span></code></pre></div>
+<ul>
+<li><strong>[NEW] section headers:</strong> the data has <code>section_title</code> per item; the current build does not
+  render it. Group items under their <code>section_title</code> (e.g. <em>Fundamentals</em> vs <em>Problem
+  solving</em>) - the AoPS instruments use these sections and they map to the <code>fund</code>/<code>ps</code> grading
+  groups, so the grouping is meaningful, not cosmetic.</li>
+<li><strong>No timer</strong> by default (placement diagnostics are not strictly timed in the prototype),
+  though <code>elapsed_sec</code> is captured silently from mount. If a soft timer is wanted, surface it
+  as a quiet stopwatch, not a countdown - see <a href="#8-open-ux-questions">Q4</a>.</li>
+<li><strong>Self-mark honesty:</strong> keep the manual-item copy plain and non-judgmental - <strong>"I solved this
+  correctly (self-marked)."</strong> The verdict is recomputed server-side from marks + auto answers.</li>
+</ul>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td><code>Spinner</code> - <strong>"Loading diagnostic…"</strong></td>
+</tr>
+<tr>
+<td>Load error / 404</td>
+<td><code>ErrorState</code> - <strong>"Could not load this diagnostic"</strong></td>
+</tr>
+<tr>
+<td>Filling</td>
+<td>The form above; Submit always enabled (blanks allowed - they count as wrong/unmarked).</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td>Button → <code>Submitting…</code>, disabled.</td>
+</tr>
+<tr>
+<td>Submit error</td>
+<td><code>ErrorState</code> - <strong>"Could not submit. Please try again."</strong> (answers retained).</td>
+</tr>
+<tr>
+<td>Result</td>
+<td>Replaced by <a href="#43-diagnostic-result-verdict">4.3 Diagnostic result</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mobile:</strong> already single-column and stacks naturally; ensure text inputs are full-width and
+checkboxes have a large (44px+) tap target with the label as part of the hit area.</p>
+<h3 id="43-diagnostic-result-verdict">4.3 Diagnostic result (verdict)<a class="headerlink" href="#43-diagnostic-result-verdict" title="Permanent link">&para;</a></h3>
+<p>Renders <code>DiagnosticResultResponse</code>: <code>verdict</code> (<code>win | mid | low</code>), <code>passed</code>, <code>correct</code>/<code>total</code>,
+<code>summary</code> (the recommendation line), and optionally <code>group_scores</code> + per-item <code>review[]</code>
+(<code>DiagnosticItemReview</code>: <code>item_id</code>, <code>correct</code>, <code>manual</code>, <code>answer</code>). Current build shows only
+verdict + summary + correct/total; the wireframe below is the <strong>[NEW]</strong> fuller version.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  Introduction to Algebra B - result                                       ← h1, aria-live
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  ┌────────────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  │  WIN                                                                         │  ← verdict, prominent
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  │  You&#39;re ready for Introduction to Algebra B. Strong on problem solving;      │  ← summary (from API)
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  │  brush up fundamentals before you start.                                    │
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>  │                                                                             │
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  │  9 of 12 correct.   Passed.                                                 │  ← correct/total + passed
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  └────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  Section scores                                              ← [NEW] from group_scores (if present)
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  ┌──────────────────┬─────────┐
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  │  Fundamentals    │   4     │
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>  │  Problem solving │   5     │
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>  └──────────────────┴─────────┘
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>  Per-item review                                             ← [NEW] from review[] (optional, collapsible)
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>  ┌─────┬────────────┬───────────────────────┐
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>  │ Item│  Outcome   │  Answer               │
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>  ├─────┼────────────┼───────────────────────┤
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>  │  1  │  Correct   │  17                   │
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>  │  2  │  Incorrect │  3/2                  │
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>  │  3  │  Self ✓    │  (self-marked)        │   manual=true → outcome from the student&#39;s mark
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>  │  …  │            │                       │
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>  └─────┴────────────┴───────────────────────┘
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>  [ Back to diagnostics ]        [ View my progress ]         ← [NEW] next steps
+</span></code></pre></div>
+<ul>
+<li><strong>Verdict treatment:</strong> map <code>win/mid/low</code> to calm, legible emphasis - a labeled badge with
+  text (<strong>Ready / Almost / Not yet</strong> as friendly synonyms, or keep the raw <code>WIN/MID/LOW</code> the
+  code currently uppercases). Reinforce with text, never color alone.</li>
+<li><strong>Per-item review</strong> is the only place a diagnostic <code>answer</code> is revealed (mirrors the exam
+  key rule). Manual items show the student's self-mark, not a key.</li>
+<li>The summary line is authoritative recommendation copy from the server - render it verbatim;
+  do not paraphrase.</li>
+<li>On success the progress query is invalidated, so <code>/progress</code> reflects this attempt.</li>
+</ul>
+<hr />
+<h2 id="5-progress-recommendation">5. Progress &amp; recommendation<a class="headerlink" href="#5-progress-recommendation" title="Permanent link">&para;</a></h2>
+<h3 id="51-my-progress-dashboard-progress">5.1 My progress dashboard (<code>/progress</code>)<a class="headerlink" href="#51-my-progress-dashboard-progress" title="Permanent link">&para;</a></h3>
+<p><code>GET /api/v1/progress</code> → <code>ProgressResponse</code>. The shared <code>ProgressView</code> renders three blocks:
+<strong>Recommendation</strong> (<code>recommendation_course</code>, <code>recommendation_reason</code>, <code>algebra_warning</code>,
+<code>unlocked_by_amc[]</code>), <strong>Contest history</strong> (<code>test_attempts[]</code>), and <strong>Diagnostics</strong>
+(<code>diagnostic_attempts[]</code>). Matches <code>ProgressPage.tsx</code> + <code>ProgressView.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>  Your progress                                                            ← h1
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  ┌── Recommendation ──────────────────────────────────────────────────────────┐
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  │                                                                             │
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  │  Introduction to Algebra B                       ← recommendation_course (h2 region) │
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>  │                                                                             │
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>  │  Your diagnostics place you mid-ladder; your AMC 10 score clears the gate   │  ← recommendation_reason
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>  │  for Algebra B, so start there.                                             │
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>  │                                                                             │
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>  │  ⚠ Your algebra fundamentals look shaky - review them before the first      │  ← algebra_warning
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>  │     class.                                                                  │     (role=&quot;alert&quot;, only if present)
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>  │                                                                             │
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>  │  Your AMC score unlocks: Algebra B, Counting &amp; Probability.                 │  ← unlocked_by_amc (if any)
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>  └─────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>  ┌── Contest history ─────────────────────────────────────────────────────────┐
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>  │  Score        │ Correct │ Wrong │ Blank │ Time (s)                          │
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>  │  105 / 150    │   17    │   6   │   2   │  4120                             │
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>  │  96 / 150     │   15    │   8   │   2   │  4500                             │
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>  └─────────────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>  ┌── Diagnostics ─────────────────────────────────────────────────────────────┐
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>  │  Instrument        │  Verdict │  Result                                     │
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>  │  algB-pre          │   win    │  Passed                                     │
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>  │  pa1-pre           │   mid    │  Did not pass                               │
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>  └─────────────────────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li><strong>Recommendation block first</strong> - it is the headline output of the whole app. The
+  <code>recommendation_reason</code> is server-authored; render verbatim.</li>
+<li><code>algebra_warning</code> renders as a <code>role="alert"</code> only when non-null (the prototype's algebra
+  gate). <code>unlocked_by_amc</code> renders as a sentence only when the array is non-empty.</li>
+<li><strong>[NEW]</strong> Contest-history rows should identify <strong>which paper</strong> (e.g. <em>AMC 10 2022A</em>) and
+  <strong>when</strong>; the current <code>ProgressResponse.test_attempts</code> items are untyped (<code>items: {}</code> in the
+  schema) and the table keys off <code>score/correct/wrong/blank/time_used_sec</code>. If the attempt
+  objects carry an exam label/date, surface them as the first column; if not, flag the API gap
+  ([Q5]). Same for diagnostics (<code>instrument_id</code> is shown raw - prefer the human <code>course -
+  kind</code> if available).</li>
+</ul>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td><code>Spinner</code> - <strong>"Loading progress…"</strong></td>
+</tr>
+<tr>
+<td>Error</td>
+<td><code>ErrorState</code> - <strong>"Could not load your progress"</strong></td>
+</tr>
+<tr>
+<td>No recommendation yet</td>
+<td><code>EmptyState</code> in the recommendation block - <strong>"No recommendation yet."</strong> (plus the <code>recommendation_reason</code>, which may explain what's missing, e.g. "Take a diagnostic to get a placement.")</td>
+</tr>
+<tr>
+<td>No contests</td>
+<td><code>EmptyState</code> - <strong>"No contests taken yet."</strong></td>
+</tr>
+<tr>
+<td>No diagnostics</td>
+<td><code>EmptyState</code> - <strong>"No diagnostics taken yet."</strong></td>
+</tr>
+<tr>
+<td>Fresh account (all empty)</td>
+<td>All three empties stack; consider a single calming lead-in: <strong>"Take a practice test or a diagnostic to get started."</strong> with links to <code>/exams</code> and <code>/diagnostics</code>. <strong>[NEW]</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mobile:</strong> the three blocks stack (already vertical). The two history <strong>tables</strong> are the only
+wide elements - apply the same treatment as the review table: horizontal scroll within the
+card, or collapse each attempt into a stacked mini-card (<code>AMC 10 2022A · 105/150 · 17✓ 6✗ 2-
+· 4120s</code>). Keep the Recommendation block full-width and untruncated.</p>
+<h3 id="52-coachs-view-of-a-student-usersuseridprogress">5.2 Coach's view of a student (<code>/users/:userId/progress</code>)<a class="headerlink" href="#52-coachs-view-of-a-student-usersuseridprogress" title="Permanent link">&para;</a></h3>
+<p>Staff-only. Same <code>ProgressResponse</code> and the <strong>same <code>ProgressView</code></strong> as 5.1, so the layout is
+identical - only the framing differs (h1 = <strong>"Student progress"</strong>, read-only). Matches
+<code>UserProgressPage.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>  Student progress                                                         ← h1
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  ┌──────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  │  [ ← Back to students ]   Bayden  ·  bayden@example.com   ·  student   │  ← [NEW] context bar
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  └──────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  …identical Recommendation / Contest history / Diagnostics blocks as §5.1…
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  (read-only; no controls that mutate the student&#39;s data)
+</span></code></pre></div>
+<ul>
+<li><strong>[NEW] student context bar:</strong> the coach needs to know <em>whose</em> progress this is. The current
+  page shows a generic "Student progress" heading with no name. Add a context bar with the
+  student's <code>display_name</code> / <code>email</code> / <code>role</code> and a <strong>"Back to students"</strong> link. (Requires
+  either a roster endpoint or fetching the target user - see [Q7].)</li>
+<li>Everything is <strong>read-only</strong>: a coach observes, never edits a student's attempts.</li>
+</ul>
+<p><strong>States</strong> mirror 5.1, plus:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading</td>
+<td><code>Spinner</code> - <strong>"Loading progress…"</strong></td>
+</tr>
+<tr>
+<td>Error / 403 (non-staff)</td>
+<td>Guard redirects non-staff home before render; a server 403 → <code>ErrorState</code> <strong>"You don't have access to this student."</strong></td>
+</tr>
+<tr>
+<td>404 (no such user)</td>
+<td><code>ErrorState</code> - <strong>"Could not load this student's progress"</strong> (matches current copy).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-coach-roster-the-missing-entry-point-new">5.3 Coach roster - the missing entry point [NEW]<a class="headerlink" href="#53-coach-roster-the-missing-entry-point-new" title="Permanent link">&para;</a></h3>
+<p>There is currently <strong>no UI path</strong> from the coach's nav to <code>/users/:id/progress</code>; the route
+exists but is unreachable without typing a UUID. This is an IA gap. Proposed minimal solution
+(pending a list-students endpoint - [Q7]):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>  Students                                                                 ← [NEW] page, staff-only
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>  ┌──────────────────────────────────────────────────────────────────────┐
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  │  Bayden        bayden@example.com    last active 2d ago        →      │
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>  │  Avery         avery@example.com     last active 5d ago        →      │
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>  │  …                                                                    │
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>  └──────────────────────────────────────────────────────────────────────┘
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>       ↑ each row → /users/:id/progress
+</span></code></pre></div>
+<ul>
+<li>Add a <strong>"Students"</strong> nav item (staff-only, next to "Invite"), or fold the roster into a
+  staff landing page. Route suggestion: <code>/students</code> (not yet in the router).</li>
+<li>Until a roster endpoint exists, a coach reaches a student only via a link the app generates
+  elsewhere (e.g. from the invite flow once the account is created). Flagged as [Q7].</li>
+</ul>
+<hr />
+<h2 id="6-invite-staff-only-invite">6. Invite (staff-only) - <code>/invite</code><a class="headerlink" href="#6-invite-staff-only-invite" title="Permanent link">&para;</a></h2>
+<p>Mint a one-time invite via <code>POST /api/v1/invites</code> (<code>InviteCreateRequest</code>: <code>email</code>, <code>role</code>).
+The response (<code>InviteCreatedResponse</code>: <code>token</code>, <code>email</code>, <code>role</code>) returns the raw <code>token</code>
+<strong>exactly once</strong>; the page builds the shareable link <code>…/register?token=&lt;token&gt;</code>. Matches
+<code>InvitePage.tsx</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  Invite a student                                                         ← h1
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  Email
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  ┌─────────────────────────────────────┐
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>  │ avery@example.com                   │
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>  └─────────────────────────────────────┘
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>  Role
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>  ┌─────────────────────────────────────┐
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>  │ student            ▾                │   ← select: student / coach / admin
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>  └─────────────────────────────────────┘
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>  ┌─────────────────────────────────────┐
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>  │          Create invite             │   ← &quot;Creating…&quot; while pending
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>  └─────────────────────────────────────┘
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>  [ ⚠ Could not create the invite. ]       ← role=alert on error
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>  ── after success ───────────────────────────────────────────────────────────
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>  ┌── Share this link once ────────────────────────────────────────────────────┐
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>  │  Send this to avery@example.com. It won&#39;t be shown again.                   │
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>  │                                                                             │
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>  │  https://amc.example.com/register?token=R7xK…q1                ⧉ Copy       │  ← code + [NEW] copy button
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>  └─────────────────────────────────────────────────────────────────────────────┘
+</span></code></pre></div>
+<ul>
+<li><strong>One-time disclosure is the key UX risk.</strong> The raw token is shown once and never again.
+  Make this unmissable: heading <strong>"Share this link once"</strong>, helper <strong>"It won't be shown
+  again."</strong>, and <strong>[NEW]</strong> a <strong>Copy</strong> button (the current build shows the link in a <code>&lt;code&gt;</code>
+  block with no copy affordance - easy to lose). After copying, confirm with <strong>"Copied."</strong></li>
+<li><strong>[NEW] post-create affordances:</strong> offer <strong>"Create another invite"</strong> (resets the form) and,
+  once the invitee registers, a path to their progress (ties into the roster, [Q7]).</li>
+<li>Role select defaults to <strong>student</strong>; coaches will rarely mint coach/admin - consider hiding
+  <code>admin</code> for non-admins, or confirming on elevated roles. ([Q9])</li>
+</ul>
+<p><strong>States</strong></p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Copy / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>Empty email, role=student, Create enabled.</td>
+</tr>
+<tr>
+<td>Submitting</td>
+<td>Button → <code>Creating…</code>, disabled.</td>
+</tr>
+<tr>
+<td>Error</td>
+<td><code>ErrorState</code> - <strong>"Could not create the invite."</strong> (e.g. invalid role, or non-staff 403).</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>The "Share this link once" panel (<code>aria-live="polite"</code>) with the link + Copy.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-core-user-journeys-end-to-end">7. Core user journeys (end to end)<a class="headerlink" href="#7-core-user-journeys-end-to-end" title="Permanent link">&para;</a></h2>
+<h3 id="us-001-take-a-timed-amc-test-graded-review">US-001 - Take a timed AMC test → graded review<a class="headerlink" href="#us-001-take-a-timed-amc-test-graded-review" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>[Login] ──► /exams ──► pick &quot;AMC 10 2022A&quot; ──► /exams/:id (RUNNER, key-free)
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>                                                   │
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>            ┌──── answer A–E · flag · navigate via palette · timer counts down ───┐
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>            │                                                                     │
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>            ▼                                                                     ▼
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>   manual Submit ──► [Confirm if blanks] ──► POST /exams/:id/attempts      timer hits 0
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>                                                   │                        ──► &quot;Time&#39;s up:
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>                                                   │   (same guarded submit)    submitting…&quot;
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>                                                   ▼                              │
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>                                          ExamResultResponse  ◄────────────────────┘
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>                                                   │
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>                                                   ▼
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>                                  /exams/:id (REVIEW - key revealed: score + per-problem)
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>                                                   │
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>                                   [Back to tests]  ·  [View my progress]
+</span></code></pre></div>
+<p>Acceptance hooks: timer counts down from <code>duration_sec</code> and auto-submits at zero; flag +
+palette navigation work; on submit the server grades and stores; review shows correct answers.
+The key is revealed only in the review (the runner never holds it).</p>
+<h3 id="us-002-redeem-invite-register-first-login">US-002 - Redeem invite → register → first login<a class="headerlink" href="#us-002-redeem-invite-register-first-login" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Coach: /invite ──► POST /invites ──► copies  …/register?token=XYZ  ──► sends to student
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>                                                                          │
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Student: opens link ──► /register?token=XYZ                               ▼
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>            │  GET /auth/invites/{token}  (valid?  show email : show &quot;invalid/expired&quot;)
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>            ▼
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>   enter display name + password (8+) ──► POST /auth/register ──► server sets amc_session cookie
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>            │
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            ▼
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>   /auth/me re-derives user ──► redirect to / ──► /exams   (first login lands in the catalog)
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>Returning later: /login ──► email + password ──► POST /auth/login ──► cookie ──► /exams
+</span></code></pre></div>
+<p>Acceptance hooks: coach mints an invite; student sets a password and logs in; session persists
+via the secure cookie; <code>/auth/me</code> returns the user; history follows the account across devices.</p>
+<h3 id="us-003-take-diagnostics-see-placement-recommendation">US-003 - Take diagnostics → see placement recommendation<a class="headerlink" href="#us-003-take-diagnostics-see-placement-recommendation" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>/diagnostics ──► pick &quot;Algebra B - Are You Ready?&quot; ──► /diagnostics/:id (RUNNER)
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>        │
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>        │   auto items: type answer        manual items: work on paper, ☑ self-mark
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>        ▼
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>   Submit diagnostic ──► POST /diagnostics/:id/attempts  {responses, marks, elapsed_sec}
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>        │
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>        ▼
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>   DiagnosticResultResponse  (verdict win/mid/low · summary · correct/total · group_scores)
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        │
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>        ├──► [Back to diagnostics]  (take more instruments)
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>        └──► /progress  ──► combined read: recommendation_course + reason
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>                              (+ algebra_warning, unlocked_by_amc from the AMC gate)
+</span></code></pre></div>
+<p>Acceptance hooks: the recommendation reflects the latest attempts and matches the prototype's
+ladder + AMC-gate logic. Diagnostics feed <code>/progress</code>, where the AMC score and diagnostics are
+synthesized into one <code>recommendation_course</code> + <code>recommendation_reason</code>.</p>
+<h3 id="coach-journey-mint-an-invite-view-a-students-progress">Coach journey - mint an invite, view a student's progress<a class="headerlink" href="#coach-journey-mint-an-invite-view-a-students-progress" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>/invite ──► create invite ──► &quot;Share this link once&quot; (copy)  ──► [later] student registers
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>   │
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>   ▼
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>[Students roster - NEW]  ──► pick &quot;Bayden&quot;  ──► /users/:id/progress
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>                                                     │
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>                                                     ▼
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>                              read-only ProgressView: recommendation + contest + diagnostics
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>                                          [ ← Back to students ]
+</span></code></pre></div>
+<p>Acceptance hooks: a coach can open any student's progress; a student cannot open another's
+(403). <strong>Gap:</strong> the roster step is [NEW] - the route exists but the entry point does not (see
+<a href="#53-coach-roster--the-missing-entry-point-new">5.3</a> and [Q7]).</p>
+<hr />
+<h2 id="8-open-ux-questions">8. Open UX questions<a class="headerlink" href="#8-open-ux-questions" title="Permanent link">&para;</a></h2>
+<p>Decisions to confirm with the team. Each notes a recommended default so engineering is not
+blocked.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Q1</strong></td>
+<td><strong>Confirm before a manual submit?</strong> The current runner submits with no confirmation.</td>
+<td><strong>Confirm only when blanks (or flags) remain</strong>; skip the dialog if every problem is answered. Auto-submit at zero never confirms.</td>
+</tr>
+<tr>
+<td><strong>Q2</strong></td>
+<td><strong>Show a ticking clock or a countdown?</strong></td>
+<td><strong>Countdown</strong> of time <em>remaining</em> (<code>M:SS</code>), matching <code>useCountdown</code>/<code>formatDuration</code> already built. A countdown maps to the real constraint better than elapsed time.</td>
+</tr>
+<tr>
+<td><strong>Q3</strong></td>
+<td><strong>Warn at low time?</strong> No warning exists today.</td>
+<td><strong>Yes</strong> - non-color emphasis + one-shot <code>aria-live</code> announcements at <strong>5:00</strong> and <strong>1:00</strong> remaining.</td>
+</tr>
+<tr>
+<td><strong>Q4</strong></td>
+<td><strong>Time the diagnostics?</strong> <code>elapsed_sec</code> is captured but not shown.</td>
+<td><strong>No visible timer</strong> (placement, not a contest); keep silent capture. If wanted, a quiet stopwatch, never a countdown.</td>
+</tr>
+<tr>
+<td><strong>Q5</strong></td>
+<td><strong>What identifies a contest-history row?</strong> <code>ProgressResponse.test_attempts</code> items are untyped; the table keys off score/correct/wrong/blank/time only.</td>
+<td>Surface <strong>exam label (AMC 10 2022A) + date</strong> as the first column. Needs the attempt objects to carry an exam ref/timestamp - <strong>API follow-up</strong> if absent.</td>
+</tr>
+<tr>
+<td><strong>Q6</strong></td>
+<td><strong>Show solution links in the exam review?</strong> <code>Problem.solution_url</code> exists in the data model but <code>ReviewItemResponse</code> does not expose it.</td>
+<td>Add <code>solution_url</code> to the review item and render a per-row <strong>"Solution"</strong> link. <strong>API follow-up.</strong></td>
+</tr>
+<tr>
+<td><strong>Q7</strong></td>
+<td><strong>How does a coach reach a student?</strong> <code>/users/:id/progress</code> has no entry point.</td>
+<td>Add a <strong>staff-only "Students" roster</strong> (<code>/students</code>) backed by a list-students endpoint; rows link in. <strong>API + route follow-up.</strong> Until then the route is unreachable in normal use.</td>
+</tr>
+<tr>
+<td><strong>Q8</strong></td>
+<td><strong>Surface login rate-limiting?</strong></td>
+<td>Default to the generic error to avoid enumeration; only show a specific "too many attempts" message if the API returns a distinguishable signal.</td>
+</tr>
+<tr>
+<td><strong>Q9</strong></td>
+<td><strong>Restrict which roles a coach can mint?</strong> Invite role select currently lists student/coach/admin to all staff.</td>
+<td>Default role <strong>student</strong>; hide/disable <strong>admin</strong> for non-admins, or confirm on elevated roles.</td>
+</tr>
+<tr>
+<td><strong>Q10</strong></td>
+<td><strong>Reconnect / resume an in-progress exam?</strong> State is in-memory; a refresh restarts the runner and the in-memory timer.</td>
+<td>Out of scope for v1 (single-sitting). Flag the data-loss risk: a mid-exam refresh loses unsaved answers. Consider a "leave page?" <code>beforeunload</code> guard while <code>phase==='active'</code>.</td>
+</tr>
+<tr>
+<td><strong>Q11</strong></td>
+<td><strong>Empty-state guidance for a brand-new account?</strong></td>
+<td>Add a one-line lead-in on <code>/progress</code> linking to <code>/exams</code> and <code>/diagnostics</code> (see <a href="#51-my-progress-dashboard-progress">5.1</a>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-cross-cutting-ux-standards">9. Cross-cutting UX standards<a class="headerlink" href="#9-cross-cutting-ux-standards" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Status is never color-only.</strong> Every status (palette cell, outcome, verdict, warning) pairs
+  color with text and/or a glyph + ARIA, per the convention in <code>States.tsx</code>, <code>Palette.tsx</code>,
+  and <code>ExamReview.tsx</code>. This is both an accessibility requirement and a fit with the
+  clean-academic tone.</li>
+<li><strong>One canonical loading / empty / error vocabulary</strong> via the shared <code>Spinner</code> / <code>EmptyState</code>
+  / <code>ErrorState</code> components - reuse them everywhere rather than bespoke states. Loading copy is
+  always context-specific ("Loading tests…", "Loading exam…", "Loading progress…").</li>
+<li><strong>Server copy is authoritative.</strong> <code>recommendation_reason</code>, diagnostic <code>summary</code>, and
+  <code>algebra_warning</code> are rendered verbatim; the UI frames them but does not rewrite them.</li>
+<li><strong>Calm, exam-serious microcopy.</strong> Short, declarative, no exclamation marks except the genuine
+  urgency of "Time's up". No celebratory or gamified language - this is a study aid for a coach
+  and serious students.</li>
+<li><strong>Focus &amp; keyboard.</strong> The palette grid, radiogroups, and dialogs are keyboard-navigable;
+  focus is visible (<code>focus-ring</code> token) and moves into/out of the confirm dialog correctly. The
+  runner must be fully operable without a mouse (palette jump, A–E selection, flag, submit).</li>
+<li><strong>Responsive intent.</strong> Desktop is the primary surface (a focused, exam-like single view);
+  mobile is a supported stacked variant. The two complex screens - the <strong>runner</strong> and the
+  <strong>progress dashboard</strong> - have explicit stacked layouts above; everything else stacks
+  naturally in a single column.</li>
+</ul>
+<hr />
+<h2 id="appendix-a-screen-api-source-map">Appendix A - Screen ⇄ API ⇄ source map<a class="headerlink" href="#appendix-a-screen-api-source-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Route</th>
+<th>API (method path)</th>
+<th>Key response fields</th>
+<th>Existing source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Login</td>
+<td><code>/login</code></td>
+<td>POST <code>/auth/login</code>; GET <code>/auth/me</code></td>
+<td><code>UserResponse{id,email,display_name,role}</code></td>
+<td><code>pages/LoginPage.tsx</code></td>
+</tr>
+<tr>
+<td>Register</td>
+<td><code>/register?token=</code></td>
+<td>GET <code>/auth/invites/{token}</code>; POST <code>/auth/register</code></td>
+<td><code>InviteValidationResponse{valid,email,role}</code></td>
+<td><code>pages/RegisterPage.tsx</code></td>
+</tr>
+<tr>
+<td>Exam list</td>
+<td><code>/exams</code></td>
+<td>GET <code>/exams?contest=</code></td>
+<td><code>ExamSummary[]</code></td>
+<td><code>pages/ExamListPage.tsx</code></td>
+</tr>
+<tr>
+<td>Exam runner</td>
+<td><code>/exams/:id</code></td>
+<td>GET <code>/exams/{id}</code></td>
+<td><code>ExamDetail{…,problems:ProblemRead[]}</code> (no key)</td>
+<td><code>pages/ExamRunnerPage.tsx</code>, <code>features/exam/*</code></td>
+</tr>
+<tr>
+<td>Exam review</td>
+<td><code>/exams/:id</code> (post-submit)</td>
+<td>POST <code>/exams/{id}/attempts</code></td>
+<td><code>ExamResultResponse{score,max_score,correct,wrong,blank,review[{n,your,correct,ok,voided}]}</code></td>
+<td><code>features/exam/ExamReview.tsx</code></td>
+</tr>
+<tr>
+<td>Diagnostic list</td>
+<td><code>/diagnostics</code></td>
+<td>GET <code>/diagnostics</code></td>
+<td><code>DiagnosticSummary[]</code></td>
+<td><code>pages/DiagnosticListPage.tsx</code></td>
+</tr>
+<tr>
+<td>Diagnostic runner</td>
+<td><code>/diagnostics/:id</code></td>
+<td>GET <code>/diagnostics/{id}</code></td>
+<td><code>DiagnosticDetail{instructions,items:DiagnosticItemRead[{…,manual}]}</code> (no key)</td>
+<td><code>pages/DiagnosticRunnerPage.tsx</code></td>
+</tr>
+<tr>
+<td>Diagnostic result</td>
+<td><code>/diagnostics/:id</code> (post-submit)</td>
+<td>POST <code>/diagnostics/{id}/attempts</code></td>
+<td><code>DiagnosticResultResponse{verdict,passed,correct,total,summary,group_scores,review[]}</code></td>
+<td><code>pages/DiagnosticRunnerPage.tsx</code></td>
+</tr>
+<tr>
+<td>My progress</td>
+<td><code>/progress</code></td>
+<td>GET <code>/progress</code></td>
+<td><code>ProgressResponse{test_attempts[],diagnostic_attempts[],recommendation_course,recommendation_reason,unlocked_by_amc[],algebra_warning}</code></td>
+<td><code>pages/ProgressPage.tsx</code>, <code>features/progress/ProgressView.tsx</code></td>
+</tr>
+<tr>
+<td>Student progress</td>
+<td><code>/users/:id/progress</code></td>
+<td>GET <code>/users/{id}/progress</code></td>
+<td><code>ProgressResponse</code> (same)</td>
+<td><code>pages/UserProgressPage.tsx</code>, <code>features/progress/ProgressView.tsx</code></td>
+</tr>
+<tr>
+<td>Invite</td>
+<td><code>/invite</code></td>
+<td>POST <code>/invites</code></td>
+<td><code>InviteCreatedResponse{token,email,role}</code> (token once)</td>
+<td><code>pages/InvitePage.tsx</code></td>
+</tr>
+<tr>
+<td>Students roster</td>
+<td><code>/students</code> <strong>[NEW]</strong></td>
+<td><em>list-students endpoint TBD</em> ([Q7])</td>
+<td>TBD</td>
+<td><em>not yet built</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="related-documents">Related documents<a class="headerlink" href="#related-documents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../planning/project-vision/">Project Vision</a></li>
+<li><a href="../../planning/tech-spec/">Technical Spec</a></li>
+<li><a href="../../planning/roadmap/">Roadmap</a> - US-001 / US-002 / US-003</li>
+<li><a href="../../api/openapi.json">OpenAPI schema</a> - response shapes designed around</li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Byron Williams
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ByronWilliamsCPA" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

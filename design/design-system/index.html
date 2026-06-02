@@ -1,0 +1,2786 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Web app for practice math tests">
+      
+      
+        <meta name="author" content="Byron Williams">
+      
+      
+        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/design/design-system/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AMC Trainer - Design System & Token Specification - AMC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0-context-locked-decisions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AMC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AMC Trainer - Design System & Token Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guides/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api-reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../development/architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Development
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../auth/authentik/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Authentication
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../known-vulnerabilities/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Security
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../project/roadmap/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Project
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AMC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ByronWilliamsCPA/AMC" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ByronWilliamsCPA/AMC
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/code-quality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code Quality
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Authentication
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../auth/authentik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentik
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Security
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../known-vulnerabilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Known Vulnerabilities
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/license/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    License
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-context-locked-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Context &amp; locked decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Design principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-color-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Color tokens
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Color tokens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Approach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-contrast-intent-verified" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Contrast intent (verified)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-light-theme-tokens-the-default-root" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Light theme tokens (the default :root)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-dark-theme-tokens-the-contract-ships-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Dark theme tokens (the contract, ships later)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-typography-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Typography tokens
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Typography tokens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-font-stacks-no-web-font-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Font stacks (no web-font dependency)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-type-scale-modular-12-minor-third-rounded-to-clean-px" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Type scale (modular, ~1.2 minor-third, rounded to clean px)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-recommended-role-token-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Recommended role → token map
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-base-element-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Base element defaults
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-rendering-math-katex-legibly-alongside-prose-explicit-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Rendering math (KaTeX) legibly alongside prose - explicit guidance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-math-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 Math token
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-spacing-radius-shadow-z-index-breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Spacing, radius, shadow, z-index, breakpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Spacing, radius, shadow, z-index, breakpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-spacing-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Spacing scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-radius-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Radius scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-shadow-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Shadow scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-z-index-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Z-index scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Breakpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-token-naming-file-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Token naming &amp; file layout
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Token naming &amp; file layout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-where-tokens-live" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Where tokens live
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Naming convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-tokenscss-excerpt-authoritative-starting-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 tokens.css excerpt (authoritative starting point)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-how-css-modules-consume-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 How CSS Modules consume tokens
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-theming-lightdark-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Theming (light/dark contract)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Motion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Motion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-tokens-standardize-on-one-duration-pair-one-easing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Tokens (standardize on one duration pair + one easing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-prefers-reduced-motion-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 prefers-reduced-motion (required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-implementation-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Implementation checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-open-items-future" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Open items / future
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>AMC Trainer - Design System & Token Specification</h1>
+
+<blockquote>
+<p><strong>Status</strong>: Canonical · <strong>Version</strong>: 1.0 · <strong>Updated</strong>: 2026-05-31
+<strong>Scope</strong>: This is the source-of-truth design-system and design-token spec for the AMC
+Trainer frontend. All other frontend docs and the implementation build on it. An engineer
+should be able to write <code>tokens.css</code> directly from §2–§4 and §5.</p>
+</blockquote>
+<h2 id="0-context-locked-decisions">0. Context &amp; locked decisions<a class="headerlink" href="#0-context-locked-decisions" title="Permanent link">&para;</a></h2>
+<p>AMC Trainer is a web app where a math coach and up to ~30 students take <strong>timed AMC 8/10/12
+practice contests</strong> and <strong>AoPS placement diagnostics</strong>, then get a synthesized course
+recommendation. The exam runner is the highest-stakes surface: a student is under a countdown,
+reading math, and one misread choice changes their score.</p>
+<p>These decisions are <strong>locked</strong>; this doc designs within them, it does not relitigate them.</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Styling foundation</td>
+<td><strong>CSS Modules + design tokens as CSS custom properties</strong>. No Tailwind, no UI component library.</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Minimal-dependency ethos. The only styling-adjacent runtime dep is <strong>KaTeX</strong> (<code>katex</code> <code>^0.16</code>), already used by <code>frontend/src/components/Tex.tsx</code>. <strong>No web fonts.</strong></td>
+</tr>
+<tr>
+<td>Visual tone</td>
+<td><strong>Clean &amp; academic</strong> - calm, focused, exam-serious, high legibility for math, restrained single accent, minimal chrome.</td>
+</tr>
+<tr>
+<td>Target stack</td>
+<td>React 19 + TypeScript 5.7 + Vite 6 (already set up).</td>
+</tr>
+<tr>
+<td>Performance budget</td>
+<td>Exam page interactive <strong>&lt; 2 s</strong> (<code>tech-spec.md</code> §Performance). System fonts + CSS vars keep CSS cost near-zero; this is a hard constraint on the design.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Relationship to existing code.</strong> <code>frontend/src/index.css</code> already defines a starter token set
+(<code>--color-bg</code>, <code>--color-fg</code>, <code>--color-muted</code>, <code>--color-primary</code>, <code>--color-primary-fg</code>,
+<code>--color-border</code>, <code>--color-ok</code>, <code>--color-warn</code>, <code>--color-error</code>, <code>--color-surface</code>,
+<code>--space-1..5</code>, <code>--radius</code>, <code>--maxw</code>, <code>--font</code>). This spec is an <strong>evolution, not a rewrite</strong>:
+every existing name is preserved (some as the canonical token, some as a back-compat alias), and
+the existing hex values are kept wherever they already pass WCAG AA - which, after verification,
+is all of them. New tokens are additive.</p>
+<hr />
+<h2 id="1-design-principles">1. Design principles<a class="headerlink" href="#1-design-principles" title="Permanent link">&para;</a></h2>
+<p>Six principles, ordered. When two conflict, the lower number wins.</p>
+<ol>
+<li>
+<p><strong>Legibility before everything.</strong> Students read dense math under time pressure. Body text is
+   ≥ 16px with generous line-height; math (KaTeX) is sized to sit at or slightly above the prose
+   x-height so fractions and exponents stay readable; numerals are tabular where they're compared
+   (timer, scores, problem palette). Never trade contrast or size for prettiness.</p>
+</li>
+<li>
+<p><strong>Low distraction during a timed test.</strong> The runner is near-monochrome: one restrained
+   accent, lots of calm surface, no gradients, no decorative motion, no animated timers. Color is
+   spent only where it carries meaning (current question, flagged, answered, correct/incorrect in
+   review). Chrome recedes so the problem is the only loud thing on screen.</p>
+</li>
+<li>
+<p><strong>Trustworthy &amp; serious.</strong> This is exam software; it should feel like a proctored test, not a
+   gamified quiz app. Restrained academic blue accent, square-ish geometry (small radii), flat
+   surfaces with hairline borders rather than heavy shadows. No emoji, no playful illustration, no
+   celebratory confetti. State changes are immediate and unambiguous.</p>
+</li>
+<li>
+<p><strong>Accessible by default, not as a retrofit.</strong> Every text/background pair in this doc meets
+   <strong>WCAG 2.1 AA</strong> (4.5:1 body, 3:1 large/UI) - verified, see §2. Meaning is <strong>never carried by
+   color alone</strong>: answered/flagged/correct/incorrect/voided each pair color with a glyph, label,
+   border, or text change. Visible keyboard focus everywhere (already in <code>index.css</code>). Touch
+   targets ≥ 44px. Respect <code>prefers-reduced-motion</code> and <code>prefers-color-scheme</code>.</p>
+</li>
+<li>
+<p><strong>Consistent through tokens.</strong> No raw hex, px font sizes, or magic spacing in component CSS.
+   Components consume tokens (<code>var(--color-*)</code>, <code>var(--space-*)</code>, …) only. This is what makes the
+   light→dark contract (§6) and any future re-theme a config change, not a refactor.</p>
+</li>
+<li>
+<p><strong>Responsive for "whatever device is handy."</strong> Students practice on laptops and tablets
+   (<code>project-vision.md</code>). The runner is single-column on small screens and grows a question-palette
+   sidebar at ≥ 720px (the existing <code>--bp-md</code> breakpoint). Layout is fluid; the type scale does not
+   shrink below the legibility floor on small screens.</p>
+</li>
+</ol>
+<hr />
+<h2 id="2-color-tokens">2. Color tokens<a class="headerlink" href="#2-color-tokens" title="Permanent link">&para;</a></h2>
+<h3 id="21-approach">2.1 Approach<a class="headerlink" href="#21-approach" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Neutrals</strong> are a cool, very-slightly-blue gray ramp (not pure gray) so the academic-blue
+  accent feels native rather than bolted on. Two text weights (primary, muted) plus a third
+  "subtle" for de-emphasized metadata; three surface levels; two border weights.</li>
+<li><strong>One accent</strong>: an academic blue (<code>--color-primary</code> <code>#2d4ea2</code>, kept from the existing file). A
+  darker <code>-strong</code> step for hover/active, a <code>-soft</code> tint for selected backgrounds.</li>
+<li><strong>Semantic colors</strong>: success/correct, warning, error/incorrect, info, and <strong>voided/muted</strong>
+  (the AMC "this problem doesn't count" state). Each has a <strong>text-weight</strong> value (readable on the
+  page background), a <strong>soft</strong> tinted surface, and an <strong>fg-on-soft</strong> value for text inside a tinted
+  chip. This three-part shape is what review tables and the palette need.</li>
+</ul>
+<h3 id="22-contrast-intent-verified">2.2 Contrast intent (verified)<a class="headerlink" href="#22-contrast-intent-verified" title="Permanent link">&para;</a></h3>
+<p>All pairs below were computed with the WCAG relative-luminance formula. <strong>Intent column = the bar
+the pair must clear.</strong> All listed pairs <strong>PASS</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Pair (light)</th>
+<th>Ratio</th>
+<th>Intent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--color-text</code> <code>#1a1a2e</code> on <code>--color-bg</code> <code>#ffffff</code></td>
+<td>17.06</td>
+<td>body 4.5:1 - primary reading text</td>
+</tr>
+<tr>
+<td><code>--color-text</code> on <code>--color-surface</code> <code>#f4f6fb</code></td>
+<td>15.78</td>
+<td>body 4.5:1 - text on cards/panels</td>
+</tr>
+<tr>
+<td><code>--color-text</code> on <code>--color-surface-raised</code> <code>#eceff6</code></td>
+<td>14.82</td>
+<td>body 4.5:1 - text on raised rows</td>
+</tr>
+<tr>
+<td><code>--color-text-muted</code> <code>#54546b</code> on <code>#ffffff</code></td>
+<td>7.35</td>
+<td>body 4.5:1 - secondary text</td>
+</tr>
+<tr>
+<td><code>--color-text-muted</code> on <code>--color-surface</code></td>
+<td>6.80</td>
+<td>body 4.5:1 - secondary text on panels</td>
+</tr>
+<tr>
+<td><code>--color-text-subtle</code> <code>#6b6b85</code> on <code>#ffffff</code></td>
+<td>5.16</td>
+<td>body 4.5:1 - metadata, hints</td>
+</tr>
+<tr>
+<td><code>--color-primary</code> <code>#2d4ea2</code> on <code>#ffffff</code></td>
+<td>7.71</td>
+<td>body 4.5:1 - links, accent text</td>
+</tr>
+<tr>
+<td><code>--color-primary-strong</code> <code>#274690</code> on <code>#ffffff</code></td>
+<td>8.88</td>
+<td>body 4.5:1 - hover/active accent text</td>
+</tr>
+<tr>
+<td><code>--color-on-primary</code> <code>#ffffff</code> on <code>--color-primary</code></td>
+<td>7.71</td>
+<td>body 4.5:1 - button label</td>
+</tr>
+<tr>
+<td><code>--color-success-text</code> <code>#16703f</code> on <code>#ffffff</code></td>
+<td>6.13</td>
+<td>body 4.5:1 - "correct" text</td>
+</tr>
+<tr>
+<td><code>--color-success-text</code> on <code>--color-success-soft</code> <code>#e3f3e9</code></td>
+<td>5.33</td>
+<td>body 4.5:1 - text in correct chip</td>
+</tr>
+<tr>
+<td><code>--color-warning-text</code> <code>#8a4f00</code> on <code>#ffffff</code></td>
+<td>6.56</td>
+<td>body 4.5:1 - "flagged"/caution text</td>
+</tr>
+<tr>
+<td><code>--color-warning-text</code> on <code>--color-warning-soft</code> <code>#fbeed9</code></td>
+<td>5.73</td>
+<td>body 4.5:1 - text in caution chip</td>
+</tr>
+<tr>
+<td><code>--color-error-text</code> <code>#b00020</code> on <code>#ffffff</code></td>
+<td>7.33</td>
+<td>body 4.5:1 - "incorrect" text</td>
+</tr>
+<tr>
+<td><code>--color-error-text</code> on <code>--color-error-soft</code> <code>#fbe4e7</code></td>
+<td>6.05</td>
+<td>body 4.5:1 - text in incorrect chip</td>
+</tr>
+<tr>
+<td><code>--color-info-text</code> <code>#1f5fa8</code> on <code>#ffffff</code></td>
+<td>6.44</td>
+<td>body 4.5:1 - info/notice text</td>
+</tr>
+<tr>
+<td><code>--color-info-text</code> on <code>--color-info-soft</code> <code>#e4eefb</code></td>
+<td>5.50</td>
+<td>body 4.5:1 - text in info chip</td>
+</tr>
+<tr>
+<td><code>--color-voided-text</code> <code>#6b6b85</code> on <code>#ffffff</code></td>
+<td>5.16</td>
+<td>body 4.5:1 - voided "doesn't count" text</td>
+</tr>
+<tr>
+<td><code>--color-text</code> on any <code>*-soft</code> tint (success/warn/error/info/primary)</td>
+<td>14.1–14.9</td>
+<td>body 4.5:1 - body text on tinted rows</td>
+</tr>
+<tr>
+<td><code>--color-focus</code> <code>#2d4ea2</code> ring on <code>#ffffff</code></td>
+<td>7.71</td>
+<td>UI 3:1 - focus indicator</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Borders are intentionally below 3:1.</strong> <code>--color-border</code> <code>#d4d7e0</code> (1.44:1 on white) and
+<code>--color-border-strong</code> <code>#b9bdcb</code> (1.87:1) are <strong>decorative separators</strong>, not the sole signal of
+any state or control boundary. Per Principle 4, every interactive/stateful element also carries a
+text label, glyph, fill, or focus ring - so the borders are not load-bearing for WCAG 1.4.11.</p>
+</blockquote>
+<p>Dark-theme pairs were verified identically (text on bg 15.14, muted 7.97, every semantic
+text-on-bg 7.7–9.0, every <code>fg-on-soft</code> 9.4–9.9). The dark ramp is defined in §2.4.</p>
+<h3 id="23-light-theme-tokens-the-default-root">2.3 Light theme tokens (the default <code>:root</code>)<a class="headerlink" href="#23-light-theme-tokens-the-default-root" title="Permanent link">&para;</a></h3>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c">/* ---- Neutrals: cool gray ramp ---- */</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">--color-bg</span><span class="o">:</span><span class="w">              </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"> </span><span class="c">/* app background / page */</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">--color-surface</span><span class="o">:</span><span class="w">         </span><span class="p">#</span><span class="nn">f4f6fb</span><span class="o">;</span><span class="w"> </span><span class="c">/* cards, panels, list rows  (was #f5f6fa) */</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">--color-surface-raised</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">eceff6</span><span class="o">;</span><span class="w"> </span><span class="c">/* hovered/selected rows, sticky bars */</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">--color-surface-sunken</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">e4e7f0</span><span class="o">;</span><span class="w"> </span><span class="c">/* wells, code blocks, inset areas */</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">--color-border</span><span class="o">:</span><span class="w">          </span><span class="p">#</span><span class="nn">d4d7e0</span><span class="o">;</span><span class="w"> </span><span class="c">/* hairline separators (decorative) */</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">--color-border-strong</span><span class="o">:</span><span class="w">   </span><span class="p">#</span><span class="nn">b9bdcb</span><span class="o">;</span><span class="w"> </span><span class="c">/* emphasized dividers, input borders on focus-within */</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">--color-text</span><span class="o">:</span><span class="w">            </span><span class="p">#</span><span class="nn">1a1a2e</span><span class="o">;</span><span class="w"> </span><span class="c">/* primary reading text */</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">--color-text-muted</span><span class="o">:</span><span class="w">      </span><span class="p">#</span><span class="nn">54546b</span><span class="o">;</span><span class="w"> </span><span class="c">/* secondary text, captions   (was --color-muted #5b5b73) */</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nt">--color-text-subtle</span><span class="o">:</span><span class="w">     </span><span class="p">#</span><span class="nn">6b6b85</span><span class="o">;</span><span class="w"> </span><span class="c">/* de-emphasized metadata, placeholders */</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nt">--color-text-inverse</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"> </span><span class="c">/* text on dark/accent fills */</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c">/* ---- Accent (academic blue) ---- */</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nt">--color-primary</span><span class="o">:</span><span class="w">         </span><span class="p">#</span><span class="nn">2d4ea2</span><span class="o">;</span><span class="w"> </span><span class="c">/* kept from existing file */</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nt">--color-primary-strong</span><span class="o">:</span><span class="w">  </span><span class="p">#</span><span class="nn">274690</span><span class="o">;</span><span class="w"> </span><span class="c">/* hover / active / pressed */</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nt">--color-primary-soft</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">e6ecf8</span><span class="o">;</span><span class="w"> </span><span class="c">/* selected background tint */</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nt">--color-on-primary</span><span class="o">:</span><span class="w">      </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"> </span><span class="c">/* text/icon on a primary fill (was --color-primary-fg) */</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="c">/* ---- Semantic: correct ---- */</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="nt">--color-success</span><span class="o">:</span><span class="w">         </span><span class="p">#</span><span class="nn">1b7f4b</span><span class="o">;</span><span class="w"> </span><span class="c">/* solid fill / icon (was --color-ok) */</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="nt">--color-success-text</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">16703f</span><span class="o">;</span><span class="w"> </span><span class="c">/* &quot;correct&quot; text on bg */</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="nt">--color-success-soft</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">e3f3e9</span><span class="o">;</span><span class="w"> </span><span class="c">/* correct row / answered-cell tint */</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="c">/* ---- Semantic: warning / flagged / caution ---- */</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="nt">--color-warning</span><span class="o">:</span><span class="w">         </span><span class="p">#</span><span class="nn">9a5b00</span><span class="o">;</span><span class="w"> </span><span class="c">/* solid fill / flag icon (was --color-warn) */</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="nt">--color-warning-text</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">8a4f00</span><span class="o">;</span><span class="w"> </span><span class="c">/* caution text on bg */</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="nt">--color-warning-soft</span><span class="o">:</span><span class="w">    </span><span class="p">#</span><span class="nn">fbeed9</span><span class="o">;</span><span class="w"> </span><span class="c">/* flagged tint */</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="c">/* ---- Semantic: incorrect / error ---- */</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="nt">--color-error</span><span class="o">:</span><span class="w">           </span><span class="p">#</span><span class="nn">b00020</span><span class="o">;</span><span class="w"> </span><span class="c">/* solid fill / icon (kept) */</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="nt">--color-error-text</span><span class="o">:</span><span class="w">      </span><span class="p">#</span><span class="nn">b00020</span><span class="o">;</span><span class="w"> </span><span class="c">/* &quot;incorrect&quot; text on bg */</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="nt">--color-error-soft</span><span class="o">:</span><span class="w">      </span><span class="p">#</span><span class="nn">fbe4e7</span><span class="o">;</span><span class="w"> </span><span class="c">/* incorrect row tint */</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="c">/* ---- Semantic: info / notice ---- */</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="nt">--color-info</span><span class="o">:</span><span class="w">            </span><span class="p">#</span><span class="nn">1f5fa8</span><span class="o">;</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="nt">--color-info-text</span><span class="o">:</span><span class="w">       </span><span class="p">#</span><span class="nn">1f5fa8</span><span class="o">;</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="nt">--color-info-soft</span><span class="o">:</span><span class="w">       </span><span class="p">#</span><span class="nn">e4eefb</span><span class="o">;</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="c">/* ---- Semantic: voided / muted (&quot;does not count&quot;) ---- */</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="nt">--color-voided-text</span><span class="o">:</span><span class="w">     </span><span class="p">#</span><span class="nn">6b6b85</span><span class="o">;</span><span class="w"> </span><span class="c">/* voided problem label */</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="nt">--color-voided-soft</span><span class="o">:</span><span class="w">     </span><span class="p">#</span><span class="nn">eef0f4</span><span class="o">;</span><span class="w"> </span><span class="c">/* voided row/cell tint (paired with line-through) */</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="c">/* ---- Functional aliases ---- */</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="nt">--color-focus</span><span class="o">:</span><span class="w">           </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-primary</span><span class="o">);</span><span class="w"> </span><span class="c">/* focus ring colour */</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="nt">--color-link</span><span class="o">:</span><span class="w">            </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-primary</span><span class="o">);</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="nt">--color-overlay</span><span class="o">:</span><span class="w">         </span><span class="nt">rgb</span><span class="o">(</span><span class="nt">18</span><span class="w"> </span><span class="nt">19</span><span class="w"> </span><span class="nt">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">45</span><span class="o">);</span><span class="w"> </span><span class="c">/* modal/scrim backdrop */</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c">/* ---- Back-compat aliases (existing index.css names → canonical) ---- */</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="nt">--color-fg</span><span class="o">:</span><span class="w">              </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-text</span><span class="o">);</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="nt">--color-muted</span><span class="o">:</span><span class="w">           </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-text-muted</span><span class="o">);</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="nt">--color-primary-fg</span><span class="o">:</span><span class="w">      </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-on-primary</span><span class="o">);</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="nt">--color-ok</span><span class="o">:</span><span class="w">              </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-success</span><span class="o">);</span>
+</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="nt">--color-warn</span><span class="o">:</span><span class="w">            </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-warning</span><span class="o">);</span>
+</span></code></pre></div>
+<blockquote>
+<p>Keeping <code>--color-fg</code>, <code>--color-muted</code>, <code>--color-primary-fg</code>, <code>--color-ok</code>, <code>--color-warn</code> as
+aliases means the current <code>index.css</code> rules keep working unchanged while components migrate to the
+canonical names at their own pace.</p>
+</blockquote>
+<h3 id="24-dark-theme-tokens-the-contract-ships-later">2.4 Dark theme tokens (the contract, ships later)<a class="headerlink" href="#24-dark-theme-tokens-the-contract-ships-later" title="Permanent link">&para;</a></h3>
+<p>Dark mode is a <strong>named-token contract defined now</strong>; it may ship in a later phase, but the contract
+is fixed so no component hardcodes a light-only value. It is applied via <code>[data-theme="dark"]</code>
+(see §6). Only the values that change are overridden - the structural tokens (spacing, radius, type,
+z-index) are theme-independent.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c">/* Neutrals */</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nv">--color-bg</span><span class="p">:</span><span class="w">             </span><span class="mh">#12131a</span><span class="p">;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nv">--color-surface</span><span class="p">:</span><span class="w">        </span><span class="mh">#1a1c26</span><span class="p">;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nv">--color-surface-raised</span><span class="p">:</span><span class="w"> </span><span class="mh">#232634</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nv">--color-surface-sunken</span><span class="p">:</span><span class="w"> </span><span class="mh">#0e0f16</span><span class="p">;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nv">--color-border</span><span class="p">:</span><span class="w">         </span><span class="mh">#3a3d4d</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nv">--color-border-strong</span><span class="p">:</span><span class="w">  </span><span class="mh">#4c4f63</span><span class="p">;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nv">--color-text</span><span class="p">:</span><span class="w">           </span><span class="mh">#e6e8f0</span><span class="p">;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nv">--color-text-muted</span><span class="p">:</span><span class="w">     </span><span class="mh">#a6a9bd</span><span class="p">;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nv">--color-text-subtle</span><span class="p">:</span><span class="w">    </span><span class="mh">#8d90a6</span><span class="p">;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nv">--color-text-inverse</span><span class="p">:</span><span class="w">   </span><span class="mh">#12131a</span><span class="p">;</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="c">/* Accent - lightened so it reads on a dark bg (text on bg ≥ 8.6:1) */</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w">        </span><span class="mh">#8fb0ff</span><span class="p">;</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="nv">--color-primary-strong</span><span class="p">:</span><span class="w"> </span><span class="mh">#aec4ff</span><span class="p">;</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span><span class="nv">--color-primary-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#17223d</span><span class="p">;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="nv">--color-on-primary</span><span class="p">:</span><span class="w">     </span><span class="mh">#0e0f16</span><span class="p">;</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="c">/* Semantic: lightened text/icon, deep tinted surfaces */</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w">        </span><span class="mh">#5cc98c</span><span class="p">;</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="nv">--color-success-text</span><span class="p">:</span><span class="w">   </span><span class="mh">#9fe0bb</span><span class="p">;</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="nv">--color-success-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#15301d</span><span class="p">;</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="nv">--color-warning</span><span class="p">:</span><span class="w">        </span><span class="mh">#e0a44d</span><span class="p">;</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">  </span><span class="nv">--color-warning-text</span><span class="p">:</span><span class="w">   </span><span class="mh">#f0c98a</span><span class="p">;</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">  </span><span class="nv">--color-warning-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#2e2410</span><span class="p">;</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">  </span><span class="nv">--color-error</span><span class="p">:</span><span class="w">          </span><span class="mh">#f2899a</span><span class="p">;</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">  </span><span class="nv">--color-error-text</span><span class="p">:</span><span class="w">     </span><span class="mh">#f6b3bf</span><span class="p">;</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">  </span><span class="nv">--color-error-soft</span><span class="p">:</span><span class="w">     </span><span class="mh">#2e1419</span><span class="p">;</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">  </span><span class="nv">--color-info</span><span class="p">:</span><span class="w">           </span><span class="mh">#7db0ec</span><span class="p">;</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">  </span><span class="nv">--color-info-text</span><span class="p">:</span><span class="w">      </span><span class="mh">#aaccf5</span><span class="p">;</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">  </span><span class="nv">--color-info-soft</span><span class="p">:</span><span class="w">      </span><span class="mh">#13243a</span><span class="p">;</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">  </span><span class="nv">--color-voided-text</span><span class="p">:</span><span class="w">    </span><span class="mh">#8d90a6</span><span class="p">;</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">  </span><span class="nv">--color-voided-soft</span><span class="p">:</span><span class="w">    </span><span class="mh">#1f2230</span><span class="p">;</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">  </span><span class="c">/* Functional */</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">  </span><span class="nv">--color-overlay</span><span class="p">:</span><span class="w">        </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.6</span><span class="p">);</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">  </span><span class="c">/* aliases inherit automatically via var() indirection */</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="p">}</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>KaTeX in dark mode.</strong> KaTeX renders math as glyphs that inherit <code>color</code>, so math follows
+<code>--color-text</code> for free. The one risk is KaTeX's <code>\rule</code>-based fraction bars and matrix lines,
+which also use <code>currentColor</code> and are therefore fine. Problem <strong>images</strong> (<code>render_mode == "image"</code>,
+see <code>tech-spec.md</code> Problem model) are raster PNGs with white backgrounds and will <em>not</em> invert; in
+dark mode they must be wrapped in a token-driven light "paper" frame (<code>--color-image-mat</code>,
+defined as <code>#ffffff</code> in both themes) so scanned problems stay legible. Noted here so the dark
+rollout doesn't regress image problems.</p>
+</blockquote>
+<hr />
+<h2 id="3-typography-tokens">3. Typography tokens<a class="headerlink" href="#3-typography-tokens" title="Permanent link">&para;</a></h2>
+<h3 id="31-font-stacks-no-web-font-dependency">3.1 Font stacks (no web-font dependency)<a class="headerlink" href="#31-font-stacks-no-web-font-dependency" title="Permanent link">&para;</a></h3>
+<p>A web font would add a render-blocking download and fight the <strong>&lt; 2 s interactive</strong> budget, so we
+use the system UI stack already in <code>index.css</code>. The justification bar for ever adding a web font:
+only if a metric demands it (it does not today).</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">--font-sans</span><span class="o">:</span><span class="w"> </span><span class="nt">system-ui</span><span class="o">,</span><span class="w"> </span><span class="nt">-apple-system</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Segoe UI&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">Roboto</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Helvetica Neue&#39;</span><span class="o">,</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">             </span><span class="nt">Arial</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Noto Sans&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">sans-serif</span><span class="o">;</span><span class="w">            </span><span class="c">/* was --font */</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nt">--font-mono</span><span class="o">:</span><span class="w"> </span><span class="nt">ui-monospace</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;SF Mono&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Source Code Pro&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">Menlo</span><span class="o">,</span><span class="w"> </span><span class="nt">Monaco</span><span class="o">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">             </span><span class="nt">Consolas</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Courier New&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">monospace</span><span class="o">;</span><span class="w">        </span><span class="c">/* code, raw answers */</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">--font-math</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;KaTeX_Main&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Latin Modern Math&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">serif</span><span class="o">;</span><span class="w">  </span><span class="c">/* documentary only - KaTeX sets its own */</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nt">--font</span><span class="o">:</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--font-sans</span><span class="o">);</span><span class="w">                               </span><span class="c">/* back-compat alias */</span>
+</span></code></pre></div>
+<ul>
+<li><strong>Prose &amp; UI</strong>: <code>--font-sans</code>. Sans-serif maximizes on-screen legibility at small sizes.</li>
+<li><strong>Math</strong>: KaTeX ships and applies its own <code>KaTeX_*</code> font faces via the CSS imported in
+  <code>main.tsx</code> (<code>katex/dist/katex.min.css</code>). We do <strong>not</strong> restyle KaTeX glyph fonts; <code>--font-math</code>
+  exists only to document the rendered family. See §3.5.</li>
+<li><strong>Mono</strong>: raw student answers in diagnostics (<code>5/7</code>, <code>2^7</code>), code-like content, and the invite
+  token. Tabular by nature.</li>
+</ul>
+<h3 id="32-type-scale-modular-12-minor-third-rounded-to-clean-px">3.2 Type scale (modular, ~1.2 minor-third, rounded to clean px)<a class="headerlink" href="#32-type-scale-modular-12-minor-third-rounded-to-clean-px" title="Permanent link">&para;</a></h3>
+<p>Sizes are tokens in <code>rem</code> (root = 16px). Each size pairs with a default line-height token. The
+scale floor for body is <strong>1rem/16px</strong> - the legibility floor from Principle 1; nothing in reading
+content goes below it.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">--font-size-xs</span><span class="o">:</span><span class="w">   </span><span class="nt">0</span><span class="p">.</span><span class="nc">75rem</span><span class="o">;</span><span class="w">  </span><span class="c">/* 12px - table captions, fine print, dt labels */</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">--font-size-sm</span><span class="o">:</span><span class="w">   </span><span class="nt">0</span><span class="p">.</span><span class="nc">875rem</span><span class="o">;</span><span class="w"> </span><span class="c">/* 14px - secondary UI, metadata */</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">--font-size-base</span><span class="o">:</span><span class="w"> </span><span class="nt">1rem</span><span class="o">;</span><span class="w">     </span><span class="c">/* 16px - body, problem prose, choices (floor) */</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">--font-size-md</span><span class="o">:</span><span class="w">   </span><span class="nt">1</span><span class="p">.</span><span class="nc">125rem</span><span class="o">;</span><span class="w"> </span><span class="c">/* 18px - emphasized body, lead-in */</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">--font-size-lg</span><span class="o">:</span><span class="w">   </span><span class="nt">1</span><span class="p">.</span><span class="nc">25rem</span><span class="o">;</span><span class="w">  </span><span class="c">/* 20px - section headings, score figures */</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nt">--font-size-xl</span><span class="o">:</span><span class="w">   </span><span class="nt">1</span><span class="p">.</span><span class="nc">5rem</span><span class="o">;</span><span class="w">   </span><span class="c">/* 24px - page titles, the runner timer */</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nt">--font-size-2xl</span><span class="o">:</span><span class="w">  </span><span class="nt">1</span><span class="p">.</span><span class="nc">875rem</span><span class="o">;</span><span class="w"> </span><span class="c">/* 30px - dashboard headline numbers */</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nt">--font-size-3xl</span><span class="o">:</span><span class="w">  </span><span class="nt">2</span><span class="p">.</span><span class="nc">25rem</span><span class="o">;</span><span class="w">  </span><span class="c">/* 36px - rare hero / verdict screens */</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c">/* Line-heights (unitless) */</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nt">--line-height-tight</span><span class="o">:</span><span class="w">   </span><span class="nt">1</span><span class="p">.</span><span class="nc">2</span><span class="o">;</span><span class="w">  </span><span class="c">/* headings, the timer, large numerals */</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="nt">--line-height-snug</span><span class="o">:</span><span class="w">    </span><span class="nt">1</span><span class="p">.</span><span class="nc">35</span><span class="o">;</span><span class="w"> </span><span class="c">/* choices, dense rows, palette labels */</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="nt">--line-height-normal</span><span class="o">:</span><span class="w">  </span><span class="nt">1</span><span class="p">.</span><span class="nc">6</span><span class="o">;</span><span class="w">  </span><span class="c">/* body &amp; problem prose - roomy for mixed math + text */</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nt">--line-height-relaxed</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">75</span><span class="o">;</span><span class="w"> </span><span class="c">/* long solution explanations */</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c">/* Weights - system fonts: 400/600/700 only (avoid faux/odd weights) */</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nt">--font-weight-regular</span><span class="o">:</span><span class="w">  </span><span class="nt">400</span><span class="o">;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nt">--font-weight-medium</span><span class="o">:</span><span class="w">   </span><span class="nt">600</span><span class="o">;</span><span class="w"> </span><span class="c">/* choice letters, emphasized labels, buttons */</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="nt">--font-weight-bold</span><span class="o">:</span><span class="w">     </span><span class="nt">700</span><span class="o">;</span><span class="w"> </span><span class="c">/* headings, timer, score figures */</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="c">/* Letter-spacing - minimal; only tighten large display, open up all-caps eyebrows */</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="nt">--letter-spacing-tight</span><span class="o">:</span><span class="w"> </span><span class="nt">-0</span><span class="p">.</span><span class="nc">01em</span><span class="o">;</span><span class="w"> </span><span class="c">/* 2xl/3xl display numerals */</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="nt">--letter-spacing-caps</span><span class="o">:</span><span class="w">   </span><span class="nt">0</span><span class="p">.</span><span class="nc">04em</span><span class="o">;</span><span class="w"> </span><span class="c">/* small all-caps labels, if used */</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="c">/* Numerals - compare-by-column surfaces */</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="nt">--font-numeric-tabular</span><span class="o">:</span><span class="w"> </span><span class="nt">tabular-nums</span><span class="o">;</span><span class="w"> </span><span class="c">/* timer, scores, palette, tables */</span>
+</span></code></pre></div>
+<h3 id="33-recommended-role-token-map">3.3 Recommended role → token map<a class="headerlink" href="#33-recommended-role-token-map" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>size</th>
+<th>line-height</th>
+<th>weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem prose / choices</td>
+<td><code>--font-size-base</code></td>
+<td><code>--line-height-normal</code></td>
+<td>regular</td>
+</tr>
+<tr>
+<td>Choice letter (A–E)</td>
+<td><code>--font-size-base</code></td>
+<td><code>--line-height-snug</code></td>
+<td>medium</td>
+</tr>
+<tr>
+<td>Runner timer</td>
+<td><code>--font-size-xl</code></td>
+<td><code>--line-height-tight</code></td>
+<td>bold + <code>tabular-nums</code></td>
+</tr>
+<tr>
+<td>Page title</td>
+<td><code>--font-size-xl</code></td>
+<td><code>--line-height-tight</code></td>
+<td>bold</td>
+</tr>
+<tr>
+<td>Section heading</td>
+<td><code>--font-size-lg</code></td>
+<td><code>--line-height-tight</code></td>
+<td>bold</td>
+</tr>
+<tr>
+<td>Score figure (review/progress <code>dd</code>)</td>
+<td><code>--font-size-lg</code></td>
+<td><code>--line-height-tight</code></td>
+<td>bold + <code>tabular-nums</code></td>
+</tr>
+<tr>
+<td>Metadata / <code>dt</code> label</td>
+<td><code>--font-size-xs</code>–<code>sm</code></td>
+<td><code>--line-height-snug</code></td>
+<td>regular, <code>--color-text-muted</code></td>
+</tr>
+<tr>
+<td>Solution explanation</td>
+<td><code>--font-size-base</code></td>
+<td><code>--line-height-relaxed</code></td>
+<td>regular</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-base-element-defaults">3.4 Base element defaults<a class="headerlink" href="#34-base-element-defaults" title="Permanent link">&para;</a></h3>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">                 </span><span class="c">/* respect user&#39;s browser font-size */</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--font-sans</span><span class="p">);</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--font-size-base</span><span class="p">);</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line-height-normal</span><span class="p">);</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-text</span><span class="p">);</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-bg</span><span class="p">);</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="kp">-webkit-</span><span class="n">font-smoothing</span><span class="p">:</span><span class="w"> </span><span class="n">antialiased</span><span class="p">;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="n">text-rendering</span><span class="p">:</span><span class="w"> </span><span class="kc">optimizeLegibility</span><span class="p">;</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="35-rendering-math-katex-legibly-alongside-prose-explicit-guidance">3.5 Rendering math (KaTeX) legibly alongside prose - explicit guidance<a class="headerlink" href="#35-rendering-math-katex-legibly-alongside-prose-explicit-guidance" title="Permanent link">&para;</a></h3>
+<p><code>Tex.tsx</code> calls <code>katex.renderToString(..., { output: 'htmlAndMathml' })</code> and injects the result;
+KaTeX styling comes from the imported <code>katex.min.css</code>. Rules for keeping math legible <strong>without
+forking KaTeX's CSS</strong>:</p>
+<ol>
+<li>
+<p><strong>Inline math must not shrink.</strong> Inline KaTeX inherits the surrounding <code>font-size</code>. Set problem
+   prose to <code>--font-size-base</code> (16px floor) so inline fractions/exponents render at a readable size.
+   Never place math inside <code>--font-size-xs</code>/<code>sm</code> text.</p>
+</li>
+<li>
+<p><strong>Nudge math optical size up ~4–6%.</strong> KaTeX's x-height runs slightly small against system sans.
+   Apply a single token-driven bump to rendered math so symbols match prose weight:</p>
+</li>
+</ol>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">.</span><span class="nc">katex</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--math-scale</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c">/* --math-scale: 1.05; */</span>
+</span></code></pre></div>
+<p>Keep it global and small; do <strong>not</strong> per-component override (Principle 5). <code>--math-scale</code> is a
+   typography token (see §3.6).</p>
+<ol>
+<li><strong>Display equations get vertical breathing room, centered.</strong> <code>displayMode</code> math (block) needs
+   space so numerators/denominators don't crowd the lines above/below:</li>
+</ol>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">.</span><span class="nc">katex-display</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--space-</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">overflow-x</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w"> </span><span class="k">overflow-y</span><span class="p">:</span><span class="w"> </span><span class="kc">hidden</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p><code>overflow-x: auto</code> prevents a wide matrix from forcing the whole runner to scroll on a tablet.</p>
+<ol>
+<li>
+<p><strong>Color comes free.</strong> KaTeX glyphs use <code>currentColor</code>; they inherit <code>--color-text</code>, so dark mode
+   and "voided/incorrect" text recoloring apply to math automatically. Don't set explicit colors on
+   <code>.katex</code>.</p>
+</li>
+<li>
+<p><strong>Never let bad TeX break layout.</strong> <code>Tex.tsx</code> already uses <code>throwOnError: false</code>, which renders
+   malformed source as KaTeX's error string. Style <code>.katex-error</code> with <code>--color-error-text</code> so a
+   bad problem is visibly flagged, not silently mis-rendered, mid-exam.</p>
+</li>
+<li>
+<p><strong>Numerals in math vs. UI.</strong> KaTeX numerals are math-set (proportional, which is correct for
+   equations). UI numerals that get <em>compared</em> (timer, palette, scores) use <code>--font-numeric-tabular</code>
+   on the <strong>surrounding element</strong>, never on <code>.katex</code>.</p>
+</li>
+</ol>
+<h3 id="36-math-token">3.6 Math token<a class="headerlink" href="#36-math-token" title="Permanent link">&para;</a></h3>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">--math-scale</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">05</span><span class="o">;</span><span class="w">     </span><span class="c">/* optical bump applied to .katex (§3.5.2) */</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nt">--color-image-mat</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"> </span><span class="c">/* white &quot;paper&quot; frame behind raster problem images (both themes) */</span>
+</span></code></pre></div>
+<hr />
+<h2 id="4-spacing-radius-shadow-z-index-breakpoints">4. Spacing, radius, shadow, z-index, breakpoints<a class="headerlink" href="#4-spacing-radius-shadow-z-index-breakpoints" title="Permanent link">&para;</a></h2>
+<h3 id="41-spacing-scale">4.1 Spacing scale<a class="headerlink" href="#41-spacing-scale" title="Permanent link">&para;</a></h3>
+<p>The existing <code>--space-1..5</code> ramp is kept exactly and <strong>extended</strong> (the runner already relies on its
+values). Base unit 4px; the ramp is intentionally not a strict geometric series - it matches what's
+already in use, then adds larger steps for page-level rhythm.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">--space-0</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="o">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">--space-1</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="p">.</span><span class="nc">25rem</span><span class="o">;</span><span class="w"> </span><span class="c">/* 4px  - kept */</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">--space-2</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="p">.</span><span class="nc">5rem</span><span class="o">;</span><span class="w">  </span><span class="c">/* 8px  - kept */</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nt">--space-3</span><span class="o">:</span><span class="w">  </span><span class="nt">1rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 16px - kept (default gap) */</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nt">--space-4</span><span class="o">:</span><span class="w">  </span><span class="nt">1</span><span class="p">.</span><span class="nc">5rem</span><span class="o">;</span><span class="w">  </span><span class="c">/* 24px - kept */</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">--space-5</span><span class="o">:</span><span class="w">  </span><span class="nt">2rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 32px - kept */</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nt">--space-6</span><span class="o">:</span><span class="w">  </span><span class="nt">3rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 48px - section separation */</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nt">--space-7</span><span class="o">:</span><span class="w">  </span><span class="nt">4rem</span><span class="o">;</span><span class="w">    </span><span class="c">/* 64px - page-level vertical rhythm */</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Touch targets (Principle 4):</strong> choices, palette cells, and buttons must render ≥ 44px tall.
+With <code>--space-2</code> padding + 16px text + borders, choices clear this; palette cells use
+<code>aspect-ratio: 1</code> on a grid whose column width keeps them ≥ 44px on the smallest supported width.</p>
+</blockquote>
+<h3 id="42-radius-scale">4.2 Radius scale<a class="headerlink" href="#42-radius-scale" title="Permanent link">&para;</a></h3>
+<p>Small radii reinforce the serious/academic tone (Principle 3). Existing <code>--radius</code> (6px) is kept and
+aliased to the new mid step.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">--radius-none</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="o">;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">--radius-sm</span><span class="o">:</span><span class="w">   </span><span class="nt">4px</span><span class="o">;</span><span class="w">  </span><span class="c">/* inputs, choice cells, palette cells */</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nt">--radius-md</span><span class="o">:</span><span class="w">   </span><span class="nt">6px</span><span class="o">;</span><span class="w">  </span><span class="c">/* buttons, cards (kept value) */</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nt">--radius-lg</span><span class="o">:</span><span class="w">   </span><span class="nt">10px</span><span class="o">;</span><span class="w"> </span><span class="c">/* modals, large panels */</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nt">--radius-pill</span><span class="o">:</span><span class="w"> </span><span class="nt">999px</span><span class="o">;</span><span class="c">/* status chips / badges only */</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nt">--radius</span><span class="o">:</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--radius-md</span><span class="o">);</span><span class="w"> </span><span class="c">/* back-compat alias */</span>
+</span></code></pre></div>
+<h3 id="43-shadow-scale">4.3 Shadow scale<a class="headerlink" href="#43-shadow-scale" title="Permanent link">&para;</a></h3>
+<p>Flat-first: surfaces are defined by borders, not elevation. Shadows are reserved for genuinely
+floating layers (menus, modals, the sticky timer bar when it detaches on scroll). No shadow on
+resting cards. Shadows are theme-aware (softer/darker in dark mode via the overlay token approach).</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">--shadow-none</span><span class="o">:</span><span class="w"> </span><span class="nt">none</span><span class="o">;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">--shadow-sm</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="w"> </span><span class="nt">1px</span><span class="w"> </span><span class="nt">2px</span><span class="w"> </span><span class="nt">rgb</span><span class="o">(</span><span class="nt">18</span><span class="w"> </span><span class="nt">19</span><span class="w"> </span><span class="nt">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">06</span><span class="o">);</span><span class="w">                          </span><span class="c">/* sticky bars, raised rows */</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">--shadow-md</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="w"> </span><span class="nt">2px</span><span class="w"> </span><span class="nt">8px</span><span class="w"> </span><span class="nt">rgb</span><span class="o">(</span><span class="nt">18</span><span class="w"> </span><span class="nt">19</span><span class="w"> </span><span class="nt">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">10</span><span class="o">);</span><span class="w">                          </span><span class="c">/* dropdowns, popovers */</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nt">--shadow-lg</span><span class="o">:</span><span class="w">  </span><span class="nt">0</span><span class="w"> </span><span class="nt">8px</span><span class="w"> </span><span class="nt">28px</span><span class="w"> </span><span class="nt">rgb</span><span class="o">(</span><span class="nt">18</span><span class="w"> </span><span class="nt">19</span><span class="w"> </span><span class="nt">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">16</span><span class="o">);</span><span class="w">                         </span><span class="c">/* modals, dialogs */</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nt">--shadow-focus</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">0</span><span class="w"> </span><span class="nt">3px</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--color-primary-soft</span><span class="o">);</span><span class="w">                   </span><span class="c">/* optional soft focus halo */</span>
+</span></code></pre></div>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nv">--shadow-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nv">--shadow-md</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.55</span><span class="p">);</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nv">--shadow-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="mi">28</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.65</span><span class="p">);</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="44-z-index-scale">4.4 Z-index scale<a class="headerlink" href="#44-z-index-scale" title="Permanent link">&para;</a></h3>
+<p>Named layers so stacking is intentional, not a px arms race. The <strong>sticky runner timer</strong> must stay
+above scrolling content but below modals/toasts (a student should always see the countdown).</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">--z-base</span><span class="o">:</span><span class="w">     </span><span class="nt">0</span><span class="o">;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nt">--z-sticky</span><span class="o">:</span><span class="w">   </span><span class="nt">100</span><span class="o">;</span><span class="w">  </span><span class="c">/* sticky runner header / timer bar */</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nt">--z-dropdown</span><span class="o">:</span><span class="w"> </span><span class="nt">200</span><span class="o">;</span><span class="w">  </span><span class="c">/* selects, palette overflow menus */</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nt">--z-overlay</span><span class="o">:</span><span class="w">  </span><span class="nt">300</span><span class="o">;</span><span class="w">  </span><span class="c">/* modal scrim */</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="nt">--z-modal</span><span class="o">:</span><span class="w">    </span><span class="nt">310</span><span class="o">;</span><span class="w">  </span><span class="c">/* dialog (submit-confirm, session-expiry) */</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nt">--z-toast</span><span class="o">:</span><span class="w">    </span><span class="nt">400</span><span class="o">;</span><span class="w">  </span><span class="c">/* transient notices, never blocks the timer */</span>
+</span></code></pre></div>
+<h3 id="45-breakpoints">4.5 Breakpoints<a class="headerlink" href="#45-breakpoints" title="Permanent link">&para;</a></h3>
+<p>Mobile-first, min-width. <code>--bp-md</code> 720px is <strong>kept</strong> - it's the existing runner breakpoint where the
+question palette becomes a sidebar (<code>@media (min-width: 720px)</code> in <code>index.css</code>). Max content width
+<code>--maxw</code> is kept.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">--bp-sm</span><span class="o">:</span><span class="w">  </span><span class="nt">480px</span><span class="o">;</span><span class="w">  </span><span class="c">/* large phone */</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nt">--bp-md</span><span class="o">:</span><span class="w">  </span><span class="nt">720px</span><span class="o">;</span><span class="w">  </span><span class="c">/* tablet - runner palette sidebar appears (kept) */</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nt">--bp-lg</span><span class="o">:</span><span class="w">  </span><span class="nt">960px</span><span class="o">;</span><span class="w">  </span><span class="c">/* small laptop - matches --maxw content width */</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nt">--bp-xl</span><span class="o">:</span><span class="w">  </span><span class="nt">1280px</span><span class="o">;</span><span class="w"> </span><span class="c">/* large laptop / desktop */</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nt">--maxw</span><span class="o">:</span><span class="w">   </span><span class="nt">960px</span><span class="o">;</span><span class="w">  </span><span class="c">/* kept - main content max width */</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> CSS custom properties cannot be used inside <code>@media (min-width: …)</code> queries. The
+breakpoint <em>tokens</em> document the contract and are the single source of truth; in <code>@media</code> rules
+write the literal value with a comment, e.g. <code>@media (min-width: 720px) /* --bp-md */</code>. (A
+Sass/PostCSS layer is explicitly out of scope per the minimal-dependency ethos.)</p>
+</blockquote>
+<hr />
+<h2 id="5-token-naming-file-layout">5. Token naming &amp; file layout<a class="headerlink" href="#5-token-naming-file-layout" title="Permanent link">&para;</a></h2>
+<h3 id="51-where-tokens-live">5.1 Where tokens live<a class="headerlink" href="#51-where-tokens-live" title="Permanent link">&para;</a></h3>
+<p>Tokens are CSS custom properties on <code>:root</code>, in a dedicated <strong><code>frontend/src/styles/tokens.css</code></strong>,
+imported once at app entry <strong>before</strong> <code>index.css</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>frontend/src/
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>├── main.tsx                 # imports katex CSS, then tokens.css, then index.css
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>├── styles/
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>│   └── tokens.css           # :root tokens + [data-theme=&quot;dark&quot;] overrides (THIS SPEC)
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>├── index.css                # global resets + element defaults + a few global classes
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>│                            #   (migrate component-specific rules out into *.module.css)
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>└── features/&lt;x&gt;/&lt;X&gt;.module.css   # component-scoped styles, consume tokens only
+</span></code></pre></div>
+<p>Import order in <code>main.tsx</code> (extends the existing imports):</p>
+<div class="language-ts highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">import</span><span class="w"> </span><span class="s1">&#39;katex/dist/katex.min.css&#39;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">&#39;./styles/tokens.css&#39;</span><span class="w">   </span><span class="c1">// tokens first - everything below references them</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">import</span><span class="w"> </span><span class="s1">&#39;./index.css&#39;</span><span class="w">           </span><span class="c1">// resets + element defaults</span>
+</span></code></pre></div>
+<blockquote>
+<p><code>index.css</code> keeps the global reset, base element styles, focus-visible rule, and <code>.visually-hidden</code>
+helper. Component-specific blocks currently in <code>index.css</code> (<code>.runner__*</code>, <code>.palette__*</code>, <code>.choice*</code>,
+<code>.review__*</code>, …) are migrated into co-located <code>*.module.css</code> files over time. The tokens move is the
+prerequisite; this spec does not require a big-bang CSS rewrite.</p>
+</blockquote>
+<h3 id="52-naming-convention">5.2 Naming convention<a class="headerlink" href="#52-naming-convention" title="Permanent link">&para;</a></h3>
+<p><code>--&lt;category&gt;-&lt;role&gt;[-&lt;variant&gt;][-&lt;state&gt;]</code>, lowercase, hyphen-separated.</p>
+<table>
+<thead>
+<tr>
+<th>Category prefix</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--color-*</code></td>
+<td><code>--color-bg</code>, <code>--color-text-muted</code>, <code>--color-primary-strong</code>, <code>--color-error-soft</code></td>
+</tr>
+<tr>
+<td><code>--space-*</code></td>
+<td><code>--space-1</code> … <code>--space-7</code></td>
+</tr>
+<tr>
+<td><code>--font-*</code> / <code>--font-size-*</code> / <code>--font-weight-*</code></td>
+<td><code>--font-sans</code>, <code>--font-size-lg</code>, <code>--font-weight-bold</code></td>
+</tr>
+<tr>
+<td><code>--line-height-*</code></td>
+<td><code>--line-height-normal</code></td>
+</tr>
+<tr>
+<td><code>--letter-spacing-*</code></td>
+<td><code>--letter-spacing-tight</code></td>
+</tr>
+<tr>
+<td><code>--radius-*</code></td>
+<td><code>--radius-sm</code>, <code>--radius-pill</code></td>
+</tr>
+<tr>
+<td><code>--shadow-*</code></td>
+<td><code>--shadow-md</code>, <code>--shadow-focus</code></td>
+</tr>
+<tr>
+<td><code>--z-*</code></td>
+<td><code>--z-sticky</code>, <code>--z-modal</code></td>
+</tr>
+<tr>
+<td><code>--bp-*</code></td>
+<td><code>--bp-md</code> (documentary; see §4.5 note)</td>
+</tr>
+<tr>
+<td><code>--math-scale</code>, <code>--color-image-mat</code></td>
+<td>math-specific</td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ul>
+<li><strong>Semantic over raw.</strong> Components reference role tokens (<code>--color-error-text</code>), never a raw palette
+  step. There is deliberately no <code>--blue-500</code>-style raw layer - at this scale it adds indirection
+  without payoff.</li>
+<li><strong>Soft / strong / text triad</strong> for every semantic colour: <code>*-text</code> (readable on bg), <code>*-soft</code>
+  (tinted surface), solid base (fills/icons). This is the contract review tables &amp; the palette use.</li>
+<li><strong>Back-compat aliases</strong> keep the original five <code>index.css</code> names alive (<code>--color-fg</code>,
+  <code>--color-muted</code>, <code>--color-primary-fg</code>, <code>--color-ok</code>, <code>--color-warn</code>).</li>
+</ul>
+<h3 id="53-tokenscss-excerpt-authoritative-starting-point">5.3 <code>tokens.css</code> excerpt (authoritative starting point)<a class="headerlink" href="#53-tokenscss-excerpt-authoritative-starting-point" title="Permanent link">&para;</a></h3>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c">/* frontend/src/styles/tokens.css</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="c">   Design tokens - single source of truth (see docs/design/design-system.md). */</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="c">/* ---------- Color: neutrals ---------- */</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nv">--color-bg</span><span class="p">:</span><span class="w">             </span><span class="mh">#ffffff</span><span class="p">;</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">  </span><span class="nv">--color-surface</span><span class="p">:</span><span class="w">        </span><span class="mh">#f4f6fb</span><span class="p">;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="nv">--color-surface-raised</span><span class="p">:</span><span class="w"> </span><span class="mh">#eceff6</span><span class="p">;</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">  </span><span class="nv">--color-surface-sunken</span><span class="p">:</span><span class="w"> </span><span class="mh">#e4e7f0</span><span class="p">;</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="nv">--color-border</span><span class="p">:</span><span class="w">         </span><span class="mh">#d4d7e0</span><span class="p">;</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">  </span><span class="nv">--color-border-strong</span><span class="p">:</span><span class="w">  </span><span class="mh">#b9bdcb</span><span class="p">;</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">  </span><span class="nv">--color-text</span><span class="p">:</span><span class="w">           </span><span class="mh">#1a1a2e</span><span class="p">;</span>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">  </span><span class="nv">--color-text-muted</span><span class="p">:</span><span class="w">     </span><span class="mh">#54546b</span><span class="p">;</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">  </span><span class="nv">--color-text-subtle</span><span class="p">:</span><span class="w">    </span><span class="mh">#6b6b85</span><span class="p">;</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">  </span><span class="nv">--color-text-inverse</span><span class="p">:</span><span class="w">   </span><span class="mh">#ffffff</span><span class="p">;</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">  </span><span class="c">/* ---------- Color: accent ---------- */</span>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w">        </span><span class="mh">#2d4ea2</span><span class="p">;</span>
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">  </span><span class="nv">--color-primary-strong</span><span class="p">:</span><span class="w"> </span><span class="mh">#274690</span><span class="p">;</span>
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">  </span><span class="nv">--color-primary-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#e6ecf8</span><span class="p">;</span>
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="w">  </span><span class="nv">--color-on-primary</span><span class="p">:</span><span class="w">     </span><span class="mh">#ffffff</span><span class="p">;</span>
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>
+</span><span id="__span-16-22"><a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">  </span><span class="c">/* ---------- Color: semantic ---------- */</span>
+</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w">        </span><span class="mh">#1b7f4b</span><span class="p">;</span>
+</span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">  </span><span class="nv">--color-success-text</span><span class="p">:</span><span class="w">   </span><span class="mh">#16703f</span><span class="p">;</span>
+</span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">  </span><span class="nv">--color-success-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#e3f3e9</span><span class="p">;</span>
+</span><span id="__span-16-26"><a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a><span class="w">  </span><span class="nv">--color-warning</span><span class="p">:</span><span class="w">        </span><span class="mh">#9a5b00</span><span class="p">;</span>
+</span><span id="__span-16-27"><a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a><span class="w">  </span><span class="nv">--color-warning-text</span><span class="p">:</span><span class="w">   </span><span class="mh">#8a4f00</span><span class="p">;</span>
+</span><span id="__span-16-28"><a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a><span class="w">  </span><span class="nv">--color-warning-soft</span><span class="p">:</span><span class="w">   </span><span class="mh">#fbeed9</span><span class="p">;</span>
+</span><span id="__span-16-29"><a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a><span class="w">  </span><span class="nv">--color-error</span><span class="p">:</span><span class="w">          </span><span class="mh">#b00020</span><span class="p">;</span>
+</span><span id="__span-16-30"><a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a><span class="w">  </span><span class="nv">--color-error-text</span><span class="p">:</span><span class="w">     </span><span class="mh">#b00020</span><span class="p">;</span>
+</span><span id="__span-16-31"><a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="w">  </span><span class="nv">--color-error-soft</span><span class="p">:</span><span class="w">     </span><span class="mh">#fbe4e7</span><span class="p">;</span>
+</span><span id="__span-16-32"><a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="w">  </span><span class="nv">--color-info</span><span class="p">:</span><span class="w">           </span><span class="mh">#1f5fa8</span><span class="p">;</span>
+</span><span id="__span-16-33"><a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="w">  </span><span class="nv">--color-info-text</span><span class="p">:</span><span class="w">      </span><span class="mh">#1f5fa8</span><span class="p">;</span>
+</span><span id="__span-16-34"><a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a><span class="w">  </span><span class="nv">--color-info-soft</span><span class="p">:</span><span class="w">      </span><span class="mh">#e4eefb</span><span class="p">;</span>
+</span><span id="__span-16-35"><a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="w">  </span><span class="nv">--color-voided-text</span><span class="p">:</span><span class="w">    </span><span class="mh">#6b6b85</span><span class="p">;</span>
+</span><span id="__span-16-36"><a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="w">  </span><span class="nv">--color-voided-soft</span><span class="p">:</span><span class="w">    </span><span class="mh">#eef0f4</span><span class="p">;</span>
+</span><span id="__span-16-37"><a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a>
+</span><span id="__span-16-38"><a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="w">  </span><span class="c">/* ---------- Color: functional + aliases ---------- */</span>
+</span><span id="__span-16-39"><a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a><span class="w">  </span><span class="nv">--color-focus</span><span class="p">:</span><span class="w">    </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary</span><span class="p">);</span>
+</span><span id="__span-16-40"><a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="w">  </span><span class="nv">--color-link</span><span class="p">:</span><span class="w">     </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary</span><span class="p">);</span>
+</span><span id="__span-16-41"><a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="w">  </span><span class="nv">--color-overlay</span><span class="p">:</span><span class="w">  </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">18</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.45</span><span class="p">);</span>
+</span><span id="__span-16-42"><a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a><span class="w">  </span><span class="nv">--color-image-mat</span><span class="p">:</span><span class="mh">#ffffff</span><span class="p">;</span>
+</span><span id="__span-16-43"><a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a><span class="w">  </span><span class="nv">--color-fg</span><span class="p">:</span><span class="w">          </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-text</span><span class="p">);</span>
+</span><span id="__span-16-44"><a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="w">  </span><span class="nv">--color-muted</span><span class="p">:</span><span class="w">       </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-text-muted</span><span class="p">);</span>
+</span><span id="__span-16-45"><a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a><span class="w">  </span><span class="nv">--color-primary-fg</span><span class="p">:</span><span class="w">  </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-on-primary</span><span class="p">);</span>
+</span><span id="__span-16-46"><a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="w">  </span><span class="nv">--color-ok</span><span class="p">:</span><span class="w">          </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-success</span><span class="p">);</span>
+</span><span id="__span-16-47"><a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="w">  </span><span class="nv">--color-warn</span><span class="p">:</span><span class="w">        </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-warning</span><span class="p">);</span>
+</span><span id="__span-16-48"><a id="__codelineno-16-48" name="__codelineno-16-48" href="#__codelineno-16-48"></a>
+</span><span id="__span-16-49"><a id="__codelineno-16-49" name="__codelineno-16-49" href="#__codelineno-16-49"></a><span class="w">  </span><span class="c">/* ---------- Typography ---------- */</span>
+</span><span id="__span-16-50"><a id="__codelineno-16-50" name="__codelineno-16-50" href="#__codelineno-16-50"></a><span class="w">  </span><span class="nv">--font-sans</span><span class="p">:</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">apple-system</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Segoe UI&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Roboto</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Helvetica Neue&#39;</span><span class="p">,</span>
+</span><span id="__span-16-51"><a id="__codelineno-16-51" name="__codelineno-16-51" href="#__codelineno-16-51"></a><span class="w">               </span><span class="n">Arial</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Noto Sans&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+</span><span id="__span-16-52"><a id="__codelineno-16-52" name="__codelineno-16-52" href="#__codelineno-16-52"></a><span class="w">  </span><span class="nv">--font-mono</span><span class="p">:</span><span class="w"> </span><span class="n">ui-monospace</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;SF Mono&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Source Code Pro&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Menlo</span><span class="p">,</span><span class="w"> </span><span class="n">Monaco</span><span class="p">,</span>
+</span><span id="__span-16-53"><a id="__codelineno-16-53" name="__codelineno-16-53" href="#__codelineno-16-53"></a><span class="w">               </span><span class="n">Consolas</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Courier New&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">monospace</span><span class="p">;</span>
+</span><span id="__span-16-54"><a id="__codelineno-16-54" name="__codelineno-16-54" href="#__codelineno-16-54"></a><span class="w">  </span><span class="nv">--font</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--font-sans</span><span class="p">);</span>
+</span><span id="__span-16-55"><a id="__codelineno-16-55" name="__codelineno-16-55" href="#__codelineno-16-55"></a><span class="w">  </span><span class="nv">--font-size-xs</span><span class="p">:</span><span class="w"> </span><span class="mf">.75</span><span class="kt">rem</span><span class="p">;</span><span class="w">  </span><span class="nv">--font-size-sm</span><span class="p">:</span><span class="w"> </span><span class="mf">.875</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--font-size-base</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-16-56"><a id="__codelineno-16-56" name="__codelineno-16-56" href="#__codelineno-16-56"></a><span class="w">  </span><span class="nv">--font-size-md</span><span class="p">:</span><span class="w"> </span><span class="mf">1.125</span><span class="kt">rem</span><span class="p">;</span><span class="nv">--font-size-lg</span><span class="p">:</span><span class="w"> </span><span class="mf">1.25</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--font-size-xl</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-16-57"><a id="__codelineno-16-57" name="__codelineno-16-57" href="#__codelineno-16-57"></a><span class="w">  </span><span class="nv">--font-size-2xl</span><span class="p">:</span><span class="w"> </span><span class="mf">1.875</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--font-size-3xl</span><span class="p">:</span><span class="w"> </span><span class="mf">2.25</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-16-58"><a id="__codelineno-16-58" name="__codelineno-16-58" href="#__codelineno-16-58"></a><span class="w">  </span><span class="nv">--line-height-tight</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span><span class="w"> </span><span class="nv">--line-height-snug</span><span class="p">:</span><span class="w"> </span><span class="mf">1.35</span><span class="p">;</span>
+</span><span id="__span-16-59"><a id="__codelineno-16-59" name="__codelineno-16-59" href="#__codelineno-16-59"></a><span class="w">  </span><span class="nv">--line-height-normal</span><span class="p">:</span><span class="w"> </span><span class="mf">1.6</span><span class="p">;</span><span class="w"> </span><span class="nv">--line-height-relaxed</span><span class="p">:</span><span class="w"> </span><span class="mf">1.75</span><span class="p">;</span>
+</span><span id="__span-16-60"><a id="__codelineno-16-60" name="__codelineno-16-60" href="#__codelineno-16-60"></a><span class="w">  </span><span class="nv">--font-weight-regular</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span><span class="w"> </span><span class="nv">--font-weight-medium</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span><span class="w"> </span><span class="nv">--font-weight-bold</span><span class="p">:</span><span class="w"> </span><span class="mi">700</span><span class="p">;</span>
+</span><span id="__span-16-61"><a id="__codelineno-16-61" name="__codelineno-16-61" href="#__codelineno-16-61"></a><span class="w">  </span><span class="nv">--letter-spacing-tight</span><span class="p">:</span><span class="w"> </span><span class="mf">-.01</span><span class="kt">em</span><span class="p">;</span><span class="w"> </span><span class="nv">--letter-spacing-caps</span><span class="p">:</span><span class="w"> </span><span class="mf">.04</span><span class="kt">em</span><span class="p">;</span>
+</span><span id="__span-16-62"><a id="__codelineno-16-62" name="__codelineno-16-62" href="#__codelineno-16-62"></a><span class="w">  </span><span class="nv">--font-numeric-tabular</span><span class="p">:</span><span class="w"> </span><span class="n">tabular-nums</span><span class="p">;</span>
+</span><span id="__span-16-63"><a id="__codelineno-16-63" name="__codelineno-16-63" href="#__codelineno-16-63"></a><span class="w">  </span><span class="nv">--math-scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.05</span><span class="p">;</span>
+</span><span id="__span-16-64"><a id="__codelineno-16-64" name="__codelineno-16-64" href="#__codelineno-16-64"></a>
+</span><span id="__span-16-65"><a id="__codelineno-16-65" name="__codelineno-16-65" href="#__codelineno-16-65"></a><span class="w">  </span><span class="c">/* ---------- Spacing ---------- */</span>
+</span><span id="__span-16-66"><a id="__codelineno-16-66" name="__codelineno-16-66" href="#__codelineno-16-66"></a><span class="w">  </span><span class="nv">--space-0</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-1</span><span class="p">:</span><span class="w"> </span><span class="mf">.25</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-2</span><span class="p">:</span><span class="w"> </span><span class="mf">.5</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-3</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-16-67"><a id="__codelineno-16-67" name="__codelineno-16-67" href="#__codelineno-16-67"></a><span class="w">  </span><span class="nv">--space-4</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-5</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-6</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="nv">--space-7</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-16-68"><a id="__codelineno-16-68" name="__codelineno-16-68" href="#__codelineno-16-68"></a>
+</span><span id="__span-16-69"><a id="__codelineno-16-69" name="__codelineno-16-69" href="#__codelineno-16-69"></a><span class="w">  </span><span class="c">/* ---------- Radius ---------- */</span>
+</span><span id="__span-16-70"><a id="__codelineno-16-70" name="__codelineno-16-70" href="#__codelineno-16-70"></a><span class="w">  </span><span class="nv">--radius-none</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nv">--radius-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--radius-md</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--radius-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-16-71"><a id="__codelineno-16-71" name="__codelineno-16-71" href="#__codelineno-16-71"></a><span class="w">  </span><span class="nv">--radius-pill</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--radius</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--radius-md</span><span class="p">);</span>
+</span><span id="__span-16-72"><a id="__codelineno-16-72" name="__codelineno-16-72" href="#__codelineno-16-72"></a>
+</span><span id="__span-16-73"><a id="__codelineno-16-73" name="__codelineno-16-73" href="#__codelineno-16-73"></a><span class="w">  </span><span class="c">/* ---------- Shadow ---------- */</span>
+</span><span id="__span-16-74"><a id="__codelineno-16-74" name="__codelineno-16-74" href="#__codelineno-16-74"></a><span class="w">  </span><span class="nv">--shadow-none</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+</span><span id="__span-16-75"><a id="__codelineno-16-75" name="__codelineno-16-75" href="#__codelineno-16-75"></a><span class="w">  </span><span class="nv">--shadow-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">18</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.06</span><span class="p">);</span>
+</span><span id="__span-16-76"><a id="__codelineno-16-76" name="__codelineno-16-76" href="#__codelineno-16-76"></a><span class="w">  </span><span class="nv">--shadow-md</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">18</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.10</span><span class="p">);</span>
+</span><span id="__span-16-77"><a id="__codelineno-16-77" name="__codelineno-16-77" href="#__codelineno-16-77"></a><span class="w">  </span><span class="nv">--shadow-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="mi">28</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">18</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">26</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.16</span><span class="p">);</span>
+</span><span id="__span-16-78"><a id="__codelineno-16-78" name="__codelineno-16-78" href="#__codelineno-16-78"></a><span class="w">  </span><span class="nv">--shadow-focus</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary-soft</span><span class="p">);</span>
+</span><span id="__span-16-79"><a id="__codelineno-16-79" name="__codelineno-16-79" href="#__codelineno-16-79"></a>
+</span><span id="__span-16-80"><a id="__codelineno-16-80" name="__codelineno-16-80" href="#__codelineno-16-80"></a><span class="w">  </span><span class="c">/* ---------- Z-index ---------- */</span>
+</span><span id="__span-16-81"><a id="__codelineno-16-81" name="__codelineno-16-81" href="#__codelineno-16-81"></a><span class="w">  </span><span class="nv">--z-base</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nv">--z-sticky</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="nv">--z-dropdown</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
+</span><span id="__span-16-82"><a id="__codelineno-16-82" name="__codelineno-16-82" href="#__codelineno-16-82"></a><span class="w">  </span><span class="nv">--z-overlay</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">;</span><span class="w"> </span><span class="nv">--z-modal</span><span class="p">:</span><span class="w"> </span><span class="mi">310</span><span class="p">;</span><span class="w"> </span><span class="nv">--z-toast</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+</span><span id="__span-16-83"><a id="__codelineno-16-83" name="__codelineno-16-83" href="#__codelineno-16-83"></a>
+</span><span id="__span-16-84"><a id="__codelineno-16-84" name="__codelineno-16-84" href="#__codelineno-16-84"></a><span class="w">  </span><span class="c">/* ---------- Breakpoints (documentary; see §4.5) ---------- */</span>
+</span><span id="__span-16-85"><a id="__codelineno-16-85" name="__codelineno-16-85" href="#__codelineno-16-85"></a><span class="w">  </span><span class="nv">--bp-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--bp-md</span><span class="p">:</span><span class="w"> </span><span class="mi">720</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--bp-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">960</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="nv">--bp-xl</span><span class="p">:</span><span class="w"> </span><span class="mi">1280</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-16-86"><a id="__codelineno-16-86" name="__codelineno-16-86" href="#__codelineno-16-86"></a><span class="w">  </span><span class="nv">--maxw</span><span class="p">:</span><span class="w"> </span><span class="mi">960</span><span class="kt">px</span><span class="p">;</span>
+</span><span id="__span-16-87"><a id="__codelineno-16-87" name="__codelineno-16-87" href="#__codelineno-16-87"></a>
+</span><span id="__span-16-88"><a id="__codelineno-16-88" name="__codelineno-16-88" href="#__codelineno-16-88"></a><span class="w">  </span><span class="c">/* ---------- Motion (see §7) ---------- */</span>
+</span><span id="__span-16-89"><a id="__codelineno-16-89" name="__codelineno-16-89" href="#__codelineno-16-89"></a><span class="w">  </span><span class="nv">--duration-fast</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="kt">ms</span><span class="p">;</span><span class="w"> </span><span class="nv">--duration-base</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="kt">ms</span><span class="p">;</span>
+</span><span id="__span-16-90"><a id="__codelineno-16-90" name="__codelineno-16-90" href="#__codelineno-16-90"></a><span class="w">  </span><span class="nv">--ease-standard</span><span class="p">:</span><span class="w"> </span><span class="nb">cubic-bezier</span><span class="p">(</span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-16-91"><a id="__codelineno-16-91" name="__codelineno-16-91" href="#__codelineno-16-91"></a><span class="p">}</span>
+</span><span id="__span-16-92"><a id="__codelineno-16-92" name="__codelineno-16-92" href="#__codelineno-16-92"></a>
+</span><span id="__span-16-93"><a id="__codelineno-16-93" name="__codelineno-16-93" href="#__codelineno-16-93"></a><span class="c">/* Dark theme contract (ships later) - see §2.4 for full block */</span>
+</span><span id="__span-16-94"><a id="__codelineno-16-94" name="__codelineno-16-94" href="#__codelineno-16-94"></a><span class="o">[</span><span class="nt">data-theme</span><span class="o">=</span><span class="s2">&quot;dark&quot;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-95"><a id="__codelineno-16-95" name="__codelineno-16-95" href="#__codelineno-16-95"></a><span class="w">  </span><span class="nv">--color-bg</span><span class="p">:</span><span class="w"> </span><span class="mh">#12131a</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-surface</span><span class="p">:</span><span class="w"> </span><span class="mh">#1a1c26</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-surface-raised</span><span class="p">:</span><span class="w"> </span><span class="mh">#232634</span><span class="p">;</span>
+</span><span id="__span-16-96"><a id="__codelineno-16-96" name="__codelineno-16-96" href="#__codelineno-16-96"></a><span class="w">  </span><span class="nv">--color-surface-sunken</span><span class="p">:</span><span class="w"> </span><span class="mh">#0e0f16</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#3a3d4d</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-border-strong</span><span class="p">:</span><span class="w"> </span><span class="mh">#4c4f63</span><span class="p">;</span>
+</span><span id="__span-16-97"><a id="__codelineno-16-97" name="__codelineno-16-97" href="#__codelineno-16-97"></a><span class="w">  </span><span class="nv">--color-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#e6e8f0</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-text-muted</span><span class="p">:</span><span class="w"> </span><span class="mh">#a6a9bd</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-text-subtle</span><span class="p">:</span><span class="w"> </span><span class="mh">#8d90a6</span><span class="p">;</span>
+</span><span id="__span-16-98"><a id="__codelineno-16-98" name="__codelineno-16-98" href="#__codelineno-16-98"></a><span class="w">  </span><span class="nv">--color-text-inverse</span><span class="p">:</span><span class="w"> </span><span class="mh">#12131a</span><span class="p">;</span>
+</span><span id="__span-16-99"><a id="__codelineno-16-99" name="__codelineno-16-99" href="#__codelineno-16-99"></a><span class="w">  </span><span class="nv">--color-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#8fb0ff</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-primary-strong</span><span class="p">:</span><span class="w"> </span><span class="mh">#aec4ff</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-primary-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#17223d</span><span class="p">;</span>
+</span><span id="__span-16-100"><a id="__codelineno-16-100" name="__codelineno-16-100" href="#__codelineno-16-100"></a><span class="w">  </span><span class="nv">--color-on-primary</span><span class="p">:</span><span class="w"> </span><span class="mh">#0e0f16</span><span class="p">;</span>
+</span><span id="__span-16-101"><a id="__codelineno-16-101" name="__codelineno-16-101" href="#__codelineno-16-101"></a><span class="w">  </span><span class="nv">--color-success</span><span class="p">:</span><span class="w"> </span><span class="mh">#5cc98c</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-success-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#9fe0bb</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-success-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#15301d</span><span class="p">;</span>
+</span><span id="__span-16-102"><a id="__codelineno-16-102" name="__codelineno-16-102" href="#__codelineno-16-102"></a><span class="w">  </span><span class="nv">--color-warning</span><span class="p">:</span><span class="w"> </span><span class="mh">#e0a44d</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-warning-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#f0c98a</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-warning-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#2e2410</span><span class="p">;</span>
+</span><span id="__span-16-103"><a id="__codelineno-16-103" name="__codelineno-16-103" href="#__codelineno-16-103"></a><span class="w">  </span><span class="nv">--color-error</span><span class="p">:</span><span class="w"> </span><span class="mh">#f2899a</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-error-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#f6b3bf</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-error-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#2e1419</span><span class="p">;</span>
+</span><span id="__span-16-104"><a id="__codelineno-16-104" name="__codelineno-16-104" href="#__codelineno-16-104"></a><span class="w">  </span><span class="nv">--color-info</span><span class="p">:</span><span class="w"> </span><span class="mh">#7db0ec</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-info-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#aaccf5</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-info-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#13243a</span><span class="p">;</span>
+</span><span id="__span-16-105"><a id="__codelineno-16-105" name="__codelineno-16-105" href="#__codelineno-16-105"></a><span class="w">  </span><span class="nv">--color-voided-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#8d90a6</span><span class="p">;</span><span class="w"> </span><span class="nv">--color-voided-soft</span><span class="p">:</span><span class="w"> </span><span class="mh">#1f2230</span><span class="p">;</span>
+</span><span id="__span-16-106"><a id="__codelineno-16-106" name="__codelineno-16-106" href="#__codelineno-16-106"></a><span class="w">  </span><span class="nv">--color-overlay</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.6</span><span class="p">);</span>
+</span><span id="__span-16-107"><a id="__codelineno-16-107" name="__codelineno-16-107" href="#__codelineno-16-107"></a><span class="w">  </span><span class="nv">--shadow-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.5</span><span class="p">);</span>
+</span><span id="__span-16-108"><a id="__codelineno-16-108" name="__codelineno-16-108" href="#__codelineno-16-108"></a><span class="w">  </span><span class="nv">--shadow-md</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.55</span><span class="p">);</span>
+</span><span id="__span-16-109"><a id="__codelineno-16-109" name="__codelineno-16-109" href="#__codelineno-16-109"></a><span class="w">  </span><span class="nv">--shadow-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="mi">28</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.65</span><span class="p">);</span>
+</span><span id="__span-16-110"><a id="__codelineno-16-110" name="__codelineno-16-110" href="#__codelineno-16-110"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="54-how-css-modules-consume-tokens">5.4 How CSS Modules consume tokens<a class="headerlink" href="#54-how-css-modules-consume-tokens" title="Permanent link">&para;</a></h3>
+<p>CSS Modules scope <strong>class names</strong>; they do <strong>not</strong> scope or isolate custom properties - <code>var(--*)</code>
+resolves against the cascade exactly as in plain CSS, so a <code>.module.css</code> references tokens directly.
+Example: the exam-runner choice cell, migrated from the global <code>.choice</code> rules.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c">/* frontend/src/features/runner/Choice.module.css */</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">.</span><span class="nc">choice</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">  </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">  </span><span class="k">gap</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--space-</span><span class="mi">2</span><span class="p">);</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">  </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">44</span><span class="kt">px</span><span class="p">;</span><span class="w">                 </span><span class="c">/* touch target (Principle 4) */</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">  </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--space-</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--space-</span><span class="mi">3</span><span class="p">);</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">  </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--font-size-base</span><span class="p">);</span><span class="w"> </span><span class="c">/* 16px floor → inline KaTeX stays legible */</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">  </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--line-height-snug</span><span class="p">);</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-text</span><span class="p">);</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-bg</span><span class="p">);</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-border</span><span class="p">);</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--radius-sm</span><span class="p">);</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="p">}</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="p">.</span><span class="nc">letter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--font-weight-medium</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="c">/* Selected: NOT colour-alone - tinted fill + accent border + the radio&#39;s own checked state */</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="p">.</span><span class="nc">choice</span><span class="o">[</span><span class="nt">aria-checked</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary-soft</span><span class="p">);</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="w">  </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-primary</span><span class="p">);</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="p">}</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="c">/* Review states pair colour with an icon/label rendered in the markup */</span>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="p">.</span><span class="nc">choice</span><span class="o">[</span><span class="nt">data-result</span><span class="o">=</span><span class="s1">&#39;correct&#39;</span><span class="o">]</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-success-soft</span><span class="p">);</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-success</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="p">.</span><span class="nc">choice</span><span class="o">[</span><span class="nt">data-result</span><span class="o">=</span><span class="s1">&#39;incorrect&#39;</span><span class="o">]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-error-soft</span><span class="p">);</span><span class="w">   </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-error</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="p">.</span><span class="nc">choice</span><span class="p">:</span><span class="nd">focus-visible</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--color-focus</span><span class="p">);</span><span class="w"> </span><span class="k">outline-offset</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<div class="language-tsx highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// Usage</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">import</span><span class="w"> </span><span class="nx">styles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./Choice.module.css&#39;</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">&lt;</span><span class="nt">label</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">choice</span><span class="p">}</span><span class="w"> </span><span class="na">data-result</span><span class="o">=</span><span class="p">{</span><span class="nx">result</span><span class="p">}&gt;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">  </span><span class="p">&lt;</span><span class="nt">span</span><span class="w"> </span><span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">letter</span><span class="p">}&gt;{</span><span class="nx">letter</span><span class="p">}&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">  </span><span class="p">&lt;</span><span class="nt">Tex</span><span class="w"> </span><span class="na">tex</span><span class="o">=</span><span class="p">{</span><span class="nx">choiceLatex</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Theming a token <em>for one component</em></strong> (rare): set the custom property on the component root and
+children inherit it - e.g. <code>.voidedRow { --color-text: var(--color-voided-text); }</code> recolors its
+prose <em>and its KaTeX math</em> in one line, because both read <code>--color-text</code>. Prefer the standard
+tokens; reach for local overrides only for genuinely local semantics like this.</p>
+</blockquote>
+<hr />
+<h2 id="6-theming-lightdark-contract">6. Theming (light/dark contract)<a class="headerlink" href="#6-theming-lightdark-contract" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Mechanism.</strong> Light is the default <code>:root</code>. Dark is the <code>[data-theme="dark"]</code> override block in
+  <code>tokens.css</code> (§2.4 / §5.3). Set the attribute on <code>&lt;html&gt;</code>:
+  <code>document.documentElement.setAttribute('data-theme', 'dark')</code>. Because every component reads
+  tokens (Principle 5), nothing else changes - the whole app, <strong>including KaTeX math</strong> (glyphs
+  inherit <code>--color-text</code>), re-themes from this one attribute.</p>
+</li>
+<li>
+<p><strong>Why an explicit attribute, not just media query.</strong> An attribute lets a future settings toggle
+  pin a theme regardless of OS, and lets us QA dark before shipping it to users. The contract exists
+  now; the <em>toggle UI</em> and <em>persistence</em> are a later phase.</p>
+</li>
+<li>
+<p><strong><code>prefers-color-scheme</code> default.</strong> When/if dark ships, honor the OS preference as the initial
+  value <em>without</em> forcing it, so an explicit user choice still wins:</p>
+</li>
+</ul>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">prefers-color-scheme</span><span class="o">:</span><span class="w"> </span><span class="nt">dark</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="p">:</span><span class="nd">root</span><span class="p">:</span><span class="nd">not</span><span class="o">([</span><span class="nt">data-theme</span><span class="o">])</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="c">/* same overrides as [data-theme=&quot;dark&quot;] - keep the two blocks in sync,</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c">       or apply data-theme via a tiny inline &lt;head&gt; script to avoid duplication</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c">       and a flash of the wrong theme (FOUC). */</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Recommended implementation: a 3-line blocking script in <code>index.html</code> <code>&lt;head&gt;</code> that reads
+  <code>localStorage.theme ?? matchMedia('(prefers-color-scheme: dark)')</code> and sets <code>data-theme</code> before
+  first paint. This avoids both FOUC and duplicating the override block.</p>
+<ul>
+<li>
+<p><strong><code>color-scheme</code> property.</strong> Set <code>:root { color-scheme: light; }</code> and
+  <code>[data-theme="dark"] { color-scheme: dark; }</code> so native form controls, scrollbars, and the
+  <code>&lt;input&gt;</code> UA styling match the theme.</p>
+</li>
+<li>
+<p><strong>Invariant tokens.</strong> Spacing, radius, type, z-index, breakpoints, and <code>--math-scale</code> are
+  theme-independent and live only in <code>:root</code>. Only color and shadow tokens appear in the dark block.</p>
+</li>
+</ul>
+<hr />
+<h2 id="7-motion">7. Motion<a class="headerlink" href="#7-motion" title="Permanent link">&para;</a></h2>
+<p>Motion is <strong>minimal and purposeful</strong> (Principles 2 &amp; 3) - it confirms an action or eases a state
+change, and it is <em>never</em> decorative or attention-grabbing during a timed test. Specifically: <strong>the
+timer never animates</strong>, and nothing loops or pulses in the runner.</p>
+<h3 id="71-tokens-standardize-on-one-duration-pair-one-easing">7.1 Tokens (standardize on one duration pair + one easing)<a class="headerlink" href="#71-tokens-standardize-on-one-duration-pair-one-easing" title="Permanent link">&para;</a></h3>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">--duration-fast</span><span class="o">:</span><span class="w"> </span><span class="nt">120ms</span><span class="o">;</span><span class="w"> </span><span class="c">/* hovers, focus, button/active feedback, checkbox toggles */</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">--duration-base</span><span class="o">:</span><span class="w"> </span><span class="nt">200ms</span><span class="o">;</span><span class="w"> </span><span class="c">/* entrances: dropdowns, modal/scrim, toast in/out */</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nt">--ease-standard</span><span class="o">:</span><span class="w"> </span><span class="nt">cubic-bezier</span><span class="o">(</span><span class="p">.</span><span class="nc">2</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">0</span><span class="o">,</span><span class="w"> </span><span class="nt">1</span><span class="o">);</span><span class="w"> </span><span class="c">/* calm decelerate; the one curve we use */</span>
+</span></code></pre></div>
+<p>Use <code>--duration-fast</code> for state on existing elements, <code>--duration-base</code> for things appearing or
+leaving. Animate only cheap, non-layout properties - <code>opacity</code> and <code>transform</code> - to protect the
+&lt; 2 s interactive budget and avoid jank on tablets. Don't animate <code>width</code>/<code>height</code>/<code>top</code>/<code>left</code>.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">.</span><span class="nc">button</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="k">background-color</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--duration-fast</span><span class="p">)</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--ease-standard</span><span class="p">),</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">                      </span><span class="k">border-color</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--duration-fast</span><span class="p">)</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--ease-standard</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">.</span><span class="nc">dialog</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">animation</span><span class="p">:</span><span class="w"> </span><span class="n">fade-scale</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--duration-base</span><span class="p">)</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--ease-standard</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">@</span><span class="k">keyframes</span><span class="w"> </span><span class="nt">fade-scale</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="nb">translateY</span><span class="p">(</span><span class="mi">4</span><span class="kt">px</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">transform</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="72-prefers-reduced-motion-required">7.2 <code>prefers-reduced-motion</code> (required)<a class="headerlink" href="#72-prefers-reduced-motion-required" title="Permanent link">&para;</a></h3>
+<p>Honor the OS reduced-motion setting globally. Transitions of <em>color/opacity</em> for feedback may remain
+near-instant; <strong>movement</strong> is removed.</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">prefers-reduced-motion</span><span class="o">:</span><span class="w"> </span><span class="nt">reduce</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="k">animation-duration</span><span class="p">:</span><span class="w"> </span><span class="mf">.01</span><span class="kt">ms</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="k">animation-iteration-count</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="k">transition-duration</span><span class="p">:</span><span class="w"> </span><span class="mf">.01</span><span class="kt">ms</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="k">scroll-behavior</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<blockquote>
+<p>Loading states use a static "Loading…" label or a non-spinning indicator under reduced motion;
+the existing <code>.spinner</code> element should degrade to text rather than rotate. No spinner is acceptable
+on the exam runner regardless - a detached timer must never be obscured by a spinner overlay.</p>
+</blockquote>
+<hr />
+<h2 id="8-implementation-checklist">8. Implementation checklist<a class="headerlink" href="#8-implementation-checklist" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Create <code>frontend/src/styles/tokens.css</code> from §5.3 verbatim.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Import it in <code>main.tsx</code> <strong>before</strong> <code>index.css</code> (after the KaTeX CSS).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the global <code>.katex</code> / <code>.katex-display</code> / <code>.katex-error</code> rules (§3.5) to <code>index.css</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Add the <code>prefers-reduced-motion</code> block (§7.2) and <code>color-scheme</code> declarations (§6) to <code>index.css</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Leave existing <code>--color-*</code>/<code>--space-*</code>/<code>--radius</code>/<code>--maxw</code>/<code>--font</code> consumers working via the
+      back-compat aliases; migrate component blocks out of <code>index.css</code> into <code>*.module.css</code>
+      incrementally, replacing raw values with tokens as you go.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Defer the dark <strong>toggle UI + persistence</strong>; the dark <strong>token contract</strong> is already defined and
+      QA-able via <code>data-theme="dark"</code>.</li>
+</ul>
+<h2 id="9-open-items-future">9. Open items / future<a class="headerlink" href="#9-open-items-future" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Dark-mode rollout: ship the toggle + <code>localStorage</code> persistence + the FOUC-avoidance head script
+  (§6); QA raster problem-image mats (<code>--color-image-mat</code>, §2.4) before enabling.</li>
+<li>A high-contrast / forced-colors (<code>@media (forced-colors: active)</code>) pass for the runner is a good
+  follow-up given the exam context, but is out of scope for v1.</li>
+<li>If a brand/marketing surface ever needs a display typeface, that is the only justification to add a
+  web font - and it must be <code>font-display: swap</code>, subset, and kept off the exam runner path.</li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 2, 2026 04:43:13 UTC">June 2, 2026</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Byron Williams
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ByronWilliamsCPA" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
