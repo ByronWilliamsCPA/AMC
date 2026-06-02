@@ -170,6 +170,7 @@ nav:
       - Overview: guides/overview.md
       - Configuration: guides/configuration.md
       - Usage: guides/usage.md
+      - Deployment & Operations: guides/deployment.md
 
   - API Reference:
       - Overview: api-reference.md
