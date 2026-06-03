@@ -28,23 +28,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (CONSTANTS.md section 3) instead of passing an empty gate list, so a student's
   AMC-10 score unlocks the catalog courses it clears (Problem Series at 60+,
   Final Fives at 80+)
+- Fix Python 3.10 compatibility (datetime.UTC replaced with timezone.utc;
+  ruff target-version aligned with requires-python)
 - Apply full repo-compliance audit: REUSE licensing, pre-commit hooks (no-em-dash,
   yamllint, markdownlint, basedpyright, detect-secrets), CI workflow fixes
   (CodeQL, REUSE, security scan, compatibility matrix, docs strict mode),
   settings.json permission syntax, and OpenSSF baseline improvements
-- Raise test coverage from 76.68% to 80.51% with targeted unit tests for
+- Raise test coverage above the 80% gate with targeted unit tests for
   seed.py, core security, auth schemas, and health endpoints
-- Fix Python 3.10 compatibility (datetime.UTC replaced with timezone.utc;
-  ruff target-version aligned with requires-python)
-
-- Apply full repo-compliance audit: REUSE licensing, pre-commit hooks (no-em-dash,
-  yamllint, markdownlint, basedpyright, detect-secrets), CI workflow fixes
-  (CodeQL, REUSE, security scan, compatibility matrix, docs strict mode),
-  settings.json permission syntax, and OpenSSF baseline improvements
-- Raise test coverage from 76.68% to 80.51% with targeted unit tests for
-  seed.py, core security, auth schemas, and health endpoints
-- Fix Python 3.10 compatibility (datetime.UTC replaced with timezone.utc;
-  ruff target-version aligned with requires-python)
 
 ## [0.1.0] - TBD
 

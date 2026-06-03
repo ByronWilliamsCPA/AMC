@@ -3,7 +3,7 @@ title: "Deployment & Operations"
 schema_type: common
 status: published
 owner: core-maintainer
-purpose: "Run the AMC stack end to end: configuration, migrations, content seeding, first-admin bootstrap, and a tested backup/restore drill."
+purpose: "Run the AMC stack end to end: configuration, migrations, content seeding, first-admin bootstrap, and a repeatable backup/restore drill."
 tags:
   - guide
   - deployment
@@ -14,7 +14,7 @@ This guide takes a fresh machine to a running AMC stack and documents the
 operational drills the deployment depends on. It covers the same-origin Docker
 topology (FastAPI app, PostgreSQL, and the React SPA behind one reverse proxy),
 database migrations, content seeding, bootstrapping the first staff account, and
-a backup/restore procedure that has been tested, not just written.
+a backup/restore procedure with a repeatable drill you can run to verify it.
 
 ## Prerequisites
 
