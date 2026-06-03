@@ -78,9 +78,14 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
+          # --no-cov: this matrix runs the unit-only subset (integration excluded)
+          # purely to verify Python/OS compatibility. The 80% coverage gate from
+          # pyproject addopts belongs to the full-suite run in ci.yml, not here;
+          # the unit subset alone cannot reach it.
           uv run pytest tests/ -v --tb=short -x \
             --ignore=tests/integration \
             --ignore=tests/load \
+            --no-cov \
             -m "not slow and not integration"
 
   summary:
