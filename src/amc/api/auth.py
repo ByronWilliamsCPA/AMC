@@ -39,6 +39,12 @@ if TYPE_CHECKING:
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
+# A precomputed Argon2 hash verified against when the email is unknown, so login
+# response timing does not reveal whether an account exists (user-enumeration
+# mitigation). The plaintext is irrelevant; only the work the verify forces is.
+_TIMING_GUARD_PLAINTEXT = "user-enumeration-timing-guard"  # pragma: allowlist secret
+_DUMMY_PASSWORD_HASH = hash_password(_TIMING_GUARD_PLAINTEXT)
+
 
 def _set_session_cookie(response: Response, session_id: str) -> None:
     """Set the signed, hardened session cookie on a response.
@@ -85,10 +91,14 @@ async def login(
 
     users = UserRepository(db)
     user = await users.get_by_email(payload.email)
-    # Always run a verification to keep timing uniform whether or not the user
-    # exists; verify_password returns False for a missing user via the dummy hash.
-    valid = user is not None and verify_password(payload.password, user.password_hash)
-    if not valid or user is None:
+    if user is None:
+        # Verify against a dummy hash so an unknown email costs the same Argon2
+        # work as a known one; otherwise response timing leaks which emails are
+        # registered (user enumeration).
+        verify_password(payload.password, _DUMMY_PASSWORD_HASH)
+        login_rate_limiter.record_failure(key)
+        raise AuthenticationError("Invalid email or password")
+    if not verify_password(payload.password, user.password_hash):
         login_rate_limiter.record_failure(key)
         raise AuthenticationError("Invalid email or password")
 

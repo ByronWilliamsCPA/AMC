@@ -185,6 +185,7 @@ nav:
       - Authentik: auth/authentik.md
 
   - Security:
+      - Security Review: security-review.md
       - Known Vulnerabilities: known-vulnerabilities.md
 
   - Project:

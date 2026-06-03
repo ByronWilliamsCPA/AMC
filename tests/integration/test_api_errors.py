@@ -97,6 +97,8 @@ class TestSessionEndpoints:
             json={"email": admin_user.email, "password": "nope"},
         )
         assert resp.status_code == 401
+        # Generic message: must not reveal that the email exists.
+        assert "Invalid email or password" in resp.text
         login_rate_limiter.reset(admin_user.email)
 
     async def test_login_unknown_email(self, client: AsyncClient) -> None:
@@ -108,3 +110,7 @@ class TestSessionEndpoints:
             json={"email": "ghost@example.com", "password": "whatever"},
         )
         assert resp.status_code == 401
+        # Same status and message as a wrong password for a real account, so the
+        # response content does not reveal whether the email is registered
+        # (the timing parity is handled by the dummy-hash verify in the route).
+        assert "Invalid email or password" in resp.text

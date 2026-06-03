@@ -256,6 +256,30 @@ behind a cookiecutter option for projects that actually use token auth.
 
 ---
 
+### Security middleware enables credentialed CORS with no origins and wildcard headers
+
+- **Priority**: Low
+- **Category**: Security
+
+**Issue**: `add_security_middleware` in `src/amc/middleware/security.py` configures
+`CORSMiddleware` with `allow_credentials=True` and `allow_headers=["*"]` unconditionally,
+even when no `allowed_origins` are passed (the default). Starlette then emits
+`Access-Control-Allow-Credentials: true` on every response, and a wildcard `allow_headers`
+combined with credentials is non-conformant per the Fetch standard. There is no active exploit
+for a same-origin deployment, but the configuration is misleading and a latent footgun if
+origins are later added.
+
+**Context**: Found during the Phase 3.4 security review of this project.
+
+**Suggested Fix**: Enable `allow_credentials` only when explicit origins are configured
+(`allow_credentials=bool(allowed_origins)`) and replace `allow_headers=["*"]` with an explicit
+header list, so the credentialed path is conformant and the no-origin default emits no CORS
+credentials header.
+
+**Affected Files**: `{{cookiecutter.project_slug}}/src/{{...}}/middleware/security.py`.
+
+---
+
 ## Submitting Feedback
 
 Once you've collected feedback, you can:
