@@ -228,7 +228,9 @@ async def seed_catalog(session: AsyncSession, data: dict[str, Any]) -> int:
         if record is None:
             record = DiagnosticCatalogEntry(course=course)
             session.add(record)
-        record.gate = row.get("gate", "")
+        # ``gate`` is required: index it so malformed content fails fast rather
+        # than seeding an invalid row that ``list_amc_gates`` later drops silently.
+        record.gate = row["gate"]
         record.min_score = row.get("min")
         record.note = row.get("note", "")
     await session.flush()

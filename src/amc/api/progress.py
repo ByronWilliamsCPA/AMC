@@ -123,6 +123,9 @@ async def _amc_gates_from(diagnostics: DiagnosticRepository) -> list[AmcGate]:
         Catalog AMC gates as :class:`AmcGate` inputs for ``synthesize``.
     """
     entries = await diagnostics.list_amc_gates()
+    # The repository query already excludes null ``min_score`` rows; the filter
+    # below repeats that guard to narrow ``float | None`` to ``float`` for the
+    # type checker, since ``AmcGate.min_score`` is non-optional.
     return [
         AmcGate(course=entry.course, min_score=entry.min_score, note=entry.note)
         for entry in entries
