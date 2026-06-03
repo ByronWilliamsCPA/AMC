@@ -13,7 +13,7 @@
  * material in JS (no localStorage), which is the whole point of the HTTP-only
  * design. There is therefore no `Authorization` header anywhere in the app.
  */
-import { client } from '@/client'
+import { client } from '@/client/client.gen'
 
 /** Configure the singleton generated client. Call once at app startup. */
 export function configureApiClient(): void {
