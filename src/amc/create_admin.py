@@ -43,8 +43,9 @@ _MIN_PASSWORD_LENGTH = 8
 # Only privileged roles are worth bootstrapping out-of-band; students self-serve
 # via invites once a coach/admin exists.
 _STAFF_ROLES = frozenset({ROLE_ADMIN, ROLE_COACH})
-# Env-var name, not a credential; allowlisted for ruff (S105) and the scanners.
-_PASSWORD_ENV = "AMC_ADMIN_PASSWORD"  # noqa: S105  # pragma: allowlist secret
+# Env-var name, not a credential; allowlisted for ruff (S105), bandit (B105),
+# and the secret scanners.
+_PASSWORD_ENV = "AMC_ADMIN_PASSWORD"  # noqa: S105  # nosec  # pragma: allowlist secret
 
 
 @dataclass(frozen=True)
@@ -92,6 +93,11 @@ async def create_admin(session: AsyncSession, spec: NewStaffAccount) -> User:
         raise ValidationError(msg, field="password")
 
     users = UserRepository(session)
+    # #CRITICAL: security: this duplicate check is the only guard stopping a
+    # re-run from silently resetting an existing staff account's password.
+    # #VERIFY: email is lowercased so the lookup matches the stored (normalised)
+    # value, and the check shares create()'s session/transaction so a concurrent
+    # insert of the same email cannot bypass it.
     if await users.get_by_email(spec.email.lower()) is not None:
         msg = "A user with that email already exists"
         raise ValidationError(msg, field="email", value=spec.email)

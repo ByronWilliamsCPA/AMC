@@ -17,7 +17,10 @@ queries:
 # py/unused-global-variable (paths: migrations/):
 #   Alembic uses module-level globals (revision, down_revision, branch_labels,
 #   depends_on) that appear unused to static analysis but are consumed by the
-#   Alembic runtime framework.
+#   Alembic runtime framework. Migrations are generated DDL scaffolding, so the
+#   whole directory is excluded from analysis via paths-ignore below.
+paths-ignore:
+  - migrations
 query-filters:
   - exclude:
       id: py/unsafe-cyclic-import
