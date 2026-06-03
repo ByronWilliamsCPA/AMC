@@ -30,6 +30,7 @@ from sqlalchemy import delete, select
 
 from amc.core.database import dispose_engine, get_session
 from amc.models import (
+    DiagnosticCatalogEntry,
     DiagnosticInstrument,
     DiagnosticItem,
     Exam,
@@ -55,12 +56,14 @@ class SeedCounts:
         problems: Number of problems written.
         instruments: Number of diagnostic instruments upserted.
         items: Number of diagnostic items written.
+        catalog: Number of catalog entries upserted.
     """
 
     exams: int
     problems: int
     instruments: int
     items: int
+    catalog: int
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -203,6 +206,37 @@ async def seed_diag(session: AsyncSession, data: dict[str, Any]) -> tuple[int, i
     return instrument_count, item_count
 
 
+async def seed_catalog(session: AsyncSession, data: dict[str, Any]) -> int:
+    """Upsert the diagnostic course catalog.
+
+    The catalog is the placement engine's reference table (CONSTANTS.md §3): each
+    row maps a course to how it is reached (``diagnostic`` / ``prereq`` / ``amc``).
+    ``amc`` rows carry the ``min`` score the recommendation engine uses for its
+    advisory unlock list. Upserts by ``course`` so re-runs are idempotent.
+
+    Args:
+        session: The active database session.
+        data: The parsed ``diag_data.json`` object.
+
+    Returns:
+        The number of catalog entries upserted.
+    """
+    catalog: list[dict[str, Any]] = data.get("catalog", [])
+    for row in catalog:
+        course = row["course"]
+        record = await session.get(DiagnosticCatalogEntry, course)
+        if record is None:
+            record = DiagnosticCatalogEntry(course=course)
+            session.add(record)
+        # ``gate`` is required: index it so malformed content fails fast rather
+        # than seeding an invalid row that ``list_amc_gates`` later drops silently.
+        record.gate = row["gate"]
+        record.min_score = row.get("min")
+        record.note = row.get("note", "")
+    await session.flush()
+    return len(catalog)
+
+
 async def _upsert_instrument(
     session: AsyncSession, slug: str, instrument: dict[str, Any]
 ) -> DiagnosticInstrument:
@@ -278,11 +312,13 @@ async def run_seed(amc_path: Path, diag_path: Path) -> SeedCounts:
             await seed_amc(session, amc_data) if amc_data is not None else (0, 0)
         )
         instruments, items = await seed_diag(session, diag_data)
+        catalog = await seed_catalog(session, diag_data)
     return SeedCounts(
         exams=exams,
         problems=problems,
         instruments=instruments,
         items=items,
+        catalog=catalog,
     )
 
 
@@ -322,6 +358,7 @@ def main(argv: list[str] | None = None) -> None:
         problems=counts.problems,
         instruments=counts.instruments,
         items=counts.items,
+        catalog=counts.catalog,
     )
 
 

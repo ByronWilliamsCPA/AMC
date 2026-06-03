@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
-from amc.models import DiagnosticInstrument, Exam
+from amc.models import GATE_AMC, DiagnosticCatalogEntry, DiagnosticInstrument, Exam
 
 if TYPE_CHECKING:
     import uuid
@@ -101,3 +101,23 @@ class DiagnosticRepository:
         )
         result = await self._session.execute(stmt)
         return result.scalar_one_or_none()
+
+    async def list_amc_gates(self) -> list[DiagnosticCatalogEntry]:
+        """Return catalog entries gated by an AMC-10 score, lowest bar first.
+
+        Only ``gate``-``amc`` rows with a non-null ``min_score`` qualify; these
+        feed the recommendation engine's advisory unlock list (CONSTANTS.md §3).
+
+        Returns:
+            AMC-gated catalog entries ordered by ascending ``min_score``.
+        """
+        stmt = (
+            select(DiagnosticCatalogEntry)
+            .where(
+                DiagnosticCatalogEntry.gate == GATE_AMC,
+                DiagnosticCatalogEntry.min_score.is_not(None),
+            )
+            .order_by(DiagnosticCatalogEntry.min_score)
+        )
+        result = await self._session.execute(stmt)
+        return list(result.scalars().all())

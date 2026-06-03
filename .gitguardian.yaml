@@ -1,0 +1,13 @@
+# GitGuardian configuration.
+# Reference: https://docs.gitguardian.com/ggshield-docs/reference/config
+version: 2
+
+secret:
+  # Alembic migration files contain only generated DDL and 12-character hex
+  # revision identifiers (``revision`` / ``down_revision``). GitGuardian's
+  # "Hex High Entropy String" detector flags those revision IDs as secrets;
+  # they are not. The CodeQL config (.github/codeql/codeql-config.yml) excludes
+  # this directory for the same false-positive class. Secrets never belong in
+  # migrations, so the whole directory is ignored for secret scanning.
+  ignored-paths:
+    - "migrations/**"
