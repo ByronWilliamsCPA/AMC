@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Diagnostic course catalog: `DiagnosticCatalogEntry` model and migration, seeded
   from `diag_data.json`, persisting how each course is reached (diagnostic /
   prereq / amc) and the AMC-10 score thresholds for gated courses
+- `create-admin` bootstrap command (`python -m amc.create_admin`): creates the
+  first staff account out-of-band since invite-only onboarding cannot bootstrap
+  itself. Password read from `AMC_ADMIN_PASSWORD` or prompted (never a CLI
+  argument); refuses to overwrite an existing account
+- Backup and restore scripts (`scripts/backup.sh`, `scripts/restore.sh`) wrapping
+  `pg_dump` / `psql` against the compose database service, plus a Deployment and
+  Operations guide documenting setup, seeding, the first-admin bootstrap, and a
+  step-by-step restore drill (Phase 0.6)
 
 ### Changed
 
