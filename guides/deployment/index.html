@@ -12,27 +12,31 @@
         <meta name="author" content="Byron Williams">
       
       
-        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/planning/adr/adr-001-initial-architecture/">
+        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/guides/deployment/">
       
       
+        <link rel="prev" href="../usage/">
+      
+      
+        <link rel="next" href="../../api-reference/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>ADR-001: Server-Backed Architecture with FastAPI and PostgreSQL - AMC</title>
+        <title>Deployment & Operations - AMC</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +55,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -88,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tldr" class="md-skip">
+        <a href="#prerequisites" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
+    <a href="../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -122,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR-001: Server-Backed Architecture with FastAPI and PostgreSQL
+              Deployment & Operations
             
           </span>
         </div>
@@ -235,7 +239,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -252,11 +256,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../guides/overview/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../overview/" class="md-tabs__link">
           
   
   
@@ -278,7 +284,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../api-reference/" class="md-tabs__link">
+        <a href="../../api-reference/" class="md-tabs__link">
           
   
   
@@ -300,7 +306,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../development/architecture/" class="md-tabs__link">
+        <a href="../../development/architecture/" class="md-tabs__link">
           
   
   
@@ -322,7 +328,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../auth/authentik/" class="md-tabs__link">
+        <a href="../../auth/authentik/" class="md-tabs__link">
           
   
   
@@ -344,7 +350,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../known-vulnerabilities/" class="md-tabs__link">
+        <a href="../../known-vulnerabilities/" class="md-tabs__link">
           
   
   
@@ -366,7 +372,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../project/roadmap/" class="md-tabs__link">
+        <a href="../../project/roadmap/" class="md-tabs__link">
           
   
   
@@ -402,7 +408,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
+    <a href="../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -432,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -463,8 +469,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -480,21 +488,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -512,7 +521,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -530,7 +539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/overview/" class="md-nav__link">
+      <a href="../overview/" class="md-nav__link">
         
   
   
@@ -565,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   
@@ -600,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/usage/" class="md-nav__link">
+      <a href="../usage/" class="md-nav__link">
         
   
   
@@ -632,10 +641,42 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../guides/deployment/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment & Operations
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -658,6 +699,118 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bring-up-the-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bring up the stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply migrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seeding-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seeding content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap-the-first-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap the first admin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-and-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup and restore
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup and restore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tested-restore-drill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tested restore drill
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -735,7 +888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../api-reference/" class="md-nav__link">
+      <a href="../../api-reference/" class="md-nav__link">
         
   
   
@@ -841,7 +994,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/architecture/" class="md-nav__link">
+      <a href="../../development/architecture/" class="md-nav__link">
         
   
   
@@ -876,7 +1029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/testing/" class="md-nav__link">
+      <a href="../../development/testing/" class="md-nav__link">
         
   
   
@@ -911,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/code-quality/" class="md-nav__link">
+      <a href="../../development/code-quality/" class="md-nav__link">
         
   
   
@@ -946,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/contributing/" class="md-nav__link">
+      <a href="../../development/contributing/" class="md-nav__link">
         
   
   
@@ -1046,7 +1199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../auth/authentik/" class="md-nav__link">
+      <a href="../../auth/authentik/" class="md-nav__link">
         
   
   
@@ -1146,7 +1299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../known-vulnerabilities/" class="md-nav__link">
+      <a href="../../known-vulnerabilities/" class="md-nav__link">
         
   
   
@@ -1250,7 +1403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/roadmap/" class="md-nav__link">
+      <a href="../../project/roadmap/" class="md-nav__link">
         
   
   
@@ -1285,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/changelog/" class="md-nav__link">
+      <a href="../../project/changelog/" class="md-nav__link">
         
   
   
@@ -1320,7 +1473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/license/" class="md-nav__link">
+      <a href="../../project/license/" class="md-nav__link">
         
   
   
@@ -1380,10 +1533,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tldr" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TL;DR
+        Prerequisites
       
     </span>
   </a>
@@ -1391,44 +1544,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#context" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Context
+        Configuration
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Context">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bring-up-the-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bring up the stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply migrations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seeding-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seeding content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap-the-first-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap the first admin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backup-and-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup and restore
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup and restore">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#problem" class="md-nav__link">
+  <a href="#tested-restore-drill" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Problem
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#constraints" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constraints
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#significance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Significance
+        Tested restore drill
       
     </span>
   </a>
@@ -1437,223 +1623,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#decision" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Decision
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Decision">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rationale" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rationale
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options-considered" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Options Considered
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Options Considered">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-1-server-backed-fastapi-postgresql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Option 1: Server-backed FastAPI + PostgreSQL ✓
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-static-spa-keep-the-prototype-shape" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Option 2: Static SPA (keep the prototype shape)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-3-hybrid-static-now-backend-later" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Option 3: Hybrid (static now, backend later)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#consequences" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Consequences
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Consequences">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#positive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Positive
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trade-offs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Trade-offs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#technical-debt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Technical Debt
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Implementation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#components-affected" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Components Affected
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#testing-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testing Strategy
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#success-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Success Criteria
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#review-schedule" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Review Schedule
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1677,123 +1646,125 @@
   
 
 
-  <h1>ADR-001: Server-Backed Architecture with FastAPI and PostgreSQL</h1>
+  <h1>Deployment & Operations</h1>
 
-<blockquote>
-<p><strong>Status</strong>: Accepted
-<strong>Date</strong>: 2026-05-31
-<strong>Supersedes</strong>: None</p>
-</blockquote>
-<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
-<p>We will build a server-backed app (FastAPI + PostgreSQL via async SQLAlchemy) that stores
-problems as structured records and grades submissions on the server, replacing the
-prototype's single static HTML file with embedded content and <code>localStorage</code>.</p>
-<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
-<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
-<p>The prototype (<code>tmp/amc10-trainer.html</code>) is a single 4.6MB HTML file: KaTeX, problem images
-(base64 PNG), answer keys, and app logic all inline, with state in <code>localStorage</code>. The
-agreed v1 goals are persistent cross-device progress for a small private group, multi-user
-accounts, and a content model that scales past hand-edited megabytes. None of these are
-reachable without a server and a real datastore.</p>
-<h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
+<p>This guide takes a fresh machine to a running AMC stack and documents the
+operational drills the deployment depends on. It covers the same-origin Docker
+topology (FastAPI app, PostgreSQL, and the React SPA behind one reverse proxy),
+database migrations, content seeding, bootstrapping the first staff account, and
+a backup/restore procedure with a repeatable drill you can run to verify it.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Technical</strong>: <code>pyproject.toml</code> already pins FastAPI, Starlette, async SQLAlchemy, and
-  Pydantic v2; <code>src/amc/</code> ships config, exceptions, security, and correlation middleware.
-  Python 3.12. Quality gates: Ruff, BasedPyright strict, &gt;= 80% coverage.</li>
-<li><strong>Business</strong>: Solo developer; bounded audience (~1-30 users); self-hosted.</li>
+<li>Docker and the Docker Compose plugin (<code>docker compose</code>, v2).</li>
+<li>A clone of this repository.</li>
+<li>The content bundle (see <a href="#seeding-content">Seeding content</a>).</li>
 </ul>
-<h3 id="significance">Significance<a class="headerlink" href="#significance" title="Permanent link">&para;</a></h3>
-<p>This sets the data boundary and persistence model. Reversing it later (for example, moving
-from static-local to server-backed after building features) means rewriting the data layer,
-the grading path, and the storage of every attempt. Choosing now is cheap; changing later
-is not.</p>
-<h2 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h2>
-<p><strong>We will use a FastAPI backend with PostgreSQL (async SQLAlchemy) serving a JSON API to a
-browser frontend, because it is the only option that meets the persistence, multi-user, and
-content-scaling goals while matching the existing scaffolding.</strong></p>
-<h3 id="rationale">Rationale<a class="headerlink" href="#rationale" title="Permanent link">&para;</a></h3>
-<p>Server-side storage is the single hard requirement behind cross-device progress and
-multi-user tracking. Grading on the server is a free win it unlocks: answer keys never ship
-to the client (the prototype leaks the full key in page source). Storing problems as rows
-plus asset files removes the 4.6MB embed and makes adding a paper a seed/import step.</p>
-<h2 id="options-considered">Options Considered<a class="headerlink" href="#options-considered" title="Permanent link">&para;</a></h2>
-<h3 id="option-1-server-backed-fastapi-postgresql">Option 1: Server-backed FastAPI + PostgreSQL ✓<a class="headerlink" href="#option-1-server-backed-fastapi-postgresql" title="Permanent link">&para;</a></h3>
-<p><strong>Pros</strong>:</p>
-<ul>
-<li>✅ Cross-device, multi-user persistence (the core v1 goal).</li>
-<li>✅ Server-side grading keeps answer keys off the client.</li>
-<li>✅ Uses the dependencies and middleware already in the repo.</li>
-</ul>
-<p><strong>Cons</strong>:</p>
-<ul>
-<li>❌ Requires hosting, a database, migrations, and auth.</li>
-</ul>
-<h3 id="option-2-static-spa-keep-the-prototype-shape">Option 2: Static SPA (keep the prototype shape)<a class="headerlink" href="#option-2-static-spa-keep-the-prototype-shape" title="Permanent link">&para;</a></h3>
-<p><strong>Pros</strong>:</p>
-<ul>
-<li>✅ Fastest path; no backend to operate.</li>
-</ul>
-<p><strong>Cons</strong>:</p>
-<ul>
-<li>❌ <code>localStorage</code> cannot sync across devices or separate users: fails the primary goal.</li>
-<li>❌ Answer keys remain exposed in client code.</li>
-</ul>
-<h3 id="option-3-hybrid-static-now-backend-later">Option 3: Hybrid (static now, backend later)<a class="headerlink" href="#option-3-hybrid-static-now-backend-later" title="Permanent link">&para;</a></h3>
-<p>Defers the database but ships persistence-blind features first, then forces a data-layer
-rewrite once the server arrives. Rejected: it spends effort on throwaway local state and
-delays the one capability the user ranked highest.</p>
-<h2 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
-<h3 id="positive">Positive<a class="headerlink" href="#positive" title="Permanent link">&para;</a></h3>
-<ul>
-<li>✅ Progress persists per user and is visible to a coach: directly serves the audience.</li>
-<li>✅ Content scales: a new paper is a database/seed change, not an HTML edit.</li>
-<li>✅ Integrity: grading and keys live server-side.</li>
-</ul>
-<h3 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h3>
-<ul>
-<li>⚠️ Operational surface (DB, migrations, deploy): mitigate with Docker Compose for local
-  Postgres and Alembic migrations from Phase 0.</li>
-<li>⚠️ SQLite is tempting for simplicity; we choose PostgreSQL for JSON columns and concurrent
-  writers, accepting the heavier local setup.</li>
-</ul>
-<h3 id="technical-debt">Technical Debt<a class="headerlink" href="#technical-debt" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Assets are served from the app filesystem in v1; object storage/CDN is deferred until
-  group size or asset volume justifies it.</li>
-</ul>
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<h3 id="components-affected">Components Affected<a class="headerlink" href="#components-affected" title="Permanent link">&para;</a></h3>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>Settings load from environment variables (the <code>AMC_</code> prefix is optional for the
+keys below). Copy <code>.env.example</code> to <code>.env</code> and set, at minimum:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DB_PASSWORD</code></td>
+<td>PostgreSQL password for the <code>amc</code> role.</td>
+</tr>
+<tr>
+<td><code>DATABASE_URL</code></td>
+<td>Async connection string the app uses; must match <code>DB_PASSWORD</code>.</td>
+</tr>
+<tr>
+<td><code>AMC_SESSION_SECRET</code></td>
+<td>Session-cookie signing secret. <strong>Required</strong> in production; the app refuses to boot in production with the development sentinel.</td>
+</tr>
+<tr>
+<td><code>AMC_ENVIRONMENT</code></td>
+<td><code>production</code> enables the HTTPS redirect and the secret guard.</td>
+</tr>
+</tbody>
+</table>
+<p>Never commit a real <code>.env</code>; it is gitignored.</p>
+<h2 id="bring-up-the-stack">Bring up the stack<a class="headerlink" href="#bring-up-the-stack" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div>
+<p>This starts the app, PostgreSQL 16 (<code>db</code> service, data on the <code>postgres-data</code>
+volume), and the frontend behind the reverse proxy. <code>frontend/nginx.conf</code>
+proxies <code>/api/</code> and <code>/health/</code> to the app so the <code>SameSite=Lax</code> session cookie
+works without CORS relaxation.</p>
+<h2 id="apply-migrations">Apply migrations<a class="headerlink" href="#apply-migrations" title="Permanent link">&para;</a></h2>
+<p>The schema is managed by Alembic. Create every table with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+</span></code></pre></div>
+<p><code>alembic upgrade head</code> is idempotent: it is safe to run on every deploy and
+applies only outstanding migrations.</p>
+<h2 id="seeding-content">Seeding content<a class="headerlink" href="#seeding-content" title="Permanent link">&para;</a></h2>
+<p>The diagnostic bundle (<code>content/diag_data.json</code>) ships in the repository. The
+AMC paper bundle (<code>content/amc_data.json</code>, roughly 4 MB of official problem
+scans) is <strong>kept local and is gitignored</strong>: redistributing it through a public
+repository is a licensing risk (see the planning risk register). Place the file
+at <code>content/amc_data.json</code> on the deployment host before seeding; a fresh clone
+will not contain it.</p>
+<p>Validate the bundle against the content contract, then seed:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>content/validate_content.py<span class="w"> </span>content/amc_data.json<span class="w"> </span>content/diag_data.json
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>amc.seed<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>--amc<span class="w"> </span>content/amc_data.json<span class="w"> </span>--diag<span class="w"> </span>content/diag_data.json
+</span></code></pre></div>
+<p>Seeding is idempotent (rows are upserted), so re-running after a content update
+will not duplicate exams, diagnostics, or catalog entries. If <code>amc_data.json</code> is
+absent, seeding logs a warning and loads the diagnostics and catalog only.</p>
+<h2 id="bootstrap-the-first-admin">Bootstrap the first admin<a class="headerlink" href="#bootstrap-the-first-admin" title="Permanent link">&para;</a></h2>
+<p>Onboarding is invite-only and minting an invite requires an existing
+coach or admin, so the first staff account must be created out of band:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>amc.create_admin<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>--email<span class="w"> </span>coach@example.com<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;Head Coach&quot;</span>
+</span></code></pre></div>
+<p>The command prompts for a password (with confirmation) and refuses to overwrite
+an existing account. For non-interactive provisioning, supply the password via
+the <code>AMC_ADMIN_PASSWORD</code> environment variable instead of a prompt. Once one staff
+account exists, all further accounts are created through the in-app invite flow.</p>
+<h2 id="backup-and-restore">Backup and restore<a class="headerlink" href="#backup-and-restore" title="Permanent link">&para;</a></h2>
+<p>A single-instance database makes a tested restore the difference between a minor
+incident and data loss. Two scripts wrap <code>pg_dump</code> / <code>psql</code> against the compose
+<code>db</code> service; both accept <code>DB_SERVICE</code>, <code>DB_NAME</code>, and <code>DB_USER</code> overrides.</p>
+<p>Create a compressed, timestamped dump (written under <code>backups/</code>, which is
+gitignored):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>scripts/backup.sh
+</span></code></pre></div>
+<p>Restore a dump. This overwrites the target database, so confirm the target
+before running:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>scripts/restore.sh<span class="w"> </span>backups/amc-20260602-120000Z.sql.gz
+</span></code></pre></div>
+<h3 id="tested-restore-drill">Tested restore drill<a class="headerlink" href="#tested-restore-drill" title="Permanent link">&para;</a></h3>
+<p>Run this after any change to the schema or the backup tooling. It proves the
+dump is replayable, not merely that a file was written:</p>
 <ol>
-<li><strong><code>src/amc/api/</code></strong>: new routers for auth, exams, diagnostics, attempts, progress.</li>
-<li><strong><code>src/amc/</code> (new <code>db/</code>, <code>models/</code>, <code>services/</code>)</strong>: SQLAlchemy models, session wiring,
-   grading and recommendation services.</li>
-<li><strong><code>alembic/</code></strong>: migrations (new).</li>
-<li><strong>Frontend</strong>: a React 19 SPA fetching from the API instead of the prototype's inline
-   <code>DATA</code>; framework choice and same-origin topology are recorded in
-   <a href="../adr-002-frontend-framework/">ADR-002</a>.</li>
+<li>Seed a known database (see <a href="#seeding-content">Seeding content</a>) and note a
+   verifiable fact, for example the exam count:</li>
 </ol>
-<h3 id="testing-strategy">Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Unit: grading and recommendation services at 100% (financial-grade correctness paths).</li>
-<li>Integration: API endpoints against a test Postgres (transaction rollback per test).</li>
-</ul>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> An attempt submitted on one device is retrievable on another for the same account.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No correct-answer field appears in any pre-submission API response or page source.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Adding one new AMC paper requires no change to application HTML/JS.</li>
-</ul>
-<h3 id="review-schedule">Review Schedule<a class="headerlink" href="#review-schedule" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Initial: end of Phase 1 (persistence proven end-to-end).</li>
-<li>Ongoing: revisit if audience approaches public scale.</li>
-</ul>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../../project-vision/">Project Vision</a>: scope and audience that drive this decision.</li>
-<li><a href="../../tech-spec/">Tech Spec</a>: data model, endpoints, and auth that implement it.</li>
-</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>amc<span class="w"> </span>-d<span class="w"> </span>amc<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;select count(*) from exams;&#39;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p>Back it up: <code>backup_file=$(scripts/backup.sh)</code>.</p>
+</li>
+<li>
+<p>Drop and recreate the schema (simulating loss), then restore:</p>
+</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>db<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>amc<span class="w"> </span>-d<span class="w"> </span>amc<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;drop schema public cascade; create schema public;&#39;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>scripts/restore.sh<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">backup_file</span><span class="si">}</span><span class="s2">&quot;</span>
+</span></code></pre></div>
+<ol>
+<li>Re-read the same fact and confirm it matches the pre-backup value. A matching
+   count means the restore reproduced the database; a mismatch fails the drill.</li>
+</ol>
+<p>Record the date of the most recent successful drill in your operations log so a
+stale backup path is caught before it is needed.</p>
 
 
 
@@ -1816,7 +1787,7 @@ delays the one capability the user ranked highest.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2026 16:46:50 UTC">May 31, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 3, 2026 05:58:23 UTC">June 3, 2026</span>
   </span>
 
     
@@ -1826,7 +1797,7 @@ delays the one capability the user ranked highest.</p>
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2026 16:46:50 UTC">May 31, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 3, 2026 05:58:23 UTC">June 3, 2026</span>
   </span>
 
     
@@ -1903,10 +1874,10 @@ delays the one capability the user ranked highest.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
