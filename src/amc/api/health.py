@@ -105,10 +105,11 @@ async def check_database() -> ReadinessCheck:
         )
     except Exception as e:
         latency_ms = (time.time() - start) * 1000
-        # Log the full error server-side, but return a generic message: the
-        # readiness endpoint is unauthenticated and a driver exception can carry
-        # the connection string (and thus credentials).
-        logger.warning("readiness_db_check_failed", error=str(e))
+        # Log only the exception type, and return a generic message: the
+        # readiness endpoint is unauthenticated and a driver exception's message
+        # can carry the connection string (and thus credentials), which must not
+        # reach the HTTP response or the logs.
+        logger.warning("readiness_db_check_failed", error_type=type(e).__name__)
         return ReadinessCheck(
             name="database",
             status=False,

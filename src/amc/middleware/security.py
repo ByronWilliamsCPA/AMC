@@ -478,12 +478,16 @@ def add_security_middleware(
     # origins are configured. With no origins (the same-origin reverse-proxy
     # default) emitting Access-Control-Allow-Credentials is misleading, and a
     # wildcard allow_headers combined with credentials is non-conformant per the
-    # Fetch standard, so headers are listed explicitly.
+    # Fetch standard, so headers are listed explicitly. A wildcard origin ("*")
+    # with credentials is also disallowed by the Fetch standard and a footgun
+    # (Starlette would reflect any origin), so credentials are enabled only for
+    # concrete, non-wildcard origins.
     cors_origins = allowed_origins or []
+    cors_allow_credentials = bool(cors_origins) and "*" not in cors_origins
     app.add_middleware(
         CORSMiddleware,
         allow_origins=cors_origins,
-        allow_credentials=bool(cors_origins),
+        allow_credentials=cors_allow_credentials,
         allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
         allow_headers=[
             "Authorization",
@@ -492,7 +496,7 @@ def add_security_middleware(
             "X-Correlation-ID",
             "X-Request-ID",
         ],
-        expose_headers=["X-Request-ID"],
+        expose_headers=["X-Request-ID", "X-Correlation-ID"],
         max_age=3600,
     )
 

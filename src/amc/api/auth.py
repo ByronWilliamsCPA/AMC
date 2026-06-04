@@ -39,9 +39,10 @@ if TYPE_CHECKING:
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-# A precomputed Argon2 hash verified against when the email is unknown, so login
-# response timing does not reveal whether an account exists (user-enumeration
-# mitigation). The plaintext is irrelevant; only the work the verify forces is.
+# An Argon2 hash computed once at import time, verified against when the email is
+# unknown so login response timing does not reveal whether an account exists
+# (user-enumeration mitigation). The plaintext is irrelevant; only the work the
+# verify forces is.
 _TIMING_GUARD_PLAINTEXT = "user-enumeration-timing-guard"  # pragma: allowlist secret
 _DUMMY_PASSWORD_HASH = hash_password(_TIMING_GUARD_PLAINTEXT)
 
