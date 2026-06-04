@@ -12,27 +12,31 @@
         <meta name="author" content="Byron Williams">
       
       
-        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/planning/adr/adr-002-frontend-framework/">
+        <link rel="canonical" href="https://ByronWilliamsCPA.github.io/AMC/security-review/">
       
       
+        <link rel="prev" href="../auth/authentik/">
+      
+      
+        <link rel="next" href="../known-vulnerabilities/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>ADR-002: React 19 SPA for the Frontend - AMC</title>
+        <title>Security Review (Phase 3.4) - AMC</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +55,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -88,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tldr" class="md-skip">
+        <a href="#findings-and-remediations" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +106,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
+    <a href=".." title="AMC" class="md-header__button md-logo" aria-label="AMC" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -122,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR-002: React 19 SPA for the Frontend
+              Security Review (Phase 3.4)
             
           </span>
         </div>
@@ -235,7 +239,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href=".." class="md-tabs__link">
         
   
   
@@ -256,7 +260,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../guides/overview/" class="md-tabs__link">
+        <a href="../guides/overview/" class="md-tabs__link">
           
   
   
@@ -278,7 +282,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../api-reference/" class="md-tabs__link">
+        <a href="../api-reference/" class="md-tabs__link">
           
   
   
@@ -300,7 +304,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../development/architecture/" class="md-tabs__link">
+        <a href="../development/architecture/" class="md-tabs__link">
           
   
   
@@ -322,7 +326,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../auth/authentik/" class="md-tabs__link">
+        <a href="../auth/authentik/" class="md-tabs__link">
           
   
   
@@ -340,11 +344,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../security-review/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -366,7 +372,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../project/roadmap/" class="md-tabs__link">
+        <a href="../project/roadmap/" class="md-tabs__link">
           
   
   
@@ -402,7 +408,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
+    <a href=".." title="AMC" class="md-nav__button md-logo" aria-label="AMC" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -432,7 +438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -530,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/overview/" class="md-nav__link">
+      <a href="../guides/overview/" class="md-nav__link">
         
   
   
@@ -565,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/configuration/" class="md-nav__link">
+      <a href="../guides/configuration/" class="md-nav__link">
         
   
   
@@ -600,7 +606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/usage/" class="md-nav__link">
+      <a href="../guides/usage/" class="md-nav__link">
         
   
   
@@ -635,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../guides/deployment/" class="md-nav__link">
+      <a href="../guides/deployment/" class="md-nav__link">
         
   
   
@@ -735,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../api-reference/" class="md-nav__link">
+      <a href="../api-reference/" class="md-nav__link">
         
   
   
@@ -841,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/architecture/" class="md-nav__link">
+      <a href="../development/architecture/" class="md-nav__link">
         
   
   
@@ -876,7 +882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/testing/" class="md-nav__link">
+      <a href="../development/testing/" class="md-nav__link">
         
   
   
@@ -911,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/code-quality/" class="md-nav__link">
+      <a href="../development/code-quality/" class="md-nav__link">
         
   
   
@@ -946,7 +952,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../development/contributing/" class="md-nav__link">
+      <a href="../development/contributing/" class="md-nav__link">
         
   
   
@@ -1046,7 +1052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../auth/authentik/" class="md-nav__link">
+      <a href="../auth/authentik/" class="md-nav__link">
         
   
   
@@ -1085,8 +1091,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -1098,21 +1106,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -1130,7 +1139,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1145,10 +1154,42 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../security-review/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Review
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1171,6 +1212,107 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#findings-and-remediations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Findings and remediations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Findings and remediations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#f-1-login-timing-user-enumeration-medium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F-1: Login timing / user enumeration (Medium)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-2-cors-credentials-posture-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F-2: CORS credentials posture (Low)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-3-health-endpoint-information-disclosure-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F-3: Health-endpoint information disclosure (Low)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-4-rate-limiter-across-replicas-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F-4: Rate limiter across replicas (Low)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verified-controls-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verified controls (pass)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#residual-risk-and-follow-ups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Residual risk and follow-ups
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1183,7 +1325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../known-vulnerabilities/" class="md-nav__link">
+      <a href="../known-vulnerabilities/" class="md-nav__link">
         
   
   
@@ -1287,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/roadmap/" class="md-nav__link">
+      <a href="../project/roadmap/" class="md-nav__link">
         
   
   
@@ -1322,7 +1464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/changelog/" class="md-nav__link">
+      <a href="../project/changelog/" class="md-nav__link">
         
   
   
@@ -1357,7 +1499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../project/license/" class="md-nav__link">
+      <a href="../project/license/" class="md-nav__link">
         
   
   
@@ -1417,33 +1559,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#tldr" class="md-nav__link">
+  <a href="#findings-and-remediations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TL;DR
+        Findings and remediations
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Context
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Context">
+    <nav class="md-nav" aria-label="Findings and remediations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#problem" class="md-nav__link">
+  <a href="#f-1-login-timing-user-enumeration-medium" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Problem
+        F-1: Login timing / user enumeration (Medium)
       
     </span>
   </a>
@@ -1451,10 +1582,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#constraints" class="md-nav__link">
+  <a href="#f-2-cors-credentials-posture-low" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constraints
+        F-2: CORS credentials posture (Low)
       
     </span>
   </a>
@@ -1462,10 +1593,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#significance" class="md-nav__link">
+  <a href="#f-3-health-endpoint-information-disclosure-low" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Significance
+        F-3: Health-endpoint information disclosure (Low)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-4-rate-limiter-across-replicas-low" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F-4: Rate limiter across replicas (Low)
       
     </span>
   </a>
@@ -1478,116 +1620,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#decision" class="md-nav__link">
+  <a href="#verified-controls-pass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Decision
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Decision">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#rationale" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rationale
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#options-considered" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Options Considered
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Options Considered">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#option-1-react-19-typescript-vite-spa-the-existing-scaffold" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Option 1: React 19 + TypeScript + Vite SPA (the existing scaffold) ✓
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-vanilla-js-katex-server-served-static-html" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Option 2: Vanilla JS + KaTeX, server-served static HTML
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#consequences" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Consequences
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Consequences">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#positive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Positive
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#trade-offs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Trade-offs
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implementation
+        Verified controls (pass)
       
     </span>
   </a>
@@ -1595,49 +1631,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation" class="md-nav__link">
+  <a href="#residual-risk-and-follow-ups" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#success-criteria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Success Criteria
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#review-schedule" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Review Schedule
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related
+        Residual risk and follow-ups
       
     </span>
   </a>
@@ -1664,111 +1661,115 @@
   
 
 
-  <h1>ADR-002: React 19 SPA for the Frontend</h1>
+  <h1>Security Review</h1>
 
-<blockquote>
-<p><strong>Status</strong>: Accepted
-<strong>Date</strong>: 2026-05-31
-<strong>Refines</strong>: <a href="../adr-001-initial-architecture/">ADR-001</a></p>
-</blockquote>
-<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
-<p>We will build the frontend as the React 19 + TypeScript + Vite SPA the template already
-committed under <code>frontend/</code>, consuming a generated typed OpenAPI client, rather than the
-vanilla-JS + KaTeX static page the early drafts assumed. SPA and API are served same-origin
-behind a reverse proxy, so the <code>SameSite=Lax</code> session cookie avoids CORS-with-credentials.</p>
-<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
-<h3 id="problem">Problem<a class="headerlink" href="#problem" title="Permanent link">&para;</a></h3>
-<p>Two frontend architectures contradicted each other:</p>
-<ol>
-<li>Early planning drafts (PVS, tech spec) described a <strong>vanilla-JS + KaTeX</strong>, server-served
-   static HTML page refactored from the prototype, with same-origin cookie auth.</li>
-<li>The cookiecutter template had already committed a working <strong>React 19 + TypeScript + Vite
-   SPA</strong> under <code>frontend/</code> (axios, a generated OpenAPI client via <code>@hey-api/openapi-ts</code>,
-   vitest, eslint/prettier, Dockerfile, <code>nginx.conf</code>).</li>
-</ol>
-<p>A frontend framework is expensive to reverse once feature code accretes, so this had to be
-resolved before Phase 1.</p>
-<h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
+<p>This review audits the AMC backend against the security acceptance criteria in
+<a href="../planning/tech-spec/">tech-spec.md</a> section "Security". Scope: authentication
+and sessions, role-based authorization, answer-key non-exposure, input
+validation, the same-origin cookie/CORS posture, and logging hygiene. The
+review combined a specialist automated pass with manual verification of every
+finding against the source.</p>
+<p>Outcome: no critical or high findings. The core posture (Argon2id password
+hashing, opaque signed server-side sessions, RBAC on every protected route, and
+structurally key-free read schemas) passed. Four lower-severity gaps were found
+and <strong>all have been remediated</strong> in this branch.</p>
+<h2 id="findings-and-remediations">Findings and remediations<a class="headerlink" href="#findings-and-remediations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Issue</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-1</td>
+<td>Medium</td>
+<td>Login short-circuited the Argon2 verify for unknown emails, leaking account existence through response timing; an inline comment wrongly claimed this was mitigated.</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>F-2</td>
+<td>Low</td>
+<td>CORS middleware set <code>allow_credentials=True</code> with an empty origin list and wildcard <code>allow_headers</code> (non-conformant when combined).</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>F-3</td>
+<td>Low</td>
+<td><code>/health/ready</code> returned the raw database exception (which can carry the DSN/credentials) to unauthenticated callers.</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>F-4</td>
+<td>Low</td>
+<td>The in-process login rate limiter is bypassed across multiple app replicas; the production compose defaulted to 2.</td>
+<td>Fixed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="f-1-login-timing-user-enumeration-medium">F-1: Login timing / user enumeration (Medium)<a class="headerlink" href="#f-1-login-timing-user-enumeration-medium" title="Permanent link">&para;</a></h3>
+<p><code>POST /auth/login</code> computed <code>user is not None and verify_password(...)</code>, so an
+unknown email skipped the ~100 ms Argon2 work entirely while a known email paid
+it, a timing oracle for account enumeration that the per-email rate limiter does
+not cover. Remediation (<a href="https://github.com/ByronWilliamsCPA/AMC/blob/main/src/amc/api/auth.py">auth.py</a>):
+verify against a module-level dummy hash when the email is unknown, so both
+paths cost the same work, and the misleading comment was removed. Tests assert
+the unknown-email and wrong-password responses are identical in status and
+message.</p>
+<h3 id="f-2-cors-credentials-posture-low">F-2: CORS credentials posture (Low)<a class="headerlink" href="#f-2-cors-credentials-posture-low" title="Permanent link">&para;</a></h3>
+<p><code>add_security_middleware</code> emitted <code>Access-Control-Allow-Credentials: true</code>
+unconditionally, even with no configured origins, and paired it with
+<code>allow_headers=["*"]</code> (disallowed with credentials per the Fetch standard). No
+active exploit existed given the same-origin reverse-proxy topology, but the
+configuration was misleading. Remediation: credentials are now enabled only when
+explicit origins are configured, and headers are listed explicitly. Recorded as
+template feedback, since the middleware originates from the project template.</p>
+<h3 id="f-3-health-endpoint-information-disclosure-low">F-3: Health-endpoint information disclosure (Low)<a class="headerlink" href="#f-3-health-endpoint-information-disclosure-low" title="Permanent link">&para;</a></h3>
+<p>The unauthenticated readiness probe serialized the raw driver exception. A
+connection failure could surface the database DSN, including a password, in the
+response body. Remediation: the endpoint now returns a generic
+<code>"database connectivity check failed"</code> message and logs the full error
+server-side at warning level.</p>
+<h3 id="f-4-rate-limiter-across-replicas-low">F-4: Rate limiter across replicas (Low)<a class="headerlink" href="#f-4-rate-limiter-across-replicas-low" title="Permanent link">&para;</a></h3>
+<p><code>LoginRateLimiter</code> keeps per-email counters in process memory. With the
+production compose default of two replicas behind the proxy, an attacker
+alternating replicas doubled the effective attempt budget. Remediation: the
+production replica default is now 1, with a comment that scaling past one
+replica requires moving rate-limit state to a shared store first.</p>
+<h2 id="verified-controls-pass">Verified controls (pass)<a class="headerlink" href="#verified-controls-pass" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Technical</strong>: <code>frontend/</code> ships React 19, Vite 6, TypeScript 5.7, vitest, and OpenAPI
-  client generation; the backend exposes <code>/openapi.json</code>. Quality gates apply to both stacks.</li>
-<li><strong>Business</strong>: Solo developer; bounded audience (~1-30 users); self-hosted.</li>
+<li><strong>Passwords</strong>: Argon2id via <code>argon2-cffi</code>; no bcrypt/MD5/SHA-1 for security use.</li>
+<li><strong>Sessions</strong>: opaque server-side <code>Session</code> rows; cookie is <code>HttpOnly</code>, <code>Secure</code>,
+  <code>SameSite=Lax</code>, and signed (itsdangerous, SHA-256 HMAC). Expiry and <code>revoked</code>
+  checked per request; logout revokes; production boot guard enforces a strong
+  <code>SESSION_SECRET</code> and the <code>Secure</code> flag.</li>
+<li><strong>Invites</strong>: 256-bit <code>secrets.token_urlsafe</code> tokens; only the SHA-256 hash is
+  stored; lookup is by hash; redemption is one-time.</li>
+<li><strong>Authorization</strong>: every protected route depends on <code>CurrentUser</code> /
+  <code>StaffUser</code>; <code>authorize_view_user</code> confines students to their own data while
+  allowing staff to read any student's.</li>
+<li><strong>Answer-key non-exposure</strong>: pre-submission read schemas
+  (<a href="https://github.com/ByronWilliamsCPA/AMC/blob/main/src/amc/schemas/exam.py">exam.py</a>,
+  <a href="https://github.com/ByronWilliamsCPA/AMC/blob/main/src/amc/schemas/diagnostic.py">diagnostic.py</a>)
+  have no field that can carry a key; endpoints construct key-free objects
+  explicitly. <code>password_hash</code> is never serialized.</li>
+<li><strong>Injection</strong>: Pydantic validation at boundaries; SQLAlchemy parameterized
+  queries throughout; no string-built SQL.</li>
+<li><strong>Logging</strong>: no passwords, session tokens, raw invite tokens, or full answer
+  keys are logged.</li>
 </ul>
-<h3 id="significance">Significance<a class="headerlink" href="#significance" title="Permanent link">&para;</a></h3>
-<p>The UI is a <strong>stateful application</strong>, not a document: timer, 25 answers, flags, palette
-navigation, review mode, live diagnostic self-mark recompute, and a dashboard. The framework
-choice sets how that state is managed for the project's life.</p>
-<h2 id="decision">Decision<a class="headerlink" href="#decision" title="Permanent link">&para;</a></h2>
-<p><strong>We will use the scaffolded React 19 + TypeScript + Vite SPA as the frontend, consuming a
-generated typed OpenAPI client, because it is the better long-term fit for a growing
-stateful UI and it keeps the project on the cookiecutter template's golden path.</strong></p>
-<h3 id="rationale">Rationale<a class="headerlink" href="#rationale" title="Permanent link">&para;</a></h3>
-<p>The case for vanilla JS (ship fast, no toolchain) is short-term; the case for React is
-long-term:</p>
+<h2 id="residual-risk-and-follow-ups">Residual risk and follow-ups<a class="headerlink" href="#residual-risk-and-follow-ups" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>State scales with features, not discipline.</strong> The runner only grows (the PVS defers
-  adaptive practice, spaced repetition, per-topic drills). Hand-rolled DOM code degrades as
-  that lands; a component model absorbs it.</li>
-<li><strong>Type-safe API contract.</strong> The generated client makes frontend types track the Pydantic
-  schemas, catching drift at build time on an app whose hard requirements are "no answer-key
-  leakage" and "scores match the prototype."</li>
-<li><strong>Template alignment.</strong> Deleting the scaffold to hand-serve static HTML would make every
-  future <code>cruft update</code> fight the project, a recurring tax on a solo developer.</li>
-<li><strong>Testability.</strong> vitest + testing-library is already wired, so the runner is
-  component-testable rather than DOM-scraped.</li>
-</ul>
-<p>The "4.6MB single-file" pain was about base64-embedded content and <code>localStorage</code>, solved by
-ADR-001, not by the frontend framework. Dropping the framework would not have addressed it.</p>
-<h2 id="options-considered">Options Considered<a class="headerlink" href="#options-considered" title="Permanent link">&para;</a></h2>
-<h3 id="option-1-react-19-typescript-vite-spa-the-existing-scaffold">Option 1: React 19 + TypeScript + Vite SPA (the existing scaffold) ✓<a class="headerlink" href="#option-1-react-19-typescript-vite-spa-the-existing-scaffold" title="Permanent link">&para;</a></h3>
-<ul>
-<li>✅ Component state fits the stateful runner and scales with features.</li>
-<li>✅ Generated typed client guards the correctness-critical API boundary.</li>
-<li>✅ Reuses the working scaffold and the template's golden path.</li>
-<li>❌ Node build toolchain in CI (mostly paid); separate origin needs a reverse proxy.</li>
-</ul>
-<h3 id="option-2-vanilla-js-katex-server-served-static-html">Option 2: Vanilla JS + KaTeX, server-served static HTML<a class="headerlink" href="#option-2-vanilla-js-katex-server-served-static-html" title="Permanent link">&para;</a></h3>
-<ul>
-<li>✅ No build step; same-origin cookie auth "just works"; incremental prototype port.</li>
-<li>❌ Hand-managed state degrades as features accrete; no type-safe API contract; fights the
-  template scaffold and future <code>cruft</code> updates.</li>
-</ul>
-<h2 id="consequences">Consequences<a class="headerlink" href="#consequences" title="Permanent link">&para;</a></h2>
-<h3 id="positive">Positive<a class="headerlink" href="#positive" title="Permanent link">&para;</a></h3>
-<ul>
-<li>✅ Maintainable home for growing UI state; compile-time protection on the submit/grade
-  contract; stays on the template's supported full-stack shape.</li>
-</ul>
-<h3 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h3>
-<ul>
-<li>⚠️ <strong>Same-origin requirement.</strong> The SPA and API must sit behind one origin so the
-  <code>HTTP-only</code> <code>Secure</code> <code>SameSite=Lax</code> cookie works without CORS-with-credentials. Mitigation:
-  a reverse proxy (<code>frontend/nginx.conf</code>) routes <code>/api/*</code> to FastAPI and <code>/*</code> to the SPA.</li>
-<li>⚠️ <strong>Asset exposure temptation.</strong> Do not let nginx serve <code>assets/</code> (problem images)
-  unauthenticated; serve them through the authenticated API so content stays behind auth.</li>
-<li>⚠️ A second toolchain (node) to patch alongside Python.</li>
-</ul>
-<h2 id="implementation">Implementation<a class="headerlink" href="#implementation" title="Permanent link">&para;</a></h2>
-<p>Build the UI in <code>frontend/</code> (runner, diagnostics, progress as React components on the
-generated client); front SPA and API on one origin via <code>frontend/nginx.conf</code>; test runner
-state with vitest; regenerate the OpenAPI client in CI and fail on drift.</p>
-<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
-<h3 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The session cookie authenticates API calls with no CORS-credentials relaxation.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No <code>correct_answer</code> reaches the client before submission (unchanged from ADR-001).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Regenerating the OpenAPI client produces no diff in CI.</li>
-</ul>
-<h3 id="review-schedule">Review Schedule<a class="headerlink" href="#review-schedule" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Initial: end of Phase 1, once the React runner persists attempts end-to-end.</li>
-<li>Ongoing: revisit only if team or scope changes enough to question the toolchain.</li>
-</ul>
-<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../adr-001-initial-architecture/">ADR-001</a>: server-backed architecture this refines.</li>
-<li><a href="../../project-vision/">Project Vision</a>: scope and the now-resolved frontend assumption.</li>
-<li><a href="../../tech-spec/">Tech Spec</a>: frontend stack, deployment topology, and auth.</li>
+<li><strong>Dependency vulnerabilities</strong>: GitHub reports open Dependabot alerts on the
+  repository (tracked separately under the known-vulnerabilities policy). This
+  review covered application code, not the dependency tree; triage those before
+  release.</li>
+<li><strong>Live verification</strong>: cookie flags and the production boot guard are verified
+  by unit/integration tests; confirm them once more against a running production
+  build during the deploy drill.</li>
 </ul>
 
 
@@ -1792,7 +1793,7 @@ state with vitest; regenerate the OpenAPI client in CI and fail on drift.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2026 16:46:50 UTC">May 31, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 4, 2026 14:36:01 UTC">June 4, 2026</span>
   </span>
 
     
@@ -1802,7 +1803,7 @@ state with vitest; regenerate the OpenAPI client in CI and fail on drift.</p>
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 31, 2026 16:46:50 UTC">May 31, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 4, 2026 14:36:01 UTC">June 4, 2026</span>
   </span>
 
     
@@ -1879,10 +1880,10 @@ state with vitest; regenerate the OpenAPI client in CI and fail on drift.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
