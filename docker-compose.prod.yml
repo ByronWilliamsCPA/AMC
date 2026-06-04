@@ -14,9 +14,12 @@ services:
       JSON_LOGS: "true"
       LOG_LEVEL: ${LOG_LEVEL:-WARNING}
 
-    # Production replicas (for load balancing)
+    # Production replicas. Defaults to 1: the login rate limiter is in-process
+    # (see src/amc/services/auth.py), so multiple replicas would each keep an
+    # independent counter and multiply the effective attempt budget. Raising
+    # REPLICAS above 1 requires moving rate-limit state to a shared store first.
     deploy:
-      replicas: ${REPLICAS:-2}
+      replicas: ${REPLICAS:-1}
       resources:
         limits:
           cpus: '1.0'

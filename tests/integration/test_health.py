@@ -108,7 +108,9 @@ class TestCheckDatabase:
                 return None
 
             async def execute(self, *_args: object) -> None:
-                error_message = "db unavailable"
+                # Driver errors can embed the DSN (and thus credentials); the
+                # sentinel stands in for any such sensitive detail.
+                error_message = "auth failed for user amc SENSITIVE_DSN_MARKER"
                 raise RuntimeError(error_message)
 
         def _boom_session() -> _BoomSession:
@@ -120,4 +122,7 @@ class TestCheckDatabase:
         )
         result = await health_module.check_database()
         assert result.status is False
-        assert result.error is not None
+        # The unauthenticated readiness response must carry a generic message,
+        # never the raw driver error detail.
+        assert result.error == "database connectivity check failed"
+        assert "SENSITIVE_DSN_MARKER" not in (result.error or "")

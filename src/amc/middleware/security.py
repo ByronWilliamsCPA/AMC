@@ -474,14 +474,29 @@ def add_security_middleware(
             allowed_hosts=allowed_hosts,
         )
 
-    # CORS configuration (OWASP A05)
+    # CORS configuration (OWASP A05). Enable credentialed CORS only when explicit
+    # origins are configured. With no origins (the same-origin reverse-proxy
+    # default) emitting Access-Control-Allow-Credentials is misleading, and a
+    # wildcard allow_headers combined with credentials is non-conformant per the
+    # Fetch standard, so headers are listed explicitly. A wildcard origin ("*")
+    # with credentials is also disallowed by the Fetch standard and a footgun
+    # (Starlette would reflect any origin), so credentials are enabled only for
+    # concrete, non-wildcard origins.
+    cors_origins = allowed_origins or []
+    cors_allow_credentials = bool(cors_origins) and "*" not in cors_origins
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=allowed_origins or [],
-        allow_credentials=True,
+        allow_origins=cors_origins,
+        allow_credentials=cors_allow_credentials,
         allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
-        allow_headers=["*"],
-        expose_headers=["X-Request-ID"],
+        allow_headers=[
+            "Authorization",
+            "Content-Type",
+            "X-Requested-With",
+            "X-Correlation-ID",
+            "X-Request-ID",
+        ],
+        expose_headers=["X-Request-ID", "X-Correlation-ID"],
         max_age=3600,
     )
 

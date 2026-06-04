@@ -37,6 +37,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Raise test coverage above the 80% gate with targeted unit tests for
   seed.py, core security, auth schemas, and health endpoints
 
+### Security
+
+- Phase 3.4 security review (`docs/security-review.md`): no critical or high
+  findings. Remediated a login user-enumeration timing channel (constant-work
+  Argon2 verify for unknown emails), tightened the CORS credentials/headers
+  posture, stopped the readiness probe from returning raw database errors to
+  unauthenticated callers, and defaulted production to a single app replica so
+  the in-process login rate limiter is not bypassed
+
 ## [0.1.0] - TBD
 
 ### Added

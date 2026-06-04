@@ -20,6 +20,10 @@ import time
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
+from amc.utils.logging import get_logger
+
+logger = get_logger(__name__)
+
 router = APIRouter(prefix="/health", tags=["health"])
 
 # Track application start time for uptime calculation
@@ -101,11 +105,16 @@ async def check_database() -> ReadinessCheck:
         )
     except Exception as e:
         latency_ms = (time.time() - start) * 1000
+        # Log only the exception type, and return a generic message: the
+        # readiness endpoint is unauthenticated and a driver exception's message
+        # can carry the connection string (and thus credentials), which must not
+        # reach the HTTP response or the logs.
+        logger.warning("readiness_db_check_failed", error_type=type(e).__name__)
         return ReadinessCheck(
             name="database",
             status=False,
             latency_ms=round(latency_ms, 2),
-            error=str(e),
+            error="database connectivity check failed",
         )
 
 
