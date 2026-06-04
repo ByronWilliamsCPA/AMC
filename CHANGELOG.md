@@ -49,7 +49,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   upgrading `@hey-api/openapi-ts` 0.61 to 0.98 (clears the transitive
   `handlebars` and `tar` advisories and regenerates the API client) and `vitest`
   /`@vitest/coverage-v8` 3.x to 4.1 (clears the critical Vitest UI-server
-  advisory). `npm audit` now reports 0 vulnerabilities
+  advisory). `npm audit` now reports 0 vulnerabilities. Drop the standalone
+  `@hey-api/client-fetch` dependency, which openapi-ts 0.98 bundles internally,
+  so it is no longer imported or installed
 - Document the Python `py` 1.11.0 advisory (PYSEC-2022-42969) in
   `docs/known-vulnerabilities.md`: a dev-only transitive dependency of
   `interrogate` with no upstream fix and an unreachable Subversion code path

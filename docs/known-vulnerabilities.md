@@ -18,7 +18,7 @@ To add new entries, see `.github/known-vulnerabilities-template.md`.
 
 ## Active Entries
 
-## PYSEC-2022-42969 | py | Low
+## PYSEC-2022-42969 | py | High (NVD) / Low effective
 
 | Field | Value |
 |-------|-------|
@@ -26,7 +26,7 @@ To add new entries, see `.github/known-vulnerabilities-template.md`.
 | **Package** | py |
 | **Affected Version** | <=1.11.0 (1.11.0 installed) |
 | **Fixed Version** | None (package unmaintained; 1.11.0 is the final release) |
-| **Severity** | Low (ReDoS, dev-only, unreachable code path) |
+| **Severity** | High per NVD (7.5); effective risk Low (ReDoS, dev-only, unreachable SVN code path) |
 | **CVSS Score** | 7.5 (AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H) per NVD; effective risk Low in context |
 | **Discovered** | 2026-06-03 |
 | **Reassessment Due** | 2026-08-02 |
@@ -74,7 +74,7 @@ solely for this finding is not justified at this time.
 | CVE | Package | Resolved Date | Resolution |
 |-----|---------|---------------|------------|
 | GHSA-3mfm-83xf-c92r (and 7 related) | handlebars | 2026-06-03 | Upgraded `@hey-api/openapi-ts` 0.61.2 -> 0.98.1; handlebars is no longer present in the dependency tree (`npm audit` clean). Client regenerated and frontend gates pass. |
-| GHSA-34x7-hfp2-rc4v (and 5 related) | tar | 2026-06-03 | Same `@hey-api/openapi-ts` 0.98.1 upgrade; the `c12`/`giget`/`tar` chain is gone (`npm audit` clean). |
+| GHSA-34x7-hfp2-rc4v (and 5 related) | tar | 2026-06-03 | Same `@hey-api/openapi-ts` 0.98.1 upgrade; `tar` is no longer pulled in (`c12`/`giget` upgraded to 3.x and dropped the vulnerable `tar`; `npm audit` clean). |
 | GHSA-5xrq-8626-4rwp | vitest, @vitest/coverage-v8 | 2026-06-03 | Upgraded `vitest` and `@vitest/coverage-v8` 3.x -> 4.1.8. Test suite passes (36/36) on vitest 4. |
 
 ## Review History
