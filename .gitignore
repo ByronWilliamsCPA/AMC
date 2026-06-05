@@ -297,3 +297,6 @@ content/amc_data.json
 
 # Database backups produced by scripts/backup.sh (contain user data and content)
 backups/
+
+# Local-only template feedback scratch log (not versioned in this repo)
+docs/template_feedback.md
