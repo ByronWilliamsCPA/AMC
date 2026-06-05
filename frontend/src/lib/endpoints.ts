@@ -59,11 +59,13 @@ export class ApiError extends Error {
  * an {@link ApiError} on a non-2xx response so promises reject normally.
  */
 async function unwrap<T>(
-  promise: Promise<{ data?: T; error?: unknown; response: Response }>
+  promise: Promise<{ data?: T; error?: unknown; response?: Response }>
 ): Promise<T> {
   const { data, error, response } = await promise
-  if (!response.ok || error !== undefined) {
-    throw new ApiError(response.status, error ?? data)
+  // client-fetch may resolve without a `response` (e.g. a network failure
+  // before any HTTP response exists), so guard before reading `.ok`/`.status`.
+  if (response === undefined || !response.ok || error !== undefined) {
+    throw new ApiError(response?.status ?? 0, error ?? data)
   }
   return data as T
 }

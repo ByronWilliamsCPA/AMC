@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import 'vitest-axe/extend-expect'
 import { afterAll, afterEach, beforeAll, expect } from 'vitest'
 import * as axeMatchers from 'vitest-axe/matchers'
-import { client } from '@/client'
+import { client } from '@/client/client.gen'
 import { server } from '@/test/server'
 
 // Accessibility assertions: `expect(await axe(container)).toHaveNoViolations()`.
