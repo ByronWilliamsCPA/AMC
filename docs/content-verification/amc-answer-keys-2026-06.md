@@ -233,7 +233,7 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2022 AMC 12A (`AMC12-2022A`)
 
-- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Primary source:** official MAA answer key, as mirrored in the Ivy League Education Center PDF (`ivyleaguecenter.org`); the center republishes the MAA key and is not itself the publisher
 - **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2022-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2022_AMC_12A_Answer_Key>
 - **Result:** All 25 match (both sources agree)
@@ -268,7 +268,7 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2023 AMC 12A (`AMC12-2023A`)
 
-- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Primary source:** official MAA answer key, as mirrored in the Ivy League Education Center PDF (`ivyleaguecenter.org`); the center republishes the MAA key and is not itself the publisher
 - **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2023-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2023_AMC_12A_Answer_Key>
 - **Result:** All 25 match (both sources agree)
@@ -303,7 +303,7 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2024 AMC 12A (`AMC12-2024A`)
 
-- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Primary source:** official MAA answer key, as mirrored in the Ivy League Education Center PDF (`ivyleaguecenter.org`); the center republishes the MAA key and is not itself the publisher
 - **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2024-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2024_AMC_12A_Answer_Key>
 - **Result:** All 25 match (both sources agree)
