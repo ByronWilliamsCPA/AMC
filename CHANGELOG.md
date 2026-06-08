@@ -55,6 +55,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Document the Python `py` 1.11.0 advisory (PYSEC-2022-42969) in
   `docs/known-vulnerabilities.md`: a dev-only transitive dependency of
   `interrogate` with no upstream fix and an unreachable Subversion code path
+- Bump `pip` 26.1.1 to 26.1.2 in `uv.lock` to resolve PYSEC-2026-196, a
+  newly published advisory that OSV-Scanner began reporting against the
+  existing locked dependency tree. OSV-Scanner now reports zero unignored
+  vulnerabilities
 
 ## [0.1.0] - TBD
 
