@@ -2,150 +2,154 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/OPENSSF_COMPLIANCE/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/PROJECT_SETUP/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/PYTHON_COMPATIBILITY/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/api-reference/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/known-vulnerabilities/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/security-review/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/ADRs/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/ADRs/adr-template/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/api/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/auth/authentik/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
+    </url>
+    <url>
+         <loc>https://ByronWilliamsCPA.github.io/AMC/content-verification/amc-answer-keys-2026-06/</loc>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/design/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/design/component-library/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/design/design-system/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/design/exam-runner-ux/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/design/ux-flows/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/development/architecture/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/development/code-quality/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/development/contributing/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/development/testing/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/guides/configuration/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/guides/deployment/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/guides/overview/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/guides/usage/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/PROJECT-PLAN/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/project-plan-template/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/project-vision/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/roadmap/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/tech-spec/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/adr/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/adr/adr-001-initial-architecture/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/planning/adr/adr-002-frontend-framework/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/project/changelog/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/project/license/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/project/roadmap/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
     <url>
          <loc>https://ByronWilliamsCPA.github.io/AMC/superpowers/plans/2026-06-01-branch-consolidation/</loc>
-         <lastmod>2026-06-05</lastmod>
+         <lastmod>2026-06-08</lastmod>
     </url>
 </urlset>
