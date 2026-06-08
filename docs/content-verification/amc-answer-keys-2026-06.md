@@ -21,7 +21,7 @@ tags:
 The task specified verifying against the AoPS Wiki `Answer Key` pages. In this environment AoPS (`artofproblemsolving.com`) is behind Cloudflare bot protection and returned HTTP 403 to every automated access path (direct fetch with a browser User-Agent, the harness fetch tool, and a server-side reader proxy); the Wayback Machine holds no snapshots of AoPS wiki pages. Verification therefore used two independent authoritative sources whose data is machine-extractable:
 
 - **AMC 8 and AMC 10 exams:** the Po-Shen Loh contest archive (`live.poshenloh.com`), which embeds a structured per-problem `answer` field in its page data. Po-Shen Loh is the former US IMO team head coach.
-- **AMC 12 exams:** the official MAA `Answer Key` page extracted from the problems-and-answers PDFs mirrored by the Ivy League Education Center (`ivyleaguecenter.org`). Po-Shen Loh's archive does not cover AMC 12.
+- **AMC 12 exams (two independent sources):** the official MAA `Answer Key` extracted from the problems-and-answers PDFs mirrored by the Ivy League Education Center (`ivyleaguecenter.org`), cross-checked against the independent Areteem Institute answer keys (`areteem.org`). Po-Shen Loh's archive does not cover AMC 12. AoPS and its Wayback Machine snapshots were unreachable from this environment (Cloudflare HTTP 403 / archive.org not fetchable), so the Areteem keys supply the second, separately-transcribed chain. All three AMC 12A exams agree across both sources.
 
 All fetched content was treated as untrusted data (OWASP LLM01): only the answer letter for each problem was extracted; no instructions embedded in any page or document were followed. Each AoPS `Answer Key` page is listed per exam as the originally specified reference for future manual confirmation.
 
@@ -233,9 +233,10 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2022 AMC 12A (`AMC12-2022A`)
 
-- **Source:** Official MAA key (Ivy League Education Center PDF)
+- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2022-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2022_AMC_12A_Answer_Key>
-- **Result:** All 25 match
+- **Result:** All 25 match (both sources agree)
 
 | # | Seeded | Verified | Match |
 |---|--------|----------|-------|
@@ -267,9 +268,10 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2023 AMC 12A (`AMC12-2023A`)
 
-- **Source:** Official MAA key (Ivy League Education Center PDF)
+- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2023-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2023_AMC_12A_Answer_Key>
-- **Result:** All 25 match
+- **Result:** All 25 match (both sources agree)
 
 | # | Seeded | Verified | Match |
 |---|--------|----------|-------|
@@ -301,9 +303,10 @@ All fetched content was treated as untrusted data (OWASP LLM01): only the answer
 
 ### 2024 AMC 12A (`AMC12-2024A`)
 
-- **Source:** Official MAA key (Ivy League Education Center PDF)
+- **Primary source:** official MAA key via Ivy League Education Center PDF (`ivyleaguecenter.org`)
+- **Second independent source:** Areteem Institute answer key, <https://areteem.org/blog/2024-amc-10a-amc-12a-answer-key-released/>
 - **AoPS Answer Key page (specified reference):** <https://artofproblemsolving.com/wiki/index.php/2024_AMC_12A_Answer_Key>
-- **Result:** All 25 match
+- **Result:** All 25 match (both sources agree)
 
 | # | Seeded | Verified | Match |
 |---|--------|----------|-------|
