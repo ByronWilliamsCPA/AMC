@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   // Generated client and build output are not linted.
-  { ignores: ['dist', 'node_modules', 'src/client'] },
+  { ignores: ['dist', 'node_modules', 'src/client', 'e2e'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
