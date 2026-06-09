@@ -26,6 +26,22 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    port: 3000,
+    proxy: {
+      // Production-build preview used by e2e: forward same-origin /api and
+      // /health to the backend so the amc_session cookie is same-origin,
+      // matching the dev server.proxy above.
+      '/api': {
+        target: process.env.VITE_DEV_API_TARGET || 'http://localhost:8000',
+        changeOrigin: true,
+      },
+      '/health': {
+        target: process.env.VITE_DEV_API_TARGET || 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
+  },
   build: {
     outDir: 'dist',
     // Hidden source maps: generated for Sentry upload but not referenced from
