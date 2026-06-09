@@ -1,0 +1,776 @@
+{
+  "tests": {
+    "AMC10-2099": {
+      "id": "AMC10-2099",
+      "contest": "AMC 10",
+      "year": 2099,
+      "exam": "",
+      "durationSec": 4500,
+      "scoreMode": "count",
+      "mode": "latex",
+      "voided": [],
+      "answers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "problems": [
+        {
+          "n": 1,
+          "q": "Synthetic problem 1: compute 1 + 1.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 1"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 1"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 1"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 1"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 1"
+            }
+          ],
+          "sol": "https://example.test/solution/1"
+        },
+        {
+          "n": 2,
+          "q": "Synthetic problem 2: compute 2 + 2.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 2"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 2"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 2"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 2"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 2"
+            }
+          ],
+          "sol": "https://example.test/solution/2"
+        },
+        {
+          "n": 3,
+          "q": "Synthetic problem 3: compute 3 + 3.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 3"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 3"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 3"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 3"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 3"
+            }
+          ],
+          "sol": "https://example.test/solution/3"
+        },
+        {
+          "n": 4,
+          "q": "Synthetic problem 4: compute 4 + 4.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 4"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 4"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 4"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 4"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 4"
+            }
+          ],
+          "sol": "https://example.test/solution/4"
+        },
+        {
+          "n": 5,
+          "q": "Synthetic problem 5: compute 5 + 5.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 5"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 5"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 5"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 5"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 5"
+            }
+          ],
+          "sol": "https://example.test/solution/5"
+        },
+        {
+          "n": 6,
+          "q": "Synthetic problem 6: compute 6 + 6.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 6"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 6"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 6"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 6"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 6"
+            }
+          ],
+          "sol": "https://example.test/solution/6"
+        },
+        {
+          "n": 7,
+          "q": "Synthetic problem 7: compute 7 + 7.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 7"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 7"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 7"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 7"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 7"
+            }
+          ],
+          "sol": "https://example.test/solution/7"
+        },
+        {
+          "n": 8,
+          "q": "Synthetic problem 8: compute 8 + 8.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 8"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 8"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 8"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 8"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 8"
+            }
+          ],
+          "sol": "https://example.test/solution/8"
+        },
+        {
+          "n": 9,
+          "q": "Synthetic problem 9: compute 9 + 9.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 9"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 9"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 9"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 9"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 9"
+            }
+          ],
+          "sol": "https://example.test/solution/9"
+        },
+        {
+          "n": 10,
+          "q": "Synthetic problem 10: compute 10 + 10.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 10"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 10"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 10"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 10"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 10"
+            }
+          ],
+          "sol": "https://example.test/solution/10"
+        },
+        {
+          "n": 11,
+          "q": "Synthetic problem 11: compute 11 + 11.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 11"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 11"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 11"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 11"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 11"
+            }
+          ],
+          "sol": "https://example.test/solution/11"
+        },
+        {
+          "n": 12,
+          "q": "Synthetic problem 12: compute 12 + 12.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 12"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 12"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 12"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 12"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 12"
+            }
+          ],
+          "sol": "https://example.test/solution/12"
+        },
+        {
+          "n": 13,
+          "q": "\\sum_{k=1}^{40} \\left( a_k + b_k + c_k + d_k + e_k + f_k + g_k + h_k + i_k + j_k \\right)^2 = \\prod_{m=1}^{40} (x_m - y_m)(p_m - q_m)",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 13"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 13"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 13"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 13"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 13"
+            }
+          ],
+          "sol": "https://example.test/solution/13"
+        },
+        {
+          "n": 14,
+          "q": "Synthetic problem 14: compute 14 + 14.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 14"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 14"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 14"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 14"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 14"
+            }
+          ],
+          "sol": "https://example.test/solution/14"
+        },
+        {
+          "n": 15,
+          "q": "Synthetic problem 15: compute 15 + 15.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 15"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 15"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 15"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 15"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 15"
+            }
+          ],
+          "sol": "https://example.test/solution/15"
+        },
+        {
+          "n": 16,
+          "q": "Synthetic problem 16: compute 16 + 16.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 16"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 16"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 16"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 16"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 16"
+            }
+          ],
+          "sol": "https://example.test/solution/16"
+        },
+        {
+          "n": 17,
+          "q": "Synthetic problem 17: compute 17 + 17.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 17"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 17"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 17"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 17"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 17"
+            }
+          ],
+          "sol": "https://example.test/solution/17"
+        },
+        {
+          "n": 18,
+          "q": "Synthetic problem 18: compute 18 + 18.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 18"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 18"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 18"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 18"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 18"
+            }
+          ],
+          "sol": "https://example.test/solution/18"
+        },
+        {
+          "n": 19,
+          "q": "Synthetic problem 19: compute 19 + 19.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 19"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 19"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 19"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 19"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 19"
+            }
+          ],
+          "sol": "https://example.test/solution/19"
+        },
+        {
+          "n": 20,
+          "q": "Synthetic problem 20: compute 20 + 20.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 20"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 20"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 20"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 20"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 20"
+            }
+          ],
+          "sol": "https://example.test/solution/20"
+        },
+        {
+          "n": 21,
+          "q": "Synthetic problem 21: compute 21 + 21.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 21"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 21"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 21"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 21"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 21"
+            }
+          ],
+          "sol": "https://example.test/solution/21"
+        },
+        {
+          "n": 22,
+          "q": "Synthetic problem 22: compute 22 + 22.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 22"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 22"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 22"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 22"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 22"
+            }
+          ],
+          "sol": "https://example.test/solution/22"
+        },
+        {
+          "n": 23,
+          "q": "Synthetic problem 23: compute 23 + 23.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 23"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 23"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 23"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 23"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 23"
+            }
+          ],
+          "sol": "https://example.test/solution/23"
+        },
+        {
+          "n": 24,
+          "q": "Synthetic problem 24: compute 24 + 24.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 24"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 24"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 24"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 24"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 24"
+            }
+          ],
+          "sol": "https://example.test/solution/24"
+        },
+        {
+          "n": 25,
+          "q": "Synthetic problem 25: compute 25 + 25.",
+          "choices": [
+            {
+              "L": "A",
+              "html": "A. choice 25"
+            },
+            {
+              "L": "B",
+              "html": "B. choice 25"
+            },
+            {
+              "L": "C",
+              "html": "C. choice 25"
+            },
+            {
+              "L": "D",
+              "html": "D. choice 25"
+            },
+            {
+              "L": "E",
+              "html": "E. choice 25"
+            }
+          ],
+          "sol": "https://example.test/solution/25"
+        }
+      ]
+    }
+  },
+  "byContest": {
+    "AMC 8": [],
+    "AMC 10": [
+      "AMC10-2099"
+    ],
+    "AMC 12": []
+  },
+  "keyedTests": [],
+  "instruments": {
+    "e2e-diag": {
+      "id": "e2e-diag",
+      "course": "E2E Synthetic Course",
+      "role": "AYR",
+      "kind": "",
+      "grading": {
+        "mode": "single",
+        "total": 2,
+        "need": 1
+      },
+      "instructions": "Synthetic diagnostic for e2e.",
+      "sections": [
+        {
+          "title": "Section 1",
+          "items": [
+            {
+              "id": "e2e-1",
+              "label": "1",
+              "prompt": "What is 2 + 2?",
+              "ans": "4",
+              "v": 4,
+              "accept": [
+                "4"
+              ],
+              "manual": false
+            },
+            {
+              "id": "e2e-2",
+              "label": "2",
+              "prompt": "Explain your reasoning.",
+              "ans": "free response",
+              "manual": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "order": [
+    "e2e-diag"
+  ],
+  "ladder": [],
+  "catalog": [
+    {
+      "course": "E2E Synthetic Course",
+      "gate": "diagnostic",
+      "note": "e2e"
+    }
+  ]
+}
