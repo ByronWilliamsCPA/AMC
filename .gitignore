@@ -300,3 +300,9 @@ backups/
 
 # Local-only template feedback scratch log (not versioned in this repo)
 docs/template_feedback.md
+
+# e2e harness: throwaway SQLite DB and saved Playwright auth state
+.e2e/
+frontend/e2e/.auth/
+frontend/playwright-report/
+frontend/test-results/
