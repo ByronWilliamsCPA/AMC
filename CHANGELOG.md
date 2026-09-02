@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- CodeQL analysis (`.github/workflows/codeql.yml` and `.github/codeql/codeql-config.yml`).
+  GitHub now bills Advanced Security (Code Security) separately and it is not
+  enabled on this repository, so CodeQL could not produce results.
+- Every `github/codeql-action/upload-sarif` step (`cifuzzy.yml`, `scorecard.yml`).
+  SARIF ingestion into the Security tab requires Advanced Security and no
+  longer functions. `cifuzzy.yml`'s ClusterFuzzLite SARIF is now uploaded as a
+  plain workflow artifact instead (`actions/upload-artifact`), so a crash
+  finding stays downloadable; `scorecard.yml` already uploaded `results.sarif`
+  as an artifact separately, so no replacement was needed there. Actual SAST/SCA
+  coverage for this repository is Bandit and OSV-Scanner
+  (`security-analysis.yml`); OpenSSF Scorecard continues to publish to the
+  public Scorecard API independent of the Security tab.
+
 ### Added
 - Initial project setup and structure
 - Diagnostic course catalog: `DiagnosticCatalogEntry` model and migration, seeded

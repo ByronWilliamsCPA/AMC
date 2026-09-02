@@ -198,9 +198,13 @@ Comprehensive static analysis on every commit.
 - **Ruff**: Python linting with security rules
 - **Bandit**: Python security issue detection
 - **BasedPyright**: Type safety (prevents entire classes of bugs)
-- **CodeQL**: Advanced semantic code analysis
+- **OSV-Scanner**: dependency vulnerability scanning
 
 **Workflow**: `.github/workflows/security-analysis.yml`
+
+CodeQL previously ran via `.github/workflows/codeql.yml`, which was removed:
+GitHub now bills Advanced Security (Code Security) separately and it is not
+enabled on this repository, so CodeQL could no longer run or upload results.
 
 ### 8. Mutation Testing 🧬
 
