@@ -13,7 +13,9 @@
 #
 # Duration: 600 seconds per run
 # Sanitizer: AddressSanitizer for memory safety
-# Reporting: SARIF format uploaded to Security tab
+# Reporting: SARIF format uploaded as a workflow artifact (GitHub Advanced
+#   Security / Code Security is not active on this repo, so results no
+#   longer go to the Security tab)
 name: Continuous Fuzzing
 
 on:
@@ -26,7 +28,6 @@ on:
 
 permissions:
   contents: read
-  security-events: write  # For SARIF upload
 
 jobs:
   fuzzing:
@@ -77,12 +78,17 @@ jobs:
           sanitizer: ${{  matrix.sanitizer  }}
           output-sarif: true
 
-      - name: Upload SARIF
-        if: always() && steps.check-fuzz.outputs.has-targets == 'true'
-        uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+      # GitHub Advanced Security (Code Security) is not active on this repo,
+      # so SARIF no longer reaches the Security tab; publish it as a plain
+      # artifact instead so a crash finding stays downloadable.
+      - name: Upload SARIF artifact
+        if: always() && steps.check-fuzz.outputs.has-targets == 'true' && hashFiles('results.sarif') != ''
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          sarif_file: results.sarif
-          category: fuzzing-${{  matrix.sanitizer  }}
+          name: fuzzing-sarif-${{  matrix.sanitizer  }}
+          path: results.sarif
+          retention-days: 90
+          if-no-files-found: warn
 
       - name: Upload Crash Artifacts
         if: failure() && steps.check-fuzz.outputs.has-targets == 'true'

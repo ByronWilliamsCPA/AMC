@@ -63,15 +63,15 @@ Comprehensive CI with:
 ---
 
 ### Security Analysis (`security-analysis.yml`)
-**Calls**: `williaby/.github/.github/workflows/python-security-analysis.yml@main`
+**Defined in this repository**, not delegated to an org-level reusable workflow.
 
-Comprehensive security scanning with:
-- CodeQL advanced analysis
+Security scanning with:
 - Bandit static security analysis
-- Safety dependency CVE scanning
-- OSV Scanner
-- OWASP dependency check
-- Dependency review (PRs only)
+- OSV Scanner dependency vulnerability scanning
+
+CodeQL and the dependency-review action are not run here: both depend on
+GitHub Advanced Security (Code Security), which GitHub now bills separately
+and which is not enabled on this repository, so `codeql.yml` was removed.
 
 **Triggers**: Push/PR to main, weekly schedule, manual dispatch
 
