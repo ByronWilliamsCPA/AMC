@@ -84,12 +84,16 @@ jobs:
           retention-days: 30
 
   security-gate-success:
-    # The job display name IS the status-check context. The org ruleset
-    # requires the context "Security Analysis / Security Gate Validation"
-    # (the Caller / Job format the org's reusable security workflow emits).
-    # This standalone workflow must name the job to match that string exactly,
-    # or the required check waits forever as "Expected".
-    name: Security Analysis / Security Gate Validation
+    # The job display name IS the status-check context. This job has no
+    # `uses:`, so it is a normal job, not a reusable-workflow caller; its
+    # context is exactly this `name:` verbatim, with no automatic prefix.
+    # The org ruleset requires the bare context "Security Gate Validation".
+    # #CRITICAL: do not reintroduce a "<workflow name> / " prefix here, that
+    # would only be correct on a caller job (uses:), and would silently stop
+    # matching the required context, leaving the check "Expected" forever.
+    # #VERIFY: confirm against the org ruleset's required_status_checks
+    # before ever renaming this job again.
+    name: Security Gate Validation
     runs-on: ubuntu-latest
     needs: [security]
     if: always()
