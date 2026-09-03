@@ -9,50 +9,6 @@ To add new entries, see [known-vulnerabilities-template.md](known-vulnerabilitie
 
 ## Active Entries
 
-## PYSEC-2022-42969 | py | Medium
-
-| Field | Value |
-|-------|-------|
-| **CVE ID** | PYSEC-2022-42969 |
-| **Package** | py |
-| **Affected Version** | 1.11.0 |
-| **Fixed Version** | No fix available |
-| **Severity** | Medium |
-| **CVSS Score** | 7.5 |
-| **Discovered** | 2026-05-21 |
-| **Reassessment Due** | 2026-07-20 |
-| **Blocking Release** | No |
-
-### Description
-
-ReDoS (Regular Expression Denial of Service) vulnerability in the `py` package's
-`path.LocalPath` function via crafted input to the `svnwc.status` method.
-
-### Impact on This Project
-
-The `py` package is a transitive dependency of `interrogate` (a docstring coverage
-tool) used only in the development environment. It is never present in production
-runtime dependencies. The vulnerable `svnwc.status` code path is exercised only
-when parsing Subversion repository info, which this project does not do.
-
-### Remediation Plan
-
-- [ ] Monitor upstream `py` package for a fix release (package is largely unmaintained)
-- [ ] Evaluate replacing `interrogate` with an alternative docstring coverage tool
-  if no fix arrives by 2026-07-20 (reassessment due)
-
-### Why Not Fixed Yet
-
-The `py` package has no released fix version. The package is largely unmaintained.
-`interrogate` has not released a version that drops the `py` dependency.
-
-### References
-
-- [PYSEC-2022-42969](https://osv.dev/vulnerability/PYSEC-2022-42969)
-- [GitHub Advisory GHSA-w596-4wvx-j9j6](https://github.com/advisories/GHSA-w596-4wvx-j9j6)
-
----
-
 ## PYSEC-2026-89 | markdown | High
 
 | Field | Value |
@@ -108,9 +64,11 @@ As of 2026-05-21, no version in the 3.9+ series resolves this CVE. Downgrading t
 
 | CVE | Package | Resolved Date | Resolution |
 |-----|---------|---------------|------------|
+| PYSEC-2022-42969 (CVE-2022-42969, GHSA-w596-4wvx-j9j6) | py | 2026-09-03 | OSV withdrew the advisory on 2026-06-09; osv-scanner reported the ignore entry as unused. Entry removed from osv-scanner.toml. |
 
 ## Review History
 
 | Review Date | Reviewer | Notes |
 |-------------|----------|-------|
 | 2026-MM-DD | Byron Williams | Initial creation. |
+| 2026-09-03 | Claude Sonnet 4.6 | Removed the PYSEC-2022-42969 entry; OSV withdrew the advisory 2026-06-09, and the ignore in osv-scanner.toml was breaking Security Gate Validation with an "unused ignores" error. |
