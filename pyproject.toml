@@ -135,10 +135,16 @@ dev = [
 
 # API framework dependencies
 api = [
-    "fastapi>=0.120.1",
+    # #EDGE: fastapi capped below 0.137.0; 0.137.0+ changes app.routes to
+    # yield an internal _IncludedRouter wrapper without a .path attribute,
+    # which breaks tests/unit/test_oidc.py::TestOidcMounting. Not a security
+    # fix in this range (starlette below carries the CVE fixes); revisit the
+    # cap once fastapi restores route.path or the test is adapted.
+    # #VERIFY: re-run tests/unit/test_oidc.py after any fastapi bump attempt.
+    "fastapi>=0.120.1,<0.137.0",
     "uvicorn[standard]>=0.23.0",
     "python-multipart>=0.0.18",
-    "starlette>=0.49.1",
+    "starlette>=1.3.1",
     "sqlalchemy[asyncio]>=2.0.0", # ORM for database operations
     "alembic>=1.12.0", # Database migrations
     "argon2-cffi>=23.1.0",
