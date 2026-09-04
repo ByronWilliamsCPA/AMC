@@ -6,6 +6,7 @@
 name: PR Validation
 
 on:
+  merge_group:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
@@ -15,7 +16,12 @@ on:
 
 # Cancel in-progress runs for same PR
 concurrency:
-  group: pr-validation-${{ github.event.pull_request.number }}
+  # #ASSUME github.event.pull_request.number is null under merge_group;
+  # fall back to github.ref (unique per merge-group ref) so a merge-group
+  # build cannot collide with, or be cancelled by, a PR build's group.
+  # #VERIFY confirm no cross-cancellation after the first live merge-queue
+  # pass.
+  group: pr-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -78,7 +84,17 @@ jobs:
     # Skip via event payload to avoid GitHub API label-timing races on the
     # opened event (e.g. Renovate PRs). Avoids out-of-step false positives
     # when main advances after the PR was opened.
+    # #CRITICAL github.event.pull_request.labels and github.base_ref (used
+    # below) are both null/empty under merge_group, and a changelog entry
+    # is meaningless for a synthetic merge-group commit that only combines
+    # already-reviewed PRs; restrict this job to pull_request so it reports
+    # "skipped" (accepted by validate-dependencies below) instead of
+    # failing on an empty base ref.
+    # #VERIFY validate-dependencies treats a skipped changelog job as
+    # non-blocking under merge_group (it already does, see the elif
+    # skipped branch below).
     if: |
+      github.event_name == 'pull_request' &&
       !contains(github.event.pull_request.labels.*.name, 'skip-changelog') &&
       !contains(github.event.pull_request.labels.*.name, 'dependencies') &&
       !contains(github.event.pull_request.labels.*.name, 'documentation') &&
