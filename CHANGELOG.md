@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   newly published advisory that OSV-Scanner began reporting against the
   existing locked dependency tree. OSV-Scanner now reports zero unignored
   vulnerabilities
+- Dependencies: refreshed `uv.lock` to clear advisories reported by pip-audit and OSV-Scanner (urllib3 2.8.0, tornado 6.5.10, virtualenv 21.14.2, cryptography 50.0.2, starlette 1.7.0, python-multipart 0.0.32, and other flagged transitive packages).
 
 ## [0.1.0] - TBD
 
