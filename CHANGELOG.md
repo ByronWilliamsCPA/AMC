@@ -60,6 +60,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   existing locked dependency tree. OSV-Scanner now reports zero unignored
   vulnerabilities
 
+### Fixed
+
+- Renovate: lock file maintenance PRs are exempt from the minimum release age gate, so they no longer stall on stability-days.
+
 ## [0.1.0] - TBD
 
 ### Added
